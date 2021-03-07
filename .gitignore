@@ -1,3 +1,7 @@
+.linaria-cache/
+coverage/
+.eslintcache
+
 # Logs
 logs
 *.log

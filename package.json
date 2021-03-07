@@ -1,0 +1,23 @@
+{
+  "name": "stop-n-swop",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:jackmellis/stop-n-swop.git",
+  "author": "Jack Ellis",
+  "license": "NONE",
+  "private": true,
+  "scripts": {
+    "ui:add": "yarn lerna --scope ui add",
+    "ui:dev": "yarn lerna --scope ui exec yarn run dev",
+    "ui:build": "yarn lerna --scope ui exec yarn run build",
+    "ui:lint": "yarn lerna --scope ui exec yarn run lint"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

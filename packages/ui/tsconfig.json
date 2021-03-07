@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "module": "ESNext",
+    "target": "ESNext",
+    "allowJs": false,
+    "moduleResolution": "node",
+    "strictBindCallApply": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "sourceMap": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    }
+  },
+  "include": ["src", "@types"]
+}

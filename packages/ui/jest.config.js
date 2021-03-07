@@ -1,0 +1,31 @@
+module.exports = {
+  collectCoverage: false,
+  collectCoverageFrom: [
+    // '!**/dist/**',
+    'src/**/*.{ts,tsx}',
+  ],
+  coverageDirectory: 'coverage',
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+  testMatch: [
+    'src/**/*.test.{ts,tsx}',
+  ],
+  transformIgnorePatterns: [
+    // ignore all node modules _except_ react-robot which doesn't have a commonjs version
+    'node_modules/(?!(react-robot)/)',
+  ],
+  moduleNameMapper: {
+    '^.+\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^.+\\.(jpg|png|svg)$': '<rootDir>/config/jest/fileStub.js',
+  },
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
+};
