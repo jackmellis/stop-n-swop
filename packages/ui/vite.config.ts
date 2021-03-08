@@ -4,7 +4,7 @@ import babel from '@babel/core';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/stop-n-swop/',
+  base: '/',
   resolve: {
     alias: {
       adapters: '/src/adapters',
@@ -13,8 +13,8 @@ export default defineConfig({
       ui: '/src/ui',
     },
   },
-  build: {
-    minify: false,
+  server: {
+    // open: true,
   },
   plugins: [
     {

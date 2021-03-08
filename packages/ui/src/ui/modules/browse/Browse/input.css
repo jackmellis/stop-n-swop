@@ -1,0 +1,7 @@
+input:focus + label,
+input:not([value='']) + label,
+input[placeholder] + label {
+  @apply transform;
+  @apply -translate-y-full;
+  @apply text-xs;
+}

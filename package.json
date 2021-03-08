@@ -8,9 +8,9 @@
   "private": true,
   "scripts": {
     "ui:add": "yarn lerna --scope ui add",
-    "ui:dev": "yarn lerna --scope ui exec yarn run dev",
-    "ui:build": "yarn lerna --scope ui exec yarn run build",
-    "ui:lint": "yarn lerna --scope ui exec yarn run lint"
+    "ui:dev": "yarn lerna --scope ui exec yarn vite",
+    "ui:build": "yarn lerna --scope ui exec yarn vite build",
+    "ui:lint": "yarn lerna --scope ui exec yarn eslint"
   },
   "devDependencies": {
     "lerna": "^4.0.0",

@@ -1,6 +1,26 @@
 import { flatten, unflatten } from 'flat';
 
 const enMessages = {
+  nav: {
+    title: 'Stop n Swop',
+    menu: 'menu',
+    basket: 'basket',
+    browse: 'browse',
+    collections: 'collections',
+    listings: 'listings',
+    account: {
+      login: 'log in',
+      logout: 'log out',
+    },
+  },
+  home: {
+    title: 'Buy, sell, expand your retro collection',
+    text: `
+      Here is some introductory text about the site and the stuff it awesomely does
+    `,
+    browse: 'Find stuff',
+    list: 'Sell stuff',
+  },
   error: {
     unknown: 'An unknown error has ocurred',
     badRequest: 'Malformed request syntax',
