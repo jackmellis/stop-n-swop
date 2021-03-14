@@ -6,6 +6,7 @@
   "homepage": "https://github.com/jackmellis/stop-n-swop#readme",
   "license": "UNLICENSED",
   "scripts": {
+    "add": "cd ../.. && yarn ui:add",
     "dev": "cd ../.. && yarn ui:dev",
     "build": "cd ../.. && yarn ui:build",
     "preview": "cd ../.. && yarn ui:preview",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "date-fns": "^2.19.0",
     "flat": "^5.0.2",
     "history": "^5.0.0",
     "jpex": "^4.3.0",

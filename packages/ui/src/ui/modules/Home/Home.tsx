@@ -1,9 +1,11 @@
 import React from 'react';
 import background from 'ui/assets/bg-1.jpg';
-import { Button } from 'ui/elements/Button';
+import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import cx from 'classnames';
 import { ids } from 'ui/messages';
+import Card from 'ui/elements/Card';
 
 export default function Home() {
   return (
@@ -11,22 +13,42 @@ export default function Home() {
       <div
         style={{
           backgroundImage: `url(${background})`,
-          filter: 'grayscale(0) blur(5px) brightness(1)',
+          filter: 'blur(3px)',
           zIndex: 0,
           top: -45,
         }}
         className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover"
       />
-      <div className="flex-grow z-10 md:max-w-3/4 lg:max-w-1/2 xl:w-1/3 flex flex-col md:justify-center xl:justify-end md:mx-auto xl:mx-0">
-        <div className="flex-grow md:flex-grow-0 space-y-12 xl:mb-40 xl:ml-40 bg-black p-10 bg-opacity-60 rounded">
+      <div
+        className={cx(
+          'flex-grow z-10 flex flex-col',
+          'md:max-w-3/4 md:justify-center md:mx-auto',
+          'lg:max-w-1/2',
+          'xl:justify-end xl:mx-0',
+        )}
+      >
+        <Card
+          className={cx(
+            'flex-grow space-y-12',
+            'md:flex-grow-0',
+            'xl:mb-40 xl:ml-40',
+          )}
+        >
           <h1 className="text-2xl">
             <FormattedMessage id={ids.home.title} />
           </h1>
           <p>
             <FormattedMessage id={ids.home.text} />
           </p>
-          <div className="pt-12 sm:pt-4 xl:pt-0 text-lg space-x-6 flex justify-center lg:justify-start">
-            <Button component={Link} to="/browse">
+          <div
+            className={cx(
+              'pt-12 text-lg space-x-6 flex justify-center',
+              'sm:pt-4',
+              'lg:justify-start',
+              'xl:pt-0',
+            )}
+          >
+            <Button component={Link} kind="primary" to="/browse">
               <span>
                 <FormattedMessage id={ids.home.browse} />
               </span>
@@ -37,7 +59,7 @@ export default function Home() {
               </span>
             </Button>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

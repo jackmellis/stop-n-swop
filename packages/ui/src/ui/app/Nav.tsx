@@ -11,7 +11,7 @@ import {
 import type { IconType } from 'react-icons';
 import cx from 'classnames';
 import { useBoop } from 'ui/hooks';
-import { TextButton } from 'ui/elements/Button';
+import Button from 'ui/elements/Button';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { animated } from 'react-spring';
 import Logo from 'ui/assets/logo.png';
@@ -20,12 +20,12 @@ import { ids } from 'ui/messages';
 const AnimatedLink = animated(Link);
 
 const NavItem = ({
-  className,
+  styles,
   to,
   children,
   Icon,
 }: {
-  className?: string;
+  styles?: Record<string, any>;
   to: string;
   Icon: IconType;
   children: ReactNode;
@@ -34,18 +34,25 @@ const NavItem = ({
 
   return (
     <animated.li style={style} onMouseEnter={boop}>
-      <Link
+      <Button
+        component={Link}
         to={to}
-        className={cx(
-          'flex items-center space-x-3 w-full',
-          'px-4 md:px-6 py-3',
-          'hover:text-gray-500 transition-colors',
-          className,
-        )}
+        className={cx({
+          flex: true,
+          'items-center': true,
+          'space-x-3': true,
+          'w-full': true,
+          'px-4': true,
+          'md:px-6': true,
+          'py-3': true,
+          'hover:text-gray-500': true,
+          'transition-colors': true,
+          ...styles,
+        })}
       >
         <Icon className="md:hidden" />
         <span className="md:text-xs lowercase md:uppercase">{children}</span>
-      </Link>
+      </Button>
     </animated.li>
   );
 };
@@ -61,16 +68,21 @@ const Account = ({
 
   return (
     <li style={style} onMouseEnter={boop}>
-      <TextButton
+      <Button
         title="account"
-        className="hidden md:flex justify-center items-center"
+        styles={{
+          hidden: true,
+          'md:flex': true,
+          'justify-center': true,
+          'items-center': true,
+        }}
         style={{ paddingTop: 0, paddingBottom: 0, height: '100%' }}
         onClick={() => setOpen(!open)}
       >
         <animated.span style={style} onMouseEnter={boop}>
           <FaUserCircle size={25} />
         </animated.span>
-      </TextButton>
+      </Button>
       <ul
         className={cx(
           open ? '' : 'md:hidden',
@@ -105,7 +117,11 @@ const NavItems = ({
       <NavItem to="/my/listings" Icon={FaListAlt}>
         <FormattedMessage id={ids.nav.listings} />
       </NavItem>
-      <NavItem to="/checkout" className="hidden md:flex" Icon={FaShoppingCart}>
+      <NavItem
+        to="/checkout"
+        styles={{ hidden: true, 'md:flex': true }}
+        Icon={FaShoppingCart}
+      >
         <FormattedMessage id={ids.nav.basket} />
       </NavItem>
       <NavItem to="/login" Icon={FaUserCircle}>
@@ -144,15 +160,15 @@ export default function Nav() {
       <div className="flex items-center pl-3 md:flex-grow">
         <Title />
         <div className="flex-grow" />
-        <TextButton
+        <Button
           title={intl.formatMessage({ id: ids.nav.basket })}
           component={Link}
           to="/checkout"
           className="md:hidden"
         >
           <FaShoppingCart />
-        </TextButton>
-        <TextButton
+        </Button>
+        <Button
           title={intl.formatMessage({ id: ids.nav.menu })}
           className="md:hidden"
           onClick={() => setOpen(!open)}
@@ -163,7 +179,7 @@ export default function Nav() {
               open ? 'rotate-180' : 'rotate-0',
             )}
           />
-        </TextButton>
+        </Button>
       </div>
       <NavItems
         open={open}

@@ -1,6 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  @variants hover, responsive {
+    .filter-none {
+      filter: none;
+    }
+    .filter-contrast {
+      filter: contrast(1.25);
+    }
+  }
+}
+
 @font-face {
   font-family: 'lithographregular';
   src: url('./ui/assets/lithograph-webfont.woff') format('woff2'),

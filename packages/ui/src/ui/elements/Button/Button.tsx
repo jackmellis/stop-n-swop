@@ -1,15 +1,6 @@
-import React, { ComponentType, ButtonHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
-
-export type Kind = 'primary' | 'secondary' | 'tertiary';
-
-type Attributes = ButtonHTMLAttributes<HTMLButtonElement>;
-
-interface Props extends Attributes {
-  component?: ComponentType<any> | string;
-  kind?: Kind;
-  [key: string]: any;
-}
+import { Kind, ButtonComponent, Props } from './types';
 
 const getColorClassNames = ({
   disabled,
@@ -18,44 +9,67 @@ const getColorClassNames = ({
   disabled?: boolean;
   kind: Kind;
 }) => {
-  if (kind === 'tertiary') {
-    return 'bg-red-500 text-white';
+  if (kind === 'primary') {
+    if (disabled) {
+      return { 'bg-gray-400': true, 'text-white': true };
+    }
+    return {
+      'bg-green-500': true,
+      'hover:bg-green-700': true,
+      'text-white': true,
+    };
   }
   if (kind === 'secondary') {
     if (disabled) {
-      // return 'bg-gray-100 text-gray-400';
+      return { 'text-gray-300': true, 'border-gray-300': true, border: true };
     }
-    return 'bg-purple-500 text-white hover:bg-purple-700 transition-colors';
+    return {
+      'border-white': true,
+      border: true,
+      'hover:text-purple-300': true,
+      'hover:border-purple-200': true,
+    };
+  }
+  if (kind === 'tertiary') {
+    if (disabled) {
+      return { 'text-gray-300': true };
+    }
+    return { 'text-green-500': true, 'hover:text-green-300': true };
+  }
+  if (kind === 'danger') {
+    if (disabled) {
+      return { 'bg-gray-400': true, 'text-white': true };
+    }
+    return { 'bg-red-500': true, 'hover:bg-red-400': true, 'text-white': true };
   }
   if (disabled) {
-    // return 'bg-blue-100 text-gray-400';
+    return { 'text-300': true };
   }
-  if (kind === 'primary') {
-    return 'bg-green-500 text-white hover:bg-green-700 transition-colors';
-  }
-  return '';
+  return { 'hover:text-green-200': true };
 };
 
-export const getClassNames = ({
-  disabled,
-  kind,
-}: { disabled?: boolean; kind?: Kind } = {}) => {
-  return cx(
-    getColorClassNames({ disabled, kind }),
-    'flex items-center space-x-3',
-    'px-4 py-3 rounded font-medium',
-    disabled && 'cursor-not-allowed',
-  );
+export const getClassNames = ({ disabled }: { disabled?: boolean } = {}) => {
+  return {
+    flex: true,
+    'items-center': true,
+    'px-4': true,
+    'py-3': true,
+    rounded: true,
+    'font-medium': true,
+    'transition-colors': true,
+    'cursor-not-allowed': disabled,
+  };
 };
 
-const Button = forwardRef<HTMLButtonElement, Props>(
+const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
   (
     {
       component: Button = 'button',
       children,
       disabled,
-      kind = 'primary',
+      kind = 'none',
       className,
+      styles,
       ...props
     },
     ref,
@@ -63,7 +77,11 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     <Button
       ref={ref}
       type="button"
-      className={cx(getClassNames({ disabled, kind }), className)}
+      className={cx(className, {
+        ...getColorClassNames({ kind, disabled }),
+        ...getClassNames({ disabled }),
+        ...styles,
+      })}
       disabled={disabled}
       {...props}
     >

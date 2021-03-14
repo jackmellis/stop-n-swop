@@ -9,16 +9,10 @@
     "strictBindCallApply": true,
     "declaration": false,
     "esModuleInterop": true,
+    "lib": ["ESNext.Intl"],
     "types": ["node", "jest"],
     "sourceMap": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "lib": ["ESNext.Intl", "DOM"],
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/*"]
-    }
-  },
-  "include": ["src", "@types"],
-  "exclude": ["../../node_modules/@formatjs/intl/src/utils.d.ts"]
+    "noEmit": true
+  }
 }
