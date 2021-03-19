@@ -9,10 +9,15 @@
     "strictBindCallApply": true,
     "declaration": false,
     "esModuleInterop": true,
-    "lib": ["ESNext.Intl"],
     "types": ["node", "jest"],
     "sourceMap": true,
     "isolatedModules": true,
-    "noEmit": true
-  }
+    "noEmit": true,
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    }
+  },
+  "include": ["src", "@types"]
 }

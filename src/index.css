@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @variants hover, responsive {
+    .filter-none {
+      filter: none;
+    }
+    .filter-contrast {
+      filter: contrast(1.25);
+    }
+  }
+}
+
+/* Aspect ratio magic */
+[style*='--aspect-ratio'] > :first-child {
+  width: 100%;
+}
+[style*='--aspect-ratio'] > img {
+  height: auto;
+}
+@supports (--custom: property) {
+  [style*='--aspect-ratio']::before {
+    content: '';
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  [style*='--aspect-ratio'] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+
+@font-face {
+  font-family: 'lithographregular';
+  src: url('./ui/assets/lithograph-webfont.woff') format('woff2'),
+    url('./ui/assets/lithograph-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lithographbold';
+  src: url('./ui/assets/lithograph_bold-webfont.woff2') format('woff2'),
+    url('./ui/assets/lithograph_bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'zx_spectrumregular';
+  src: url('./ui/assets/zx-spectrum-webfont.woff2') format('woff2'),
+    url('./ui/assets/zx-spectrum-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
