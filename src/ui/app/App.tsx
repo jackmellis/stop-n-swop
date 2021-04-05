@@ -1,17 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Provider as Jpex } from 'react-jpex';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
 import { Provider as Respite } from '@respite/core';
 import { en } from 'ui/messages';
 import background from 'ui/assets/bg-1.jpg';
-import ErrorPage from 'ui/pages/Error';
-import LoadingPage from 'ui/pages/Loading';
-import Pages from 'ui/pages/Pages';
-import Content from './Content';
-import Footer from './Footer';
-import Nav from './Nav';
 import Core from './Core';
 
 // TODO: get this

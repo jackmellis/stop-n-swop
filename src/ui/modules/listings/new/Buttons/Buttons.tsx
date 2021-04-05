@@ -23,12 +23,12 @@ export default function Buttons({
           <FormattedMessage id={ids.listings.new.buttons.back} />
         </Button>
       </If>
+      {children}
       <If condition={!last && showNext}>
         <Button kind="primary" type="submit">
           <FormattedMessage id={ids.listings.new.buttons.next} />
         </Button>
       </If>
-      {children}
     </div>
   );
 }

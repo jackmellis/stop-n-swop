@@ -20,6 +20,7 @@ const listings: IListing[] = [
       region: Region.PAL,
     },
     images: [cartridge],
+    createdDate: new Date(),
   },
   {
     productId: 'super_mario_64',
@@ -36,6 +37,7 @@ const listings: IListing[] = [
       region: Region.PAL,
     },
     images: [cartridge],
+    createdDate: new Date(),
   },
   {
     productId: 'super_mario_64',
@@ -52,6 +54,7 @@ const listings: IListing[] = [
       region: Region.PAL,
     },
     images: [cartridge],
+    createdDate: new Date(),
   },
 ];
 

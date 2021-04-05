@@ -140,6 +140,9 @@ const enMessages = {
         submit: 'Looks good!',
       },
     },
+    edit: {
+      title: 'Edit listing {name} ({listingId})',
+    },
     myListings: {
       title: 'My listings',
       listButton: 'Create a new listing',

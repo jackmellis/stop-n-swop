@@ -33,7 +33,6 @@ function Option({
 
   return (
     <OptionBox
-      type="submit"
       className={cx('p-2 w-full', 'sm:w-1/2 sm:px-12 sm:py-6', 'lg:w-1/4')}
       selected={id === value}
       onClick={() => onChange(id)}
@@ -63,7 +62,7 @@ export default function RegionStep({ previous }: { previous(): void }) {
           </div>
         )}
       />
-      <Buttons previous={previous} showNext={false} />
+      <Buttons previous={previous} />
     </div>
   );
 }

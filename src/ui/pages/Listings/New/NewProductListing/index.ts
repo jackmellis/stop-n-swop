@@ -1,1 +1,1 @@
-export { default } from './Connected';
+export { default } from './ConnectedNewProductListing';

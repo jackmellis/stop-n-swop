@@ -8,10 +8,9 @@ import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
-import { NEW_LISTING } from 'ui/constants/paths';
 import Buttons from '../Buttons';
 
-const icons = [FaGrinStars, FaGrinBeam, FaSmile, FaMeh];
+const icons = [FaMeh, FaSmile, FaGrinBeam, FaGrinStars];
 
 function Option({
   index,
@@ -28,7 +27,6 @@ function Option({
 
   return (
     <OptionBox
-      type="submit"
       className={cx('p-2 w-full', 'sm:w-1/2 sm:px-12 sm:py-6', 'lg:w-1/4')}
       selected={id === value}
       onClick={() => onChange(id)}
@@ -41,7 +39,11 @@ function Option({
   );
 }
 
-export default function ConditionStep() {
+export default function ConditionStep({
+  previousUrl,
+}: {
+  previousUrl: string;
+}) {
   return (
     <div>
       <h2 className="text-lg">
@@ -53,21 +55,23 @@ export default function ConditionStep() {
         render={({ value, onChange }) => {
           return (
             <div className="my-8 flex flex-wrap xl:px-28">
-              {Object.values(Condition).map((id, i) => (
-                <Option
-                  key={id}
-                  id={id}
-                  index={i}
-                  onChange={onChange}
-                  value={value}
-                />
-              ))}
+              {Object.values(Condition)
+                .reverse()
+                .map((id, i) => (
+                  <Option
+                    key={id}
+                    id={id}
+                    index={i}
+                    onChange={onChange}
+                    value={value}
+                  />
+                ))}
             </div>
           );
         }}
       />
-      <Buttons first showNext={false} previous={() => null}>
-        <Button kind="secondary" component={Link} to={NEW_LISTING}>
+      <Buttons first showNext previous={() => null}>
+        <Button kind="secondary" component={Link} to={previousUrl}>
           <FormattedMessage id={ids.listings.new.buttons.back} />
         </Button>
       </Buttons>

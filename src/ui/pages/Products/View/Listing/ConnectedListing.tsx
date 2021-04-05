@@ -30,6 +30,7 @@ export default function ConnectedListing({
       instructions: true,
       region: Region.PAL,
     },
+    createdDate: new Date(),
   };
 
   return (

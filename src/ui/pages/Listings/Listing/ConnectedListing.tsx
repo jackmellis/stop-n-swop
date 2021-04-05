@@ -29,6 +29,7 @@ export default function ConnectedListingPage() {
       instructions: true,
       region: Region.PAL,
     },
+    createdDate: new Date(),
   };
   const product: Product = {
     productId,

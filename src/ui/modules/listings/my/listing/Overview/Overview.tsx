@@ -1,7 +1,7 @@
 import { Status as IStatus } from 'core/constants/order';
 import { Audit } from 'core/entity/listings';
 import React from 'react';
-import Buyer from '../Buyer/Buyer';
+import Buyer from '../Buyer';
 import History from '../History';
 import Status from '../Status';
 import ViewLink from '../ViewLink';

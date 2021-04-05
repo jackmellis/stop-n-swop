@@ -4,13 +4,14 @@ import useMachine from 'ui/modules/listings/new/machine';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
-import { NEW_LISTING } from 'ui/constants/paths';
+import { MY_LISTINGS } from 'ui/constants/paths';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
+  listingId: string;
   name: string;
   step: Step;
   dispatch: Dispatch;
@@ -20,6 +21,7 @@ interface Props {
 
 export default function NewProductListing({
   productId,
+  listingId,
   name,
   step,
   dispatch,
@@ -30,14 +32,14 @@ export default function NewProductListing({
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
         <FormattedMessage
-          id={ids.listings.new.productPageTitle}
-          values={{ name }}
+          id={ids.listings.edit.title}
+          values={{ name, listingId }}
         />
       </PageTitle>
       <Form
         dispatch={dispatch}
         location={location}
-        previousUrl={NEW_LISTING}
+        previousUrl={MY_LISTINGS}
         productId={productId}
         step={step}
         username={username}

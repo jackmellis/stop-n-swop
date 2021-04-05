@@ -33,7 +33,7 @@ export default function MyListingItem({
           className="relative hidden sm:block w-1/3 lg:w-1/4 xl:w-1/5"
           style={{ '--aspect-ratio': 16 / 9 } as any}
         >
-          <img src={image} className="object-contain" />
+          <img alt="preview" src={image} className="object-contain" />
         </div>
         <div className="w-2/3 sm:w-1/3 md:w-1/2 lg:w-1/4 xl:w-1/5 pl-4 sm:pl-0">
           <span className="block">{name}</span>
