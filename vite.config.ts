@@ -8,13 +8,20 @@ export default defineConfig({
   resolve: {
     alias: {
       adapters: '/src/adapters',
-      core: '/src/core',
       ports: '/src/ports',
+      domain: '/src/domain',
+      usecases: '/src/usecases',
       ui: '/src/ui',
     },
   },
   server: {
     // open: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
   },
   plugins: [
     {
@@ -46,7 +53,6 @@ export default defineConfig({
                   {
                     pathAlias: {
                       adapters: '/src/adapters',
-                      core: '/src/core',
                       ports: '/src/ports',
                     },
                     omitIndex: true,

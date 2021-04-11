@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 import Banner from './Banner';
 import Cover from './Cover';
 import Meta from './Meta';

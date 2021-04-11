@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import useMachine from 'ui/modules/listings/new/machine';
-import { Values } from 'ui/modules/listings/new/types';
+import type { Values } from 'ui/modules/listings/new/types';
 import NewProductListing from './NewProductListing';
 
 export default function ConnectedNewProductListing() {

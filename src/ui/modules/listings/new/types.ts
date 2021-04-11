@@ -1,5 +1,5 @@
-import { Condition, Region } from '@sns/contracts/listing';
-import { ImageUrl } from 'core/types';
+import type { Condition, Region } from '@sns/contracts/listing';
+import type { ImageUrl } from 'domain/types';
 
 export interface Values {
   condition: Condition;

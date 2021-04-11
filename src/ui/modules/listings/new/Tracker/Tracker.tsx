@@ -1,6 +1,6 @@
 import React from 'react';
 import StepTracker from 'ui/elements/StepTracker';
-import { Step } from '../machine';
+import type { Step } from '../machine';
 
 const order = [
   'condition',

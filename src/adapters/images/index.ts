@@ -1,0 +1,2 @@
+import './resizeImage';
+import './uploadImage';

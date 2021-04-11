@@ -1,5 +1,5 @@
 import React from 'react';
-import { Status } from '@respite/core';
+import type { Status } from '@respite/core';
 import { useForm } from 'react-hook-form';
 import Buttons from 'ui/modules/auth/register/Buttons';
 import Email from 'ui/modules/auth/register/Email';

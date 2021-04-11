@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import Loader from 'react-spinners/BeatLoader';
 import { FaCheck } from 'react-icons/fa';
-import { Kind, ButtonComponent, Props, State } from './types';
+import type { Kind, ButtonComponent, Props, State } from './types';
 
 const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
   // @TODO: add error states for all kinds

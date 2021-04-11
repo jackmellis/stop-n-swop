@@ -2,7 +2,7 @@ import React from 'react';
 import Slideshow from 'ui/elements/Slideshow';
 import Overview from 'ui/modules/listings/listing/Overview';
 import Features from 'ui/modules/listings/listing/Features';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 import type { Stats } from '@sns/contracts/listing';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';

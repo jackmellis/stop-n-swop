@@ -6,7 +6,7 @@ import { makeProductPath } from 'ui/constants/paths';
 import { GridItem } from 'ui/elements/grid';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 
 interface Props {
   productId: string;

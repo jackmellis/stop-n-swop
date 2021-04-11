@@ -1,4 +1,5 @@
 import jpex from 'jpex';
+import type { ResizeImage } from 'ports/images';
 import {
   canvasToFile,
   fileToImageUrl,
@@ -6,8 +7,6 @@ import {
   loadImageUrl,
   resizeCanvas,
 } from './utils';
-
-export type ResizeImage = (file: File, maxSize: number) => Promise<File>;
 
 const resizeImage = async (file: File, maxSize: number): Promise<File> => {
   const imageUrl = await fileToImageUrl(file);

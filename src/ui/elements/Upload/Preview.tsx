@@ -1,4 +1,4 @@
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 import React, { useState } from 'react';
 import PreviewOptions from './PreviewOptions';
 

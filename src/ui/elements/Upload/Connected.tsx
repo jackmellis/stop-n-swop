@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Status } from '@respite/action';
-import { ImageUrl } from 'core/types';
-import { useUploadImage } from 'ports/images';
+import type { ImageUrl } from 'domain/types';
+import { useUploadImage } from 'usecases/images';
 import Upload from './Upload';
 
 export default function Connect({

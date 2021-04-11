@@ -1,4 +1,4 @@
-import { IntlShape } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import { ids } from 'ui/messages';
 
 const hasError = (e: any): e is { error: string } => {

@@ -1,4 +1,4 @@
-import { Status } from '@respite/core';
+import type { Status } from '@respite/core';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'ui/elements/Button';

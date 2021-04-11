@@ -5,7 +5,7 @@ import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 import { Actions, ListingsItem } from 'ui/modules/listings/listings';
 import Buttons from '../Buttons';
-import { Values } from '../types';
+import type { Values } from '../types';
 
 interface Props {
   username: string;

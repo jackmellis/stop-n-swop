@@ -1,7 +1,7 @@
 import React from 'react';
-import { Status as RStatus } from '@respite/core';
+import type { Status as RStatus } from '@respite/core';
 import type { Listing } from '@sns/contracts/listing';
-import { Order, Status } from '@sns/contracts/order';
+import type { Order, Status } from '@sns/contracts/order';
 import type { Product } from '@sns/contracts/product';
 import ListingItem from 'ui/modules/listings/my/listings/ListingItem';
 import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';

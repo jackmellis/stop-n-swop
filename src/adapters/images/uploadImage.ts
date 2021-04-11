@@ -1,10 +1,7 @@
 import jpex from 'jpex';
-import { ImageUrl } from 'core/types';
-import type { ResizeImage } from './resizeImage';
+import type { ResizeImage, UploadImage } from 'ports/images';
 import './resizeImage';
 import { fileToImageUrl } from './utils';
-
-export type UploadImage = (file: File) => Promise<ImageUrl>;
 
 const uploadImage = (resizeImage: ResizeImage): UploadImage => async (
   givenFile,

@@ -1,6 +1,6 @@
 import React from 'react';
-import { FallbackProps } from 'react-error-boundary';
-import { getErrorMessage } from 'core/selectors/common';
+import type { FallbackProps } from 'react-error-boundary';
+import { getErrorMessage } from 'domain/selectors/common';
 import { useIntl } from 'react-intl';
 
 interface Props extends FallbackProps {

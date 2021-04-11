@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { ProductItem } from 'ui/modules/product/products';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 
 export default function Item({
   productId,

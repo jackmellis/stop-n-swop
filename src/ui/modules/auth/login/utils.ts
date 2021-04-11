@@ -1,4 +1,4 @@
-import { State } from 'ui/elements/Button';
+import type { State } from 'ui/elements/Button';
 import { Status } from '@respite/core';
 
 export const getButtonState = (status: Status): State => {

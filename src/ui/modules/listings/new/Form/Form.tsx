@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'ui/elements/Card';
 import { useFormContext } from 'react-hook-form';
 import Loader from 'react-spinners/BeatLoader';
-import useMachine from 'ui/modules/listings/new/machine';
+import type useMachine from 'ui/modules/listings/new/machine';
 import Condition from 'ui/modules/listings/new/Condition';
 import Features from 'ui/modules/listings/new/Features';
 import Region from 'ui/modules/listings/new/Region';
@@ -11,7 +11,7 @@ import Description from 'ui/modules/listings/new/Description';
 import Photos from 'ui/modules/listings/new/Photos';
 import Review from 'ui/modules/listings/new/Review';
 import Done from 'ui/modules/listings/new/Done';
-import { Values } from 'ui/modules/listings/new/types';
+import type { Values } from 'ui/modules/listings/new/types';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
 
 type Step = ReturnType<typeof useMachine>[0];

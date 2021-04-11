@@ -12,6 +12,7 @@
     "types": ["node", "jest"],
     "sourceMap": true,
     "isolatedModules": true,
+    "importsNotUsedAsValues": "error",
     "noEmit": true,
     "lib": ["ESNext", "DOM"],
     "baseUrl": ".",

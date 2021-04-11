@@ -1,4 +1,4 @@
-import { Status } from 'core/constants/basket';
+import { Status } from 'domain/constants/basket';
 import React, { useState } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { FormattedMessage } from 'react-intl';

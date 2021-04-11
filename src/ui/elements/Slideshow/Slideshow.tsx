@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { useSwipeable } from 'react-swipeable';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 
 enum Direction {
   FORWARD,

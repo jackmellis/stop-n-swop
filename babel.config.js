@@ -23,7 +23,6 @@ module.exports = {
       {
         pathAlias: {
           adapters: '/src/adapters',
-          core: '/src/core',
           ports: '/src/ports',
         },
         omitIndex: true,

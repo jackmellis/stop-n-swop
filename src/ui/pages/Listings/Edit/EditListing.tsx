@@ -1,6 +1,6 @@
 import React from 'react';
 import PageTitle from 'ui/elements/PageTitle';
-import useMachine from 'ui/modules/listings/new/machine';
+import type useMachine from 'ui/modules/listings/new/machine';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';

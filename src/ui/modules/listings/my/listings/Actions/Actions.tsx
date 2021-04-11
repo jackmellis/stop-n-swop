@@ -4,7 +4,7 @@ import { Order, Status } from '@sns/contracts/order';
 import Button, { State } from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
-import { Listing } from '@sns/contracts/listing';
+import type { Listing } from '@sns/contracts/listing';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 

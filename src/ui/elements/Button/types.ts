@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ComponentType } from 'react';
+import type { ButtonHTMLAttributes, ComponentType } from 'react';
 
 export type Kind = 'primary' | 'secondary' | 'tertiary' | 'none';
 

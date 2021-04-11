@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactNode } from 'react';
 import cx from 'classnames';
 import { ListItem } from 'ui/elements/list';
 import type { Stats } from '@sns/contracts/listing';
-import { ImageUrl } from 'core/types';
+import type { ImageUrl } from 'domain/types';
 import Image from './Image';
 import SellerInfo from './SellerInfo';
 import Statistics from '../Stats';

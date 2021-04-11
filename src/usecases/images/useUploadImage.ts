@@ -1,8 +1,8 @@
 import { encase } from 'react-jpex';
 import { useAction } from '@respite/action';
-import type { UploadImage } from 'adapters/images/uploadImage';
 import 'adapters/images/uploadImage';
-import { isFileAnImage } from 'core/selectors/images';
+import { isFileAnImage } from 'domain/selectors/images';
+import type { UploadImage } from 'ports/images';
 
 export const useUploadImage = encase((upload: UploadImage) => () => {
   return useAction((file: File) => {

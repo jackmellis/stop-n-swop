@@ -6,7 +6,7 @@ import cartridge from 'ui/assets/s-l640.jpg';
 import cartridge2 from 'ui/assets/cartridge-back.jpg';
 import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
 import useMachine from 'ui/modules/listings/new/machine';
-import { Values } from 'ui/modules/listings/new/types';
+import type { Values } from 'ui/modules/listings/new/types';
 import { MY_LISTINGS } from 'ui/constants/paths';
 import EditListing from './EditListing';
 

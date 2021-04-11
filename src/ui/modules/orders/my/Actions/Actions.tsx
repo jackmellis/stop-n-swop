@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
-import { Status as RStatus } from '@respite/core';
+import type { Status as RStatus } from '@respite/core';
 import { Order, Status } from '@sns/contracts/order';
 import Button from 'ui/elements/Button';
 import { FormattedMessage } from 'react-intl';

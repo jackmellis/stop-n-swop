@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { HOME } from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
-import Login from './Login';
+import LoginPage from './Login';
 
 export default function ConnectedLogin() {
   const redirect = useQueryParam('redirect') || HOME;
@@ -26,5 +26,5 @@ export default function ConnectedLogin() {
     }
   }, [history, redirect, status]);
 
-  return <Login onSubmit={handleSubmit} status={status} />;
+  return <LoginPage onSubmit={handleSubmit} status={status} />;
 }
