@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { MY_ORDERS } from 'ui/constants/paths';
-import MyOrdersPage from './My';
+
+const MyOrdersPage = lazy(() => import('./My'));
 
 export default function OrdersPage() {
   return (

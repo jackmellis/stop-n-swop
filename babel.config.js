@@ -9,13 +9,6 @@ module.exports = {
         onlyRemoveTypeImports: true,
       },
     ],
-    // [
-    //   '@babel/preset-env',
-    //   {
-    //     modules: process.env.NODE_ENV === 'test' ? 'commonjs' : false,
-    //     useBuiltIns: false,
-    //   },
-    // ],
   ],
   plugins: [
     [
@@ -40,3 +33,16 @@ module.exports = {
     ],
   ],
 };
+
+if (process.env.NODE_ENV === 'test') {
+  module.exports.presets.push([
+    '@babel/preset-env',
+    {
+      modules: 'commonjs',
+      useBuiltIns: false,
+      targets: {
+        node: 'current',
+      },
+    },
+  ]);
+}

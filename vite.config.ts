@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import babel from '@babel/core';
+// import analyze from 'rollup-plugin-analyzer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,7 @@ export default defineConfig({
     },
   },
   server: {
-    // open: true,
+    port: 3001,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
@@ -23,6 +24,12 @@ export default defineConfig({
       },
     },
   },
+  // build: {
+  //   minify: false,
+  //   rollupOptions: {
+  //     plugins: [analyze({ summaryOnly: true, stdout: true })],
+  //   },
+  // },
   plugins: [
     {
       name: 'babel',

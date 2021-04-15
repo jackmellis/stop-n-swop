@@ -3,7 +3,6 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { makeProductPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
-import FieldError from 'ui/elements/FieldError';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
@@ -15,7 +14,9 @@ export default function PriceStep({
   productId: string;
   previous(): void;
 }) {
-  const { errors } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
   const error = errors.price;
   const intl = useIntl();
 
@@ -45,7 +46,7 @@ export default function PriceStep({
             }),
           }}
           defaultValue=""
-          render={({ value, onChange }) => (
+          render={({ field: { value, onChange } }) => (
             <CurrencyInput
               id="price"
               label={<FormattedMessage id={ids.listings.new.price.label} />}
@@ -53,10 +54,10 @@ export default function PriceStep({
               state={error == null ? undefined : 'error'}
               onChange={onChange}
               autoFocus
+              error={error}
             />
           )}
         />
-        <FieldError error={error} />
       </div>
       <Buttons previous={previous} />
     </div>

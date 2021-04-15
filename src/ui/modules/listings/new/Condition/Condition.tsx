@@ -52,7 +52,7 @@ export default function ConditionStep({
       <Controller
         name="condition"
         defaultValue=""
-        render={({ value, onChange }) => {
+        render={({ field: { value, onChange } }) => {
           return (
             <div className="my-8 flex flex-wrap xl:px-28">
               {Object.values(Condition)

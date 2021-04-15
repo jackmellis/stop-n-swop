@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { LOGIN, REGISTER } from 'ui/constants/paths';
-import Login from './Login';
-import Register from './Register';
+
+const Login = lazy(() => import('./Login'));
+const Register = lazy(() => import('./Register'));
 
 export default function AuthPages() {
   return (

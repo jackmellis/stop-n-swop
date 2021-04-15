@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import ReactSelect from 'react-select';
+import FieldError from '../FieldError';
 
 interface Props {
   label: ReactNode;
@@ -12,6 +13,7 @@ interface Props {
   onSearch?(value: string): void;
   id: string;
   autoFocus?: boolean;
+  error?: any;
 }
 
 export default function Typeahead({
@@ -22,6 +24,7 @@ export default function Typeahead({
   onSearch,
   id,
   autoFocus,
+  error,
 }: Props) {
   return (
     <div>
@@ -71,6 +74,9 @@ export default function Typeahead({
         onInputChange={onSearch}
         inputId={id}
       />
+      <If condition={Boolean(error)}>
+        <FieldError error={error} />
+      </If>
     </div>
   );
 }

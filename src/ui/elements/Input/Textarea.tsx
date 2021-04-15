@@ -1,5 +1,6 @@
 import React, { ReactNode, TextareaHTMLAttributes } from 'react';
 import cx from 'classnames';
+import FieldError from '../FieldError';
 
 type State = 'none' | 'error';
 
@@ -8,13 +9,15 @@ export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: ReactNode;
   height?: number | string;
   state?: State;
+  error?: any;
 }
 
 export default function Textarea({
   id,
   label,
   height = 'auto',
-  state,
+  error,
+  state = error ? 'error' : 'none',
   ...props
 }: Props) {
   return (
@@ -30,6 +33,9 @@ export default function Textarea({
         style={{ height }}
         {...props}
       />
+      <If condition={Boolean(error)}>
+        <FieldError error={error} />
+      </If>
     </div>
   );
 }

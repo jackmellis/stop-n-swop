@@ -1,14 +1,23 @@
 import React, { ReactNode } from 'react';
+import FieldError from '../FieldError';
 
 interface Props {
   label: ReactNode;
   value: any;
-  onChange?(value: any): void;
   options: Array<{ label: ReactNode; value: any }>;
   id: string;
+  error?: any;
+  onChange?(value: any): void;
 }
 
-export default function Select({ label, value, onChange, options, id }: Props) {
+export default function Select({
+  label,
+  value,
+  onChange,
+  options,
+  id,
+  error,
+}: Props) {
   return (
     <div>
       <label htmlFor={id} className="block text-gray-200 text-sm">
@@ -26,6 +35,9 @@ export default function Select({ label, value, onChange, options, id }: Props) {
           </option>
         ))}
       </select>
+      <If condition={Boolean(error)}>
+        <FieldError error={error} />
+      </If>
     </div>
   );
 }

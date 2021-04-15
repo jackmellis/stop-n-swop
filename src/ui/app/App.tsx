@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Provider as Jpex } from 'react-jpex';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as Respite } from '@respite/core';
 import { en } from 'ui/messages';
 import background from 'ui/assets/bg-1.jpg';
+import LoadingPage from 'ui/pages/Loading';
 import Core from './Core';
 
 // TODO: get this
@@ -27,7 +28,9 @@ export default function App() {
                 }}
                 className="h-screen w-screen top-0 left-0 absolute md:fixed bg-center pointer-events-none bg-cover"
               />
-              <Core />
+              <Suspense fallback={<LoadingPage />}>
+                <Core />
+              </Suspense>
             </div>
           </BrowserRouter>
         </Respite>

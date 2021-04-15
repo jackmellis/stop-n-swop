@@ -1,7 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import FieldError from 'ui/elements/FieldError';
 import Upload from 'ui/elements/Upload';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
@@ -30,17 +29,18 @@ const Row = ({
             intl.formatMessage({ id: ids.listings.new.photos.required }),
         }}
         defaultValue=""
-        render={({ value, onChange }) => (
-          <Upload value={value} onChange={onChange} />
+        render={({ field: { value, onChange } }) => (
+          <Upload value={value} onChange={onChange} error={error} />
         )}
       />
-      <FieldError error={error} />
     </div>
   );
 };
 
 export default function PhotosStep({ previous }: { previous(): void }) {
-  const { errors } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
   const labels = ['Main photo', 'Cartridge (front)', 'Cartridge (back)'];
 
   return (

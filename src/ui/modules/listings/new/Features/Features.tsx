@@ -49,7 +49,7 @@ export default function FeaturesStep({ previous }: { previous(): void }) {
         <Controller
           name="boxed"
           defaultValue={false}
-          render={({ name, value, onChange }) => (
+          render={({ field: { name, value, onChange } }) => (
             <Option name={name} value={value} onChange={onChange}>
               <FormattedMessage id={ids.listings.new.features.boxed} />
             </Option>
@@ -58,7 +58,7 @@ export default function FeaturesStep({ previous }: { previous(): void }) {
         <Controller
           name="instructions"
           defaultValue={false}
-          render={({ name, value, onChange }) => (
+          render={({ field: { name, value, onChange } }) => (
             <Option name={name} value={value} onChange={onChange}>
               <FormattedMessage id={ids.listings.new.features.instructions} />
             </Option>

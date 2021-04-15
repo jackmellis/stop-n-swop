@@ -1,13 +1,14 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import FieldError from 'ui/elements/FieldError';
 import Input from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 
 export default function Username() {
   const intl = useIntl();
-  const { errors } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className="lg:px-12 xl:px-0">
@@ -19,18 +20,16 @@ export default function Username() {
             id: ids.auth.register.username.required,
           }),
         }}
-        render={({ ref, ...input }) => (
+        render={({ field: { ref, ...input } }) => (
           <Input
             id="username"
             label={<FormattedMessage id={ids.auth.register.username.label} />}
             autoFocus
+            error={errors.username}
             {...input}
           />
         )}
       />
-      <If condition={errors.username != null}>
-        <FieldError error={errors.username} />
-      </If>
     </div>
   );
 }

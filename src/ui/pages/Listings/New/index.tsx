@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { NEW_LISTING, PRODUCT_NEW_LISTING } from 'ui/constants/paths';
-import NewListing from './NewListing';
-import NewProductListingPage from './NewProductListing';
+
+const NewListing = lazy(() => import('./NewListing'));
+const NewProductListingPage = lazy(() => import('./NewProductListing'));
 
 export default function NewListingPages() {
   return (

@@ -9,7 +9,7 @@
     "strictBindCallApply": true,
     "declaration": false,
     "esModuleInterop": true,
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "sourceMap": true,
     "isolatedModules": true,
     "importsNotUsedAsValues": "error",

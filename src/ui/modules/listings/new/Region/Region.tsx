@@ -54,7 +54,7 @@ export default function RegionStep({ previous }: { previous(): void }) {
       <Controller
         name="region"
         defaultValue=""
-        render={({ value, onChange }) => (
+        render={({ field: { value, onChange } }) => (
           <div className="my-8 flex flex-wrap xl:px-28">
             {Object.values(Region).map((id) => (
               <Option key={id} id={id} onChange={onChange} value={value} />

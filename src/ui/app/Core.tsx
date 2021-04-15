@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 import ErrorPage from 'ui/pages/Error';
 import LoadingPage from 'ui/pages/Loading';
 import Pages from 'ui/pages/Pages';
+import { useAuth } from 'usecases/auth';
+import useExchanges from 'usecases/useExchanges';
 import Content from './Content';
 import Footer from './Footer';
 import Nav from './Nav';
@@ -13,11 +15,13 @@ import Nav from './Nav';
 // https://www.dreamstime.com/taipei-taiwan-february-studio-shot-pile-different-nintendo-games-shot-above-large-pile-retro-nintendo-games-image113236003#_
 
 export default function Core() {
+  useExchanges();
   const { pathname } = useLocation();
   const window = useResolve<Window>();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname, window]);
+  useAuth();
 
   return (
     <div className="relative flex-grow flex flex-col">

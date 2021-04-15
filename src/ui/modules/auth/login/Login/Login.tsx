@@ -6,14 +6,24 @@ import Card from 'ui/elements/Card';
 import { REGISTER, FORGOT_PASSWORD } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
 import { Controller, useFormContext } from 'react-hook-form';
-import FieldError from 'ui/elements/FieldError';
 import type { Status } from '@respite/core';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ids } from 'ui/messages';
+import FormError from 'ui/elements/FormError';
+import { getErrorMessage } from 'domain/selectors/common';
 import { getButtonState } from '../utils';
+import type { Values } from '../types';
 
-export default function LoginForm({ status }: { status: Status }) {
-  const { errors } = useFormContext();
+export default function LoginForm({
+  status,
+  error,
+}: {
+  status: Status;
+  error: any;
+}) {
+  const {
+    formState: { errors },
+  } = useFormContext<Values>();
   const intl = useIntl();
 
   return (
@@ -25,6 +35,11 @@ export default function LoginForm({ status }: { status: Status }) {
             <FormattedMessage id={ids.auth.login.title} />
           </span>
         </h1>
+        <If condition={Boolean(error)}>
+          <div className="lg:px-12 xl:px-0">
+            <FormError error={getErrorMessage(error, intl)} />
+          </div>
+        </If>
         <div className="lg:px-12 xl:px-0">
           <Controller
             name="username"
@@ -34,19 +49,17 @@ export default function LoginForm({ status }: { status: Status }) {
                 id: ids.auth.login.username.required,
               }),
             }}
-            render={({ ref, ...input }) => (
+            render={({ field: { ref, ...input } }) => (
               <Input
                 id="username"
                 label={<FormattedMessage id={ids.auth.login.username.label} />}
                 autoFocus
                 autoComplete="username"
+                error={errors.username}
                 {...input}
               />
             )}
           />
-          <If condition={errors.username != null}>
-            <FieldError error={errors.username} />
-          </If>
         </div>
         <div className="lg:px-12 xl:px-0">
           <Controller
@@ -57,19 +70,17 @@ export default function LoginForm({ status }: { status: Status }) {
                 id: ids.auth.login.password.required,
               }),
             }}
-            render={({ ref, ...input }) => (
+            render={({ field: { ref, ...input } }) => (
               <Input
                 id="password"
                 label={<FormattedMessage id={ids.auth.login.password.label} />}
                 type="password"
                 autoComplete="current-password"
+                error={errors.password}
                 {...input}
               />
             )}
           />
-          <If condition={errors.password != null}>
-            <FieldError error={errors.password} />
-          </If>
         </div>
         <Button
           type="submit"

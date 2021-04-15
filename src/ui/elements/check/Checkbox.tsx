@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import cx from 'classnames';
+import FieldError from '../FieldError';
 
 type Kind = 'primary' | 'secondary';
 
@@ -10,6 +11,7 @@ interface Props {
   className?: string;
   readonly?: boolean;
   kind?: Kind;
+  error?: any;
   onChange?(checked: boolean): void;
 }
 
@@ -46,23 +48,29 @@ export default function Checkbox({
   label = '',
   className,
   readonly,
+  error,
   kind = 'primary',
 }: Props) {
   return (
-    <label className={cx('flex items-center cursor-pointer', className)}>
-      <button
-        type="button"
-        className={cx(
-          getColourClasses({ readonly, value, kind }),
-          'p-1 border-2 md:transition-colors',
-        )}
-        role="checkbox"
-        aria-checked={value}
-        onClick={() => onChange?.(!value)}
-      >
-        <FaCheck className="text-xs" />
-      </button>
-      <span className={cx(label && 'pl-2')}>{label}</span>
-    </label>
+    <>
+      <label className={cx('flex items-center cursor-pointer', className)}>
+        <button
+          type="button"
+          className={cx(
+            getColourClasses({ readonly, value, kind }),
+            'p-1 border-2 md:transition-colors',
+          )}
+          role="checkbox"
+          aria-checked={value}
+          onClick={() => onChange?.(!value)}
+        >
+          <FaCheck className="text-xs" />
+        </button>
+        <span className={cx(label && 'pl-2')}>{label}</span>
+      </label>
+      <If condition={Boolean(error)}>
+        <FieldError error={error} />
+      </If>
+    </>
   );
 }

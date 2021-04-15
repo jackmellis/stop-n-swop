@@ -1,18 +1,19 @@
 import React, { ReactNode } from 'react';
-import { FormProvider, UseFormMethods } from 'react-hook-form';
+import { FormProvider, UseFormReturn } from 'react-hook-form';
 import { FaKey } from 'react-icons/fa';
 import { FormattedMessage } from 'react-intl';
 import background from 'ui/assets/bg-1.jpg';
 import Card from 'ui/elements/Card';
 import { ids } from 'ui/messages';
 
-interface Props extends UseFormMethods {
+interface Props extends UseFormReturn {
   onSubmit(values: unknown): Promise<unknown>;
   children: ReactNode;
 }
 
 export default function Form({ onSubmit, children, ...formProps }: Props) {
   const { handleSubmit } = formProps;
+
   return (
     <FormProvider {...formProps}>
       <form

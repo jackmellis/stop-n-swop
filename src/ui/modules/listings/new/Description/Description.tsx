@@ -1,13 +1,16 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import FieldError from 'ui/elements/FieldError';
 import { Textarea } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
 
 export default function DescriptionStep({ previous }: { previous(): void }) {
-  const error = useFormContext().errors.description;
+  const {
+    formState: {
+      errors: { description: error },
+    },
+  } = useFormContext();
 
   return (
     <div>
@@ -24,19 +27,18 @@ export default function DescriptionStep({ previous }: { previous(): void }) {
               message: 'Description must be no longer than a tweet',
             },
           }}
-          render={({ ref, ...input }) => (
+          render={({ field: { ref, ...input } }) => (
             <Textarea
               id="description"
               label={
                 <FormattedMessage id={ids.listings.new.description.label} />
               }
               height={200}
-              state={error == null ? undefined : 'error'}
+              error={error}
               {...input}
             />
           )}
         />
-        <FieldError error={error} />
       </div>
       <Buttons previous={previous} />
     </div>

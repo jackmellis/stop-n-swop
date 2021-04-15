@@ -1,0 +1,3 @@
+export const AuthKey = Symbol('auth');
+export const LogInKey = Symbol('log_in');
+export const TokensKey = Symbol('auth_tokens');

@@ -41,7 +41,6 @@ export default function ConnectedEditListing() {
     });
   };
   const formProps = useForm<Values>({
-    shouldUnregister: false,
     defaultValues: {
       boxed: listing.stats.boxed,
       condition: listing.stats.condition,

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { MY_LISTINGS, VIEW_MY_LISTING } from 'ui/constants/paths';
-import MyListingsPage from './Listings';
-import MyListingPage from './Listing';
+
+const MyListingsPage = lazy(() => import('./Listings'));
+const MyListingPage = lazy(() => import('./Listing'));
 
 export default function ProductsPage() {
   return (

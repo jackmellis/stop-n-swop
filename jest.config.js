@@ -13,9 +13,11 @@ module.exports = {
       statements: 80,
     },
   },
-  testMatch: [
-    'src/**/*.test.{ts,tsx}',
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    'isomorphic-fetch',
   ],
+  testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
   transformIgnorePatterns: [
     // ignore all node modules _except_ react-robot which doesn't have a commonjs version
     'node_modules/(?!(react-robot)/)',

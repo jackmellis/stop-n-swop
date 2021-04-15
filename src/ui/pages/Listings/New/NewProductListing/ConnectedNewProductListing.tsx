@@ -13,9 +13,7 @@ export default function ConnectedNewProductListing() {
       setTimeout(res, 2000);
     });
   };
-  const formProps = useForm<Values>({
-    shouldUnregister: false,
-  });
+  const formProps = useForm<Values>();
   const [step, dispatch] = useMachine('condition', { onSubmit });
   const name = 'Super Mario 64';
 

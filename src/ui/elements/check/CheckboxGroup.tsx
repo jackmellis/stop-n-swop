@@ -2,12 +2,14 @@ import React, { Children, ReactNode, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 import Button from '../Button';
+import FieldError from '../FieldError';
 import context from './context';
 
 interface Props {
   value: any[];
   onChange(value: any[]): void;
   limit?: number;
+  error?: any;
   children?: ReactNode;
 }
 
@@ -15,6 +17,7 @@ export default function CheckboxGroup({
   onChange,
   value: list,
   limit,
+  error,
   children,
 }: Props) {
   const [showMore, setShowMore] = useState(false);
@@ -65,6 +68,9 @@ export default function CheckboxGroup({
               </Otherwise>
             </Choose>
           </Button>
+        </If>
+        <If condition={Boolean(error)}>
+          <FieldError error={error} />
         </If>
       </div>
     </context.Provider>

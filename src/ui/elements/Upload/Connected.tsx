@@ -9,6 +9,7 @@ export default function Connect({
   ...rest
 }: {
   value: ImageUrl;
+  error?: any;
   onChange(url: ImageUrl): void;
 }) {
   const { action: upload, status: uploadStatus } = useUploadImage();

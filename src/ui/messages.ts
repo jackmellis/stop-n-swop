@@ -1,5 +1,7 @@
 import { Condition, Region } from '@sns/contracts/listing';
 import { Status } from '@sns/contracts/order';
+import { CommonCode } from '@sns/contracts/common';
+import { UserCode } from '@sns/contracts/user';
 import { flatten, unflatten } from 'flat';
 
 const enMessages = {
@@ -172,13 +174,15 @@ const enMessages = {
     },
   },
   error: {
-    unknown: 'An unknown error has ocurred',
-    badRequest: 'Malformed request syntax',
+    [UserCode.INVALID_LOGIN]: 'Username or Password are incorrect',
+    [CommonCode.BAD_REQUEST]: 'Malformed request syntax',
+    [CommonCode.NOT_FOUND]:
+      'The requested resource could not be found or does not exist',
+    [CommonCode.CONFLICT]: 'Conflict in the current resource state',
     forbidden: 'You are not authorised to carry out this action',
-    notFound: 'The requested resource could not be found or does not exist',
-    conflict: 'Conflict in the current resource state',
     unavailable: 'The service is currently unavailable, please try again',
     gatewayTimeout: 'The service is currently unavailable, please try again',
+    unknown: 'An unknown error has ocurred',
   },
   regions: {
     [Region.PAL]: 'PAL',
@@ -199,7 +203,7 @@ const enMessages = {
       title: 'Log in',
       username: {
         label: 'Username / Email',
-        required: 'Please enter your username or email address',
+        required: 'Please enter your username',
       },
       password: {
         label: 'Password',

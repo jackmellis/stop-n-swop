@@ -1,13 +1,14 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import FieldError from 'ui/elements/FieldError';
 import Input from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 
 export default function Password() {
   const intl = useIntl();
-  const { errors } = useFormContext();
+  const {
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className="lg:px-12 xl:px-0">
@@ -19,19 +20,17 @@ export default function Password() {
             id: ids.auth.register.password.required,
           }),
         }}
-        render={({ ref, ...input }) => (
+        render={({ field: { ref, ...input } }) => (
           <Input
             id="password"
             type="password"
             autoComplete="new-password"
             label={<FormattedMessage id={ids.auth.register.password.label} />}
+            error={errors.password}
             {...input}
           />
         )}
       />
-      <If condition={errors.password != null}>
-        <FieldError error={errors.password} />
-      </If>
     </div>
   );
 }
