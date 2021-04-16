@@ -10,8 +10,9 @@ const enMessages = {
     menu: 'menu',
     basket: 'basket',
     browse: 'browse',
-    collections: 'collections',
+    collections: 'my collections',
     listings: 'my listings',
+    list: 'list',
     orders: 'my orders',
     account: {
       login: 'log in',
