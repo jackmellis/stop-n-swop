@@ -4,6 +4,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var common = require('@sns/contracts/common');
 
+exports.OauthProvider = void 0;
+(function (OauthProvider) {
+  OauthProvider["GOOGLE"] = "google";
+})(exports.OauthProvider || (exports.OauthProvider = {}));
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {

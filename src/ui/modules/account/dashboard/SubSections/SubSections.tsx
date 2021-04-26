@@ -1,68 +1,31 @@
-import React, { ReactNode, useEffect, useMemo } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeDashboardPath } from 'ui/constants/paths';
 import ContentBlock from '../ContentBlock';
 import SectionContent from '../SectionContent';
 import SectionList from '../SectionList';
-
-const getSubSections = (section: string) => {
-  switch (section) {
-    case 'about-me':
-      return [
-        {
-          key: 'username',
-          to: makeDashboardPath({ section, subSection: 'username' }),
-          label: 'Username',
-        },
-        {
-          key: 'email',
-          to: makeDashboardPath({ section, subSection: 'email' }),
-          label: 'Email',
-        },
-        {
-          key: 'name',
-          to: makeDashboardPath({ section, subSection: 'name' }),
-          label: 'Name',
-        },
-        {
-          key: 'address',
-          to: makeDashboardPath({ section, subSection: 'address' }),
-          label: 'Address',
-        },
-      ];
-    case 'security':
-      return [
-        {
-          key: 'password',
-          to: makeDashboardPath({ section, subSection: 'password' }),
-          label: 'Password',
-        },
-      ];
-    default:
-      return [];
-  }
-};
+import type { Section } from '../types';
 
 export default function SubSections({
   section,
   subSection,
+  sections,
   children,
 }: {
   section: string;
   subSection: string;
+  sections: Section[];
   children: ReactNode;
 }) {
   const { replace } = useHistory();
-  const subSections = useMemo(() => getSubSections(section), [section]);
   useEffect(() => {
-    if (section && !subSection && subSections.length) {
-      replace(makeDashboardPath({ section, subSection: subSections[0].key }));
+    if (section && !subSection && sections.length) {
+      replace(makeDashboardPath({ section, subSection: sections[0].key }));
     }
-  }, [replace, section, subSection, subSections]);
-
+  }, [replace, section, subSection, sections]);
   return (
     <div className="flex flex-col lg:flex-row flex-grow">
-      <SectionList options={subSections} current={subSection} />
+      <SectionList options={sections} current={subSection} />
       <SectionContent>
         <ContentBlock>{children}</ContentBlock>
       </SectionContent>

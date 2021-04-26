@@ -1,31 +1,66 @@
 import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 import Login from 'ui/modules/auth/login/Login';
 import LoginForm from 'ui/modules/auth/login/Form';
-import type { Values } from 'ui/modules/auth/login/types';
 import { useLogIn } from 'usecases/auth';
 import { makeDashboardPath } from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
 import { useHistory } from 'react-router-dom';
+import OAuth2Login from 'react-simple-oauth2-login';
+import { OauthProvider } from '@sns/contracts/user';
+import G from 'ui/assets/g-logo.png';
+import { FormattedMessage } from 'react-intl';
+import { ids } from 'ui/messages';
+import { useResolve } from 'react-jpex';
+import type { Config } from 'ports/io';
 
 export default function LoginPage() {
   const redirect = useQueryParam('redirect') || makeDashboardPath();
-  const { action: logIn, status, error } = useLogIn();
+  const { action: logIn, error } = useLogIn();
   const { push } = useHistory();
-  const formProps = useForm<Values>({
-    reValidateMode: 'onChange',
-  });
-  const { handleSubmit } = formProps;
-  const onSubmit = async (values: Values) => {
-    await logIn(values);
+  const config = useResolve<Config>();
 
-    push(redirect);
-  };
   return (
-    <FormProvider {...formProps}>
-      <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <Login status={status} error={error} />
-      </LoginForm>
-    </FormProvider>
+    <LoginForm>
+      <Login error={error}>
+        <OAuth2Login
+          component={OAuth2Login}
+          authorizationUrl={config.oauth.google.url}
+          responseType="token"
+          clientId={config.oauth.google.clientId}
+          scope={config.oauth.google.scope}
+          redirectUri="http://localhost:3001/oauth"
+          onSuccess={async (response: {
+            /* eslint-disable camelcase */
+            access_token: string;
+            authuser: string;
+            expires_in: string;
+            prompt: string;
+            scope: string;
+            token_type: string;
+            /* eslint-enable camelcase */
+          }) => {
+            await logIn({
+              provider: OauthProvider.GOOGLE,
+              token: response.access_token,
+            });
+
+            push(redirect);
+          }}
+          onFailure={console.error}
+        >
+          <div
+            className="flex items-center"
+            style={{ backgroundColor: '#4285F4' }}
+          >
+            <span className="p-3 bg-white">
+              <img src={G} width={24} height={24} aria-label="Google" />
+            </span>
+            <span className="px-4">
+              <FormattedMessage id={ids.auth.login.google} />
+            </span>
+          </div>
+        </OAuth2Login>
+      </Login>
+    </LoginForm>
   );
 }

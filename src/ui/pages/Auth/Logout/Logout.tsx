@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { HOME } from 'ui/constants/paths';
+import { LOGIN } from 'ui/constants/paths';
 import { useLogOut } from 'usecases/auth';
 
 export default function Logout() {
@@ -10,7 +10,7 @@ export default function Logout() {
   useEffect(() => {
     (async () => {
       await logOut();
-      push(HOME);
+      push(LOGIN);
     })();
   }, [logOut, push]);
 

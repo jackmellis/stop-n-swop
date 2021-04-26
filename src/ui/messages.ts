@@ -186,6 +186,7 @@ const enMessages = {
     unavailable: 'The service is currently unavailable, please try again',
     gatewayTimeout: 'The service is currently unavailable, please try again',
     unknown: 'An unknown error has ocurred',
+    required: 'Required',
   },
   regions: {
     [Region.PAL]: 'PAL',
@@ -204,39 +205,7 @@ const enMessages = {
   auth: {
     login: {
       title: 'Log in',
-      username: {
-        label: 'Email',
-        required: 'Please enter your email',
-      },
-      password: {
-        label: 'Password',
-        required: 'Please enter your password',
-      },
-      buttons: {
-        submit: 'Sign in',
-        register: 'Register',
-        forgot: 'Forgot your password?',
-      },
-    },
-    register: {
-      title: 'Register',
-      buttons: {
-        submit: 'Register',
-      },
-      email: {
-        label: 'Email',
-        required: 'Please enter your email address',
-      },
-      name: {
-        label: 'Name',
-        required: 'Please enter your name',
-      },
-      password: {
-        label: 'Password',
-        required: 'Create a password',
-        pattern:
-          'Your password should contain 1 lowercase, 1 uppercase, 1 number, and 1 special character',
-      },
+      google: 'Continue with Google',
     },
   },
   order: {
@@ -252,6 +221,64 @@ const enMessages = {
       [Status.POSTED]: 'Posted',
       [Status.RECEIVED]: 'Received',
       [Status.CANCELLED]: 'Cancelled',
+    },
+  },
+  account: {
+    dashboard: {
+      title: 'My account',
+      welcome: 'Welcome {name}!',
+      sections: {
+        aboutMe: {
+          label: 'About me',
+          username: 'Username',
+          email: 'Email',
+          address: 'Address',
+        },
+        orders: 'Orders',
+        listings: 'Listings',
+      },
+    },
+    saveButton: 'Save',
+    aboutMe: {
+      username: {
+        title: 'Username',
+        description:
+          'Pick a username! This will be your public display name shown to other users',
+        username: {
+          label: 'Your username',
+          required: 'Please enter a username',
+          maxLength:
+            'Your username should be no longer than {maxLength} characters',
+        },
+      },
+      email: {
+        title: 'Email',
+        description:
+          "We'll use your email to send you notifications and receipts",
+        email: {
+          label: 'Your email address',
+        },
+      },
+      address: {
+        title: 'Address',
+        description:
+          "You'll need an address so we know where to send things. Setting an address will also improve your seller rating!",
+        line1: {
+          label: 'Line 1',
+        },
+        line2: {
+          label: 'Line 2',
+        },
+        city: {
+          label: 'City',
+        },
+        postcode: {
+          label: 'Post code / Zip',
+        },
+        country: {
+          label: 'Country',
+        },
+      },
     },
   },
 };

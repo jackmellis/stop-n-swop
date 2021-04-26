@@ -13,6 +13,9 @@ const hasCode = (e: any): e is { error: { code: number } } => {
 };
 
 export default function getErrorMessage(error: any, intl: IntlShape) {
+  if (error == null) {
+    return null;
+  }
   if (hasCode(error)) {
     // validation errors should be handled per-field and so we
     // don't want to show a generic error message

@@ -1,18 +1,9 @@
 import React, { ReactNode } from 'react';
 import background from 'ui/assets/bg-1.jpg';
 
-export default function LoginForm({
-  onSubmit,
-  children,
-}: {
-  onSubmit(): Promise<void>;
-  children: ReactNode;
-}) {
+export default function LoginForm({ children }: { children: ReactNode }) {
   return (
-    <form
-      className="relative overflow-y-hidden flex-grow flex flex-col md:justify-center md:items-center"
-      onSubmit={onSubmit}
-    >
+    <div className="relative overflow-y-hidden flex-grow flex flex-col md:justify-center md:items-center">
       <div
         className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover"
         style={{
@@ -23,6 +14,6 @@ export default function LoginForm({
         }}
       />
       {children}
-    </form>
+    </div>
   );
 }

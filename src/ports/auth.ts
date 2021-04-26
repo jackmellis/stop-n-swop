@@ -1,6 +1,8 @@
+import type { OauthProvider } from '@sns/contracts/user';
+
 export type LogIn = (args: {
-  email: string;
-  password: string;
+  provider: OauthProvider;
+  token: string;
 }) => Promise<{ authToken: string; refreshToken: string; userId: string }>;
 
 export type LogOut = () => Promise<void>;

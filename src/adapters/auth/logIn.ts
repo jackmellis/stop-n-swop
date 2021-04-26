@@ -3,11 +3,11 @@ import type { LogIn } from 'ports/auth';
 import type { Driver } from 'ports/io';
 import type { LoginRequest, LoginResponse } from '@sns/contracts/user';
 
-const logIn = (driver: Driver): LogIn => async ({ password, email }) => {
+const logIn = (driver: Driver): LogIn => async ({ provider, token }) => {
   const response = await driver<LoginRequest, LoginResponse>({
     url: '/api/auth/sessions',
     method: 'POST',
-    data: { password, email },
+    data: { provider, token },
   });
 
   const {

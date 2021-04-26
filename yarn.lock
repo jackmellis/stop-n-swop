@@ -6702,6 +6702,11 @@ react-error-boundary@^3.1.0:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+react-harness@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-harness/-/react-harness-1.0.1.tgz#b1c9c0afc72d02b9f1d655171343e4f362e94020"
+  integrity sha512-9dbh5DfVFLX7GQKRUUX1ogJGt4tlqX/vrRDTzyh0f8qEhwyUpGujfQB2FdFVDJfTgbirx9BYDt/wOYgEHA/ntw==
+
 react-hook-form@^7.1.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.1.1.tgz#b0e2990d4dfa153c4ff2f27fe72ff73d2fbe6a26"
@@ -6802,6 +6807,11 @@ react-select@^4.3.0:
     prop-types "^15.6.0"
     react-input-autosize "^3.0.0"
     react-transition-group "^4.3.0"
+
+react-simple-oauth2-login@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-simple-oauth2-login/-/react-simple-oauth2-login-0.2.0.tgz#d09bc3e086978f49c3c7013cbe42590230aa2f0f"
+  integrity sha512-rVQJN/ngEpHK9uQl6S7ymtm0o39c7t/kUxjJg6Yy1uL7A9At0YqjhAw1mDVj2ht9EkVGE8QgzYbXZElRC2OeFQ==
 
 react-spinners@^0.10.6:
   version "0.10.6"

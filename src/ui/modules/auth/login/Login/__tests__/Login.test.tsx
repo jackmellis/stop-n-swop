@@ -1,6 +1,5 @@
 import React from 'react';
 import { render as renderComponent, screen } from '@testing-library/react';
-import { Status } from '@respite/core';
 import createWrapper from '__tests__/createWrapper';
 import { FormProvider, useForm, UseFormReturn } from 'react-hook-form';
 import { ids } from 'ui/messages';
@@ -16,23 +15,23 @@ const setup = () => {
   });
 
   const render = ({ error }: { error?: any } = {}) => {
-    renderComponent(<Login status={Status.IDLE} error={error} />, { wrapper });
+    renderComponent(
+      <Login error={error}>
+        <div />
+      </Login>,
+      { wrapper },
+    );
   };
 
   return { render, formProps };
 };
 
-it('renders the username/password fields', () => {
+it('renders the login screen', () => {
   const { render } = setup();
 
   render();
 
-  expect(
-    screen.getByLabelText(ids.auth.login.username.label),
-  ).toBeInTheDocument();
-  expect(
-    screen.getByLabelText(ids.auth.login.password.label),
-  ).toBeInTheDocument();
+  expect(screen.getByText(ids.auth.login.title)).toBeInTheDocument();
 });
 
 describe('when there is a form error', () => {

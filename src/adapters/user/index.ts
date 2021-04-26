@@ -1,1 +1,2 @@
-import './createUser';
+import './getUser';
+import './updateUser';

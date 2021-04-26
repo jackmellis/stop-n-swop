@@ -5,9 +5,11 @@ import createWrapper from '__tests__/createWrapper';
 import 'adapters';
 import { ids } from 'ui/messages';
 import { createMemoryHistory } from 'history';
-import { HOME } from 'ui/constants/paths';
-import type { Driver, Storage } from 'ports/io';
+import { makeDashboardPath } from 'ui/constants/paths';
+import type { Config, Driver, Storage } from 'ports/io';
 import type { LoginResponse } from '@sns/contracts/user';
+import OAuth2Login from 'react-simple-oauth2-login';
+import Harness from 'react-harness';
 import Login from '../Login';
 
 let push: jest.SpyInstance;
@@ -36,11 +38,40 @@ beforeEach(() => {
   const history = createMemoryHistory();
   push = jest.spyOn(history, 'push').mockImplementation();
 
+  const OAuthStub = ({ children, onSuccess }: any) => (
+    <button
+      type="button"
+      onClick={() => {
+        onSuccess({
+          access_token: 'my-access-token',
+        });
+      }}
+    >
+      {children}
+    </button>
+  );
+
   const wrapper = createWrapper({
     history,
     inject(jpex) {
       jpex.constant<Driver>(driver);
       jpex.constant<Storage>(storage as any);
+      jpex.constant<Config>({
+        oauth: {
+          google: {
+            url: '',
+            clientId: '',
+            scope: '',
+          },
+        },
+      });
+    },
+    Render({ children }) {
+      return (
+        <Harness Component={OAuth2Login} Stub={OAuthStub}>
+          {children}
+        </Harness>
+      );
     },
   });
 
@@ -53,44 +84,15 @@ it('renders the login page', () => {
 
 describe('when I submit the form', () => {
   beforeEach(async () => {
-    userEvent.click(screen.getByText(ids.auth.login.buttons.submit));
+    userEvent.click(screen.getByText(ids.auth.login.google));
     await act(async () => null);
   });
 
-  it('shows validation messages', () => {
-    expect(
-      screen.getByText(ids.auth.login.username.required),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(ids.auth.login.password.required),
-    ).toBeInTheDocument();
+  it('logs in', () => {
+    expect(driver).toBeCalled();
+    expect(storage.setItem).toBeCalled();
   });
-});
-
-describe('when I enter username/password', () => {
-  beforeEach(() => {
-    userEvent.type(
-      screen.getByLabelText(ids.auth.login.username.label),
-      'test',
-    );
-    userEvent.type(
-      screen.getByLabelText(ids.auth.login.password.label),
-      'password',
-    );
-  });
-
-  describe('when I submit the form', () => {
-    beforeEach(async () => {
-      userEvent.click(screen.getByText(ids.auth.login.buttons.submit));
-      await act(async () => null);
-    });
-
-    it('logs in', () => {
-      expect(driver).toBeCalled();
-      expect(storage.setItem).toBeCalled();
-    });
-    it('redirects to the redirect url', () => {
-      expect(push).toBeCalledWith(HOME);
-    });
+  it('redirects to the redirect url', () => {
+    expect(push).toBeCalledWith(makeDashboardPath());
   });
 });

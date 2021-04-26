@@ -1,17 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Route, useParams } from 'react-router-dom';
 import PageTitle from 'ui/elements/PageTitle';
-import Address from 'ui/modules/account/about-me/Address';
 import Container from 'ui/modules/account/dashboard/Container';
 import Sections from 'ui/modules/account/dashboard/Sections';
-
-const pages = {
-  'about-me': {
-    address: Address,
-  },
-};
-
-const Nuller = () => null;
+import { sections } from 'ui/modules/account/dashboard/constants';
+import { makeDashboardPath } from 'ui/constants/paths';
+import Username from 'ui/modules/account/about-me/Username';
+import Email from 'ui/modules/account/about-me/Email';
+import Address from 'ui/modules/account/about-me/Address';
+import { FormattedMessage } from 'react-intl';
+import { ids } from 'ui/messages';
 
 export default function Dashboard() {
   const name = 'jb';
@@ -19,13 +17,38 @@ export default function Dashboard() {
     section: string;
     subSection: string;
   }>();
-  const Page = pages[section]?.[subSection] ?? Nuller;
+
   return (
     <>
-      <PageTitle>My account</PageTitle>
+      <PageTitle>
+        <FormattedMessage id={ids.account.dashboard.title} />
+      </PageTitle>
       <Container name={name}>
-        <Sections section={section} subSection={subSection}>
-          <Page />
+        <Sections section={section} subSection={subSection} sections={sections}>
+          <Route
+            path={makeDashboardPath({
+              section: 'about-me',
+              subSection: 'username',
+            })}
+          >
+            <Username />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'about-me',
+              subSection: 'email',
+            })}
+          >
+            <Email />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'about-me',
+              subSection: 'address',
+            })}
+          >
+            <Address />
+          </Route>
         </Sections>
       </Container>
     </>

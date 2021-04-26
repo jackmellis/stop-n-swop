@@ -1,3 +1,6 @@
+import type { OauthProvider } from "./enums";
+import type { User } from "./entities";
+
 export interface RefreshTokenRequest {
   token: string;
 }
@@ -8,13 +11,15 @@ export interface RefreshTokenResponse {
 }
 
 export interface LoginRequest {
-  email: string;
-  password: string;
+  provider: OauthProvider;
+  token: string;
 }
 export type LoginResponse = RefreshTokenResponse;
 
-export interface CreateUserRequest {
-  email: string;
-  password: string;
+export interface UpdateUserRequest
+  extends Partial<Omit<User, "address" | "preferences">> {
+  address?: Partial<User["address"]>;
+  preferences?: Partial<User["preferences"]>;
 }
-export type CreateUserResponse = void;
+
+export type UpdateUserResponse = void;

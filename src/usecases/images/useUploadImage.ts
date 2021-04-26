@@ -10,5 +10,5 @@ export const useUploadImage = encase((upload: UploadImage) => () => {
       throw new Error('Wha?! This is not an image!');
     }
     return upload(file);
-  });
+  }, []);
 });

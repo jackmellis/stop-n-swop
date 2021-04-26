@@ -3,7 +3,13 @@ export interface User {
   username: string;
   name: string;
   phoneNumber: string;
-  address: Record<string, unknown>;
+  address: {
+    line1: string;
+    line2: string;
+    city: string;
+    postcode: string;
+    country: string;
+  };
   preferences: Record<string, unknown>;
   verified: boolean;
 }

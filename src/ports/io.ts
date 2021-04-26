@@ -26,3 +26,14 @@ export type Temp = {
 };
 
 export type Storage = Window['localStorage'];
+
+export interface Config {
+  oauth: Record<
+    string,
+    {
+      url: string;
+      clientId: string;
+      scope: string;
+    }
+  >;
+}

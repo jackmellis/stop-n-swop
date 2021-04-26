@@ -1,0 +1,5 @@
+interface ImportMetaEnv {
+  VITE_OAUTH_GOOGLE_URL: string;
+  VITE_OAUTH_GOOGLE_CLIENT_ID: string;
+  VITE_OAUTH_GOOGLE_SCOPE: string;
+}

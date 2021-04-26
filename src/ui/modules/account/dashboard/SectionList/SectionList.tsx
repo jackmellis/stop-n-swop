@@ -1,14 +1,16 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import cx from 'classnames';
+import { FormattedMessage } from 'react-intl';
+import type { Section } from '../types';
 
 export default function SectionList({
   current: currentKey,
   options,
 }: {
   current: string;
-  options: Array<{ key: string; to: string; label: ReactNode }>;
+  options: Section[];
 }) {
   const current =
     options.find((option) => option.key === currentKey) ?? options[0];
@@ -46,27 +48,42 @@ export default function SectionList({
 
       <ul
         className={cx(
-          'flex-shrink-0 text-lg border-green-700 border-b',
+          'flex-shrink-0 text-lg border-green-700 border-b bg-black',
           { hidden: !expanded },
-          'lg:border-b-0 lg:border-r lg:block',
+          'lg:border-b-0 lg:border-r lg:block lg:bg-transparent',
         )}
       >
-        {options.map((option) => (
-          <li key={option.key}>
-            <Link
-              to={option === current ? undefined : option.to}
-              className={cx(
-                'w-full px-4 py-3 text-left',
-                option === current
-                  ? 'bg-green-600 hover:bg-green-500 hidden lg:block'
-                  : 'hover:bg-gray-800 block',
-              )}
-              style={{ minWidth: '14rem' }}
-            >
-              {option.label}
-            </Link>
-          </li>
-        ))}
+        {options.map((option) => {
+          return (
+            <li key={option.key}>
+              <Choose>
+                <When condition={current === option}>
+                  <div
+                    className={cx(
+                      'w-full px-4 py-3 text-left',
+                      'bg-green-600 hover:bg-green-500 hidden lg:block',
+                    )}
+                    style={{ minWidth: '14rem' }}
+                  >
+                    <FormattedMessage id={option.label} />
+                  </div>
+                </When>
+                <Otherwise>
+                  <Link
+                    to={option.to}
+                    className={cx(
+                      'w-full px-4 py-3 text-left',
+                      'hover:bg-gray-800 block',
+                    )}
+                    style={{ minWidth: '14rem' }}
+                  >
+                    <FormattedMessage id={option.label} />
+                  </Link>
+                </Otherwise>
+              </Choose>
+            </li>
+          );
+        })}
       </ul>
     </>
   );

@@ -5,4 +5,5 @@ export const TokensKey = Symbol('auth_tokens');
 export const LogOutKey = Symbol('log_out');
 
 // User
-export const RegisterKey = Symbol('register');
+export const UserKey = Symbol('user');
+export const UpdateUserKey = Symbol('update_user');

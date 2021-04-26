@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { render } from 'react-dom';
 import './index.css';
 import './adapters';
+import './adapters/io/config';
 import App from './ui/app/App';
 
 const node = document.getElementById('root');
