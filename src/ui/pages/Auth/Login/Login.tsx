@@ -18,6 +18,7 @@ export default function LoginPage() {
   const { action: logIn, error } = useLogIn();
   const { push } = useHistory();
   const config = useResolve<Config>();
+  const console = useResolve<Console>();
 
   return (
     <LoginForm>

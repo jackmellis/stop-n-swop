@@ -29,7 +29,7 @@ const getColourClasses = ({
       if (readonly) {
         return 'text-black border-black';
       }
-      return 'bg-white border-transparent text-green-500';
+      return 'bg-white border-transparent text-primary-light';
     }
     return 'border-black text-transparent';
   }
@@ -37,7 +37,7 @@ const getColourClasses = ({
     if (readonly) {
       return 'text-white border-white';
     }
-    return 'bg-green-500 border-transparent text-white';
+    return 'bg-primary border-transparent text-white';
   }
   return 'border-white text-transparent';
 };

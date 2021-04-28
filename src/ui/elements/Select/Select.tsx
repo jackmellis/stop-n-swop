@@ -27,7 +27,7 @@ export default function Select({
         id={id}
         value={value}
         onChange={onChange}
-        className="w-full block bg-transparent border-b border-white focus:border-green-500"
+        className="w-full block bg-transparent border-b border-white focus:border-primary"
       >
         {options.map(({ label, value }) => (
           <option value={value} className="bg-black text-white">

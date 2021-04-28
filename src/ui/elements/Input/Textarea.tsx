@@ -28,7 +28,7 @@ export default function Textarea({
       <textarea
         className={cx(
           'border rounded bg-transparent outline-none w-full px-4 py-3',
-          state === 'error' && 'border-red-400',
+          state === 'error' && 'border-danger',
         )}
         style={{ height }}
         {...props}

@@ -21,4 +21,7 @@ export type Props = Attributes &
     styles?: Record<string, any>;
   };
 
-export type ButtonComponent = (props: Props) => JSX.Element;
+export interface ButtonComponent {
+  (props: Props): JSX.Element;
+  displayName?: string;
+}

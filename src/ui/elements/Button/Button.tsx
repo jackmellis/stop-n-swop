@@ -5,56 +5,50 @@ import { FaCheck } from 'react-icons/fa';
 import type { Kind, ButtonComponent, Props, State } from './types';
 
 const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
-  // @TODO: add error states for all kinds
-  if (kind === 'primary') {
-    if (state === 'error') {
-      return {
-        'bg-red-500': true,
-        'hover:bg-red-400': true,
-        'text-white': true,
-      };
-    }
-    if (state === 'disabled') {
-      return {
-        'bg-green-400': true,
-        'text-white': true,
-        'bg-opacity-50': true,
-        'text-opacity-50': true,
-      };
-    }
-    return {
-      'bg-green-500': true,
-      'hover:bg-green-700': true,
-      'text-white': true,
-    };
+  switch (kind) {
+    case 'primary':
+      switch (state) {
+        case 'error':
+          return 'bg-danger hover:bg-danger-light text-white';
+        case 'disabled':
+          return 'bg-primary-lightest text-gray-200';
+        default:
+          return 'bg-primary hover:bg-primary-light text-white';
+      }
+    case 'secondary':
+      switch (state) {
+        case 'error':
+          return 'bg-danger hover:bg-danger-light text-white';
+        case 'disabled':
+          return 'bg-secondary-lightest text-gray-200';
+        default:
+          return 'bg-secondary hover:bg-secondary-light text-white';
+      }
+    case 'tertiary':
+      switch (state) {
+        case 'disabled':
+          return 'text-gray-300';
+        case 'error':
+          return 'text-danger-light hover:text-danger-lighter';
+        case 'pending':
+        case 'success':
+          return 'text-transparent';
+        default:
+          return 'text-secondary-light hover:text-secondary-lightest';
+      }
+    default:
+      switch (state) {
+        case 'disabled':
+          return 'text-gray-300';
+        case 'error':
+          return 'text-danger-light hover:text-danger-lighter';
+        case 'pending':
+        case 'success':
+          return 'text-transparent';
+        default:
+          return 'hover:text-primary';
+      }
   }
-  if (kind === 'secondary') {
-    if (state === 'disabled') {
-      return { 'text-gray-300': true, 'border-gray-300': true, border: true };
-    }
-    return {
-      'border-white': true,
-      border: true,
-      'hover:text-purple-300': true,
-      'hover:border-purple-200': true,
-    };
-  }
-  if (kind === 'tertiary') {
-    if (state === 'disabled') {
-      return { 'text-gray-300': true };
-    }
-    if (state === 'error') {
-      return { 'text-red-300': true, 'hover:text-red-200': true };
-    }
-    if (state === 'pending' || state === 'success') {
-      return { 'text-transparent': true };
-    }
-    return { 'text-green-500': true, 'hover:text-green-300': true };
-  }
-  if (state === 'disabled') {
-    return { 'text-300': true };
-  }
-  return { 'hover:text-green-200': true };
 };
 
 const getClassNames = ({
@@ -64,19 +58,14 @@ const getClassNames = ({
   state: State;
   padding: boolean;
 }) => {
-  return {
-    flex: true,
-    'items-center': true,
-    'justify-center': true,
-    'px-4': padding,
-    'py-3': padding,
-    rounded: true,
-    'font-medium': true,
-    'md:transition-colors': true,
-    'cursor-not-allowed':
-      state === 'disabled' || state === 'pending' || state === 'success',
-    relative: true,
-  };
+  return cx(
+    'flex items-center justify-center rounded font-medium md:transition-colors relative',
+    padding && 'px-4 py-3',
+    {
+      'cursor-not-allowed':
+        state === 'disabled' || state === 'pending' || state === 'success',
+    },
+  );
 };
 
 const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
@@ -97,11 +86,12 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
     <Button
       ref={ref}
       type="button"
-      className={cx(className, {
-        ...getColorClassNames({ kind, state }),
-        ...getClassNames({ state, padding }),
-        ...styles,
-      })}
+      className={cx(
+        className,
+        getColorClassNames({ kind, state }),
+        getClassNames({ state, padding }),
+        styles,
+      )}
       disabled={
         state === 'disabled' || state === 'pending' || state === 'success'
       }
@@ -141,5 +131,6 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
     </Button>
   ),
 );
+Button.displayName = 'Button';
 
 export default Button;

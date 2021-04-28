@@ -54,7 +54,7 @@ export default function NavItems({
       ref={ref}
       className={cx(
         open ? '' : 'hidden',
-        'items-center absolute z-30 bg-black w-full border-b border-green-700',
+        'items-center absolute z-30 bg-black w-full border-b border-primary',
         'md:flex md:relative md:z-auto md:bg-transparent md:w-auto md:border-none',
       )}
     >

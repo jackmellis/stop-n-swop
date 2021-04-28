@@ -19,5 +19,5 @@ export default function FormError({ error }: { error: any }) {
     return null;
   }
 
-  return <div className="bg-red-300 p-4 rounded">{message}</div>;
+  return <div className="bg-danger p-4 rounded">{message}</div>;
 }

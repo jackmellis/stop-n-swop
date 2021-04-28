@@ -18,7 +18,7 @@ export default function Nav() {
 
   return (
     <nav
-      className="md:flex lg:px-4 border-b-2 border-green-700 font-title bg-black"
+      className="md:flex lg:px-4 border-b-2 border-primary font-title bg-black"
       style={{ fontSize: 12 }}
     >
       <div className="flex items-center pl-3 md:flex-grow">

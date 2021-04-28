@@ -18,7 +18,7 @@ export default function StarFilter() {
             className="md:px-1 lg:px-3 xl:px-1"
             onMouseEnter={() => setRating(r)}
           >
-            <Star className={selected ? 'text-purple-300' : ''} />
+            <Star className={selected ? 'text-secondary-light' : ''} />
           </Button>
         );
       })}

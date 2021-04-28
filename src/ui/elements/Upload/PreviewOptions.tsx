@@ -30,7 +30,7 @@ export default function PreviewOptions({
         <FaTimes />
         <span className="pl-4">{useMessage(ids.elements.upload.remove)}</span>
       </Button>
-      <Button className="w-1/2 xl:hidden" kind="secondary" onClick={onClose}>
+      <Button className="w-1/2 xl:hidden" kind="tertiary" onClick={onClose}>
         {useMessage(ids.elements.upload.close)}
       </Button>
     </div>

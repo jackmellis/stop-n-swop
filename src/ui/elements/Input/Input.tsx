@@ -37,8 +37,8 @@ export default function Input({
         className={cx(
           'flex items-end border-b flex-grow',
           {
-            'focus-within:border-green-500': state === 'none',
-            'border-red-400 focus-within:border-red-600': state === 'error',
+            'focus-within:border-primary': state === 'none',
+            'border-danger focus-within:border-danger-light': state === 'error',
           },
           containerStyles,
         )}
@@ -58,11 +58,7 @@ export default function Input({
           <label
             htmlFor={id}
             className={cx(
-              'absolute left-0 top-0 text-sm transition-all',
-              {
-                'text-gray-200': state === 'none',
-                'text-red-100': state === 'error',
-              },
+              'absolute left-0 top-0 text-sm transition-all text-gray-200',
               labelStyles,
             )}
           >

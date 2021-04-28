@@ -19,5 +19,5 @@ export default function FieldError({ error }: { error: any }) {
     return null;
   }
 
-  return <div className="text-red-300 text-sm">{message}</div>;
+  return <div className="text-danger-light py-3 text-sm">{message}</div>;
 }

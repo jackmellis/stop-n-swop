@@ -8,6 +8,7 @@ import NewProductListing from './NewProductListing';
 export default function ConnectedNewProductListing() {
   const { productId } = useParams<{ productId: string }>();
   const onSubmit = async (values: Values) => {
+    // eslint-disable-next-line no-console
     console.log(values);
     return new Promise((res) => {
       setTimeout(res, 2000);

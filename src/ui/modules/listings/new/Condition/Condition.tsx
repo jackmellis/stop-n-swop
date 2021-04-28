@@ -71,7 +71,7 @@ export default function ConditionStep({
         }}
       />
       <Buttons first showNext previous={() => null}>
-        <Button kind="secondary" component={Link} to={previousUrl}>
+        <Button kind="tertiary" component={Link} to={previousUrl}>
           {getMessage(ids.listings.new.buttons.back)}
         </Button>
       </Buttons>

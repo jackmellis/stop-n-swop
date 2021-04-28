@@ -25,8 +25,8 @@ export default function OptionBox({
           className={cx(
             'text-black rounded-lg shadow-inner focus:outline-none w-full flex flex-col justify-center items-center space-y-4',
             selected
-              ? 'bg-green-500 text-white'
-              : 'bg-green-50 hover:bg-green-200',
+              ? 'bg-primary text-white hover:bg-primary-lighter'
+              : 'bg-white hover:bg-primary-lightest',
           )}
           onClick={() => {
             onClick();

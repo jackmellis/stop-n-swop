@@ -6,8 +6,7 @@ const Segment = ({ index, current }: { index: number; current: number }) => {
     <div
       className={cx(
         'rounded-full w-4 h-4 transition-colors flex-shrink-0',
-        current >= index && 'bg-green-400 border-2 border-green-400',
-        // current === index && 'border-green-400 border-2 bg-transparent',
+        current >= index && 'bg-primary-light border-2 border-primary-light',
         current < index && 'border-gray-200 border-2 bg-transparent',
       )}
       style={{ transitionDuration: '500ms', transitionDelay: '250ms' }}
@@ -31,7 +30,7 @@ const Trail = ({
     >
       <div
         className={cx(
-          'absolute left-0 top-0 h-full bg-green-400',
+          'absolute left-0 top-0 h-full bg-primary-light',
           current >= index ? 'w-full' : 'w-0',
         )}
         style={{

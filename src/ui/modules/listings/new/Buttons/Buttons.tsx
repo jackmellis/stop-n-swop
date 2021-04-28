@@ -21,7 +21,7 @@ export default function Buttons({
   return (
     <div className="text-right mt-10 flex justify-end space-x-6">
       <If condition={!first}>
-        <Button kind="secondary" onClick={previous}>
+        <Button kind="tertiary" onClick={previous}>
           {getMessage(ids.listings.new.buttons.back)}
         </Button>
       </If>

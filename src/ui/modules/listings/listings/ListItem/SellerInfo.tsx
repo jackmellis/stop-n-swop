@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaQuestionCircle } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
 import { makeUserPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
@@ -24,9 +23,6 @@ export default function SellerInfo({
         </Button>
       </div>
       <StarRating rating={rating} />
-      <Button kind="tertiary">
-        <FaQuestionCircle className="text-sm" />
-      </Button>
     </div>
   );
 }

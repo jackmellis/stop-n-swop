@@ -1,22 +1,3 @@
-const color = require('color');
-
-const makeColors = (initial) => {
-  const c = color(initial);
-
-  return {
-    50: c.lighten(0.8).hex(),
-    100: c.lighten(0.6).hex(),
-    200: c.lighten(0.4).hex(),
-    300: c.lighten(0.2).hex(),
-    400: initial,
-    500: c.darken(0.2).hex(),
-    600: c.darken(0.4).hex(),
-    700: c.darken(0.6).hex(),
-    800: c.darken(0.8).hex(),
-    900: c.darken(0.9).hex(),
-  };
-};
-
 module.exports = {
   purge: ['./src/**/*.ts', './src/**/*.tsx', './index.html'],
   darkMode: false, // or 'media' or 'class'
@@ -56,11 +37,34 @@ module.exports = {
         logo: ['lithographbold'],
       },
       colors: {
-        // yellow: makeColors('#ffa70f'),
-        // yellow: makeColors('#e1c749'),
-        red: makeColors('#c6352b'),
-        // brown: makeColors('#753c39'),
-        // blue: makeColors('#4976ba'),
+        primary: {
+          darkest: '#0b825a',
+          darker: '#0d9467',
+          dark: '#0ea774',
+          DEFAULT: '#10b981',
+          light: '#28c08e',
+          lighter: '#40c79a',
+          lightest: '#58cea7',
+        },
+        secondary: {
+          darkest: '#a62d7a',
+          darker: '#ba328a',
+          dark: '#cf3899',
+          DEFAULT: '#d960ad',
+          light: '#dd74b8',
+          lighter: '#e79ccc',
+          lightest: '#ecafd6',
+        },
+        warning: {
+          DEFAULT: '#FB8B24',
+        },
+        danger: {
+          dark: '#cc1616',
+          DEFAULT: '#FF1B1C',
+          light: '#ff5f60',
+          lighter: '#ff7677',
+          lightest: '#ff8d8e',
+        },
       },
       lineHeight: 1.5,
       borderWidth: {

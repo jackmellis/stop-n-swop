@@ -51,7 +51,7 @@ export default function ProductItem({
           <div
             className={cx(
               'text-xs',
-              totalListings > 0 ? 'text-green-50' : 'text-gray-500',
+              totalListings > 0 ? 'text-primary-lightest' : 'text-gray-500',
             )}
           >
             {useMessage(ids.products.search.results.available, {

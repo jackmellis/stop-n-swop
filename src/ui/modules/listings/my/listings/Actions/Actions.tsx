@@ -50,7 +50,7 @@ export default function Actions({ listing, order, status, onClick }: Props) {
         <Button
           component={Link}
           to={makeEditListingPath({ productId, listingId })}
-          kind="tertiary"
+          kind="secondary"
         >
           {getMessage(ids.listings.myListings.actions.edit)}
         </Button>

@@ -52,7 +52,7 @@ export default function CheckboxGroup({
         {childrenArr}
         <If condition={limit && total > limit}>
           <Button
-            kind="tertiary"
+            kind="secondary"
             className="text-xs"
             onClick={(e) => {
               e.preventDefault();

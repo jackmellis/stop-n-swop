@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaQuestionCircle } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
 import { useCurrency, useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
@@ -44,9 +43,6 @@ export default function Overview({
               {username}
             </Button>
             <StarRating rating={3.5} />
-            <Button kind="tertiary">
-              <FaQuestionCircle className="text-sm" />
-            </Button>
           </div>
           <div className="text-sm text-gray-300">{location}</div>
         </div>

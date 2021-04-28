@@ -30,13 +30,13 @@ export default function SectionList({
       <button
         type="button"
         className={cx(
-          'text-lg w-full border-green-700 border-b-2 px-4 py-3 flex items-center justify-between',
+          'text-lg w-full border-primary-dark border-b-2 px-4 py-3 flex items-center justify-between',
           'lg:hidden',
-          { 'bg-green-600': expanded },
+          { 'bg-primary-dark': expanded },
         )}
         onClick={() => setExpanded(!expanded)}
       >
-        <span>{current.label}</span>
+        <span>{getMessage(current.label)}</span>
         <Choose>
           <When condition={expanded}>
             <FaChevronUp />
@@ -49,7 +49,7 @@ export default function SectionList({
 
       <ul
         className={cx(
-          'flex-shrink-0 text-lg border-green-700 border-b bg-black',
+          'flex-shrink-0 text-lg border-primary-dark border-b-2 bg-black',
           { hidden: !expanded },
           'lg:border-b-0 lg:border-r lg:block lg:bg-transparent',
         )}
@@ -62,7 +62,7 @@ export default function SectionList({
                   <div
                     className={cx(
                       'w-full px-4 py-3 text-left',
-                      'bg-green-600 hover:bg-green-500 hidden lg:block',
+                      'bg-primary-dark hover:bg-primary cursor-pointer hidden lg:block',
                     )}
                     style={{ minWidth: '14rem' }}
                   >
