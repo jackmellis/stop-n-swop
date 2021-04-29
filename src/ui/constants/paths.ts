@@ -1,10 +1,10 @@
 export const HOME = '/';
 
-// PRODUCTS
-export const PRODUCTS = '/products';
-export const PRODUCT = '/products/:productId';
-export const makeProductPath = ({ productId }: { productId: string }) =>
-  `${PRODUCTS}/${encodeURIComponent(productId)}`;
+// GAMES
+export const GAMES = '/games';
+export const GAME = '/games/:productId';
+export const makeGamePath = ({ productId }: { productId: string }) =>
+  `${GAMES}/${encodeURIComponent(productId)}`;
 
 // COLLECTIONS
 export const MY_COLLECTIONS = '/my/collections';
@@ -15,28 +15,25 @@ export const VIEW_MY_LISTING = '/my/listings/:listingId';
 export const makeViewMyListingPath = ({ listingId }: { listingId: string }) =>
   `${MY_LISTINGS}/${encodeURIComponent(listingId)}`;
 export const NEW_LISTING = '/list';
-export const PRODUCT_LISTING = `/products/:productId/listings/:listingId`;
-export const makeProductListingPath = ({
+export const GAME_LISTING = `/games/:productId/listings/:listingId`;
+export const makeGameListingPath = ({
   productId,
   listingId,
 }: {
   productId: string;
   listingId: string;
-}) => `${makeProductPath({ productId })}/listings/${listingId}`;
-export const EDIT_LISTING = '/products/:productId/listings/:listingId/edit';
+}) => `${makeGamePath({ productId })}/listings/${listingId}`;
+export const EDIT_LISTING = '/games/:productId/listings/:listingId/edit';
 export const makeEditListingPath = ({
   productId,
   listingId,
 }: {
   productId: string;
   listingId: string;
-}) => `${makeProductListingPath({ productId, listingId })}/edit`;
-export const PRODUCT_NEW_LISTING = '/products/:productId/list';
-export const makeProductNewListingPath = ({
-  productId,
-}: {
-  productId: string;
-}) => `${makeProductPath({ productId })}/list`;
+}) => `${makeGameListingPath({ productId, listingId })}/edit`;
+export const GAME_NEW_LISTING = '/games/:productId/list';
+export const makeGameNewListingPath = ({ productId }: { productId: string }) =>
+  `${makeGamePath({ productId })}/list`;
 export const MY_ORDERS = '/my/orders';
 
 // Account dashboard

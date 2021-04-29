@@ -7,7 +7,7 @@ import Order from 'ui/modules/orders/my/Order';
 import OrderStatus from 'ui/modules/orders/my/OrderStatus';
 import { Game, Type } from '@sns/contracts/product';
 import type { Status, Order as IOrder } from '@sns/contracts/order';
-import { makeProductListingPath } from 'ui/constants/paths';
+import { makeGameListingPath } from 'ui/constants/paths';
 
 const product: Game = {
   banner: '',
@@ -97,7 +97,7 @@ export default function MyOrder({ order: o }: { order: IOrder }) {
   };
   return (
     <Order
-      to={makeProductListingPath({ productId, listingId })}
+      to={makeGameListingPath({ productId, listingId })}
       listing={listing}
       product={product}
       orderStatus={

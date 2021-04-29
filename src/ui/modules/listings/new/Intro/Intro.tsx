@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeProductNewListingPath } from 'ui/constants/paths';
+import { makeGameNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
@@ -44,7 +44,7 @@ export default function Intro({
           <Button
             component={Link}
             kind="primary"
-            to={makeProductNewListingPath({ productId })}
+            to={makeGameNewListingPath({ productId })}
           >
             <span className="pr-3">
               {getMessage(ids.listings.new.intro.button)}

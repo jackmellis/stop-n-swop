@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'ui/elements/Button';
-import { makeProductListingPath } from 'ui/constants/paths';
+import { makeGameListingPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
 import { useCurrency, useMessage } from 'ui/intl';
 import cx from 'classnames';
@@ -45,7 +45,7 @@ export default function Actions({
           className="text-xs md:px-0"
           style={{ justifyContent: 'flex-end' }}
           component={Link}
-          to={makeProductListingPath({
+          to={makeGameListingPath({
             productId,
             listingId,
           })}

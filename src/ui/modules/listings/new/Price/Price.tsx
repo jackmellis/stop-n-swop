@@ -1,7 +1,7 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useGetMessage } from 'ui/intl';
-import { makeProductPath } from 'ui/constants/paths';
+import { makeGamePath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
@@ -28,7 +28,7 @@ export default function PriceStep({
           kind="tertiary"
           component="a"
           target="_blank"
-          href={makeProductPath({ productId })}
+          href={makeGamePath({ productId })}
           padding={false}
           className="text-xs"
         >

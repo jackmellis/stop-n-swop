@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
-import { makeProductListingPath } from 'ui/constants/paths';
+import { makeGameListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 
@@ -11,7 +11,7 @@ export default function ViewLink({ productId, listingId }) {
       <Button
         padding={false}
         component={Link}
-        to={makeProductListingPath({ productId, listingId })}
+        to={makeGameListingPath({ productId, listingId })}
         kind="tertiary"
       >
         {useMessage(ids.listings.myListing.link)}

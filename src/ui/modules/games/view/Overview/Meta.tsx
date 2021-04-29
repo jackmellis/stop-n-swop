@@ -34,7 +34,7 @@ export default function Meta({
         {useDate(releaseDate)}
       </div>
       <div className="hidden md:block text-gray-300">
-        {useMessage(ids.products.search.results.owner, {
+        {useMessage(ids.games.search.results.owner, {
           developer,
           publisher,
         })}

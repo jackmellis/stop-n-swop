@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import Favourite from 'ui/modules/product/Favourite';
 import cx from 'classnames';
-import { makeProductPath } from 'ui/constants/paths';
+import { makeGamePath } from 'ui/constants/paths';
 import { GridItem } from 'ui/elements/grid';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
@@ -30,11 +30,7 @@ export default function ProductItem({
   onFavouriteClick,
 }: Props) {
   return (
-    <GridItem
-      component={Link}
-      to={makeProductPath({ productId })}
-      style={style}
-    >
+    <GridItem component={Link} to={makeGamePath({ productId })} style={style}>
       <div className="w-1/4 md:w-full flex-shrink-0 relative md:pb-2/3">
         <img
           className="object-cover w-full h-full md:absolute hover:bg-opacity-50"
@@ -54,7 +50,7 @@ export default function ProductItem({
               totalListings > 0 ? 'text-primary-lightest' : 'text-gray-500',
             )}
           >
-            {useMessage(ids.products.search.results.available, {
+            {useMessage(ids.games.search.results.available, {
               count: totalListings,
             })}
           </div>

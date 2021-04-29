@@ -3,7 +3,7 @@ import { FaMoneyBillWave, FaPlus } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { animated } from 'react-spring';
-import { makeProductNewListingPath } from 'ui/constants/paths';
+import { makeGameNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { useBoop } from 'ui/hooks';
 import { ids } from 'ui/messages';
@@ -35,18 +35,18 @@ export default function QuickActions({
         className="w-full justify-center"
       >
         <span className="hidden md:block text-xs ml-3">
-          {getMessage(ids.products.actions.favourite)}
+          {getMessage(ids.games.actions.favourite)}
         </span>
       </Favourite>
       <Button
         className="w-full justify-center"
         component={Link}
-        to={makeProductNewListingPath({ productId: 'super_mario_64' })}
+        to={makeGameNewListingPath({ productId: 'super_mario_64' })}
         onMouseEnter={listBoop}
       >
         <ListIcon style={listStyle} size="1em" />
         <span className="hidden md:block text-xs ml-3">
-          {getMessage(ids.products.actions.list)}
+          {getMessage(ids.games.actions.list)}
         </span>
       </Button>
       <Button
@@ -56,7 +56,7 @@ export default function QuickActions({
       >
         <CollectionIcon style={collectionStyle} size="1em" />
         <span className="hidden md:block text-xs ml-3">
-          {getMessage(ids.products.actions.collect)}
+          {getMessage(ids.games.actions.collect)}
         </span>
       </Button>
     </div>

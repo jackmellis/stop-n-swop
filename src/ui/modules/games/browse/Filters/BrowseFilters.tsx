@@ -3,7 +3,7 @@ import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
-import { Filter, Filters } from '../../filters';
+import { Filter, Filters } from 'ui/modules/product/filters';
 
 interface Props {
   manufacturers: Manufacturer[];
@@ -17,23 +17,23 @@ export default function BrowseFilters({ manufacturers, platforms }: Props) {
     <Filters>
       <Filter
         name="preferences"
-        label={getMessage(ids.products.filters.preferences.label)}
+        label={getMessage(ids.games.filters.preferences.label)}
       >
         <Checkbox
-          label={getMessage(ids.products.filters.preferences.favourites)}
+          label={getMessage(ids.games.filters.preferences.favourites)}
           value={false}
           onChange={() => null}
           className="mb-3"
         />
         <Checkbox
-          label={getMessage(ids.products.filters.preferences.available)}
+          label={getMessage(ids.games.filters.preferences.available)}
           value
           onChange={() => null}
         />
       </Filter>
       <Filter
         name="manufacturer"
-        label={getMessage(ids.products.filters.manufacturer.label)}
+        label={getMessage(ids.games.filters.manufacturer.label)}
       >
         <CheckboxGroup value={['Nintendo']} onChange={() => null}>
           {manufacturers.map(({ id, name }) => (
@@ -43,7 +43,7 @@ export default function BrowseFilters({ manufacturers, platforms }: Props) {
       </Filter>
       <Filter
         name="platform"
-        label={getMessage(ids.products.filters.platform.label)}
+        label={getMessage(ids.games.filters.platform.label)}
       >
         <CheckboxGroup value={[]} onChange={() => null} limit={5}>
           {platforms.map(({ name, productId: id }) => (

@@ -9,7 +9,7 @@ const enMessages = {
     title: 'Stop n Swop',
     menu: 'menu',
     basket: 'basket',
-    browse: 'browse',
+    games: 'games',
     collections: 'my collections',
     listings: 'my listings',
     list: 'list',
@@ -39,8 +39,8 @@ const enMessages = {
     browse: 'Find stuff',
     list: 'Sell stuff',
   },
-  products: {
-    title: 'Browse products',
+  games: {
+    title: 'Browse games',
     actions: {
       favourite: 'Favourite',
       list: 'List this game',

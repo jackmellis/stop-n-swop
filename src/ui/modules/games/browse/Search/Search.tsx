@@ -19,7 +19,7 @@ export default function Search({ onChange, value, children }: Props) {
         type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        label={useMessage(ids.products.search.label)}
+        label={useMessage(ids.games.search.label)}
         suffix={
           <Button aria-label="Search">
             <FaSearch />

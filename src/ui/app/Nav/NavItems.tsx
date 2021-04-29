@@ -15,7 +15,7 @@ import {
   MY_LISTINGS,
   MY_ORDERS,
   NEW_LISTING,
-  PRODUCTS,
+  GAMES,
 } from 'ui/constants/paths';
 import NavItem from './NavItem';
 import Account from './Account';
@@ -58,8 +58,8 @@ export default function NavItems({
         'md:flex md:relative md:z-auto md:bg-transparent md:w-auto md:border-none',
       )}
     >
-      <NavItem to={PRODUCTS} Icon={FaSearch} onClose={close}>
-        {getMessage(ids.nav.browse)}
+      <NavItem to={GAMES} Icon={FaSearch} onClose={close}>
+        {getMessage(ids.nav.games)}
       </NavItem>
       <Choose>
         <When condition={loggedIn}>

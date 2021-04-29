@@ -6,7 +6,7 @@ import { useGetMessage } from 'ui/intl';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
 import Card from 'ui/elements/Card';
-import { PRODUCTS, NEW_LISTING } from 'ui/constants/paths';
+import { GAMES, NEW_LISTING } from 'ui/constants/paths';
 
 export default function Home() {
   const getMessage = useGetMessage();
@@ -47,7 +47,7 @@ export default function Home() {
               'xl:pt-0',
             )}
           >
-            <Button component={Link} kind="primary" to={PRODUCTS}>
+            <Button component={Link} kind="primary" to={GAMES}>
               <span>{getMessage(ids.home.browse)}</span>
             </Button>
             <Button component={Link} kind="secondary" to={NEW_LISTING}>

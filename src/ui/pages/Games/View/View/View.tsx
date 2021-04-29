@@ -1,8 +1,8 @@
 import React from 'react';
 import { useCascade } from 'ui/hooks';
 import { ListingsList } from 'ui/modules/listings/listings';
-import Overview from 'ui/modules/product/view/Overview';
-import QuickActions from 'ui/modules/product/view/QuickActions';
+import Overview from 'ui/modules/games/view/Overview';
+import QuickActions from 'ui/modules/games/view/QuickActions';
 import Filters from 'ui/modules/listings/browse/Filters';
 import type { ImageUrl } from 'domain/types';
 import Listing from '../Listing';

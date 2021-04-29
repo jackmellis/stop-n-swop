@@ -1,8 +1,8 @@
 import React from 'react';
 import { useCascade } from 'ui/hooks';
-import Search from 'ui/modules/product/browse/Search';
+import Search from 'ui/modules/games/browse/Search';
 import { ProductList } from 'ui/modules/product/products';
-import Filters from 'ui/modules/product/browse/Filters';
+import Filters from 'ui/modules/games/browse/Filters';
 import type { Manufacturer, Platform } from '@sns/contracts/product';
 import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
@@ -26,7 +26,7 @@ export default function Browse({
 
   return (
     <div className="flex-grow flex flex-col">
-      <PageTitle>{useMessage(ids.products.title)}</PageTitle>
+      <PageTitle>{useMessage(ids.games.title)}</PageTitle>
       <Search value={search} onChange={onSearch} />
       <div className="flex-grow flex flex-col lg:flex-row">
         <Filters manufacturers={manufacturers} platforms={platforms} />

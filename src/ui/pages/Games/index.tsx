@@ -1,17 +1,17 @@
 import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import { PRODUCT, PRODUCTS } from 'ui/constants/paths';
+import { GAME, GAMES } from 'ui/constants/paths';
 
 const BrowsePage = lazy(() => import('./Browse'));
 const ViewPage = lazy(() => import('./View'));
 
-export default function ProductsPage() {
+export default function GamesPage() {
   return (
     <>
-      <Route path={PRODUCTS} exact>
+      <Route path={GAMES} exact>
         <BrowsePage />
       </Route>
-      <Route path={PRODUCT} exact>
+      <Route path={GAME} exact>
         <ViewPage />
       </Route>
     </>
