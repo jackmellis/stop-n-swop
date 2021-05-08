@@ -9,4 +9,7 @@ jpex.factory<Config>(() => ({
       scope: import.meta.env.VITE_OAUTH_GOOGLE_SCOPE,
     },
   },
+  images: {
+    url: import.meta.env.VITE_IMG_URL,
+  },
 }));

@@ -64,6 +64,9 @@ beforeEach(() => {
             scope: '',
           },
         },
+        images: {
+          url: '',
+        },
       });
     },
     Render({ children }) {

@@ -37,6 +37,9 @@ const makeHeaders = (headers: Record<string, string>) => {
     'Content-Type': 'application/json',
     ...headers,
   }).reduce((headers, entry) => {
+    if (entry[1] == null) {
+      return headers;
+    }
     return [...headers, entry];
   }, []);
 };
@@ -51,6 +54,9 @@ const appendData = (
     if (method === 'GET') {
       // eslint-disable-next-line no-param-reassign
       url = `${url}?${makeQuery(data)}`;
+    } else if (data instanceof FormData) {
+      // eslint-disable-next-line no-param-reassign
+      payload.body = data;
     } else {
       // eslint-disable-next-line no-param-reassign
       payload.body = JSON.stringify(data);

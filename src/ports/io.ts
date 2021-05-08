@@ -36,4 +36,7 @@ export interface Config {
       scope: string;
     }
   >;
+  images: {
+    url: string;
+  };
 }

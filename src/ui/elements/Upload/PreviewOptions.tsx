@@ -27,8 +27,10 @@ export default function PreviewOptions({
           }, 0);
         }}
       >
-        <FaTimes />
-        <span className="pl-4">{useMessage(ids.elements.upload.remove)}</span>
+        <FaTimes className="xl:hidden" />
+        <span className="pl-4 xl:pl-0">
+          {useMessage(ids.elements.upload.remove)}
+        </span>
       </Button>
       <Button className="w-1/2 xl:hidden" kind="tertiary" onClick={onClose}>
         {useMessage(ids.elements.upload.close)}

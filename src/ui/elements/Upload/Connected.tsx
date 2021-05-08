@@ -12,7 +12,11 @@ export default function Connect({
   error?: any;
   onChange(url: ImageUrl): void;
 }) {
-  const { action: upload, status: uploadStatus } = useUploadImage();
+  const {
+    action: upload,
+    status: uploadStatus,
+    error: uploadError,
+  } = useUploadImage();
   const status = useMemo(() => {
     if (uploadStatus === Status.LOADING) {
       return 'uploading' as const;
@@ -23,5 +27,13 @@ export default function Connect({
     return 'empty' as const;
   }, [uploadStatus, value]);
 
-  return <Upload value={value} status={status} upload={upload} {...rest} />;
+  return (
+    <Upload
+      value={value}
+      status={status}
+      upload={upload}
+      uploadError={uploadError}
+      {...rest}
+    />
+  );
 }

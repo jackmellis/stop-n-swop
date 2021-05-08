@@ -1,5 +1,6 @@
 import type { ImageUrl } from 'domain/types';
 import React, { useState } from 'react';
+import Photo from '../Photo';
 import PreviewOptions from './PreviewOptions';
 
 export default function Preview({
@@ -21,9 +22,8 @@ export default function Preview({
         onClick={() => setHovered(true)}
         className="w-full h-full"
       >
-        <img
+        <Photo
           src={preview}
-          alt={preview}
           className="object-contain w-full h-full"
           loading="lazy"
         />
