@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'ui/elements/Card';
 import { useFormContext } from 'react-hook-form';
 import Loader from 'ui/modules/Loader';
-import type useMachine from 'ui/modules/listings/new/machine';
+import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
 import Condition from 'ui/modules/listings/new/Condition';
 import Features from 'ui/modules/listings/new/Features';
 import Region from 'ui/modules/listings/new/Region';
@@ -13,6 +13,8 @@ import Review from 'ui/modules/listings/new/Review';
 import Done from 'ui/modules/listings/new/Done';
 import type { Values } from 'ui/modules/listings/new/types';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
+import type { Query } from '@respite/core';
+import { useHistory } from 'react-router-dom';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];
@@ -25,6 +27,12 @@ interface Props {
   username: string;
   location: string;
   previousUrl: string;
+  requirementsQuery: Query<{
+    images: Array<{
+      key: string;
+      required: boolean;
+    }>;
+  }>;
 }
 
 export default function Form({
@@ -35,14 +43,22 @@ export default function Form({
   username,
   location,
   previousUrl,
+  requirementsQuery,
 }: Props) {
-  const onPrevious = () => dispatch('previous');
   const { handleSubmit } = useFormContext<Values>();
+  const { push } = useHistory();
+  const onPrevious = () => {
+    if (step === firstStep) {
+      push(previousUrl);
+    } else {
+      dispatch('previous');
+    }
+  };
 
   return (
     <Card
       padding={false}
-      className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5"
+      className="w-full xl:w-4/5 xl:mx-auto lg:my-8 xl:my-12"
     >
       <form
         className="p-6"
@@ -53,7 +69,7 @@ export default function Form({
         <Tracker step={step} />
         <Choose>
           <When condition={step === 'condition'}>
-            <Condition previousUrl={previousUrl} />
+            <Condition previous={onPrevious} />
           </When>
           <When condition={step === 'features'}>
             <Features previous={onPrevious} />
@@ -72,7 +88,10 @@ export default function Form({
             <Description previous={onPrevious} />
           </When>
           <When condition={step === 'photos'}>
-            <Photos previous={onPrevious} />
+            <Photos
+              previous={onPrevious}
+              requiredPhotos={requirementsQuery.data.images}
+            />
           </When>
           <When condition={step === 'review'}>
             <Review

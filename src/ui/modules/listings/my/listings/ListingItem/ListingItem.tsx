@@ -20,8 +20,8 @@ export default function MyListingItem({
   const {
     price,
     rating,
-    listingId,
-    images: [image],
+    id: listingId,
+    images: { main: image },
   } = listing;
   const { name } = product;
 

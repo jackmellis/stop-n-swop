@@ -23,7 +23,7 @@ export default function MyListings({ listings }: { listings: IListing[] }) {
         </div>
         <List>
           {listings.map((listing) => (
-            <Listing key={listing.listingId} listing={listing} />
+            <Listing key={listing.id} listing={listing} />
           ))}
         </List>
       </div>

@@ -9,8 +9,10 @@ import {
 } from 'react-icons/gi';
 import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
-import { useMessage } from 'ui/intl';
+import { useGetMessage, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import useIsMounted from 'ui/hooks/useIsMounted';
+import FieldError from 'ui/elements/FieldError';
 import Buttons from '../Buttons';
 
 const icons = {
@@ -44,17 +46,34 @@ function Option({
 }
 
 export default function RegionStep({ previous }: { previous(): void }) {
+  const isMounted = useIsMounted();
+  const getMessage = useGetMessage();
+
   return (
     <div>
-      <h3 className="text-lg">{useMessage(ids.listings.new.region.title)}</h3>
+      <h3 className="text-lg">{getMessage(ids.listings.new.region.title)}</h3>
       <Controller
         name="region"
         defaultValue=""
-        render={({ field: { value, onChange } }) => (
+        rules={{
+          validate: {
+            required: (value) => {
+              if (!isMounted()) {
+                return true;
+              }
+              if (value) {
+                return true;
+              }
+              return getMessage(ids.listings.new.region.required);
+            },
+          },
+        }}
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
           <div className="my-8 flex flex-wrap xl:px-28">
             {Object.values(Region).map((id) => (
               <Option key={id} id={id} onChange={onChange} value={value} />
             ))}
+            <FieldError error={error} />
           </div>
         )}
       />

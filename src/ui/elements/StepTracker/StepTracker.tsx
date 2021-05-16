@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import cx from 'classnames';
 
 const Segment = ({ index, current }: { index: number; current: number }) => {
@@ -48,17 +48,17 @@ export default function StepTracker({
   current: number;
   total: number;
 }) {
-  const arr = new Array(total).fill(null);
+  const arr = new Array(total).fill(null).map((_, i) => i);
 
   return (
     <div className="flex items-center">
-      {arr.map((_, i) => (
-        <>
+      {arr.map((i) => (
+        <Fragment key={i}>
           <If condition={i > 0}>
             <Trail current={current} index={i} total={total} />
           </If>
           <Segment current={current} index={i} />
-        </>
+        </Fragment>
       ))}
     </div>
   );

@@ -48,6 +48,8 @@ export default function View({
         platform={platform}
       />
       <QuickActions
+        platformId={platformId}
+        productId={productId}
         favourite={favourite}
         onFavouriteClick={toggleFavourite}
         onCollectClick={() => null}

@@ -8,12 +8,18 @@ import { useAuthGuard } from 'application/auth';
 import MyListing from './MyListing';
 
 const listing: Listing = {
-  listingId: 'sm64_001',
-  platformId: 'nintendo-64',
+  id: 'sm64_001',
+  products: [
+    {
+      platformId: 'nintendo-64',
+      productId: 'super_mario_64',
+    },
+  ],
+  currency: 'GBP',
+  postage: 0,
   description: '',
   location: 'London, UK',
   price: 50,
-  productId: 'super_mario_64',
   rating: 3.5,
   stats: {
     boxed: false,
@@ -22,35 +28,39 @@ const listing: Listing = {
     instructions: false,
   },
   username: 'seller1337',
-  images: [cartridge, cartridge2, cartridge3],
+  images: {
+    main: cartridge,
+    'box-front': cartridge2,
+    'box-back': cartridge3,
+  },
   createdDate: new Date('2021-03-30'),
 };
 const order: Order = {
-  listingId: listing.listingId,
+  listingId: listing.id,
   username: 'buyer1',
   status: Status.RECEIVED,
 };
 const audit: Audit = [
   {
-    listingId: listing.listingId,
+    listingId: listing.id,
     date: new Date(),
     username: order.username,
     status: Status.CREATED,
   },
   {
-    listingId: listing.listingId,
+    listingId: listing.id,
     date: new Date(),
     username: order.username,
     status: Status.SOLD,
   },
   {
-    listingId: listing.listingId,
+    listingId: listing.id,
     date: new Date(),
     username: listing.username,
     status: Status.POSTED,
   },
   {
-    listingId: listing.listingId,
+    listingId: listing.id,
     date: new Date(),
     username: order.username,
     status: Status.RECEIVED,

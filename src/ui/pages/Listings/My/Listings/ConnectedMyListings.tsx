@@ -6,9 +6,15 @@ import MyListings from './MyListings';
 
 const listings: IListing[] = [
   {
-    productId: 'super_mario_64',
-    listingId: 'a',
-    platformId: 'nintendo-64',
+    id: 'a',
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
+    currency: 'GBP',
+    postage: 0,
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -20,13 +26,19 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
   {
-    productId: 'super_mario_64',
-    listingId: 'b',
-    platformId: 'nintendo-64',
+    id: 'b',
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
+    currency: 'GBP',
+    postage: 0,
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -38,13 +50,19 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
   {
-    productId: 'super_mario_64',
-    listingId: 'c',
-    platformId: 'nintendo-64',
+    id: 'c',
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
+    currency: 'GBP',
+    postage: 0,
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -56,7 +74,7 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
 ];

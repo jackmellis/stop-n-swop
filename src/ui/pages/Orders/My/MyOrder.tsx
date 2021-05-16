@@ -24,9 +24,15 @@ const product: Game = {
 
 const listings: IListing[] = [
   {
-    productId: 'super_mario_64',
-    listingId: 'a',
-    platformId: 'nintendo-64',
+    id: 'a',
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
+    currency: 'GBP',
+    postage: 0,
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -38,13 +44,19 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
   {
-    productId: 'super_mario_64',
-    listingId: 'b',
-    platformId: 'nintendo-64',
+    id: 'b',
+    currency: 'GBP',
+    postage: 0,
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -56,13 +68,19 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
   {
-    productId: 'super_mario_64',
-    listingId: 'c',
-    platformId: 'nintendo-64',
+    id: 'c',
+    currency: 'GBP',
+    postage: 0,
+    products: [
+      {
+        productId: 'super_mario_64',
+        platformId: 'nintendo-64',
+      },
+    ],
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -74,17 +92,18 @@ const listings: IListing[] = [
       condition: Condition.USED,
       region: Region.PAL,
     },
-    images: [cartridge],
+    images: { main: cartridge },
     createdDate: new Date(),
   },
 ];
 
 export default function MyOrder({ order: o }: { order: IOrder }) {
   const [order, setOrder] = useState(() => o);
-  const listing = listings.find(
-    (listing) => listing.listingId === order.listingId,
-  );
-  const { productId, listingId, platformId } = listing;
+  const listing = listings.find((listing) => listing.id === order.listingId);
+  const {
+    id: listingId,
+    products: [{ productId, platformId }],
+  } = listing;
   const [status, setStatus] = useState<RStatus>(RStatus.IDLE);
   const handleClick = (status: Status) => {
     setStatus(RStatus.LOADING);

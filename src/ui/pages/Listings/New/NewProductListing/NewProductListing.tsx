@@ -5,6 +5,7 @@ import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
 import { NEW_LISTING } from 'ui/constants/paths';
+import type { Query } from '@respite/core';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];
@@ -17,6 +18,12 @@ interface Props {
   dispatch: Dispatch;
   username: string;
   location: string;
+  requirementsQuery: Query<{
+    images: Array<{
+      key: string;
+      required: boolean;
+    }>;
+  }>;
 }
 
 export default function NewProductListing({
@@ -27,6 +34,7 @@ export default function NewProductListing({
   dispatch,
   username,
   location,
+  requirementsQuery,
 }: Props) {
   return (
     <div className="flex-grow flex flex-col relative">
@@ -41,6 +49,7 @@ export default function NewProductListing({
         platformId={platformId}
         step={step}
         username={username}
+        requirementsQuery={requirementsQuery}
       />
     </div>
   );

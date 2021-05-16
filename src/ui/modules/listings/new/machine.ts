@@ -27,33 +27,45 @@ const saveValues = reduce(
   }),
 );
 
+export const firstStep: Step = 'region';
+
+export const order: Step[] = [
+  'region',
+  'condition',
+  'features',
+  'photos',
+  'price',
+  'description',
+  'review',
+];
+
 const makeMachine = (initial: Step) =>
   createMachine(
     initial,
     {
-      condition: state(transition('next', 'features', saveValues)),
+      region: state(transition('next', 'condition', saveValues)),
+      condition: state(
+        transition('next', 'features', saveValues),
+        transition('previous', 'region'),
+      ),
       features: state(
         transition('previous', 'condition'),
-        transition('next', 'region', saveValues),
+        transition('next', 'photos', saveValues),
       ),
-      region: state(
+      photos: state(
         transition('previous', 'features'),
         transition('next', 'price', saveValues),
       ),
       price: state(
-        transition('previous', 'region'),
+        transition('previous', 'photos'),
         transition('next', 'description', saveValues),
       ),
       description: state(
         transition('previous', 'price'),
-        transition('next', 'photos', saveValues),
-      ),
-      photos: state(
-        transition('previous', 'description'),
         transition('next', 'review', saveValues),
       ),
       review: state(
-        transition('previous', 'photos'),
+        transition('previous', 'description'),
         transition('next', 'submitting'),
       ),
       submitting: invoke(

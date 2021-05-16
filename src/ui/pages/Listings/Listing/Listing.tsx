@@ -2,7 +2,6 @@ import React from 'react';
 import Slideshow from 'ui/elements/Slideshow';
 import Overview from 'ui/modules/listings/listing/Overview';
 import Features from 'ui/modules/listings/listing/Features';
-import type { ImageUrl } from 'domain/types';
 import type { Stats } from '@sns/contracts/listing';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
@@ -19,7 +18,7 @@ export default function ListingPage({
 }: {
   productId: string;
   listingId: string;
-  images: ImageUrl[];
+  images: Record<string, string>;
   description: string;
   location: string;
   productName: string;
@@ -36,7 +35,7 @@ export default function ListingPage({
       </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col lg:p-8 xl:pt-12 xl:px-0 xl:pb-0">
         <div className="lg:flex">
-          <Slideshow images={images} className="lg:w-1/2 mb-4" />
+          <Slideshow images={Object.values(images)} className="lg:w-1/2 mb-4" />
           <Overview
             productId={productId}
             listingId={listingId}

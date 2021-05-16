@@ -32,7 +32,7 @@ const product: Game = {
 
 export default function ConnectedMyListing({ listing }: { listing: IListing }) {
   const [order, setOrder] = useState(() =>
-    orders.find((order) => order.listingId === listing.listingId),
+    orders.find((order) => order.listingId === listing.id),
   );
   const [status, setStatus] = useState<RStatus>(RStatus.IDLE);
   const handleClick = (status: Status) => {

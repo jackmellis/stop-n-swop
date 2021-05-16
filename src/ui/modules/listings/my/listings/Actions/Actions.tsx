@@ -43,7 +43,10 @@ export default function Actions({ listing, order, status, onClick }: Props) {
   const getButtonState = makeGetButtonState(active, status);
   const getMessage = useGetMessage();
 
-  const { listingId, productId, platformId } = listing;
+  const {
+    id: listingId,
+    products: [{ productId, platformId }],
+  } = listing;
   if (order == null) {
     return (
       <>

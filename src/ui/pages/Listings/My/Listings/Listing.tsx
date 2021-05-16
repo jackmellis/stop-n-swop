@@ -22,7 +22,7 @@ export default function MyListing({
   status: RStatus;
   onClick(status: Status): void;
 }) {
-  const { listingId } = listing;
+  const { id: listingId } = listing;
 
   return (
     <ListingItem

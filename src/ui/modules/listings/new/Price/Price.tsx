@@ -1,10 +1,11 @@
 import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useGetMessage } from 'ui/intl';
 import { makeGamePath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
+import useIsMounted from 'ui/hooks/useIsMounted';
 import Buttons from '../Buttons';
 
 export default function PriceStep({
@@ -16,11 +17,8 @@ export default function PriceStep({
   productId: string;
   previous(): void;
 }) {
-  const {
-    formState: { errors },
-  } = useFormContext();
-  const error = errors.price;
   const getMessage = useGetMessage();
+  const isMounted = useIsMounted();
 
   return (
     <div>
@@ -37,14 +35,24 @@ export default function PriceStep({
           {getMessage(ids.listings.new.price.link)}
         </Button>
       </div>
-      <div className="mt-10 sm:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
+      <div className="mt-10 sm:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto space-y-4">
         <Controller
           name="price"
           rules={{
-            required: getMessage(ids.listings.new.price.required),
+            validate: {
+              required: (value) => {
+                if (!isMounted()) {
+                  return true;
+                }
+                if (value) {
+                  return true;
+                }
+                return getMessage(ids.listings.new.price.required);
+              },
+            },
           }}
           defaultValue=""
-          render={({ field: { value, onChange } }) => (
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
             <CurrencyInput
               id="price"
               label={getMessage(ids.listings.new.price.label)}
@@ -52,6 +60,33 @@ export default function PriceStep({
               state={error == null ? undefined : 'error'}
               onChange={onChange}
               autoFocus
+              error={error}
+            />
+          )}
+        />
+        <Controller
+          name="postage"
+          rules={{
+            validate: {
+              required: (value) => {
+                if (!isMounted()) {
+                  return true;
+                }
+                if (value) {
+                  return true;
+                }
+                return getMessage(ids.listings.new.price.required);
+              },
+            },
+          }}
+          defaultValue=""
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
+            <CurrencyInput
+              id="postage"
+              label={getMessage(ids.listings.new.price.postage)}
+              value={value ?? ''}
+              state={error == null ? undefined : 'error'}
+              onChange={onChange}
               error={error}
             />
           )}

@@ -1,17 +1,30 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import useMachine from 'ui/modules/listings/new/machine';
+import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
 import type { Values } from 'ui/modules/listings/new/types';
 import { useAuthGuard } from 'application/auth';
+import { useRequirements } from 'application/listings';
+import { useGame } from 'application/games';
+import { useUser } from 'application/user';
 import NewProductListing from './NewProductListing';
 
 export default function ConnectedNewProductListing() {
-  useAuthGuard({ username: true });
+  useAuthGuard({ username: true, address: true });
   const { productId, platformId } = useParams<{
     productId: string;
     platformId: string;
   }>();
+  const {
+    data: { name },
+  } = useGame({ id: productId });
+  const requirementsQuery = useRequirements({ productId, platformId });
+  const {
+    data: {
+      username,
+      address: { city, country },
+    },
+  } = useUser();
   const onSubmit = async (values: Values) => {
     // eslint-disable-next-line no-console
     console.log(values);
@@ -20,8 +33,7 @@ export default function ConnectedNewProductListing() {
     });
   };
   const formProps = useForm<Values>();
-  const [step, dispatch] = useMachine('condition', { onSubmit });
-  const name = 'Super Mario 64';
+  const [step, dispatch] = useMachine(firstStep, { onSubmit });
 
   return (
     <FormProvider {...formProps}>
@@ -31,8 +43,9 @@ export default function ConnectedNewProductListing() {
         dispatch={dispatch}
         step={step}
         name={name}
-        location="London, UK"
-        username="seller1337"
+        location={`${city}, ${country}`}
+        username={username}
+        requirementsQuery={requirementsQuery}
       />
     </FormProvider>
   );

@@ -15,10 +15,20 @@ export default function ConnectedListingPage() {
   }>();
 
   const listing: IListing = {
-    productId,
-    listingId,
-    platformId,
-    images: [cartridge, cartridge2, cartridge3],
+    id: listingId,
+    products: [
+      {
+        productId,
+        platformId,
+      },
+    ],
+    images: {
+      main: cartridge,
+      'box-front': cartridge2,
+      'box-back': cartridge3,
+    },
+    currency: 'GBP',
+    postage: 0,
     location: 'London, UK',
     price: 50,
     rating: 3.5,

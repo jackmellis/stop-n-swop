@@ -6,16 +6,17 @@ import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Game } from '@sns/contracts/product';
 
 interface Props {
   onSearch(value: string): void;
   productId: string;
   platformId: string;
   setProductId(value: string): void;
-  results: any[];
+  results: Game[];
 }
 
-export default function Intro({
+export default function GameFinder({
   onSearch,
   platformId,
   productId,
@@ -23,7 +24,7 @@ export default function Intro({
   results,
 }: Props) {
   const options = results.map((product) => ({
-    value: product.productId,
+    value: product.id,
     label: product.name,
   }));
   const getMessage = useGetMessage();
@@ -38,7 +39,7 @@ export default function Intro({
         onChange={setProductId}
         onSearch={onSearch}
         autoFocus
-        label={getMessage(ids.listings.new.intro.label)}
+        label={getMessage(ids.listings.new.game.label)}
       />
       <If condition={Boolean(productId)}>
         <div className="mt-10 flex justify-center">
@@ -48,7 +49,7 @@ export default function Intro({
             to={makeGameNewListingPath({ productId, platformId })}
           >
             <span className="pr-3">
-              {getMessage(ids.listings.new.intro.button)}
+              {getMessage(ids.listings.new.game.button)}
             </span>
             <FaRocket />
           </Button>

@@ -17,10 +17,16 @@ export default function ConnectedListing({
   style,
 }: Props) {
   const listing: IListing = {
-    productId,
-    listingId,
-    platformId,
-    images: [cartridge],
+    id: listingId,
+    products: [
+      {
+        productId,
+        platformId,
+      },
+    ],
+    currency: 'GBP',
+    postage: 0,
+    images: { main: cartridge },
     location: 'London, UK',
     price: 50,
     rating: 3.5,
@@ -41,7 +47,7 @@ export default function ConnectedListing({
       listingId={listingId}
       platformId={platformId}
       username={listing.username}
-      image={listing.images[0]}
+      image={listing.images.main}
       location={listing.location}
       price={listing.price}
       rating={listing.rating}

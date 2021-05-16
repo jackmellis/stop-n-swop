@@ -6,8 +6,8 @@ import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
 import { useMessage, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import Button from 'ui/elements/Button';
-import { Link } from 'react-router-dom';
+import useIsMounted from 'ui/hooks/useIsMounted';
+import FieldError from 'ui/elements/FieldError';
 import Buttons from '../Buttons';
 
 const icons = [FaMeh, FaSmile, FaGrinBeam, FaGrinStars];
@@ -37,12 +37,9 @@ function Option({
   );
 }
 
-export default function ConditionStep({
-  previousUrl,
-}: {
-  previousUrl: string;
-}) {
+export default function ConditionStep({ previous }: { previous(): void }) {
   const getMessage = useGetMessage();
+  const isMounted = useIsMounted();
 
   return (
     <div>
@@ -52,7 +49,20 @@ export default function ConditionStep({
       <Controller
         name="condition"
         defaultValue=""
-        render={({ field: { value, onChange } }) => {
+        rules={{
+          validate: {
+            required: (value) => {
+              if (!isMounted()) {
+                return true;
+              }
+              if (value) {
+                return true;
+              }
+              return getMessage(ids.listings.new.condition.required);
+            },
+          },
+        }}
+        render={({ field: { value, onChange }, fieldState: { error } }) => {
           return (
             <div className="my-8 flex flex-wrap xl:px-28">
               {Object.values(Condition)
@@ -66,15 +76,12 @@ export default function ConditionStep({
                     value={value}
                   />
                 ))}
+              <FieldError error={error} />
             </div>
           );
         }}
       />
-      <Buttons first showNext previous={() => null}>
-        <Button kind="tertiary" component={Link} to={previousUrl}>
-          {getMessage(ids.listings.new.buttons.back)}
-        </Button>
-      </Buttons>
+      <Buttons showNext previous={previous} />
     </div>
   );
 }

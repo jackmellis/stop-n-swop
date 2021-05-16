@@ -18,9 +18,8 @@ export default function MyListing({
   history: Audit;
 }) {
   const {
-    listingId,
-    productId,
-    platformId,
+    id: listingId,
+    products: [{ productId, platformId }],
     username,
     images,
     createdDate,
@@ -36,7 +35,7 @@ export default function MyListing({
       </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col">
         <div className="lg:flex">
-          <Slideshow images={images} className="lg:w-1/2 mb-4" />
+          <Slideshow images={Object.values(images)} className="lg:w-1/2 mb-4" />
           <Overview
             history={history}
             listingId={listingId}

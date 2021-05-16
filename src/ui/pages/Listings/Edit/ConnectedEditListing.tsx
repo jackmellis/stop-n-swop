@@ -9,15 +9,22 @@ import useMachine from 'ui/modules/listings/new/machine';
 import type { Values } from 'ui/modules/listings/new/types';
 import { MY_LISTINGS } from 'ui/constants/paths';
 import { useAuthGuard } from 'application/auth';
+import { useRequirements } from 'application/listings';
 import EditListing from './EditListing';
 
 const listing: Listing = {
-  listingId: 'sm64_001',
-  platformId: 'nintendo-64',
+  id: 'sm64_001',
+  products: [
+    {
+      platformId: 'nintendo-64',
+      productId: 'super_mario_64',
+    },
+  ],
+  postage: 0,
+  currency: 'GBP',
   description: '',
   location: 'London, UK',
   price: 50,
-  productId: 'super_mario_64',
   rating: 3.5,
   stats: {
     boxed: false,
@@ -26,7 +33,11 @@ const listing: Listing = {
     instructions: false,
   },
   username: 'seller1337',
-  images: [cartridge, cartridge2, cartridge3],
+  images: {
+    main: cartridge,
+    'box-front': cartridge2,
+    'box-back': cartridge3,
+  },
   createdDate: new Date('2021-03-30'),
 };
 
@@ -38,6 +49,7 @@ export default function ConnectedEditListing() {
     listingId: string;
     platformId: string;
   }>();
+  const requirementsQuery = useRequirements({ productId, platformId });
   const onSubmit = async (values: Values) => {
     // eslint-disable-next-line no-console
     console.log(values);
@@ -77,6 +89,7 @@ export default function ConnectedEditListing() {
         name={name}
         location="London, UK"
         username="seller1337"
+        requirementsQuery={requirementsQuery}
       />
     </FormProvider>
   );

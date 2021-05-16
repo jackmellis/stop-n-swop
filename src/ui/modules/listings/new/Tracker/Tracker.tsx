@@ -1,16 +1,7 @@
 import React from 'react';
 import StepTracker from 'ui/elements/StepTracker';
-import type { Step } from '../machine';
+import { order, Step } from '../machine';
 
-const order = [
-  'condition',
-  'features',
-  'region',
-  'price',
-  'description',
-  'photos',
-  'review',
-];
 const total = order.length;
 
 export default function Tracker({ step }: { step: Step }) {

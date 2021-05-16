@@ -23,7 +23,7 @@ export default function OptionBox({
         <button
           type="button"
           className={cx(
-            'text-black rounded-lg shadow-inner focus:outline-none w-full flex flex-col justify-center items-center space-y-4',
+            'text-black rounded-lg shadow-inner w-full flex flex-col justify-center items-center space-y-4',
             selected
               ? 'bg-primary text-white hover:bg-primary-lighter'
               : 'bg-white hover:bg-primary-lightest',

@@ -13,6 +13,8 @@ const ListIcon = animated(FaMoneyBillWave);
 const CollectionIcon = animated(FaPlus);
 
 interface Props {
+  productId: string;
+  platformId: string;
   favourite: boolean;
   onFavouriteClick(): void;
   onCollectClick(): void;
@@ -20,6 +22,8 @@ interface Props {
 
 export default function QuickActions({
   favourite,
+  platformId,
+  productId,
   onFavouriteClick,
   onCollectClick,
 }: Props) {
@@ -42,8 +46,8 @@ export default function QuickActions({
         className="w-full justify-center"
         component={Link}
         to={makeGameNewListingPath({
-          platformId: 'nintendo-64',
-          productId: 'super_mario_64',
+          platformId,
+          productId,
         })}
         onMouseEnter={listBoop}
       >

@@ -104,6 +104,7 @@ const enMessages = {
       },
       condition: {
         title: 'What condition is your game in?',
+        required: 'Tell us what condition your game is in',
       },
       description: {
         title: "You can add a description if you'd like",
@@ -121,24 +122,38 @@ const enMessages = {
         boxed: 'Boxed',
         instructions: 'Instructions',
       },
-      intro: {
-        label: "Find a game you want to sell and let's get listing...",
-        button: 'List',
+      platform: {
+        label: 'What platform are we talking?',
+        button: 'Next',
+      },
+      game: {
+        label: "Find the game you want to sell and let's get listing...",
+        button: 'List!',
       },
       photos: {
-        required: 'Please upload a main photo',
+        required: 'This photo is required',
         title: 'Upload some pictures of your game',
         description:
           "We automatically verify photos for authenticity. The more photos you add, the higher your listing's rating!",
+        unknown: 'Photo',
+        'cartridge-front': 'Game Cartridge (front)',
+        'cartridge-back': 'Game Cartridge (back)',
+        'cartridge-inside': 'Game Cartridge (inside)',
+        disc: 'Game Disc',
+        'box-front': 'Front of box',
+        'box-back': 'Back of box',
+        instructions: 'Instructions',
       },
       price: {
         title: 'How much do you want to list this for?',
         link: 'Check listing prices for this game',
         required: 'Please enter an amount',
         label: 'Price',
+        postage: 'Postage',
       },
       region: {
         title: 'What region is your listing?',
+        required: 'Please select a region',
       },
       review: {
         title: "Nearly there! Let's just check everything's correct:",
