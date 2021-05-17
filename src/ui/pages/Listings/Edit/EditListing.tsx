@@ -44,6 +44,7 @@ export default function NewProductListing({
         {useMessage(ids.listings.edit.title, { name, listingId })}
       </PageTitle>
       <Form
+        error={null}
         dispatch={dispatch}
         location={location}
         previousUrl={MY_LISTINGS}
