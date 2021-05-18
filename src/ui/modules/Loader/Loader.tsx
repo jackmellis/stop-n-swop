@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Beat from 'react-spinners/BeatLoader';
+import Pulse from 'react-spinners/PulseLoader';
 import BK from 'ui/assets/sprites/bk-pixel.gif';
 import { useQueryParam } from 'ui/hooks';
 
@@ -22,5 +22,5 @@ export default function Loader({ color = '#FFF', size, sensible }: Props) {
     }
   }
 
-  return <Beat color={color} size={size} />;
+  return <Pulse color={color} size={size} />;
 }
