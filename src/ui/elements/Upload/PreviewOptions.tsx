@@ -17,7 +17,7 @@ export default function PreviewOptions({
       onMouseLeave={onClose}
     >
       <Button
-        className="w-1/2"
+        className="w-3/4 sm:w-2/3 xl:w-1/2"
         kind="primary"
         state="error"
         onClick={() => {
@@ -27,12 +27,18 @@ export default function PreviewOptions({
           }, 0);
         }}
       >
-        <FaTimes className="xl:hidden" />
+        <span className="xl:hidden">
+          <FaTimes />
+        </span>
         <span className="pl-4 xl:pl-0">
           {useMessage(ids.elements.upload.remove)}
         </span>
       </Button>
-      <Button className="w-1/2 xl:hidden" kind="tertiary" onClick={onClose}>
+      <Button
+        className="w-3/4 sm:w-2/3 xl:w-1/2 xl:hidden"
+        kind="secondary"
+        onClick={onClose}
+      >
         {useMessage(ids.elements.upload.close)}
       </Button>
     </div>
