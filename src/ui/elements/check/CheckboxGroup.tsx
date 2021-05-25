@@ -38,7 +38,7 @@ export default function CheckboxGroup({
     <context.Provider
       value={{
         check(value) {
-          onChange(list.concat(value));
+          onChange([...list, value]);
         },
         uncheck(value) {
           onChange(list.filter((item) => item !== value));

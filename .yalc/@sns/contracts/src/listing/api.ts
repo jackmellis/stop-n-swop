@@ -1,4 +1,5 @@
-import { Listing, Stats } from "./entities";
+import { Listing } from "./entities";
+import { Condition, Region } from "./enums";
 
 export type GetListingRequirementsRequest = void;
 
@@ -16,4 +17,39 @@ export type CreateListingRequest = Omit<
 
 export interface CreateListingResponse {
   id: string;
+}
+
+export interface SearchListingsRequest {
+  productId: string;
+  platformId: string;
+  boxed?: boolean;
+  instructions?: boolean;
+  condition?: Condition | Condition[];
+  region?: Region | Region[];
+  rating?: number;
+  minPrice?: number;
+  maxPrice?: number;
+}
+export interface SearchListingsResponse {
+  listings: Listing[];
+}
+
+export interface GetListingParams {
+  listingId: string;
+}
+export type GetListingRequest = void;
+export type GetListingResponse = Listing;
+
+export interface GetProductsListingCountRequest {
+  products: Array<{
+    productId: string;
+    platformId: string;
+  }>;
+}
+export interface GetProductsListingCountResponse {
+  counts: Array<{
+    productId: string;
+    platformId: string;
+    count: number;
+  }>;
 }

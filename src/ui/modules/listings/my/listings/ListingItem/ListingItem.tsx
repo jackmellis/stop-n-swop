@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
-import type { Listing } from '@sns/contracts/listing';
 import { ListItem } from 'ui/elements/list';
-import type { Product } from '@sns/contracts/product';
 import { useCurrency } from 'ui/intl';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { Link } from 'react-router-dom';
+import type { Product } from '@sns/contracts/product';
+import type { Listing } from '@sns/contracts/listing';
 
 export default function MyListingItem({
   product,

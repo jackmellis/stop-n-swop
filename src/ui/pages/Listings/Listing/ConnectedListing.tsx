@@ -1,59 +1,19 @@
 import React from 'react';
-import cartridge from 'ui/assets/s-l640.jpg';
-import cartridge2 from 'ui/assets/cartridge-back.jpg';
-import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
-import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
-import { Game, Type } from '@sns/contracts/product';
 import { useParams } from 'react-router-dom';
+import { useListing } from 'application/listings';
+import { useGame } from 'application/games';
 import Listing from './Listing';
 
 export default function ConnectedListingPage() {
-  const { listingId, productId, platformId } = useParams<{
-    productId: string;
-    listingId: string;
-    platformId: string;
-  }>();
+  const { listingId, productId } =
+    useParams<{
+      productId: string;
+      listingId: string;
+      platformId: string;
+    }>();
 
-  const listing: IListing = {
-    id: listingId,
-    products: [
-      {
-        productId,
-        platformId,
-      },
-    ],
-    images: {
-      main: cartridge,
-      'box-front': cartridge2,
-      'box-back': cartridge3,
-    },
-    currency: 'GBP',
-    postage: 0,
-    location: 'London, UK',
-    price: 50,
-    rating: 3.5,
-    description: 'This is a description given by the seller.',
-    username: 'seller1337',
-    stats: {
-      boxed: true,
-      condition: Condition.LIKE_NEW,
-      instructions: true,
-      region: Region.PAL,
-    },
-    createdDate: new Date(),
-  };
-  const product: Game = {
-    id: productId,
-    rawgId: -1,
-    banner: '',
-    cover: '',
-    developers: ['Nintendo'],
-    publishers: ['Nintendo'],
-    name: 'Super Mario 64',
-    platforms: [{ id: 'n64', releaseDate: new Date(new Date('1996-06-23')) }],
-    type: Type.GAME,
-    releaseDate: new Date(new Date('1996-06-23')),
-  };
+  const { data: listing } = useListing({ id: listingId });
+  const { data: product } = useGame({ id: productId });
 
   return (
     <Listing
@@ -65,6 +25,10 @@ export default function ConnectedListingPage() {
       productName={product.name}
       stats={listing.stats}
       username={listing.username}
+      rating={listing.rating}
+      currency={listing.currency}
+      postage={listing.postage}
+      price={listing.price}
     />
   );
 }

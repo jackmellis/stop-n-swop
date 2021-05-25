@@ -60,12 +60,8 @@ export default function PhotosStep({
   requiredPhotos: Array<{ key: string; required: boolean }>;
 }) {
   const getMessage = useGetMessage();
-  const boxed = Boolean(
-    useWatch<Values>({ name: 'boxed' }),
-  );
-  const instructions = Boolean(
-    useWatch<Values>({ name: 'instructions' }),
-  );
+  const boxed = Boolean(useWatch<Values>({ name: 'boxed' }));
+  const instructions = Boolean(useWatch<Values>({ name: 'instructions' }));
 
   const photos = requiredPhotos.filter(({ key, required }) => {
     if (required) {

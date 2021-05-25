@@ -2,9 +2,9 @@ import React, { FunctionComponent, ReactNode, Suspense } from 'react';
 import { Provider as Jpex } from 'react-jpex';
 import { Provider as Respite } from '@respite/core';
 import { Router, Route } from 'react-router-dom';
-import type { JpexInstance } from 'jpex';
 import { createMemoryHistory, History } from 'history';
 import { Provider as Intl } from 'ui/intl';
+import type { JpexInstance } from 'jpex';
 import type { Driver, Storage } from 'core/io';
 
 interface Props {

@@ -1,10 +1,10 @@
 import React from 'react';
 import PageTitle from 'ui/elements/PageTitle';
-import type useMachine from 'ui/modules/listings/new/machine';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
 import { NEW_LISTING } from 'ui/constants/paths';
+import type useMachine from 'ui/modules/listings/new/machine';
 import type { Query } from '@respite/core';
 
 type Step = ReturnType<typeof useMachine>[0];

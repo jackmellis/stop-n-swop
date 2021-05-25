@@ -1,6 +1,6 @@
-import type { Config } from 'core/io';
 import React, { ImgHTMLAttributes, useMemo } from 'react';
 import { useResolve } from 'react-jpex';
+import type { Config } from 'core/io';
 
 type Props = ImgHTMLAttributes<HTMLImageElement>;
 
@@ -18,5 +18,5 @@ export default function Photo({ src: path, ...props }: Props) {
     return `${config.images.url}/${path}`;
   }, [config.images.url, path]);
 
-  return <img src={src} alt={path} {...props} />;
+  return <img src={src} alt={path} loading="lazy" {...props} />;
 }

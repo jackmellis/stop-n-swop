@@ -1,4 +1,7 @@
 import base from 'jpex';
+import { LOGIN } from 'ui/constants/paths';
+import { Reason } from 'domain/constants/auth';
+import { NotAuthorisedError, UnknownError } from '@sns/abyss';
 import type { AuthDriver, Driver } from 'core/io';
 import type {
   GetTokens,
@@ -7,10 +10,7 @@ import type {
   SaveTokens,
 } from 'core/auth';
 import type { Navigate } from 'core/navigation';
-import { LOGIN } from 'ui/constants/paths';
 import '../authDriver';
-import { Reason } from 'domain/constants/auth';
-import { NotAuthorisedError, UnknownError } from '@sns/abyss';
 
 const setup = () => {
   const jpex = base.extend();
@@ -105,13 +105,8 @@ describe('when logged in', () => {
       });
       describe('when refreshing the auth tokens fails', () => {
         it('redirects to the login page', async () => {
-          const {
-            authDriver,
-            driver,
-            refreshTokens,
-            navigate,
-            clearTokens,
-          } = setup();
+          const { authDriver, driver, refreshTokens, navigate, clearTokens } =
+            setup();
           driver.mockRejectedValueOnce(new NotAuthorisedError());
           refreshTokens.mockRejectedValue(new Error('failed to refresh'));
 
@@ -145,13 +140,8 @@ describe('when logged in', () => {
       });
       describe('when re-fetch fails', () => {
         it('signs out and redirects to login', async () => {
-          const {
-            authDriver,
-            driver,
-            refreshTokens,
-            clearTokens,
-            navigate,
-          } = setup();
+          const { authDriver, driver, refreshTokens, clearTokens, navigate } =
+            setup();
           driver.mockRejectedValue(new NotAuthorisedError());
 
           authDriver({ url: '/api' });

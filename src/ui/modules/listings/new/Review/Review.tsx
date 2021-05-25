@@ -15,7 +15,8 @@ interface Props {
 
 export default function Review({ username, location, previous }: Props) {
   const { getValues } = useFormContext<Values>();
-  const { boxed, condition, instructions, price, region, images } = getValues();
+  const { boxed, condition, instructions, price, region, images, postage } =
+    getValues();
   const getMessage = useGetMessage();
 
   return (
@@ -40,6 +41,8 @@ export default function Review({ username, location, previous }: Props) {
             price={price}
             productId=""
             platformId=""
+            currency="GBP"
+            postage={postage}
             readonly
           />
         </ListingsItem>

@@ -1,18 +1,19 @@
 import React, { CSSProperties, useState } from 'react';
-import type { Platform, Game } from '@sns/contracts/product';
 import ProductItem from 'ui/modules/games/browse/ProductItem';
+import type { Platform, Game } from '@sns/contracts/product';
 
 export default function Item({
   style,
   game,
   platform,
+  totalListings,
 }: {
   game: Game;
   platform: Platform;
+  totalListings: number;
   style?: CSSProperties;
 }) {
   const [favourite, setFavourite] = useState(false);
-  const totalListings = 0;
 
   return (
     <ProductItem

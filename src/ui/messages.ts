@@ -73,6 +73,7 @@ const enMessages = {
       details: 'More details',
       seller: 'Seller',
       description: 'Description',
+      postage: '{postage} delivery',
     },
     filters: {
       features: {
@@ -195,6 +196,7 @@ const enMessages = {
     },
   },
   error: {
+    retryButton: 'Refresh',
     forbidden: 'You are not authorised to carry out this action',
     unavailable: 'The service is currently unavailable, please try again',
     gatewayTimeout: 'The service is currently unavailable, please try again',

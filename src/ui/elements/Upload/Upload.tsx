@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ImageUrl } from 'domain/types';
 import { BaseError, ValidationError } from '@sns/abyss';
+import type { ImageUrl } from 'domain/types';
 import Empty from './Empty';
 import Port from './Port';
 import Preview from './Preview';

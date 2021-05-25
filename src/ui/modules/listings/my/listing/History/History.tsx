@@ -1,8 +1,8 @@
 import { Status } from '@sns/contracts/order';
-import type { Audit } from '@sns/contracts/listing';
 import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Audit } from '@sns/contracts/listing';
 import HistoryRow from './Row';
 
 export default function History({

@@ -1,5 +1,5 @@
-import type { ImageUrl } from 'domain/types';
 import React from 'react';
+import type { ImageUrl } from 'domain/types';
 
 export default function Banner({ image }: { image: ImageUrl }) {
   if (!image) {

@@ -6,8 +6,8 @@ import Actions from 'ui/modules/orders/my/Actions';
 import Order from 'ui/modules/orders/my/Order';
 import OrderStatus from 'ui/modules/orders/my/OrderStatus';
 import { Game, Type } from '@sns/contracts/product';
-import type { Status, Order as IOrder } from '@sns/contracts/order';
 import { makeGameListingPath } from 'ui/constants/paths';
+import type { Status, Order as IOrder } from '@sns/contracts/order';
 
 const product: Game = {
   banner: '',

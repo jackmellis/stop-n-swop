@@ -1,5 +1,5 @@
-import type { QueryOptions } from '@respite/query';
 import { useSelector } from '@respite/select';
+import type { QueryOptions } from '@respite/query';
 import { usePlatforms } from './usePlatforms';
 
 export const usePlatform = ({ id }: { id: string }, opts?: QueryOptions) => {

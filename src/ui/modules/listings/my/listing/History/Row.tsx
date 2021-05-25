@@ -1,7 +1,7 @@
-import type { Status } from '@sns/contracts/order';
 import React from 'react';
 import { useDate, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Status } from '@sns/contracts/order';
 
 export default function HistoryRow({
   date,

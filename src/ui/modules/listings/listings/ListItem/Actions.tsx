@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'ui/elements/Button';
 import { makeGameListingPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
-import { useCurrency, useMessage } from 'ui/intl';
+import { useCurrency, useGetMessage } from 'ui/intl';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
 import AddToBasket from '../../listing/AddToBasket';
@@ -12,16 +12,22 @@ interface Props {
   platformId: string;
   listingId: string;
   price: number;
+  postage: number;
+  currency: string;
   readonly?: boolean;
 }
 
 export default function Actions({
   readonly,
   price,
+  postage,
+  currency,
   productId,
   platformId,
   listingId,
 }: Props) {
+  const getMessage = useGetMessage();
+
   return (
     <div
       className={cx(
@@ -33,8 +39,13 @@ export default function Actions({
         'xl:w-auto',
       )}
     >
-      <div className="text-2xl text-center sm:text-right">
-        {useCurrency(price)}
+      <div className="text-2xl text-right">
+        {useCurrency(price, { currency })}
+      </div>
+      <div className="text-sm text-right text-gray-200 py-3">
+        {getMessage(ids.listings.listing.postage, {
+          postage: useCurrency(postage, { currency }),
+        })}
       </div>
       <If condition={!readonly}>
         <AddToBasket
@@ -53,7 +64,7 @@ export default function Actions({
             listingId,
           })}
         >
-          <span>{useMessage(ids.listings.listing.details)}</span>
+          <span>{getMessage(ids.listings.listing.details)}</span>
         </Button>
       </If>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { useSwipeable } from 'react-swipeable';
 import type { ImageUrl } from 'domain/types';
+import Photo from '../Photo';
 
 enum Direction {
   FORWARD,
@@ -93,12 +94,7 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
       >
         {transitions.map(({ item: image, key, props: style }) => (
           <animated.div className="absolute inset-0" key={key} style={style}>
-            <img
-              src={image}
-              className="object-contain h-full w-full"
-              alt={image}
-              loading="lazy"
-            />
+            <Photo src={image} className="object-contain h-full w-full" />
           </animated.div>
         ))}
       </div>
@@ -106,12 +102,7 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
         {images.map((image, index) => (
           <button type="button" onClick={() => setCurrent(index)}>
             {/* <FaCircle size="0.75em" /> */}
-            <img
-              src={image}
-              loading="lazy"
-              className="object-contain h-20"
-              alt={image}
-            />
+            <Photo src={image} className="object-contain h-20" />
           </button>
         ))}
       </div>

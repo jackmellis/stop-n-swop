@@ -1,24 +1,28 @@
-import type { Platform } from '@sns/contracts/product';
 import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
 import { Filter, Filters } from 'ui/modules/product/filters';
+import type { Platform } from '@sns/contracts/product';
 
 interface Props {
+  available: boolean;
+  setAvailable(value: boolean): void;
   platforms: Platform[];
   platformIds: string[];
-  platformCounts: Record<string, number>;
   setPlatformIds(value: string[]): void;
+  platformCounts: Record<string, number>;
   hasSearched: boolean;
 }
 
 export default function BrowseFilters({
   hasSearched,
+  available,
+  setAvailable,
   platforms,
   platformIds,
-  platformCounts,
   setPlatformIds,
+  platformCounts,
 }: Props) {
   const getMessage = useGetMessage();
 
@@ -36,8 +40,8 @@ export default function BrowseFilters({
         />
         <Checkbox
           label={getMessage(ids.games.filters.preferences.available)}
-          value
-          onChange={() => null}
+          value={available}
+          onChange={setAvailable}
         />
       </Filter>
       <Filter

@@ -2,21 +2,22 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
-import type { Values } from 'ui/modules/listings/new/types';
 import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
 import { useGame } from 'application/games';
 import { useUser } from 'application/user';
 import { useCreateListing } from 'application/listings/useCreateListing';
+import type { Values } from 'ui/modules/listings/new/types';
 import NewProductListing from './NewProductListing';
 import { useOnSubmit } from './utils';
 
 export default function ConnectedNewProductListing() {
   useAuthGuard({ username: true, address: true });
-  const { productId, platformId } = useParams<{
-    productId: string;
-    platformId: string;
-  }>();
+  const { productId, platformId } =
+    useParams<{
+      productId: string;
+      platformId: string;
+    }>();
   const {
     data: { name },
   } = useGame({ id: productId });

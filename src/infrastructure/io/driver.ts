@@ -1,6 +1,6 @@
 import jpex, { Global } from 'jpex';
-import type { Config, Driver } from 'core/io';
 import { responseToError } from '@sns/abyss';
+import type { Config, Driver } from 'core/io';
 
 type Fetch = typeof window.fetch;
 
@@ -13,8 +13,18 @@ const makeQuery = (data: Record<string, any>) => {
   const params = new URLSearchParams();
   Object.entries(data).forEach(([key, value]) => {
     if (Array.isArray(value)) {
-      value.forEach((el) => {
-        params.append(`${key}[]`, `${el}`);
+      value.forEach((el, i) => {
+        if (typeof el === 'object') {
+          Object.entries(el).forEach(([subkey, value]) => {
+            params.append(`${key}[${i}][${subkey}]`, `${value}`);
+          });
+        } else {
+          params.append(`${key}[${i}]`, `${el}`);
+        }
+      });
+    } else if (typeof value === 'object') {
+      Object.entries(value).forEach(([subkey, value]) => {
+        params.append(`${key}[${subkey}]`, `${value}`);
       });
     } else {
       params.append(key, `${value}`);
@@ -83,39 +93,38 @@ const handleErrorResponse = async (response: Response) => {
   });
 };
 
-const driver = (
-  fetch: Global<'fetch', Fetch>,
-  config: Config,
-): Driver => async ({
-  url: rawUrl,
-  method = 'GET',
-  data,
-  params,
-  headers: customHeaders,
-}) => {
-  const payload: RequestInit = {};
-  let url = makeUrl(config.api.url, rawUrl, params);
-  url = appendData(data, url, method, payload);
-  const headers = makeHeaders(customHeaders);
+const driver =
+  (fetch: Global<'fetch', Fetch>, config: Config): Driver =>
+  async ({
+    url: rawUrl,
+    method = 'GET',
+    data,
+    params,
+    headers: customHeaders,
+  }) => {
+    const payload: RequestInit = {};
+    let url = makeUrl(config.api.url, rawUrl, params);
+    url = appendData(data, url, method, payload);
+    const headers = makeHeaders(customHeaders);
 
-  payload.method = method;
-  if (headers.length) {
-    payload.headers = headers;
-  }
+    payload.method = method;
+    if (headers.length) {
+      payload.headers = headers;
+    }
 
-  const response = await fetch(url, payload);
+    const response = await fetch(url, payload);
 
-  if (!response.ok) {
-    const error = await handleErrorResponse(response);
-    throw error;
-  }
+    if (!response.ok) {
+      const error = await handleErrorResponse(response);
+      throw error;
+    }
 
-  const result = isJson(response) ? await response.json() : null;
+    const result = isJson(response) ? await response.json() : null;
 
-  return {
-    status: response.status,
-    data: result,
+    return {
+      status: response.status,
+      data: result,
+    };
   };
-};
 
 jpex.factory<Driver>(driver);

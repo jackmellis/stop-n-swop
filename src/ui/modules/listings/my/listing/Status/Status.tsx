@@ -1,7 +1,7 @@
-import type { Status } from '@sns/contracts/order';
 import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Status } from '@sns/contracts/order';
 
 export default function ListingStatus({ status }: { status: Status }) {
   const getMessage = useGetMessage();

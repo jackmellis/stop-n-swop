@@ -1,10 +1,10 @@
 import { QueryOptions, useQuery } from '@respite/query';
-import type { SearchGames } from 'core/games';
 import { encase } from 'react-jpex';
 import { GameKey, GamesKey } from 'application/keys';
 import { useDebounce } from 'use-debounce';
 import { useCache } from '@respite/core';
 import { useEffect, useRef } from 'react';
+import type { SearchGames } from 'core/games';
 import type { PromiseType } from 'crosscutting/utils';
 
 // TODO: make an npm library for this
@@ -14,7 +14,7 @@ const useInfiniteQuery = <T>(
   fetch: (previous: T) => Promise<T>,
   deps: any[] = [],
   {
-    initialState = ([] as unknown) as T,
+    initialState = [] as unknown as T,
     ...opts
   }: QueryOptions & { initialState?: T } = {},
 ) => {
@@ -42,39 +42,37 @@ type Args = Parameters<SearchGames>[0];
 type Result = PromiseType<ReturnType<SearchGames>>;
 
 export const useGames = encase(
-  (searchGames: SearchGames) => (
-    { page, platforms, search }: Args,
-    opts?: QueryOptions,
-  ) => {
-    const cache = useCache();
-    const [latentSearch] = useDebounce(search, 500);
+  (searchGames: SearchGames) =>
+    ({ page, platforms, search }: Args, opts?: QueryOptions) => {
+      const cache = useCache();
+      const [latentSearch] = useDebounce(search, 500);
 
-    return useInfiniteQuery<Result>(
-      GamesKey,
-      page,
-      async (previous) => {
-        const result = await searchGames({
-          page,
-          platforms,
-          search: latentSearch,
-        });
-        result.games?.forEach((game) => {
-          cache.success([GameKey, game.id], game);
-        });
-        return {
-          ...result,
-          games: [...previous.games, ...(result.games ?? [])],
-        };
-      },
-      [latentSearch, platforms.join(',')],
-      {
-        initialState: {
-          nextPage: -1,
-          games: [],
-          counts: { total: 0, platforms: {} },
+      return useInfiniteQuery<Result>(
+        GamesKey,
+        page,
+        async (previous) => {
+          const result = await searchGames({
+            page,
+            platforms,
+            search: latentSearch,
+          });
+          result.games?.forEach((game) => {
+            cache.success([GameKey, game.id], game);
+          });
+          return {
+            ...result,
+            games: [...previous.games, ...(result.games ?? [])],
+          };
         },
-        ...opts,
-      },
-    );
-  },
+        [latentSearch, platforms.join(',')],
+        {
+          initialState: {
+            nextPage: -1,
+            games: [],
+            counts: { total: 0, platforms: {} },
+          },
+          ...opts,
+        },
+      );
+    },
 );

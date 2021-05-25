@@ -6,8 +6,8 @@ import { makeGamePath } from 'ui/constants/paths';
 import { GridItem } from 'ui/elements/grid';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import type { Game, Platform } from '@sns/contracts/product';
 import { GiRetroController } from 'react-icons/gi';
+import type { Game, Platform } from '@sns/contracts/product';
 
 interface Props {
   game: Game;

@@ -1,5 +1,7 @@
 import { Reason } from 'domain/constants/auth';
 import jpex from 'jpex';
+import { makeLoginPath } from 'ui/constants/paths';
+import { NotAuthorisedError } from '@sns/abyss';
 import type {
   ClearTokens,
   GetTokens,
@@ -8,8 +10,6 @@ import type {
 } from 'core/auth';
 import type { AuthDriver, Driver } from 'core/io';
 import type { Navigate } from 'core/navigation';
-import { makeLoginPath } from 'ui/constants/paths';
-import { NotAuthorisedError } from '@sns/abyss';
 
 const authDriver = (
   driver: Driver,

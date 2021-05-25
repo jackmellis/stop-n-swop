@@ -12,7 +12,7 @@ export default function Filters({ children }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fn = (evt: MouseEvent) => {
-      if (!ref.current.contains(evt.target as any)) {
+      if (!ref.current?.contains(evt.target as any)) {
         setActive(null);
       }
     };

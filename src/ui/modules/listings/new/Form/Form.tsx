@@ -12,10 +12,10 @@ import Photos from 'ui/modules/listings/new/Photos';
 import Review from 'ui/modules/listings/new/Review';
 import Done from 'ui/modules/listings/new/Done';
 import Error from 'ui/modules/listings/new/Error';
-import type { Values } from 'ui/modules/listings/new/types';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
-import type { Query } from '@respite/core';
 import { useHistory } from 'react-router-dom';
+import type { Values } from 'ui/modules/listings/new/types';
+import type { Query } from '@respite/core';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];

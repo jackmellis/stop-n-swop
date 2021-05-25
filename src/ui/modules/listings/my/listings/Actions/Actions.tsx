@@ -4,25 +4,24 @@ import { Order, Status } from '@sns/contracts/order';
 import Button, { State } from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
-import type { Listing } from '@sns/contracts/listing';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Listing } from '@sns/contracts/listing';
 
-export const makeGetButtonState = (active: Status, mutationStatus: RStatus) => (
-  buttonStatus: Status,
-  defaultState: State = 'none',
-): State => {
-  if (active !== buttonStatus) {
+export const makeGetButtonState =
+  (active: Status, mutationStatus: RStatus) =>
+  (buttonStatus: Status, defaultState: State = 'none'): State => {
+    if (active !== buttonStatus) {
+      return defaultState;
+    }
+    if (mutationStatus === RStatus.LOADING) {
+      return 'pending';
+    }
+    if (mutationStatus === RStatus.SUCCESS) {
+      return 'success';
+    }
     return defaultState;
-  }
-  if (mutationStatus === RStatus.LOADING) {
-    return 'pending';
-  }
-  if (mutationStatus === RStatus.SUCCESS) {
-    return 'success';
-  }
-  return defaultState;
-};
+  };
 
 interface Props {
   listing: Listing;
@@ -33,13 +32,12 @@ interface Props {
 
 export default function Actions({ listing, order, status, onClick }: Props) {
   const [active, setActive] = useState<Status>();
-  const handleClick = (status: Status) => (
-    e: MouseEvent<HTMLButtonElement>,
-  ) => {
-    e.preventDefault();
-    setActive(status);
-    onClick(status);
-  };
+  const handleClick =
+    (status: Status) => (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setActive(status);
+      onClick(status);
+    };
   const getButtonState = makeGetButtonState(active, status);
   const getMessage = useGetMessage();
 

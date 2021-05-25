@@ -1,8 +1,8 @@
-import type { LogOut } from 'core/auth';
 import { encase } from 'react-jpex';
 import { useEffect } from 'react';
-import type { Navigate } from 'core/navigation';
 import { LOGIN } from 'ui/constants/paths';
+import type { Navigate } from 'core/navigation';
+import type { LogOut } from 'core/auth';
 import { useTokens } from './useTokens';
 import { useRefreshTokens } from './useRefreshTokens';
 

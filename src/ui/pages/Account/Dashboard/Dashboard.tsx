@@ -15,10 +15,11 @@ import { useAuthGuard } from 'application/auth';
 export default function Dashboard() {
   useAuthGuard();
   const name = 'jb';
-  const { section, subSection } = useParams<{
-    section: string;
-    subSection: string;
-  }>();
+  const { section, subSection } =
+    useParams<{
+      section: string;
+      subSection: string;
+    }>();
   const getMessage = useGetMessage();
 
   return (

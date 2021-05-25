@@ -1,10 +1,10 @@
 import { Status, Order } from '@sns/contracts/order';
-import type { Audit, Listing } from '@sns/contracts/listing';
 import React from 'react';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import Slideshow from 'ui/elements/Slideshow';
 import Overview from 'ui/modules/listings/my/listing/Overview';
+import type { Audit, Listing } from '@sns/contracts/listing';
 
 export default function MyListing({
   productName,

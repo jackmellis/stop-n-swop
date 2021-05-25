@@ -1,5 +1,4 @@
 import React from 'react';
-import type { Listing as IListing } from '@sns/contracts/listing';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { NEW_LISTING } from 'ui/constants/paths';
@@ -7,6 +6,7 @@ import PageTitle from 'ui/elements/PageTitle';
 import { List } from 'ui/elements/list';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import type { Listing as IListing } from '@sns/contracts/listing';
 import Listing from './ConnectedListing';
 
 export default function MyListings({ listings }: { listings: IListing[] }) {

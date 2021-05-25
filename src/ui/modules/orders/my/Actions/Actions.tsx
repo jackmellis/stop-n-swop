@@ -1,10 +1,10 @@
 import React, { useState, MouseEvent } from 'react';
-import type { Status as RStatus } from '@respite/core';
 import { Order, Status } from '@sns/contracts/order';
 import Button from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { makeGetButtonState } from 'ui/modules/listings/my/listings/Actions';
+import type { Status as RStatus } from '@respite/core';
 
 interface Props {
   order: Order;
@@ -14,13 +14,12 @@ interface Props {
 
 export default function Actions({ order, status, onClick }: Props) {
   const [active, setActive] = useState<Status>();
-  const handleClick = (status: Status) => (
-    e: MouseEvent<HTMLButtonElement>,
-  ) => {
-    e.preventDefault();
-    setActive(status);
-    onClick(status);
-  };
+  const handleClick =
+    (status: Status) => (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setActive(status);
+      onClick(status);
+    };
   const getMessage = useGetMessage();
   const getButtonState = makeGetButtonState(active, status);
 

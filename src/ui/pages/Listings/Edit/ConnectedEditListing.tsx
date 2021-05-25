@@ -6,10 +6,10 @@ import cartridge from 'ui/assets/s-l640.jpg';
 import cartridge2 from 'ui/assets/cartridge-back.jpg';
 import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
 import useMachine from 'ui/modules/listings/new/machine';
-import type { Values } from 'ui/modules/listings/new/types';
 import { MY_LISTINGS } from 'ui/constants/paths';
 import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
+import type { Values } from 'ui/modules/listings/new/types';
 import EditListing from './EditListing';
 
 const listing: Listing = {
@@ -44,11 +44,12 @@ const listing: Listing = {
 export default function ConnectedEditListing() {
   useAuthGuard();
   const { push } = useHistory();
-  const { productId, listingId, platformId } = useParams<{
-    productId: string;
-    listingId: string;
-    platformId: string;
-  }>();
+  const { productId, listingId, platformId } =
+    useParams<{
+      productId: string;
+      listingId: string;
+      platformId: string;
+    }>();
   const requirementsQuery = useRequirements({ productId, platformId });
   const onSubmit = async (values: Values) => {
     // eslint-disable-next-line no-console

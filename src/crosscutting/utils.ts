@@ -17,3 +17,9 @@ export const isEmpty = (obj: any) => {
   }
   return false;
 };
+
+export const omitNullishProperties = <T>(obj: T): T => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value != null),
+  ) as T;
+};

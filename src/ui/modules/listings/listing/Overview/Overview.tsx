@@ -14,6 +14,10 @@ export default function Overview({
   username,
   location,
   description,
+  rating,
+  price,
+  postage,
+  currency,
 }: {
   className: string;
   productId: string;
@@ -21,13 +25,24 @@ export default function Overview({
   username: string;
   location: string;
   description: string;
+  rating: number;
+  price: number;
+  postage: number;
+  currency: string;
 }) {
   const getMessage = useGetMessage();
 
   return (
     <div className={className}>
       <div className="flex justify-between items-center">
-        <span className="text-lg">{useCurrency(50)}</span>
+        <div>
+          <div className="text-xl">{useCurrency(price, { currency })}</div>
+          <div className="text-sm text-gray-200">
+            {getMessage(ids.listings.listing.postage, {
+              postage: useCurrency(postage, { currency }),
+            })}
+          </div>
+        </div>
         <AddToBasket productId={productId} listingId={listingId} />
       </div>
       <div>
@@ -42,17 +57,19 @@ export default function Overview({
             >
               {username}
             </Button>
-            <StarRating rating={3.5} />
+            <StarRating rating={rating} />
           </div>
           <div className="text-sm text-gray-300">{location}</div>
         </div>
       </div>
-      <div>
-        <h3>{getMessage(ids.listings.listing.description)}</h3>
-        <pre className="font-display whitespace-pre-wrap my-4">
-          {description}
-        </pre>
-      </div>
+      <If condition={description}>
+        <div>
+          <h3>{getMessage(ids.listings.listing.description)}</h3>
+          <pre className="font-display whitespace-pre-wrap my-4">
+            {description}
+          </pre>
+        </div>
+      </If>
     </div>
   );
 }

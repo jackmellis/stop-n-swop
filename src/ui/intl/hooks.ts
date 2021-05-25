@@ -86,12 +86,10 @@ export const useIntl = () => {
   const number = useGetNumber();
   const date = useGetDate();
 
-  return useMemo(() => ({ message, currency, number, date }), [
-    currency,
-    date,
-    message,
-    number,
-  ]);
+  return useMemo(
+    () => ({ message, currency, number, date }),
+    [currency, date, message, number],
+  );
 };
 
 export type IntlShape = ReturnType<typeof useIntl>;

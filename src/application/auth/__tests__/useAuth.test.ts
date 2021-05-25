@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import type { LogOut, GetTokens, RefreshTokens, SaveTokens } from 'core/auth';
-import type { Navigate } from 'core/navigation';
 import { LOGIN } from 'ui/constants/paths';
 import createWrapper from '__tests__/createWrapper';
+import type { LogOut, GetTokens, RefreshTokens, SaveTokens } from 'core/auth';
+import type { Navigate } from 'core/navigation';
 import { useAuth } from '../useAuth';
 
 const setup = ({

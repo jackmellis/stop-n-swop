@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import type { IconType } from 'react-icons';
 import cx from 'classnames';
 import { useBoop } from 'ui/hooks';
 import { animated } from 'react-spring';
+import type { IconType } from 'react-icons';
 
 interface Props {
   styles?: Record<string, any>;

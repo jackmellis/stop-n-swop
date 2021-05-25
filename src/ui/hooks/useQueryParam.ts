@@ -9,7 +9,7 @@ export default function useQueryParam<R = string>(
   return useMemo(() => {
     const params = new URLSearchParams(search);
     const result = array ? params.getAll(key) : params.get(key);
-    return ((result as any) as R) ?? fallback;
+    return (result as any as R) ?? fallback;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 }

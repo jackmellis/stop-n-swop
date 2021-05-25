@@ -1,15 +1,13 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import Search from 'ui/modules/games/browse/Search';
-import { ProductList } from 'ui/modules/product/products';
-import Filters from 'ui/modules/games/browse/Filters';
-import type { Platform } from '@sns/contracts/product';
 import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { Query, Status } from '@respite/core';
+import LoadingPage from 'ui/pages/Loading';
+import type { Query } from '@respite/core';
+import type { Platform } from '@sns/contracts/product';
 import type { useGames } from 'application/games';
-import More from '../More';
-import Empty from '../Empty';
+import Results from './Results';
 
 export default function BrowseScreen({
   platformsQuery,
@@ -21,6 +19,8 @@ export default function BrowseScreen({
   onSearch,
   children,
   setPage,
+  available,
+  setAvailable,
 }: {
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
@@ -31,43 +31,27 @@ export default function BrowseScreen({
   setPlatformIds(value: string[]): void;
   setPage(page: number): void;
   children: ReactNode;
+  available: boolean;
+  setAvailable(value: boolean): void;
 }) {
-  const {
-    data: {
-      nextPage,
-      counts: { platforms: platformCounts },
-    },
-    status,
-  } = gamesQuery;
-  const { data: platforms } = platformsQuery;
-  const loading = status === Status.FETCHING || status === Status.LOADING;
-
   return (
     <div className="flex-grow flex flex-col">
       <PageTitle>{useMessage(ids.games.title)}</PageTitle>
       <Search value={search} onChange={onSearch} />
-      <div className="flex-grow flex flex-col lg:flex-row">
-        <Filters
-          platforms={platforms}
-          platformIds={platformIds}
-          setPlatformIds={setPlatformIds}
-          platformCounts={platformCounts}
+      <Suspense fallback={<LoadingPage />}>
+        <Results
+          gamesQuery={gamesQuery}
           hasSearched={hasSearched}
-        />
-        <Choose>
-          <When condition={!hasSearched}>
-            <Empty />
-          </When>
-          <Otherwise>
-            <div className="flex-grow">
-              <ProductList>{children}</ProductList>
-              <If condition={nextPage != null && nextPage >= 0}>
-                <More nextPage={nextPage} setPage={setPage} loading={loading} />
-              </If>
-            </div>
-          </Otherwise>
-        </Choose>
-      </div>
+          platformIds={platformIds}
+          platformsQuery={platformsQuery}
+          setPage={setPage}
+          setPlatformIds={setPlatformIds}
+          available={available}
+          setAvailable={setAvailable}
+        >
+          {children}
+        </Results>
+      </Suspense>
     </div>
   );
 }

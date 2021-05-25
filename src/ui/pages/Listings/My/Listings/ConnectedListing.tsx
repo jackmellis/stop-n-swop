@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Status as RStatus } from '@respite/core';
-import type { Listing as IListing } from '@sns/contracts/listing';
 import { Order, Status } from '@sns/contracts/order';
 import { Game, Type } from '@sns/contracts/product';
+import type { Listing as IListing } from '@sns/contracts/listing';
 import Listing from './Listing';
 
 const orders: Order[] = [

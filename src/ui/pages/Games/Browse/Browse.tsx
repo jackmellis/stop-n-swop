@@ -19,6 +19,7 @@ export default function Browse() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState(initialSearch);
   const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
+  const [available, setAvailable] = useState(false);
   const [latentSearch] = useDebounce(search, 500);
 
   useEffect(() => {
@@ -74,11 +75,14 @@ export default function Browse() {
       setPlatformIds={setPlatformIds}
       hasSearched={hasSearched}
       setPage={setPage}
+      available={available}
+      setAvailable={setAvailable}
     >
       <Items
         gamesQuery={gamesQuery}
         platformsQuery={platformsQuery}
         platformIds={platformIds}
+        available={available}
       />
     </Screen>
   );

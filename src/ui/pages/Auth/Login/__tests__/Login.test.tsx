@@ -6,10 +6,10 @@ import 'infrastructure';
 import { ids } from 'ui/messages';
 import { createMemoryHistory } from 'history';
 import { makeDashboardPath } from 'ui/constants/paths';
-import type { Config, Driver, Storage } from 'core/io';
-import type { LoginResponse } from '@sns/contracts/user';
 import OAuth2Login from 'react-simple-oauth2-login';
 import Harness from 'react-harness';
+import type { Config, Driver, Storage } from 'core/io';
+import type { LoginResponse } from '@sns/contracts/user';
 import Login from '../Login';
 
 let push: jest.SpyInstance;

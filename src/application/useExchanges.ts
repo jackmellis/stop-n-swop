@@ -6,6 +6,8 @@ import {
   LogOutKey,
   UserKey,
   UpdateUserKey,
+  ListingsKey,
+  CreateListingKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -15,5 +17,6 @@ export default function useExchanges() {
       [LogInKey, AuthKey, LogOutKey],
     ],
     [UserKey, UpdateUserKey],
+    [ListingsKey, CreateListingKey],
   );
 }

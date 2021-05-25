@@ -1,7 +1,7 @@
-import type { LogIn, SaveTokens } from 'core/auth';
 import { useAction } from '@respite/action';
 import { encase } from 'react-jpex';
 import { LogInKey } from 'application/keys';
+import type { LogIn, SaveTokens } from 'core/auth';
 import type { OauthProvider } from '@sns/contracts/user';
 
 export const useLogIn = encase((logIn: LogIn, saveTokens: SaveTokens) => () => {

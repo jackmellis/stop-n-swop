@@ -4,8 +4,8 @@ import Card from 'ui/elements/Card';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
-import type { Reason } from 'domain/constants/auth';
 import { BaseError } from '@sns/abyss';
+import type { Reason } from 'domain/constants/auth';
 
 export default function LoginForm({
   reason,
