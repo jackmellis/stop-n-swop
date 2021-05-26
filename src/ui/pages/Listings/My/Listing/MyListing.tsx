@@ -10,6 +10,7 @@ import { useAuthGuard } from 'application/auth';
 import { useMyListing } from 'application/listings/useMyListing';
 import { useGame } from 'application/games';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'application/listings';
 
 export default function MyListing() {
   useAuthGuard();
@@ -27,8 +28,8 @@ export default function MyListing() {
   const { data: game } = useGame({
     id: productId,
   });
+  const { data: history } = useHistory({ listingId });
   const order: Order = null;
-  const history = [];
   const status = order?.status ?? Status.NONE;
 
   return (

@@ -2,6 +2,7 @@ import type {
   CreateListingRequest,
   SearchListingsRequest,
   Listing,
+  AuditItem,
 } from '@sns/contracts/listing';
 
 export type FetchListingRequirements = (args: {
@@ -32,3 +33,7 @@ export type FetchProductsListingCount = (
 >;
 
 export type FetchMyListings = () => Promise<Listing[]>;
+
+export type FetchHistory = (args: {
+  listingId: string;
+}) => Promise<AuditItem[]>;

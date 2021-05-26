@@ -38,7 +38,7 @@ export default function History({
             username={username}
           />
           {history.map((item) => (
-            <HistoryRow key={item.date.getTime()} {...item} />
+            <HistoryRow key={new Date(item.date).getTime()} {...item} />
           ))}
         </tbody>
       </table>

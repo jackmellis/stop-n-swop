@@ -1,4 +1,4 @@
-import { Listing } from "./entities";
+import { AuditItem, Listing } from "./entities";
 import { Condition, Region } from "./enums";
 export declare type GetListingRequirementsRequest = void;
 export interface GetListingRequirementsResponse {
@@ -42,4 +42,11 @@ export interface GetProductsListingCountResponse {
         platformId: string;
         count: number;
     }>;
+}
+export interface GetHistoryParams {
+    listingId: string;
+}
+export declare type GetHistoryRequest = void;
+export interface GetHistoryResponse {
+    history: AuditItem[];
 }

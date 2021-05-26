@@ -1586,6 +1586,13 @@
   resolved "https://registry.yarnpkg.com/@jpex-js/babel-plugin/-/babel-plugin-1.5.0.tgz#9bf9e057c99aba40de570727f78f20e66ac64602"
   integrity sha512-DRF0X52E2GRbbzQReTCy+vfepJDx3svgMhsk67kdZKHdtL/jWZYkFM0opdEGWs/K4GHhW6rxOb485aXZfYtTNQ==
 
+"@jpex-js/vite-plugin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@jpex-js/vite-plugin/-/vite-plugin-1.0.0.tgz#cc78ccd81d4a8c595d9aecf18fed79348c140cd8"
+  integrity sha512-zZDqoJNmiCTuToj0XJptcDcF/Jl8TCBO6hRaOuoThTtixWUYEgahh3otzapEPtL46kTOfv8MMYUS8kcVqtbAFg==
+  dependencies:
+    "@babel/plugin-syntax-typescript" "^7.12.13"
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
@@ -1840,6 +1847,11 @@
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+
+"@types/qs@^6.9.6":
+  version "6.9.6"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.6.tgz#df9c3c8b31a247ec315e6996566be3171df4b3b1"
+  integrity sha512-0/HnwIfW4ki2D8L8c9GVcG5I72s9jP5GSLVF0VIXDW00kmIpA6O33G7a8n59Tmh7Nz0WUC3rSb7PTY/sdW2JzA==
 
 "@types/react-dom@*":
   version "17.0.3"
@@ -6928,6 +6940,13 @@ q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qs@^6.10.1:
+  version "6.10.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
+  integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
+  dependencies:
+    side-channel "^1.0.4"
 
 qs@~6.5.2:
   version "6.5.2"

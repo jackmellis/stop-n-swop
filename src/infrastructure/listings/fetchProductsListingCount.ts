@@ -15,6 +15,7 @@ const fetchProductsListingCount =
     >({
       url: '/listings/counts',
       data: { products },
+      method: 'POST',
     });
 
     return response.data.counts;

@@ -100,8 +100,7 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
       </div>
       <div className="flex justify-center mt-4">
         {images.map((image, index) => (
-          <button type="button" onClick={() => setCurrent(index)}>
-            {/* <FaCircle size="0.75em" /> */}
+          <button key={image} type="button" onClick={() => setCurrent(index)}>
             <Photo src={image} className="object-contain h-20" />
           </button>
         ))}

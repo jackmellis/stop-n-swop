@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Status as RStatus } from '@respite/core';
 import cartridge from 'ui/assets/s-l640.jpg';
 import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
-import Actions from 'ui/modules/orders/my/Actions';
 import Order from 'ui/modules/orders/my/Order';
 import OrderStatus from 'ui/modules/orders/my/OrderStatus';
 import { Game, Type } from '@sns/contracts/product';
 import { makeGameListingPath } from 'ui/constants/paths';
-import type { Status, Order as IOrder } from '@sns/contracts/order';
+import type { Order as IOrder } from '@sns/contracts/order';
 
 const product: Game = {
   banner: '',
@@ -98,39 +96,19 @@ const listings: IListing[] = [
 ];
 
 export default function MyOrder({ order: o }: { order: IOrder }) {
-  const [order, setOrder] = useState(() => o);
+  const [order] = useState(() => o);
   const listing = listings.find((listing) => listing.id === order.listingId);
   const {
     id: listingId,
     products: [{ productId, platformId }],
   } = listing;
-  const [status, setStatus] = useState<RStatus>(RStatus.IDLE);
-  const handleClick = (status: Status) => {
-    setStatus(RStatus.LOADING);
-    setTimeout(() => {
-      setStatus(RStatus.SUCCESS);
-      setTimeout(() => {
-        setOrder({
-          ...order,
-          status,
-        });
-        setStatus(RStatus.IDLE);
-      }, 1000);
-    }, 1000);
-  };
+
   return (
     <Order
       to={makeGameListingPath({ productId, platformId, listingId })}
       listing={listing}
       product={product}
-      orderStatus={
-        <OrderStatus
-          order={order}
-          actions={
-            <Actions onClick={handleClick} order={order} status={status} />
-          }
-        />
-      }
+      orderStatus={<OrderStatus order={order} />}
     />
   );
 }

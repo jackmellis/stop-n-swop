@@ -37,7 +37,7 @@ export default function Overview({
         </div>
         <Buyer username={buyer} />
       </div>
-      <div>{actions}</div>
+      <div className="block md:flex">{actions}</div>
       <ViewLink
         listingId={listingId}
         productId={productId}

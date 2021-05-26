@@ -1,12 +1,4 @@
 import React from 'react';
-import {
-  FaStream,
-  FaShoppingCart,
-  FaEnvelope,
-  FaCheckCircle,
-  FaTimes,
-  FaMoneyBillWave,
-} from 'react-icons/fa';
 import { Order, Status } from '@sns/contracts/order';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';

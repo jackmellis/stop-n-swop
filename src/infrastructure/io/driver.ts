@@ -1,5 +1,6 @@
 import jpex, { Global } from 'jpex';
 import { responseToError } from '@sns/abyss';
+import qs from 'qs';
 import type { Config, Driver } from 'core/io';
 
 type Fetch = typeof window.fetch;
@@ -10,27 +11,28 @@ const isJson = (response: Response) => {
 };
 
 const makeQuery = (data: Record<string, any>) => {
-  const params = new URLSearchParams();
-  Object.entries(data).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach((el, i) => {
-        if (typeof el === 'object') {
-          Object.entries(el).forEach(([subkey, value]) => {
-            params.append(`${key}[${i}][${subkey}]`, `${value}`);
-          });
-        } else {
-          params.append(`${key}[${i}]`, `${el}`);
-        }
-      });
-    } else if (typeof value === 'object') {
-      Object.entries(value).forEach(([subkey, value]) => {
-        params.append(`${key}[${subkey}]`, `${value}`);
-      });
-    } else {
-      params.append(key, `${value}`);
-    }
-  });
-  return params.toString();
+  return qs.stringify(data);
+  // const params = new URLSearchParams();
+  // Object.entries(data).forEach(([key, value]) => {
+  //   if (Array.isArray(value)) {
+  //     value.forEach((el, i) => {
+  //       if (typeof el === 'object') {
+  //         Object.entries(el).forEach(([subkey, value]) => {
+  //           params.append(`${key}[${i}][${subkey}]`, `${value}`);
+  //         });
+  //       } else {
+  //         params.append(`${key}[${i}]`, `${el}`);
+  //       }
+  //     });
+  //   } else if (typeof value === 'object') {
+  //     Object.entries(value).forEach(([subkey, value]) => {
+  //       params.append(`${key}[${subkey}]`, `${value}`);
+  //     });
+  //   } else {
+  //     params.append(key, `${value}`);
+  //   }
+  // });
+  // return params.toString();
 };
 
 const makeUrl = (root: string, path: string, params?: Record<string, any>) => {

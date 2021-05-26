@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import babel from '@babel/core';
+import jpex from '@jpex-js/vite-plugin';
 // import analyze from 'rollup-plugin-analyzer';
 
 // https://vitejs.dev/config/
@@ -26,13 +27,14 @@ export default defineConfig({
       },
     },
   },
-  // build: {
-  //   minify: false,
-  //   rollupOptions: {
-  //     plugins: [analyze({ summaryOnly: true, stdout: true })],
-  //   },
-  // },
   plugins: [
+    jpex({
+      pathAlias: {
+        infrastructure: '/src/infrastructure',
+        core: '/src/core',
+      },
+      omitIndex: true,
+    }),
     {
       name: 'babel',
       enforce: 'pre',
@@ -40,12 +42,7 @@ export default defineConfig({
         if (!id.endsWith('.ts') && !id.endsWith('.tsx')) {
           return;
         }
-        if (
-          !code.includes('jpex') &&
-          !code.includes('react-jpex') &&
-          !code.includes('<If') &&
-          !code.includes('<Choose>')
-        ) {
+        if (!code.includes('<If') && !code.includes('<Choose>')) {
           return;
         }
         return new Promise((res, rej) => {
@@ -57,16 +54,6 @@ export default defineConfig({
               presets: [],
               plugins: [
                 '@babel/plugin-syntax-typescript',
-                [
-                  'jpex/babel-plugin',
-                  {
-                    pathAlias: {
-                      infrastructure: '/src/infrastructure',
-                      core: '/src/core',
-                    },
-                    omitIndex: true,
-                  },
-                ],
                 'babel-plugin-jsx-control-statements',
               ],
             },
