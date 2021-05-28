@@ -35,7 +35,9 @@ export default function Overview({
         <div className="lg:w-1/2">
           <Status status={status} />
         </div>
-        <Buyer username={buyer} />
+        <If condition={buyer != null}>
+          <Buyer username={buyer} />
+        </If>
       </div>
       <div className="block md:flex">{actions}</div>
       <ViewLink
