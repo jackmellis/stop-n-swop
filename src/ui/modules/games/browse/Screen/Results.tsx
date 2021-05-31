@@ -6,10 +6,12 @@ import type { Platform } from '@sns/contracts/product';
 import type { useGames } from 'application/games';
 import More from '../More';
 import Empty from '../Empty';
+import type { useListingsCounts } from 'application/listings';
 
 export default function Results({
   platformsQuery,
   gamesQuery,
+  listingsCountsQuery,
   hasSearched,
   platformIds,
   setPlatformIds,
@@ -21,6 +23,7 @@ export default function Results({
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
   gamesQuery: ReturnType<typeof useGames>;
+  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
   setPlatformIds(value: string[]): void;
   setPage(page: number): void;
@@ -36,7 +39,18 @@ export default function Results({
     status,
   } = gamesQuery;
   const { data: platforms } = platformsQuery;
-  const loading = status === Status.FETCHING || status === Status.LOADING;
+  const loading = (() => {
+    if (status === Status.FETCHING || status === Status.LOADING) {
+      return true;
+    }
+    if (
+      listingsCountsQuery.status === Status.FETCHING ||
+      listingsCountsQuery.status === Status.LOADING
+    ) {
+      return true;
+    }
+    return false;
+  })();
 
   return (
     <div className="flex-grow flex flex-col lg:flex-row">

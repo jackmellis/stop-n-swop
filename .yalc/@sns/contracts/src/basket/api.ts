@@ -6,4 +6,4 @@ export type FetchBasketResponse = Basket;
 export interface AddToBasketRequest {
   listingId: string;
 }
-export type AddToBasketResponse = void;
+export type AddToBasketResponse = {};

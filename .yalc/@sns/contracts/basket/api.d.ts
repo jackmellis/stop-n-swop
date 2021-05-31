@@ -4,4 +4,4 @@ export declare type FetchBasketResponse = Basket;
 export interface AddToBasketRequest {
     listingId: string;
 }
-export declare type AddToBasketResponse = void;
+export declare type AddToBasketResponse = {};

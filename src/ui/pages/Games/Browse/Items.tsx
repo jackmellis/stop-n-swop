@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCascade } from 'ui/hooks';
-import { useListingsCounts } from 'application/listings';
+import type { useListingsCounts } from 'application/listings';
 import type { Query } from '@respite/core';
 import type { Game, Platform } from '@sns/contracts/product';
 import Item from './Item';
@@ -8,19 +8,22 @@ import Item from './Item';
 export default function Items({
   platformsQuery,
   gamesQuery,
+  listingsCountsQuery,
   platformIds,
   available,
 }: {
   platformsQuery: Query<Platform[]>;
-  gamesQuery: Query<{ games: Game[] }>;
+  gamesQuery: Query<{ games: Game[]; nextPage: number; counts: any }>;
+  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
   available: boolean;
+  page: number;
 }) {
   const {
     data: { games },
   } = gamesQuery;
   const { data: platforms } = platformsQuery;
-  const { data: listingsCounts } = useListingsCounts(games);
+  const { data: listingsCounts } = listingsCountsQuery;
   const totalResults = games.reduce((total, game) => {
     return total + game.platforms.length;
   }, 0);

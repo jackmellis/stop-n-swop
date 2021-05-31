@@ -9,7 +9,7 @@ import type { Driver } from 'core/io';
 const searchGames =
   (driver: Driver): SearchGames =>
   async ({ page, platforms, search }) => {
-    if (!search && !platforms.length) {
+    if (!search) {
       return {
         games: null,
         nextPage: -1,

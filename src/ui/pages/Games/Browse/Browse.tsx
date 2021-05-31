@@ -7,6 +7,7 @@ import { Status } from '@respite/core';
 import { useHistory } from 'react-router-dom';
 import { useQueryParam } from 'ui/hooks';
 import { useDebounce } from 'use-debounce';
+import { useListingsCounts } from 'application/listings';
 import Items from './Items';
 
 export default function Browse() {
@@ -15,11 +16,15 @@ export default function Browse() {
   const initialPlatforms = useQueryParam<string[]>('platforms', {
     array: true,
   });
+  const initialAvailable = useQueryParam('available', {
+    default: false,
+    bool: true,
+  });
   const history = useHistory();
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState(initialSearch);
   const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
-  const [available, setAvailable] = useState(false);
+  const [available, setAvailable] = useState(initialAvailable);
   const [latentSearch] = useDebounce(search, 500);
 
   useEffect(() => {
@@ -27,13 +32,18 @@ export default function Browse() {
       mountedRef.current = true;
       return;
     }
-    if (initialSearch !== search || initialPlatforms !== platformIds) {
+    if (
+      initialSearch !== search ||
+      initialPlatforms !== platformIds ||
+      initialAvailable !== available
+    ) {
       setPage(0);
       setSearch(initialSearch);
       setPlatformIds(initialPlatforms);
+      setAvailable(initialAvailable);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialPlatforms, initialSearch]);
+  }, [initialPlatforms, initialSearch, initialAvailable]);
 
   const platformsQuery = usePlatforms();
   const gamesQuery = useGames({
@@ -41,11 +51,12 @@ export default function Browse() {
     page,
     platforms: platformIds,
   });
+  const listingsCountsQuery = useListingsCounts(gamesQuery);
   const hasSearched =
     (gamesQuery.status === Status.SUCCESS ||
       gamesQuery.status === Status.FETCHING) &&
     gamesQuery.data.games != null &&
-    (Boolean(search) || !isEmpty(platformIds));
+    Boolean(search);
 
   useEffect(() => {
     const params = new URLSearchParams('');
@@ -57,9 +68,12 @@ export default function Browse() {
         params.append('platforms', id);
       });
     }
+    if (available) {
+      params.append('available', 'true');
+    }
 
     history.replace({ search: params.toString() });
-  }, [history, platformIds, latentSearch]);
+  }, [history, platformIds, latentSearch, available]);
 
   useEffect(() => {
     setPage(0);
@@ -69,6 +83,7 @@ export default function Browse() {
     <Screen
       gamesQuery={gamesQuery}
       platformsQuery={platformsQuery}
+      listingsCountsQuery={listingsCountsQuery}
       search={search}
       platformIds={platformIds}
       onSearch={setSearch}
@@ -79,10 +94,12 @@ export default function Browse() {
       setAvailable={setAvailable}
     >
       <Items
+        page={page}
         gamesQuery={gamesQuery}
         platformsQuery={platformsQuery}
         platformIds={platformIds}
         available={available}
+        listingsCountsQuery={listingsCountsQuery}
       />
     </Screen>
   );

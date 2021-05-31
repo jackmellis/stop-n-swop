@@ -8,10 +8,12 @@ import type { Query } from '@respite/core';
 import type { Platform } from '@sns/contracts/product';
 import type { useGames } from 'application/games';
 import Results from './Results';
+import type { useListingsCounts } from 'application/listings';
 
 export default function BrowseScreen({
   platformsQuery,
   gamesQuery,
+  listingsCountsQuery,
   hasSearched,
   search,
   platformIds,
@@ -25,6 +27,7 @@ export default function BrowseScreen({
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
   gamesQuery: ReturnType<typeof useGames>;
+  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   search: string;
   platformIds: string[];
   onSearch(value: string): void;
@@ -41,6 +44,7 @@ export default function BrowseScreen({
       <Suspense fallback={<LoadingPage />}>
         <Results
           gamesQuery={gamesQuery}
+          listingsCountsQuery={listingsCountsQuery}
           hasSearched={hasSearched}
           platformIds={platformIds}
           platformsQuery={platformsQuery}

@@ -8,11 +8,11 @@ import type { SearchGames } from 'core/games';
 import type { PromiseType } from 'crosscutting/utils';
 
 // TODO: make an npm library for this
-const useInfiniteQuery = <T>(
-  key: any,
-  index: number,
+export const useInfiniteQuery = <T>(
+  key: any, // a unique key for the query
+  index: number, // the current page
   fetch: (previous: T) => Promise<T>,
-  deps: any[] = [],
+  deps: any[] = [], // any deps this query relies on
   {
     initialState = [] as unknown as T,
     ...opts
@@ -22,6 +22,9 @@ const useInfiniteQuery = <T>(
   const query = useQuery<T>(
     key,
     async () => {
+      // this sucks but we basically have to wait for an arbitrary
+      // amount of time before triggering the next fetch, otherwise
+      // we can end up with infinite re-renders
       await new Promise((res) => setTimeout(res, 100));
       ref.current = await fetch(ref.current);
       return ref.current;
@@ -30,6 +33,8 @@ const useInfiniteQuery = <T>(
     opts,
   );
 
+  // if deps changes we want to completely reset the state
+  // and start afresh
   useEffect(() => {
     ref.current = initialState;
     // eslint-disable-next-line react-hooks/exhaustive-deps
