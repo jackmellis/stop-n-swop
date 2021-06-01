@@ -1,6 +1,10 @@
 import jpex from 'jpex';
 import type { GetTokens } from 'core/auth';
-import type { FetchMyBasket } from 'core/basket';
+import type {
+  FetchLocalBasket,
+  FetchMyBasket,
+  FetchRemoteBasket,
+} from 'core/basket';
 import type { AuthDriver, Persist } from 'core/io';
 import type {
   Basket,
@@ -8,23 +12,39 @@ import type {
   FetchBasketResponse,
 } from '@sns/contracts/basket';
 
-const fetchMyBasket =
-  (getTokens: GetTokens, persist: Persist, driver: AuthDriver): FetchMyBasket =>
+const fetchLocalBasket =
+  (persist: Persist): FetchLocalBasket =>
+  () => {
+    return persist.get<Basket>('basket');
+  };
+
+const fetchRemoteBasket =
+  (driver: AuthDriver): FetchRemoteBasket =>
   async () => {
-    const { authToken } = await getTokens();
-    if (authToken) {
-      const { data: basket } = await driver<
-        FetchBasketRequest,
-        FetchBasketResponse
-      >({
-        url: '/baskets/my',
-      });
-      return basket;
-    }
-
-    const basket = await persist.get<Basket>('basket');
-
+    const { data: basket } = await driver<
+      FetchBasketRequest,
+      FetchBasketResponse
+    >({
+      url: '/baskets/my',
+    });
     return basket;
   };
 
+const fetchMyBasket =
+  (
+    getTokens: GetTokens,
+    fetchLocal: FetchLocalBasket,
+    fetchRemote: FetchRemoteBasket,
+  ): FetchMyBasket =>
+  async () => {
+    const { authToken } = await getTokens();
+    if (authToken) {
+      return fetchRemote();
+    }
+
+    return fetchLocal();
+  };
+
 jpex.factory<FetchMyBasket>(fetchMyBasket);
+jpex.factory<FetchLocalBasket>(fetchLocalBasket);
+jpex.factory<FetchRemoteBasket>(fetchRemoteBasket);
