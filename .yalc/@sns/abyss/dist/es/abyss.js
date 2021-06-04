@@ -231,6 +231,37 @@ class UpdateListingProhibitedError extends NotAuthorisedError {
   }
 }
 
+let OrderErrorCode;
+(function (OrderErrorCode) {
+  OrderErrorCode["ORDER_NOT_FOUND"] = "ORDER_NOT_FOUND";
+  OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
+  OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
+})(OrderErrorCode || (OrderErrorCode = {}));
+class OrderNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("order", id);
+    this.code = OrderErrorCode.ORDER_NOT_FOUND;
+  }
+}
+class OrderNotOwnedByUserError extends NotAuthorisedError {
+  constructor(userId, listingId) {
+    super(`User [${userId}] is not the buyer or seller of listing [${listingId}]`);
+    this.code = OrderErrorCode.ORDER_NOT_OWNED_BY_USER;
+  }
+  toString() {
+    return "You are not authorised to access this order";
+  }
+}
+class InvalidStatusError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = OrderErrorCode.INVALID_TRANSITION;
+  }
+  toString() {
+    return "You have attempted to change your order status to an invalid value";
+  }
+}
+
 let PlatformErrorCode;
 (function (PlatformErrorCode) {
   PlatformErrorCode["PLATFORM_NOT_FOUND"] = "PLATFORM_NOT_FOUND";
@@ -304,6 +335,12 @@ const responseToError = response => {
       return new UpdateListingProhibitedError();
     case PlatformErrorCode.PLATFORM_NOT_FOUND:
       return new PlatformNotFoundError(response.error.id);
+    case OrderErrorCode.INVALID_TRANSITION:
+      return new InvalidStatusError();
+    case OrderErrorCode.ORDER_NOT_FOUND:
+      return new OrderNotFoundError(response.error.id);
+    case OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
+      return new OrderNotOwnedByUserError("", "");
   }
   switch (response.status) {
     case 400:
@@ -320,4 +357,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OutdatedTokenError, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

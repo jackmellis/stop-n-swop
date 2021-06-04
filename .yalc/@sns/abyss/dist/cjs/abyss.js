@@ -235,6 +235,37 @@ class UpdateListingProhibitedError extends NotAuthorisedError {
   }
 }
 
+exports.OrderErrorCode = void 0;
+(function (OrderErrorCode) {
+  OrderErrorCode["ORDER_NOT_FOUND"] = "ORDER_NOT_FOUND";
+  OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
+  OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
+})(exports.OrderErrorCode || (exports.OrderErrorCode = {}));
+class OrderNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("order", id);
+    this.code = exports.OrderErrorCode.ORDER_NOT_FOUND;
+  }
+}
+class OrderNotOwnedByUserError extends NotAuthorisedError {
+  constructor(userId, listingId) {
+    super(`User [${userId}] is not the buyer or seller of listing [${listingId}]`);
+    this.code = exports.OrderErrorCode.ORDER_NOT_OWNED_BY_USER;
+  }
+  toString() {
+    return "You are not authorised to access this order";
+  }
+}
+class InvalidStatusError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.OrderErrorCode.INVALID_TRANSITION;
+  }
+  toString() {
+    return "You have attempted to change your order status to an invalid value";
+  }
+}
+
 exports.PlatformErrorCode = void 0;
 (function (PlatformErrorCode) {
   PlatformErrorCode["PLATFORM_NOT_FOUND"] = "PLATFORM_NOT_FOUND";
@@ -308,6 +339,12 @@ const responseToError = response => {
       return new UpdateListingProhibitedError();
     case exports.PlatformErrorCode.PLATFORM_NOT_FOUND:
       return new PlatformNotFoundError(response.error.id);
+    case exports.OrderErrorCode.INVALID_TRANSITION:
+      return new InvalidStatusError();
+    case exports.OrderErrorCode.ORDER_NOT_FOUND:
+      return new OrderNotFoundError(response.error.id);
+    case exports.OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
+      return new OrderNotOwnedByUserError("", "");
   }
   switch (response.status) {
     case 400:
@@ -331,11 +368,14 @@ exports.CreateListingError = CreateListingError;
 exports.GameNotFoundError = GameNotFoundError;
 exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
+exports.InvalidStatusError = InvalidStatusError;
 exports.InvalidTokenError = InvalidTokenError;
 exports.ListingNotFoundError = ListingNotFoundError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
+exports.OrderNotFoundError = OrderNotFoundError;
+exports.OrderNotOwnedByUserError = OrderNotOwnedByUserError;
 exports.OutdatedTokenError = OutdatedTokenError;
 exports.PlatformNotFoundError = PlatformNotFoundError;
 exports.UnknownError = UnknownError;
