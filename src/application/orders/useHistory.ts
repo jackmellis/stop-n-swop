@@ -1,12 +1,12 @@
 import { QueryOptions, useQuery } from '@respite/query';
 import { HistoryKey } from 'application/keys';
 import { encase } from 'react-jpex';
-import type { FetchHistory } from 'core/listings';
+import type { FetchHistory } from 'core/orders';
 
 export const useHistory = encase(
   (fetch: FetchHistory) =>
-    ({ listingId }: { listingId: string }, opts?: QueryOptions) => {
-      return useQuery(HistoryKey, () => fetch({ listingId }), [listingId], {
+    ({ orderId }: { orderId: string }, opts?: QueryOptions) => {
+      return useQuery(HistoryKey, () => fetch({ orderId }), [orderId], {
         ttl: 30000,
         ...opts,
       });

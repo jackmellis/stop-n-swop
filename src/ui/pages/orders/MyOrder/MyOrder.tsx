@@ -1,7 +1,7 @@
 import { useAuthGuard } from 'application/auth';
 import { useGame } from 'application/games';
-import { useHistory, useListing } from 'application/listings';
-import { useChangeStatus, useMyOrder } from 'application/orders';
+import { useListing } from 'application/listings';
+import { useHistory, useChangeStatus, useMyOrder } from 'application/orders';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MY_ORDERS } from 'ui/constants/paths';
@@ -20,7 +20,7 @@ export default function MyOrder() {
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
   const { data: game } = useGame({ id: listing.products[0].productId });
-  const { data: history } = useHistory({ listingId: listing.id });
+  const { data: history } = useHistory({ orderId });
   const {
     action: changeStatus,
     status: actionStatus,

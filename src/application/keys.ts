@@ -27,7 +27,7 @@ export const ListingsKey = Symbol('listings');
 export const ListingKey = Symbol('listing');
 export const ListingCountKey = Symbol('listing_count');
 export const MyListingsKey = Symbol('my_listings');
-export const ListingHistoryKey = Symbol('listing_history');
+export const HistoryKey = Symbol('listing_history');
 // Actions
 export const CreateListingKey = Symbol('create_listing');
 export const UpdateListingKey = Symbol('update_listing');
