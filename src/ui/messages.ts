@@ -171,11 +171,6 @@ const enMessages = {
     myListings: {
       title: 'My listings',
       listButton: 'Create a new listing',
-      actions: {
-        edit: 'Edit',
-        cancel: 'Cancel',
-        post: 'Posted',
-      },
     },
     myListing: {
       buyer: {
@@ -184,7 +179,6 @@ const enMessages = {
       status: {
         label: 'Status',
       },
-      link: 'View listing',
       history: {
         label: 'Order history',
         headers: {
@@ -240,13 +234,21 @@ const enMessages = {
   order: {
     title: 'My Orders',
     actions: {
-      received: 'Received',
+      edit: 'Edit',
+      [Status.OPEN]: 'Open',
+      [Status.CLOSED]: 'Close',
+      [Status.CANCELLED]: 'Cancel order',
+      [Status.APPROVED]: 'Approve',
+      [Status.DECLINED]: 'Decline',
+      [Status.POSTED]: 'Posted',
+      [Status.RECEIVED]: 'Received',
       feedback: 'Leave feedback?',
     },
     status: {
       [Status.OPEN]: 'Listed',
-      [Status.CREATED]: 'Order started',
-      [Status.APPROVED]: 'Approved',
+      [Status.CLOSED]: 'Closed',
+      [Status.CREATED]: 'Order placed',
+      [Status.APPROVED]: 'Processing payment',
       [Status.DECLINED]: 'Declined',
       [Status.PAID]: 'Paid',
       [Status.NOT_PAID]: 'Payment failed',

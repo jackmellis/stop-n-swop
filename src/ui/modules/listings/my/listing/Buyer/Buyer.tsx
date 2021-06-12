@@ -8,7 +8,9 @@ import { ids } from 'ui/messages';
 export default function Buyer({ username }: { username: string }) {
   return (
     <div>
-      <h3>{useMessage(ids.listings.myListing.buyer.label)}</h3>
+      <h3 className="font-semibold">
+        {useMessage(ids.listings.myListing.buyer.label)}
+      </h3>
       <Button
         padding={false}
         component={Link}

@@ -1,1 +1,1 @@
-export { default, makeGetButtonState } from './Actions';
+export { default } from './Actions';

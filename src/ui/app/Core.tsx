@@ -4,12 +4,12 @@ import { useResolve } from 'react-jpex';
 import { useLocation } from 'react-router-dom';
 import ErrorPage from 'ui/pages/Error';
 import LoadingPage from 'ui/pages/Loading';
-import Pages from 'ui/pages/Pages';
 import { useAuth } from 'application/auth';
 import useExchanges from 'application/useExchanges';
 import Content from './Content';
 import Footer from './Footer';
 import Nav from './Nav';
+import Routes from './Routes';
 
 export default function Core() {
   useExchanges();
@@ -30,7 +30,7 @@ export default function Core() {
       <Content>
         <ErrorBoundary FallbackComponent={ErrorPage}>
           <Suspense fallback={<LoadingPage />}>
-            <Pages />
+            <Routes />
           </Suspense>
         </ErrorBoundary>
       </Content>

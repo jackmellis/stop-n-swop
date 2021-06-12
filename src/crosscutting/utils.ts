@@ -23,3 +23,15 @@ export const omitNullishProperties = <T>(obj: T): T => {
     Object.entries(obj).filter(([, value]) => value != null),
   ) as T;
 };
+
+export const sortBy = <T>(list: T[], fn: (t: T) => any, asc = true) => {
+  return list.slice().sort((a, b) => {
+    const x = fn(a);
+    const y = fn(b);
+
+    if (asc) {
+      return x > y ? 1 : -1;
+    }
+    return x > y ? -1 : 1;
+  });
+};

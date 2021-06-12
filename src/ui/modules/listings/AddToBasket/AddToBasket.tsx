@@ -3,38 +3,60 @@ import { FaShoppingBasket } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
-import { Status } from '@respite/core';
+import { Status as ActionStatus } from '@respite/core';
+import { Status } from '@sns/contracts/order';
 
-const getButtonStatus = (status: Status, inBasket: boolean) => {
+const getButtonStatus = ({
+  inBasket,
+  owned,
+  addStatus,
+  listingStatus,
+}: Props) => {
   if (inBasket) {
     return 'success';
   }
-  if (status === Status.LOADING) {
+  if (owned) {
+    return 'disabled';
+  }
+  if (listingStatus !== Status.OPEN) {
+    return 'disabled';
+  }
+  if (addStatus === ActionStatus.LOADING) {
     return 'pending';
   }
-  if (status === Status.SUCCESS) {
+  if (addStatus === ActionStatus.SUCCESS) {
     return 'success';
   }
   return 'none';
 };
 
+const getTitle = ({ inBasket, owned, listingStatus }: Props) => {
+  if (inBasket) {
+    return 'This item is already in your basket';
+  }
+  if (owned) {
+    return 'You own this listing';
+  }
+  if (listingStatus !== Status.OPEN) {
+    return 'This listing is no longer available';
+  }
+};
+
 interface Props {
-  status: Status;
+  addStatus: ActionStatus;
   inBasket: boolean;
   listingId: string;
+  owned: boolean;
+  listingStatus: Status;
   onAddToBasket({ listingId: string }): Promise<void>;
   className?: string;
 }
 
-export default function AddToBasket({
-  className,
-  onAddToBasket,
-  status,
-  inBasket,
-  listingId,
-}: Props) {
+export default function AddToBasket(props: Props) {
+  const { className, onAddToBasket, listingId } = props;
   const getMessage = useGetMessage();
-  const state = getButtonStatus(status, inBasket);
+  const state = getButtonStatus(props);
+  const title = getTitle(props);
 
   return (
     <Button
@@ -42,9 +64,7 @@ export default function AddToBasket({
       className={className}
       state={state}
       onClick={() => onAddToBasket({ listingId })}
-      title={
-        state === 'success' ? 'This item is already in your basket' : undefined
-      }
+      title={title}
     >
       <FaShoppingBasket className="hidden md:block mr-3" />
       <span className="flex-shrink-0">

@@ -11,3 +11,5 @@ export type AddToRemoteBasket = AddToBasket;
 export type ClearLocalBasket = () => Promise<void>;
 
 export type TransferBasket = () => Promise<void>;
+
+export type SubmitBasket = () => Promise<void>;

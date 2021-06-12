@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Pulse from 'react-spinners/PulseLoader';
 import BK from 'ui/assets/sprites/bk-pixel.gif';
 import { useQueryParam } from 'ui/hooks';
@@ -12,11 +12,11 @@ interface Props {
 
 export default function Loader({ color = '#FFF', size, sensible }: Props) {
   const q = useQueryParam('q');
-  const { productId } = useParams<{ productId: string }>();
+  const { pathname } = useLocation();
 
   if (!sensible) {
     // TODO: add loaders for other series
-    if (q?.includes('banjo') || productId?.startsWith('banjo-')) {
+    if (q?.includes('banjo') || pathname.includes('banjo-')) {
       // TODO: get permission for this image (or get a new one)
       return <img src={BK} alt="Loading" />;
     }

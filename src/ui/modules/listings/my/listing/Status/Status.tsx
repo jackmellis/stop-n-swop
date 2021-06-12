@@ -11,7 +11,9 @@ export default function ListingStatus({ status }: { status: Status }) {
 
   return (
     <div>
-      <h3>{getMessage(ids.listings.myListing.status.label)}</h3>
+      <h3 className="font-semibold">
+        {getMessage(ids.listings.myListing.status.label)}
+      </h3>
       <div className="text-sm flex items-center space-x-4">
         <span className={color}>
           <Icon size="1em" />

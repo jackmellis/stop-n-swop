@@ -1,46 +1,40 @@
-import React, { useState, MouseEvent } from 'react';
-import { Status as RStatus } from '@respite/core';
+import React, { useState } from 'react';
 import { Order, Status } from '@sns/contracts/order';
-import Button, { State } from 'ui/elements/Button';
+import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { iconMatrix } from 'ui/modules/listings/utils';
 import { FaPen } from 'react-icons/fa';
+import type { Status as RStatus } from '@respite/core';
 import type { Listing } from '@sns/contracts/listing';
-
-export const makeGetButtonState =
-  (active: Status, mutationStatus: RStatus) =>
-  (buttonStatus: Status, defaultState: State = 'none'): State => {
-    if (active !== buttonStatus) {
-      return defaultState;
-    }
-    if (mutationStatus === RStatus.LOADING) {
-      return 'pending';
-    }
-    if (mutationStatus === RStatus.SUCCESS) {
-      return 'success';
-    }
-    return defaultState;
-  };
+import ActionButton from './ActionButton';
+import MultiOrders from './MultiOrders';
 
 interface Props {
   listing: Listing;
-  order: Order;
+  orders: Order[];
   status: RStatus;
-  onClick(status: Status): void;
+  onChangeStatus(args: { orderId: string; status: Status }): void;
 }
 
-export default function Actions({ listing, order, status, onClick }: Props) {
-  const [active, setActive] = useState<Status>();
-  const handleClick =
-    (status: Status) => (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      setActive(status);
-      onClick(status);
-    };
-  const getButtonState = makeGetButtonState(active, status);
+export default function Actions({
+  listing,
+  orders,
+  status,
+  onChangeStatus,
+}: Props) {
+  const [active, setActive] = useState<{ orderId: string; status: Status }>({
+    orderId: '',
+    status: Status.OPEN,
+  });
+  const handleClick = (args: { orderId: string; status: Status }) => {
+    setActive(args);
+    onChangeStatus(args);
+  };
+  const isActive = (orderId: string, status: Status) => {
+    return orderId === active.orderId && status === active.status;
+  };
   const getMessage = useGetMessage();
 
   const {
@@ -48,49 +42,81 @@ export default function Actions({ listing, order, status, onClick }: Props) {
     products: [{ productId, platformId }],
   } = listing;
 
-  if (order == null) {
+  if (listing.status === Status.OPEN) {
     return (
-      <>
+      <div className="md:flex md:space-x-4 lg:space-x-8">
         <Button
-          className="w-full space-x-4"
+          className="w-full lg:w-auto space-x-4"
           component={Link}
           to={makeEditListingPath({ productId, platformId, listingId })}
-          kind="secondary"
+          kind="primary"
         >
           <span>
             <FaPen />
           </span>
-          <span>{getMessage(ids.listings.myListings.actions.edit)}</span>
+          <span>{getMessage(ids.order.actions.edit)}</span>
         </Button>
-        <Button
-          className="w-full space-x-4"
-          kind="tertiary"
-          state={getButtonState(Status.CANCELLED, 'error')}
-          onClick={handleClick(Status.CANCELLED)}
-        >
-          <span>
-            <iconMatrix.cancelled />
-          </span>
-          <span>{getMessage(ids.listings.myListings.actions.cancel)}</span>
-        </Button>
-      </>
+        <ActionButton
+          orderId=""
+          action={Status.CLOSED}
+          active={isActive('', Status.CLOSED)}
+          status={status}
+          onClick={handleClick}
+        />
+      </div>
     );
   }
-  if (order.status === Status.PAID) {
+  if (listing.status === Status.CREATED && orders.length > 1) {
     return (
-      <>
-        <Button
-          className="w-full space-x-4"
-          kind="primary"
-          state={getButtonState(Status.POSTED)}
-          onClick={handleClick(Status.POSTED)}
-        >
-          <span>
-            <iconMatrix.posted />
-          </span>
-          <span>{getMessage(ids.listings.myListings.actions.post)}</span>
-        </Button>
-      </>
+      <MultiOrders
+        active={active}
+        onChangeStatus={handleClick}
+        orders={orders}
+        status={status}
+      />
+    );
+  }
+  const [order] = orders;
+
+  if (listing.status === Status.CREATED) {
+    return (
+      <div className="block md:flex md:space-x-4 lg:space-x-8">
+        <ActionButton
+          orderId={order.id}
+          action={Status.APPROVED}
+          active={isActive(order.id, Status.APPROVED)}
+          status={status}
+          onClick={handleClick}
+        />
+        <ActionButton
+          orderId={order.id}
+          action={Status.DECLINED}
+          active={isActive(order.id, Status.DECLINED)}
+          status={status}
+          onClick={handleClick}
+        />
+        <ActionButton
+          orderId={order.id}
+          action={Status.CLOSED}
+          active={isActive(order.id, Status.CLOSED)}
+          status={status}
+          onClick={handleClick}
+        />
+      </div>
+    );
+  }
+  if (listing.status === Status.PAID) {
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <ActionButton
+          orderId={order.id}
+          action={Status.POSTED}
+          active={isActive(order.id, Status.POSTED)}
+          status={status}
+          onClick={handleClick}
+        />
+        <div className="w-full" />
+      </div>
     );
   }
   return null;

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Order, Status } from '@sns/contracts/order';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { colorMatrix, iconMatrix } from 'ui/modules/listings/utils';
+import type { Status } from '@sns/contracts/order';
 
-export default function OrderStatus({ order }: { order: Order }) {
-  const status = order?.status ?? Status.OPEN;
+export default function OrderStatus({ status }: { status: Status }) {
   const Icon = iconMatrix[status];
   const color = colorMatrix[status];
 

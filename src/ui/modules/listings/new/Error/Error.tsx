@@ -13,6 +13,7 @@ export default function Error({
 }) {
   const getMessage = useGetMessage();
   const message = useMemo(() => {
+    debugger;
     if (error instanceof ValidationError) {
       return Object.values(error.errors);
     }

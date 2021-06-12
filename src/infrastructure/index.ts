@@ -5,5 +5,6 @@ import './images';
 import './io';
 import './listings';
 import './navigation';
+import './orders';
 import './platforms';
 import './user';

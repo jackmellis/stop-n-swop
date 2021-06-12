@@ -32,8 +32,16 @@ export const ListingHistoryKey = Symbol('listing_history');
 export const CreateListingKey = Symbol('create_listing');
 export const UpdateListingKey = Symbol('update_listing');
 
+// Orders
+// Queries
+export const MyOrdersKey = Symbol('my_orders');
+export const ListingOrdersKey = Symbol('listing_orders');
+// Actions
+export const ChangeStatusKey = Symbol('change_status');
+
 // Basket
 // Queries
 export const BasketKey = Symbol('basket');
 // Actions
 export const AddToBasketKey = Symbol('add_to_basket');
+export const SubmitBasketKey = Symbol('submit_basket');
