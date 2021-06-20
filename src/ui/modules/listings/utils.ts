@@ -7,10 +7,12 @@ import {
   FaStream,
   FaTimes,
   FaEllipsisH,
+  FaLock,
 } from 'react-icons/fa';
 
 export const iconMatrix = {
   [Status.OPEN]: FaStream,
+  [Status.CLOSED]: FaLock,
   [Status.CREATED]: FaShoppingCart,
   [Status.APPROVED]: FaEllipsisH,
   [Status.DECLINED]: FaTimes,
@@ -23,6 +25,7 @@ export const iconMatrix = {
 
 export const colorMatrix = {
   [Status.OPEN]: 'text-white',
+  [Status.CLOSED]: 'text-gray-400',
   [Status.CREATED]: 'text-secondary',
   [Status.APPROVED]: 'text-white',
   [Status.DECLINED]: 'text-gray-400',

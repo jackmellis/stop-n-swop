@@ -2,12 +2,13 @@ import React, { Children, ReactNode } from 'react';
 
 const chevron = '>';
 
-export default function Browse({ children }: { children: ReactNode }) {
+export default function PageTitle({ children }: { children: ReactNode }) {
   const nodes = Children.toArray(children).reduce((acc: any, child, i) => {
     if (i === 0) {
       return [child];
     }
-    return [...acc, <span>{chevron}</span>, child];
+    // eslint-disable-next-line react/no-array-index-key
+    return [...acc, <span key={i}>{chevron}</span>, child];
   }, []);
 
   return (

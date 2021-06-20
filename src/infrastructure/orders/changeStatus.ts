@@ -10,9 +10,9 @@ const changeStatus =
   (driver: AuthDriver): ChangeStatus =>
   async ({ orderId, status }) => {
     await driver<PatchOrderRequest, PatchOrderResponse>({
-      url: '/orders/{orderId}',
+      url: '/orders/{orderId}/status',
       params: { orderId },
-      method: 'PATCH',
+      method: 'POST',
       data: {
         status,
       },

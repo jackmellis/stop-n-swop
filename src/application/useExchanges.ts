@@ -19,6 +19,7 @@ import {
   SubmitBasketKey,
   ListingOrdersKey,
   ChangeStatusKey,
+  ChangeListingStatusKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -55,7 +56,7 @@ export default function useExchanges() {
         MyOrdersKey,
         ListingOrdersKey,
       ],
-      ChangeStatusKey,
+      [ChangeStatusKey, ChangeListingStatusKey],
     ],
   );
 }

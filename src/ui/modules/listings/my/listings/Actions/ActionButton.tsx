@@ -5,6 +5,7 @@ import {
   FaEnvelopeOpenText,
   FaLock,
   FaTimes,
+  FaUnlock,
 } from 'react-icons/fa';
 import { Status as Action } from '@sns/contracts/order';
 import { Status } from '@respite/action';
@@ -13,6 +14,7 @@ import Button, { Kind, State } from 'ui/elements/Button';
 import { useMessage } from 'ui/intl';
 
 const iconMatrix = {
+  [Action.OPEN]: FaUnlock,
   [Action.CLOSED]: FaLock,
   [Action.CANCELLED]: FaTimes,
   [Action.APPROVED]: FaCheck,
@@ -21,6 +23,7 @@ const iconMatrix = {
   [Action.RECEIVED]: FaEnvelopeOpenText,
 };
 const kindMatrix = {
+  [Action.OPEN]: 'primary',
   [Action.CLOSED]: 'secondary',
   [Action.CANCELLED]: 'primary',
   [Action.APPROVED]: 'primary',
@@ -33,6 +36,7 @@ const stateMatrix = {
   [Action.DECLINED]: 'error',
 };
 const messageMatrix = {
+  [Action.OPEN]: ids.order.actions.open,
   [Action.CLOSED]: ids.order.actions.closed,
   [Action.CANCELLED]: ids.order.actions.cancelled,
   [Action.APPROVED]: ids.order.actions.approved,

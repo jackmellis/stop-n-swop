@@ -63,6 +63,19 @@ export default function Actions({
       </div>
     );
   }
+  if (listing.status === Status.CLOSED) {
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <ActionButton
+          orderId=""
+          action={Status.OPEN}
+          active={isActive('', Status.OPEN)}
+          status={status}
+          onClick={handleClick}
+        />
+      </div>
+    );
+  }
   if (listing.status === Status.CREATED && orders.length > 1) {
     return (
       <MultiOrders
@@ -74,6 +87,10 @@ export default function Actions({
     );
   }
   const [order] = orders;
+
+  if (order == null || order.status !== listing.status) {
+    return null;
+  }
 
   if (listing.status === Status.CREATED) {
     return (

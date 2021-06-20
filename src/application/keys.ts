@@ -32,6 +32,7 @@ export const HistoryKey = Symbol('listing_history');
 // Actions
 export const CreateListingKey = Symbol('create_listing');
 export const UpdateListingKey = Symbol('update_listing');
+export const ChangeListingStatusKey = Symbol('change_listing_status');
 
 // Orders
 // Queries

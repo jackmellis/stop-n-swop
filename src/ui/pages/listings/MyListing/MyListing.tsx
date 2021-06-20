@@ -8,12 +8,21 @@ import { useAuthGuard } from 'application/auth';
 import { useMyListing } from 'application/listings/useMyListing';
 import { useGame } from 'application/games';
 import { Link, useParams } from 'react-router-dom';
-import { useHistory } from 'application/listings';
-import { useChangeStatus, useListingOrders } from 'application/orders';
+import {
+  useHistory,
+  useChangeStatus as useChangeListingStatus,
+} from 'application/listings';
+import {
+  useChangeStatus as useChangeOrderStatus,
+  useListingOrders,
+} from 'application/orders';
+
 import FormError from 'ui/elements/FormError';
 import { MY_LISTINGS } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { Status } from '@respite/core';
+import { Status as OrderStatus } from '@sns/contracts/order';
 
 export default function MyListing() {
   useAuthGuard();
@@ -40,10 +49,19 @@ export default function MyListing() {
     listingId,
   });
   const {
-    action: changeStatus,
-    status: actionStatus,
-    error,
-  } = useChangeStatus();
+    action: changeOrderStatus,
+    status: actionStatus1,
+    error: error1,
+  } = useChangeOrderStatus();
+  const {
+    action: changeListingStatus,
+    status: actionStatus2,
+    error: error2,
+  } = useChangeListingStatus();
+
+  const actionStatus =
+    actionStatus1 === Status.IDLE ? actionStatus2 : actionStatus1;
+  const error = error1 ?? error2;
 
   // TODO: would be good to make this a respite native
   useEffect(() => {
@@ -82,7 +100,16 @@ export default function MyListing() {
               listing={listing}
               orders={orders}
               status={actionStatus}
-              onChangeStatus={changeStatus}
+              onChangeStatus={({ orderId, status }) => {
+                if (
+                  status === OrderStatus.OPEN ||
+                  status === OrderStatus.CLOSED
+                ) {
+                  changeListingStatus({ status, id: listing.id });
+                } else {
+                  changeOrderStatus({ orderId, status });
+                }
+              }}
             />
           }
           history={

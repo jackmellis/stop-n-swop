@@ -1,3 +1,4 @@
+import './changeListingStatus';
 import './createListing';
 import './fetchHistory';
 import './fetchListing';
