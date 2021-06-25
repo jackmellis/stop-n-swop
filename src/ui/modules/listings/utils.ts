@@ -13,6 +13,8 @@ import {
 export const iconMatrix = {
   [Status.OPEN]: FaStream,
   [Status.CLOSED]: FaLock,
+  [Status.CREATED]: FaShoppingCart,
+  [Status.PENDING]: FaShoppingCart,
   [Status.PLACED]: FaShoppingCart,
   [Status.APPROVED]: FaEllipsisH,
   [Status.DECLINED]: FaTimes,

@@ -1,16 +1,12 @@
 import React, { CSSProperties } from 'react';
 import { ListingsItem, Actions } from 'ui/modules/listings/listings';
-import AddToBasket from 'ui/modules/listings/AddToBasket';
+import Purchase from 'ui/modules/listings/Purchase';
 import type { Listing as IListing } from '@sns/contracts/listing';
-import type { Status } from '@respite/core';
 
 interface Props {
   owned: boolean;
   listing: IListing;
   style: CSSProperties;
-  inBasket: boolean;
-  addToBasketStatus: Status;
-  onAddToBasket({ listingId: string }): Promise<void>;
 }
 
 export default function Listing({
@@ -27,9 +23,6 @@ export default function Listing({
     currency,
     status,
   },
-  addToBasketStatus,
-  onAddToBasket,
-  inBasket,
   style,
   owned,
 }: Props) {
@@ -49,12 +42,9 @@ export default function Listing({
         currency={currency}
         postage={postage}
         addToBasket={
-          <AddToBasket
+          <Purchase
             listingId={listingId}
             className="text-sm"
-            inBasket={inBasket}
-            addStatus={addToBasketStatus}
-            onAddToBasket={onAddToBasket}
             listingStatus={status}
             owned={owned}
           />

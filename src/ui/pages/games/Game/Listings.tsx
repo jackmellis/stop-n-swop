@@ -1,8 +1,6 @@
 import React from 'react';
 import { useCascade } from 'ui/hooks';
 import { ListingsList } from 'ui/modules/listings/listings';
-import { useAddToBasket, useBasket } from 'application/basket';
-import { isInBasket } from 'domain/selectors/basket';
 import Listing from './Listing';
 import type { Query } from '@respite/core';
 import type { Listing as IListing } from '@sns/contracts/listing';
@@ -18,8 +16,6 @@ export default function Listings({
   user,
 }: Props) {
   const cascade = useCascade(listings.length);
-  const { data: basket } = useBasket();
-  const { action: addToBasket, status } = useAddToBasket();
 
   return (
     <ListingsList>
@@ -28,9 +24,6 @@ export default function Listings({
           key={listing.id}
           style={cascade(i)}
           listing={listing}
-          addToBasketStatus={status}
-          onAddToBasket={addToBasket}
-          inBasket={isInBasket(listing.id, basket)}
           owned={user?.username === listing.username}
         />
       ))}

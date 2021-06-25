@@ -7,6 +7,10 @@ export type FetchListingOrders = (args: {
   listingId: string;
 }) => Promise<Order[]>;
 
+export type CreateOrder = (args: {
+  listingId: string;
+}) => Promise<{ orderId: string }>;
+
 export type ChangeStatus = (args: {
   orderId: string;
   status: Status;

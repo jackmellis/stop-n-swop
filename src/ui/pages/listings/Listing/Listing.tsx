@@ -4,12 +4,10 @@ import Overview from 'ui/modules/listings/listing/Overview';
 import Features from 'ui/modules/listings/listing/Features';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
-import AddToBasket from 'ui/modules/listings/AddToBasket';
+import Purchase from 'ui/modules/listings/Purchase';
 import { useListing } from 'application/listings';
 import { useGame } from 'application/games';
 import { useParams, Link } from 'react-router-dom';
-import { useAddToBasket, useBasket } from 'application/basket';
-import { isInBasket } from 'domain/selectors/basket';
 import { useUser } from 'application/user';
 import { useIsLoggedIn } from 'application/auth';
 import { GAMES, makeGamePath } from 'ui/constants/paths';
@@ -27,8 +25,6 @@ export default function ListingPage() {
 
   const { data: listing } = useListing({ id: listingId });
   const { data: product } = useGame({ id: productId });
-  const { action: addToBasket, status: addStatus } = useAddToBasket();
-  const { data: basket } = useBasket();
 
   const loggedIn = useIsLoggedIn();
   const userQuery = useUser();
@@ -47,7 +43,6 @@ export default function ListingPage() {
     status,
   } = listing;
   const { name: productName } = product;
-  const inBasket = isInBasket(listingId, basket);
 
   return (
     <div>
@@ -69,11 +64,8 @@ export default function ListingPage() {
             postage={postage}
             price={price}
             addToBasket={
-              <AddToBasket
+              <Purchase
                 listingId={listingId}
-                onAddToBasket={addToBasket}
-                addStatus={addStatus}
-                inBasket={inBasket}
                 owned={user?.username === username}
                 listingStatus={status}
               />

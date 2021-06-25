@@ -41,10 +41,4 @@ export const MyOrdersKey = Symbol('my orders');
 export const ListingOrdersKey = Symbol('listing orders');
 // Actions
 export const ChangeStatusKey = Symbol('change status');
-
-// Basket
-// Queries
-export const BasketKey = Symbol('basket');
-// Actions
-export const AddToBasketKey = Symbol('add to basket');
-export const SubmitBasketKey = Symbol('submit basket');
+export const CreateOrderKey = Symbol('create order');

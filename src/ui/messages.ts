@@ -68,7 +68,7 @@ const enMessages = {
   },
   listings: {
     listing: {
-      addToBasket: 'Add to basket',
+      purchase: 'Buy now',
       details: 'More details',
       seller: 'Seller',
       description: 'Description',
@@ -251,6 +251,7 @@ const enMessages = {
       edit: 'Edit',
       [Status.OPEN]: 'Open',
       [Status.CLOSED]: 'Close',
+      [Status.PENDING]: 'Continue order',
       [Status.CANCELLED]: 'Cancel order',
       [Status.APPROVED]: 'Approve',
       [Status.DECLINED]: 'Decline',
@@ -261,6 +262,8 @@ const enMessages = {
     status: {
       [Status.OPEN]: 'Listed',
       [Status.CLOSED]: 'Closed',
+      [Status.CREATED]: 'In progress',
+      [Status.PENDING]: 'In progress',
       [Status.PLACED]: 'Order placed',
       [Status.APPROVED]: 'Processing payment',
       [Status.DECLINED]: 'Declined',

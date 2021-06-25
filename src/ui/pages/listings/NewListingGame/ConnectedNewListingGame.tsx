@@ -15,7 +15,7 @@ export default function ConnectedNewListing() {
   } = useGames({
     search,
     page: 0,
-    platforms: search ? [platformId] : [],
+    platforms: [platformId],
     available: null,
   });
 

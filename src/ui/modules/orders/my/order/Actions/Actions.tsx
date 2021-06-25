@@ -4,7 +4,9 @@ import Button from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import ActionButton from 'ui/modules/listings/my/listings/Actions/ActionButton';
-import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { FaShoppingCart, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { makeCheckoutBillingAddressPath } from 'ui/constants/paths';
 import type { Status } from '@respite/core';
 
 interface Props {
@@ -23,6 +25,28 @@ export default function Actions({ order, status, onClick }: Props) {
     return status === active;
   };
   const getMessage = useGetMessage();
+
+  if (
+    order.status === OrderStatus.CREATED ||
+    order.status === OrderStatus.PENDING
+  ) {
+    getMessage(ids.order.actions.pending);
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <Button
+          className="w-full lg:w-auto space-x-4"
+          component={Link}
+          to={makeCheckoutBillingAddressPath({ orderId: order.id })}
+          kind="primary"
+        >
+          <span>
+            <FaShoppingCart />
+          </span>
+          <span>{getMessage(ids.order.actions.pending)}</span>
+        </Button>
+      </div>
+    );
+  }
 
   if (order.status === OrderStatus.PLACED) {
     return (

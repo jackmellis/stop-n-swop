@@ -1,5 +1,4 @@
 import './auth';
-import './basket';
 import './games';
 import './images';
 import './io';
