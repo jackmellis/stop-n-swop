@@ -4,6 +4,7 @@ import { useGetMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 import { Actions, ListingsItem } from 'ui/modules/listings/listings';
+import { getDisplayPrice } from 'domain/selectors/listings';
 import Buttons from '../Buttons';
 import type { Values } from '../types';
 
@@ -15,8 +16,9 @@ interface Props {
 
 export default function Review({ username, location, previous }: Props) {
   const { getValues } = useFormContext<Values>();
-  const { boxed, condition, instructions, price, region, images, postage } =
-    getValues();
+  const values = getValues();
+  const { boxed, condition, instructions, region, images, postage } = values;
+  const displayPrice = getDisplayPrice(values);
   const getMessage = useGetMessage();
 
   return (
@@ -37,7 +39,7 @@ export default function Review({ username, location, previous }: Props) {
         >
           <Actions
             listingId=""
-            price={price}
+            price={displayPrice}
             productId=""
             currency="GBP"
             postage={postage}

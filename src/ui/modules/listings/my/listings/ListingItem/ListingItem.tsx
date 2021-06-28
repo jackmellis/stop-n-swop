@@ -12,13 +12,15 @@ export default function MyListingItem({
   listing,
   orderStatus,
   to,
+  price,
 }: {
   to: string;
   product: Product;
   listing: Listing;
   orderStatus: ReactNode;
+  price: number;
 }) {
-  const { price, rating, id: listingId, images } = listing;
+  const { rating, id: listingId, images, currency } = listing;
   const { name } = product;
 
   return (
@@ -40,7 +42,9 @@ export default function MyListingItem({
             {listingId}
           </span>
         </div>
-        <div className="hidden lg:block w-1/4">{useCurrency(price)}</div>
+        <div className="hidden lg:block w-1/4">
+          {useCurrency(price, { currency })}
+        </div>
         <div className="hidden xl:block w-1/4 xl:w-1/4">
           <StarRating rating={rating} />
         </div>

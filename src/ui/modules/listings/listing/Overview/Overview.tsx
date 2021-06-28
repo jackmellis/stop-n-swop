@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import Button from 'ui/elements/Button';
-import { useCurrency, useGetMessage } from 'ui/intl';
+import { useCurrency, useGetCurrency, useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { makeUserPath } from 'ui/constants/paths';
 import StarRating from 'ui/modules/listings/listings/StarRating';
@@ -28,17 +28,21 @@ export default function Overview({
   addToBasket: ReactNode;
 }) {
   const getMessage = useGetMessage();
+  const getCurrency = useGetCurrency();
 
   return (
     <div className={className}>
-      <div className="flex justify-between items-center">
-        <div>
-          <div className="text-xl">{useCurrency(price, { currency })}</div>
-          <div className="text-sm text-gray-200">
-            {getMessage(ids.listings.listing.postage, {
-              postage: useCurrency(postage, { currency }),
-            })}
-          </div>
+      <div className="flex space-x-8 items-center">
+        <div className="text-xl">{useCurrency(price, { currency })}</div>
+        <div className="text-sm text-gray-200">
+          <Choose>
+            <When condition={postage}>
+              {getMessage(ids.listings.listing.postage, {
+                postage: getCurrency(postage, { currency }),
+              })}
+            </When>
+            <Otherwise>{getMessage(ids.listings.listing.noPostage)}</Otherwise>
+          </Choose>
         </div>
         {addToBasket}
       </div>
@@ -49,7 +53,7 @@ export default function Overview({
             <Button
               padding={false}
               component={Link}
-              to={makeUserPath({ userId: username })}
+              to={makeUserPath({ username })}
               className="text-gray-300 mr-4"
             >
               {username}

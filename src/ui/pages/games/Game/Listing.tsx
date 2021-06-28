@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { ListingsItem, Actions } from 'ui/modules/listings/listings';
 import Purchase from 'ui/modules/listings/Purchase';
+import { getDisplayPrice } from 'domain/selectors/listings';
 import type { Listing as IListing } from '@sns/contracts/listing';
 
 interface Props {
@@ -10,13 +11,13 @@ interface Props {
 }
 
 export default function Listing({
+  listing,
   listing: {
     productIds: [productId],
     id: listingId,
     username,
     images,
     location,
-    price,
     rating,
     stats,
     postage,
@@ -37,7 +38,7 @@ export default function Listing({
     >
       <Actions
         listingId={listingId}
-        price={price}
+        price={getDisplayPrice(listing)}
         productId={productId}
         currency={currency}
         postage={postage}

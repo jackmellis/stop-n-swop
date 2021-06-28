@@ -41,7 +41,7 @@ export default function Actions({
       <div className="text-2xl text-right">
         {useCurrency(price, { currency })}
       </div>
-      <div className="text-sm text-right text-gray-200 py-3">
+      <div className="text-xs text-right text-gray-200 py-3">
         {getMessage(ids.listings.listing.postage, {
           postage: useCurrency(postage, { currency }),
         })}

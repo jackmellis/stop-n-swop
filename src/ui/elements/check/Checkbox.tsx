@@ -8,6 +8,7 @@ type Kind = 'primary' | 'secondary';
 interface Props {
   value: boolean;
   label?: ReactNode;
+  labelClassName?: string;
   className?: string;
   readonly?: boolean;
   kind?: Kind;
@@ -47,6 +48,7 @@ export default function Checkbox({
   value,
   label = '',
   className,
+  labelClassName,
   readonly,
   error,
   kind = 'primary',
@@ -66,7 +68,7 @@ export default function Checkbox({
         >
           <FaCheck className="text-xs" />
         </button>
-        <span className={cx(label && 'pl-2')}>{label}</span>
+        <span className={cx(labelClassName, label && 'pl-2')}>{label}</span>
       </label>
       <If condition={Boolean(error)}>
         <FieldError error={error} />

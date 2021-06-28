@@ -1,5 +1,5 @@
 // USERS
 export const USERS = '/users';
-export const USER = '/users/:userId';
-export const makeUserPath = ({ userId }: { userId: string }) =>
-  `${USERS}/${encodeURIComponent(userId)}`;
+export const USER = '/users/:username';
+export const makeUserPath = ({ username }: { username: string }) =>
+  `${USERS}/${encodeURIComponent(username)}`;

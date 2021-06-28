@@ -4,6 +4,9 @@ import { flatten, unflatten } from 'flat';
 import { Reason } from 'domain/constants/auth';
 
 const enMessages = {
+  help: {
+    whatsThis: "What's this?",
+  },
   nav: {
     title: 'Stop n Swop',
     menu: 'menu',
@@ -72,7 +75,8 @@ const enMessages = {
       details: 'More details',
       seller: 'Seller',
       description: 'Description',
-      postage: '{postage} delivery',
+      postage: '+ {postage} delivery',
+      noPostage: 'Free delivery',
     },
     filters: {
       features: {
@@ -333,6 +337,51 @@ const enMessages = {
     },
   },
   checkout: {
+    intro: {
+      title: 'Checkout',
+      next: 'Continue',
+      back: 'Back',
+      seller: 'seller:',
+      price: {
+        price: 'Price:',
+        postage: 'Postage:',
+        protection: 'Buyer protection:',
+        total: 'Total to pay:',
+      },
+      howItWorks: {
+        button: 'How it works',
+        steps: [
+          [
+            'Confirm your delivery address',
+            "We'll default to your primary address but you can send it somewhere else if you want",
+          ],
+          [
+            'Proceed & Pay',
+            'All payment information is handled securely by our payment provider',
+            "We won't release your payment to the seller until you're happy with the item",
+          ],
+          [
+            'The seller posts your game',
+            "We'll notify you once your item is out for delivery",
+          ],
+          [
+            "Tell us when you've received it",
+            "If there's anything wrong with the item, let us know. You can speak with the seller or request a refund",
+            "If you're happy with the item, we release the funds to the seller",
+          ],
+        ],
+      },
+      protectionGuide: {
+        title: 'Buyer Protection',
+        steps: [
+          "We've all bought things off marketplaces, given our money away, and then received a dud product - or no product - while the seller has conveniently gone awol.",
+          'To protect our buyers at stop-n-swop we supply a protection service for all transactions.',
+          "In order to facilitate this, we apply a small 2% fee on the base price of all products. This is the amount you'll see throughout the site so there's no surprises when you reach the checkout!",
+          'This means that until you have received your purchase and are happy with it, your payment is not released to the seller.',
+          'If the product is not in the advertised condition, if it does not arrive in time, or if you receive a counterfit or fake product, you can request a refund without the trouble of trying to track down awol sellers.',
+        ],
+      },
+    },
     billingAddress: {
       title: 'Billing Address',
       description:

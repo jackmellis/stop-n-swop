@@ -23,6 +23,27 @@
   }
 }
 
+.aspect {
+  position: relative;
+}
+.aspect::before {
+  content: '';
+  display: block;
+}
+.aspect > :first-child {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.aspect-16-9::before {
+  padding-bottom: 56.249999993%;
+}
+.aspect-1::before {
+  padding-bottom: 100%;
+}
+
 @font-face {
   font-family: 'lithographregular';
   src: url('./ui/assets/lithograph-webfont.woff') format('woff2'),

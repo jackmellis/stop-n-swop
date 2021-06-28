@@ -13,6 +13,7 @@ import { useIsLoggedIn } from 'application/auth';
 import { GAMES, makeGamePath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { getDisplayPrice } from 'domain/selectors/listings';
 
 export default function ListingPage() {
   const getMessage = useGetMessage();
@@ -37,7 +38,6 @@ export default function ListingPage() {
     rating,
     currency,
     postage,
-    price,
     location,
     stats,
     status,
@@ -66,7 +66,7 @@ export default function ListingPage() {
             rating={rating}
             currency={currency}
             postage={postage}
-            price={price}
+            price={getDisplayPrice(listing)}
             addToBasket={
               <Purchase
                 listingId={listingId}

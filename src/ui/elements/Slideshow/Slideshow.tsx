@@ -98,13 +98,15 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
           </animated.div>
         ))}
       </div>
-      <div className="flex justify-center mt-4">
-        {images.map((image, index) => (
-          <button key={image} type="button" onClick={() => setCurrent(index)}>
-            <Photo src={image} className="object-contain h-20" />
-          </button>
-        ))}
-      </div>
+      <If condition={images.length > 1}>
+        <div className="flex justify-center mt-4">
+          {images.map((image, index) => (
+            <button key={image} type="button" onClick={() => setCurrent(index)}>
+              <Photo src={image} className="object-contain h-20" />
+            </button>
+          ))}
+        </div>
+      </If>
     </div>
   );
 }

@@ -28,7 +28,6 @@ export default function LoginPage() {
     <LoginForm>
       <Login error={error} reason={reason}>
         <OAuth2Login
-          component={OAuth2Login}
           authorizationUrl={config.oauth.google.url}
           responseType="token"
           clientId={config.oauth.google.clientId}

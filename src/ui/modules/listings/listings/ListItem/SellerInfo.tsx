@@ -17,7 +17,7 @@ export default function SellerInfo({
         <Button
           padding={false}
           component={Link}
-          to={makeUserPath({ userId: username })}
+          to={makeUserPath({ username })}
         >
           {username}
         </Button>

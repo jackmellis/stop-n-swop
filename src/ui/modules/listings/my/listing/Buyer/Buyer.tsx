@@ -14,7 +14,7 @@ export default function Buyer({ username }: { username: string }) {
       <Button
         padding={false}
         component={Link}
-        to={makeUserPath({ userId: username })}
+        to={makeUserPath({ username })}
         className="justify-start"
       >
         {username}

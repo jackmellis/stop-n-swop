@@ -18,7 +18,7 @@ export default function App() {
         <Respite>
           <BrowserRouter basename="/">
             <div
-              className="flex-grow flex flex-col text-white bg-gray-700 font-display"
+              className="flex-grow flex flex-col"
               style={{ zIndex: 0, fontSize: 20 }}
             >
               <div
