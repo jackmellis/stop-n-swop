@@ -288,6 +288,9 @@ const enMessages = {
       [Status.RECEIVED]: 'Received',
       [Status.CANCELLED]: 'Cancelled',
     },
+    declinedModal: {
+      title: 'Why was my order declined?',
+    },
   },
   account: {
     dashboard: {
@@ -386,6 +389,44 @@ const enMessages = {
       title: 'Order placed!',
       myOrder: 'View order',
       games: 'Find more games',
+    },
+  },
+  notices: {
+    title: 'Notifications',
+    states: {
+      orderPlaced: {
+        title: 'An order has been placed for your listing',
+        subtitle: 'Approve the order to get the ball rolling',
+        action: 'View',
+      },
+      orderCancelled: {
+        title: 'An order for your listing has been cancelled by the buyer',
+      },
+      orderDeclined: {
+        title: 'Your order has been declined by the seller',
+        action: 'View',
+        why: 'Why?',
+      },
+      orderPaid: {
+        title: 'The order for your listing has been paid 🎉',
+        subtitle: 'You can now arrange for your item to be delivered!',
+        action: 'View',
+      },
+      orderNotPaid: {
+        title: 'Your order payment has failed',
+        subtitle: 'Ack!',
+      },
+      listingNotPaid: {
+        title: 'Payment failed for your listing',
+        subtitle: 'Uh what now?',
+      },
+      orderPosted: {
+        title: 'Your order is on its way!',
+        action: 'View',
+      },
+      orderReceived: {
+        title: 'Your item has been received by the buyer',
+      },
     },
   },
 };

@@ -1934,9 +1934,9 @@
     fastq "^1.6.0"
 
 "@respite/action@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@respite/action/-/action-4.0.1.tgz#63222c27165230f0790fc8f718fb62b34ae6e2d4"
-  integrity sha512-JXVFjlg3A8UjtkMcePdXTHCYhiqhMirWg04E/UKs9hAVakEzk8Cmg+g3jM52mmoQQjthjaN1S6KwuyZ2QLOBIA==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@respite/action/-/action-4.0.2.tgz#3b6184a918a16ce99fed1be38e6893fbac84577a"
+  integrity sha512-XOc5F+KvT0HOUoe98PX36texmLhAbTQyHwaYzFkqok0u4gHM6T/KKCOOqmKg8C51vtmS8A2naQALVH8tSHfmsQ==
 
 "@respite/core@^4.0.0":
   version "4.0.0"
@@ -1949,14 +1949,14 @@
   integrity sha512-HEqv4/3Oo+TVuOYRWdCD288xFff2+WLJGHSPM5lv+eseHVz6UBAuc/9bjpBlmZmN3VESopfs8+eAjQ0+jQsaUA==
 
 "@respite/query@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@respite/query/-/query-4.0.0.tgz#caed4b0da9133f11804ab6bcf0b7eafff2e6ffca"
-  integrity sha512-QcDOkD5zLGZZY+iyEYZ0GLSgBR3cmm5BLUBtX7SALhkLHb15gagJU+YjSFvaLGFmVqVtpAfzRKcn07bxnlE0Nw==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@respite/query/-/query-4.0.2.tgz#8f87e4cbfa893ad39fda2395bbf5b5f7e7d66762"
+  integrity sha512-1KVz1nO6+XzGiwQusUs13fKHEFfLuWfZHCSvRE0fu08ZA6qzCuH7qhF05U/1YuS/P7eVlKSZ8QvDjrbVQB0XCQ==
 
 "@respite/select@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@respite/select/-/select-4.0.0.tgz#d6a470b07172ffaa6e7fe00f6fd16772dfa6f6c2"
-  integrity sha512-Qe7bHFPvA4wUBshnfNwHVXkLZOAiwYat6X0QJeV31hGBbX3jRa1174BCOHIaIse4w8pbjOK2KrCvjqP8M6zcGw==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@respite/select/-/select-4.0.2.tgz#85cce8c8ae8661a6ba4ba98c2df1ca5bcdaa83fa"
+  integrity sha512-Zaf/pDK7j11hn0q7Edgr/wqGZqLNey1+IL2KFH4dBNkcGc/MpnzUKHb1+uPtA7OLFaLEmHboK70PpbqI1d8MAg==
 
 "@rollup/pluginutils@^4.0.0":
   version "4.1.0"

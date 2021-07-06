@@ -42,7 +42,7 @@ export default function NavItem({
         })}
         onClick={onClose}
       >
-        <Icon className="md:hidden" />
+        <Icon className="md:hidden" size="1.5em" />
         <span className="md:text-xs lowercase md:uppercase">{children}</span>
       </Link>
     </animated.li>

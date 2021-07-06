@@ -17,6 +17,7 @@ import {
 } from 'ui/constants/paths';
 import NavItem from './NavItem';
 import Account from './Account';
+import Notices from './Notices';
 
 interface Props {
   open: boolean;
@@ -79,6 +80,7 @@ export default function NavItems({
       </Choose>
       <Choose>
         <When condition={loggedIn}>
+          <Notices />
           <Account open={accountOpen} setOpen={setAccountOpen} />
         </When>
         <Otherwise>

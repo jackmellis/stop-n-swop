@@ -43,3 +43,7 @@ export const ListingOrdersKey = Symbol('listing orders');
 export const ChangeStatusKey = Symbol('change status');
 export const CreateOrderKey = Symbol('create order');
 export const PatchOrderKey = Symbol('patch order');
+
+// Notices
+// Queries
+export const NoticesKey = Symbol('notices');
