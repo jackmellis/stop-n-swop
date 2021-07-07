@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
 import { ListItem } from 'ui/elements/list';
-import { useCurrency } from 'ui/intl';
+import { useCurrency, useGetMessage } from 'ui/intl';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { Link } from 'react-router-dom';
 import Photo from 'ui/elements/Photo';
+import cx from 'classnames';
+import { ids } from 'ui/messages';
 import type { Product } from '@sns/contracts/product';
 import type { Listing } from '@sns/contracts/listing';
 
@@ -13,19 +15,43 @@ export default function MyListingItem({
   orderStatus,
   to,
   price,
+  hasActions,
+  isComplete,
 }: {
   to: string;
   product: Product;
   listing: Listing;
   orderStatus: ReactNode;
   price: number;
+  hasActions: boolean;
+  isComplete: boolean;
 }) {
-  const { rating, id: listingId, images, currency } = listing;
+  const g = useGetMessage();
+  const { rating, images, currency } = listing;
   const { name } = product;
 
   return (
-    <ListItem className="hover:bg-gray-800">
-      <Link to={to} className="w-full flex items-center">
+    <ListItem
+      className={cx(
+        'hover:bg-gray-800',
+        isComplete && 'bg-opacity-50 text-gray-400 hover:bg-gray-800',
+      )}
+    >
+      <Link
+        to={to}
+        className={cx(
+          'relative w-full flex items-center',
+          hasActions &&
+            'bg-secondary-darkest bg-opacity-40 hover:bg-opacity-70',
+        )}
+      >
+        <If condition={hasActions}>
+          <div className="absolute top-2 right-4 hidden md:block">
+            <span className="text-gray-200" style={{ fontSize: '0.6em' }}>
+              {g(ids.listings.myListings.hasActions)}
+            </span>
+          </div>
+        </If>
         <div
           className="relative hidden sm:block w-1/3 lg:w-1/4 xl:w-1/5"
           style={{ '--aspect-ratio': 16 / 9 } as any}
@@ -38,9 +64,6 @@ export default function MyListingItem({
         </div>
         <div className="w-1/2 sm:w-1/3 md:w-1/2 lg:w-1/4 xl:w-1/5 pl-4 sm:pl-0">
           <span className="block">{name}</span>
-          <span className="hidden lg:block text-xs text-gray-300">
-            {listingId}
-          </span>
         </div>
         <div className="hidden lg:block w-1/4">
           {useCurrency(price, { currency })}

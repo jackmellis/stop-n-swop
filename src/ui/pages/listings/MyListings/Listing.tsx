@@ -4,6 +4,7 @@ import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';
 import { makeMyListingPath } from 'ui/constants/paths';
 import { useGame } from 'application/games';
 import { Listing, getListedPrice } from '@sns/contracts/listing';
+import { Status } from '@sns/contracts/order';
 
 export default function MyListing({ listing }: { listing: Listing }) {
   const {
@@ -11,6 +12,8 @@ export default function MyListing({ listing }: { listing: Listing }) {
     productIds: [productId],
   } = listing;
   const { data: product } = useGame({ id: productId });
+  const hasActions = [Status.PLACED, Status.PAID].includes(listing.status);
+  const isComplete = [Status.CLOSED, Status.RECEIVED].includes(listing.status);
   // TODO: get the listing order
 
   return (
@@ -20,6 +23,8 @@ export default function MyListing({ listing }: { listing: Listing }) {
       product={product}
       orderStatus={<OrderStatus status={listing.status} />}
       price={getListedPrice(listing)}
+      hasActions={hasActions}
+      isComplete={isComplete}
     />
   );
 }

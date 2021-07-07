@@ -5,7 +5,7 @@ import { makeMyOrderPath } from 'ui/constants/paths';
 import { useListing } from 'application/listings';
 import { useGame } from 'application/games';
 import { getFinalPrice } from '@sns/contracts/listing';
-import type { Order as IOrder } from '@sns/contracts/order';
+import { Order as IOrder, Status } from '@sns/contracts/order';
 
 export default function MyOrder({ order }: { order: IOrder }) {
   const { data: listing } = useListing({ id: order.listingId });
@@ -13,6 +13,14 @@ export default function MyOrder({ order }: { order: IOrder }) {
     productIds: [productId],
   } = listing;
   const { data: product } = useGame({ id: productId });
+  const hasActions = [Status.CREATED, Status.PENDING, Status.POSTED].includes(
+    order.status,
+  );
+  const isComplete = [
+    Status.RECEIVED,
+    Status.CANCELLED,
+    Status.DECLINED,
+  ].includes(order.status);
 
   return (
     <Order
@@ -21,6 +29,8 @@ export default function MyOrder({ order }: { order: IOrder }) {
       product={product}
       orderStatus={<OrderStatus status={order.status} />}
       price={getFinalPrice(listing)}
+      hasActions={hasActions}
+      isComplete={isComplete}
     />
   );
 }

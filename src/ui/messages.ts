@@ -185,6 +185,7 @@ const enMessages = {
     myListings: {
       title: 'My listings',
       listButton: 'Create a new listing',
+      hasActions: 'Action required!',
     },
     myListing: {
       listing: 'Listing',
