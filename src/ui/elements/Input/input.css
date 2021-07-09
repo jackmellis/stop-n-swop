@@ -1,7 +1,12 @@
 .input:focus + label,
 .input:not([value='']) + label,
+.input[type='date'] + label,
 .input[placeholder] + label {
   @apply transform;
   @apply -translate-y-full;
   @apply text-xs;
+}
+
+.input::-webkit-calendar-picker-indicator {
+  background: none;
 }

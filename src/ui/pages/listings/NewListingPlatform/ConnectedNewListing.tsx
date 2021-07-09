@@ -1,12 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import fuzzy from 'fuzzy';
-import { useAuthGuard } from 'application/auth';
 import { usePlatforms } from 'application/platforms';
 import NewListing from './NewListing';
 
 export default function ConnectedNewListing() {
-  useAuthGuard({ username: true });
-
   const [search, setSearch] = useState('');
   const [platformId, setPlatformId] = useState('');
   const { data: platforms } = usePlatforms();

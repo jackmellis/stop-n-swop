@@ -19,12 +19,16 @@ export default function LoginForm({
   const intl = useIntl();
 
   return (
-    <Card className="relative flex-grow md:flex-grow-0 md:w-96 xl:mx-40">
-      <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12">
-        <h1 className="text-2xl flex space-x-6 items-center justify-center">
+    <Card
+      title={
+        <div className="flex space-x-6 items-center">
           <FaLockOpen />
           <span>{intl.message(ids.auth.login.title)}</span>
-        </h1>
+        </div>
+      }
+      className="relative flex-grow md:flex-grow-0 md:w-96 lg:w-auto xl:mx-auto"
+    >
+      <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12">
         <If condition={Boolean(reason)}>
           <div className="lg:px-12 xl:px-0 text-center">
             {intl.message(ids.auth.levelUp.reason[reason])}

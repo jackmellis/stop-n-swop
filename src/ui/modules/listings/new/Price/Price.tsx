@@ -58,6 +58,7 @@ export default function PriceStep({
               onChange={onChange}
               autoFocus
               error={error}
+              autoComplete="off"
             />
           )}
         />
@@ -69,14 +70,14 @@ export default function PriceStep({
                 if (!isMounted()) {
                   return true;
                 }
-                if (value) {
+                if (value || value === 0) {
                   return true;
                 }
                 return getMessage(ids.listings.new.price.required);
               },
             },
           }}
-          defaultValue=""
+          defaultValue="0"
           render={({ field: { value, onChange }, fieldState: { error } }) => (
             <CurrencyInput
               id="postage"
@@ -85,6 +86,7 @@ export default function PriceStep({
               state={error == null ? undefined : 'error'}
               onChange={onChange}
               error={error}
+              autoComplete="off"
             />
           )}
         />

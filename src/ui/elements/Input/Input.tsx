@@ -3,7 +3,7 @@ import cx from 'classnames';
 import './input.css';
 import FieldError from '../FieldError';
 
-type State = 'success' | 'error' | 'none';
+type State = 'success' | 'error' | 'disabled' | 'none';
 
 export interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
@@ -28,7 +28,10 @@ export default function Input({
   label,
   id,
   error,
-  state = error ? 'error' : 'none',
+  disabled,
+  // eslint-disable-next-line no-nested-ternary
+  state = error ? 'error' : disabled ? 'disabled' : 'none',
+  children,
   ...props
 }: Props) {
   return (
@@ -39,6 +42,7 @@ export default function Input({
           {
             'focus-within:border-primary': state === 'none',
             'border-danger focus-within:border-danger-light': state === 'error',
+            'border-gray-400': state === 'disabled',
           },
           containerStyles,
         )}
@@ -50,9 +54,11 @@ export default function Input({
             className={cx(
               'input',
               'bg-transparent outline-none w-full',
+              'disabled:text-gray-300',
               styles,
               className,
             )}
+            disabled={disabled}
             {...props}
           />
           <label
@@ -64,6 +70,7 @@ export default function Input({
           >
             {label}
           </label>
+          {children}
         </div>
         {suffix}
       </div>

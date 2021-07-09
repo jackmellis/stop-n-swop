@@ -24,6 +24,7 @@ import {
   NEW_LISTING_COMPLETE,
   CHECKOUT_COMPLETE,
   CHECKOUT_PAYMENT,
+  LEVEL_UP_DETAILS,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
@@ -31,6 +32,7 @@ import Home from 'ui/pages/Home';
 const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
 const LevelUpUsername = lazy(() => import('ui/pages/account/LevelUpUsername'));
 const LevelUpAddress = lazy(() => import('ui/pages/account/LevelUpAddress'));
+const LevelUpDetails = lazy(() => import('ui/pages/account/LevelUpDetails'));
 // Auth
 const Login = lazy(() => import('ui/pages/auth/Login'));
 const Logout = lazy(() => import('ui/pages/auth/Logout'));
@@ -63,10 +65,12 @@ const MyOrder = lazy(() => import('ui/pages/orders/MyOrder'));
 export default function Routes() {
   return (
     <>
+      {/* Home */}
       <Route path={HOME} exact>
         <Home />
       </Route>
 
+      {/* Account */}
       <Route path={DASHBOARD} exact>
         <Dashboard />
       </Route>
@@ -76,7 +80,11 @@ export default function Routes() {
       <Route path={LEVEL_UP_USERNAME} exact>
         <LevelUpUsername />
       </Route>
+      <Route path={LEVEL_UP_DETAILS} exact>
+        <LevelUpDetails />
+      </Route>
 
+      {/* Auth */}
       <Route path={LOGIN} exact>
         <Login />
       </Route>
@@ -84,6 +92,7 @@ export default function Routes() {
         <Logout />
       </Route>
 
+      {/* Checkout */}
       <Route path={CHECKOUT} exact>
         <Checkout />
       </Route>
@@ -100,6 +109,7 @@ export default function Routes() {
         <Complete />
       </Route>
 
+      {/* Games */}
       <Route path={GAMES} exact>
         <Games />
       </Route>
@@ -107,6 +117,7 @@ export default function Routes() {
         <Game />
       </Route>
 
+      {/* Listings */}
       <Route path={GAME_LISTING} exact>
         <Listing />
       </Route>
@@ -132,6 +143,7 @@ export default function Routes() {
         <MyListing />
       </Route>
 
+      {/* Orders */}
       <Route path={MY_ORDERS} exact>
         <MyOrders />
       </Route>

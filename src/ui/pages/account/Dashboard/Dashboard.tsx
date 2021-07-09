@@ -6,8 +6,8 @@ import Sections from 'ui/modules/account/dashboard/Sections';
 import { sections } from 'ui/modules/account/dashboard/constants';
 import { makeDashboardPath } from 'ui/constants/paths';
 import Username from 'ui/modules/account/about-me/Username';
-import Email from 'ui/modules/account/about-me/Email';
 import Address from 'ui/modules/account/about-me/Address';
+import Details from 'ui/modules/account/about-me/Details';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
@@ -43,20 +43,24 @@ export default function Dashboard() {
           <Route
             path={makeDashboardPath({
               section: 'about-me',
-              subSection: 'email',
-            })}
-          >
-            <Email />
-          </Route>
-          <Route
-            path={makeDashboardPath({
-              section: 'about-me',
               subSection: 'address',
             })}
           >
             <Address
               title={getMessage(ids.account.aboutMe.address.title)}
               description={getMessage(ids.account.aboutMe.address.description)}
+              submitText={getMessage(ids.account.saveButton)}
+            />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'about-me',
+              subSection: 'details',
+            })}
+          >
+            <Details
+              title={getMessage(ids.account.aboutMe.details.title)}
+              description={getMessage(ids.account.aboutMe.details.description)}
               submitText={getMessage(ids.account.saveButton)}
             />
           </Route>
