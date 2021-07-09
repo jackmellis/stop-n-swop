@@ -4,10 +4,10 @@ import Card from 'ui/elements/Card';
 import { useQueryParam } from 'ui/hooks';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import Address from 'ui/modules/account/about-me/Address';
 import { useAuthGuard } from 'application/auth';
+import Details from 'ui/modules/account/about-me/Details';
 
-export default function LevelUpAddress() {
+export default function LevelUpDetails() {
   useAuthGuard();
   const redirect = useQueryParam('redirect');
   const { push } = useHistory();
@@ -16,13 +16,15 @@ export default function LevelUpAddress() {
   return (
     <div className="flex-grow flex flex-col justify-center lg:items-center">
       <Card
-        title={getMessage(ids.account.aboutMe.address.title)}
+        title={getMessage(ids.auth.levelUp.details.title)}
         className="flex-grow flex flex-col md:flex-grow-0 lg:w-2/3 xl:w-1/2"
       >
-        <Address
-          description={getMessage(ids.auth.levelUp.address.description)}
+        <Details
+          description={getMessage(ids.auth.levelUp.details.description)}
           submitText={getMessage(ids.auth.levelUp.submitText)}
           onSubmit={() => push(redirect)}
+          mandatory
+          showEmail={false}
         />
       </Card>
     </div>

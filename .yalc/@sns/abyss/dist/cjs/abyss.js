@@ -112,7 +112,7 @@ class ValidationError extends BadRequestError {
     };
   }
   toString() {
-    return "";
+    return "Some required fields are missing or incomplete...";
   }
 }
 
@@ -276,6 +276,30 @@ class ListingOwnedByUserError extends NotAuthorisedError {
   }
 }
 
+exports.PaymentErrorCode = void 0;
+(function (PaymentErrorCode) {
+  PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
+  PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
+})(exports.PaymentErrorCode || (exports.PaymentErrorCode = {}));
+class MissingRegisterFieldsError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.MISSING_REGISTER_FIELDS;
+  }
+  toString() {
+    return 'You are missing some required data from your account. Please check the "details" and "address" sections of your account are completed...';
+  }
+}
+class FailedToRegisterError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.FAILED_TO_REGISTER;
+  }
+  toString() {
+    return "Something went wrong trying to register your account as an active buyer/seller";
+  }
+}
+
 exports.PlatformErrorCode = void 0;
 (function (PlatformErrorCode) {
   PlatformErrorCode["PLATFORM_NOT_FOUND"] = "PLATFORM_NOT_FOUND";
@@ -357,6 +381,10 @@ const responseToError = response => {
       return new OrderNotOwnedByUserError("", "");
     case exports.OrderErrorCode.LISTING_OWNED_BY_USER:
       return new ListingOwnedByUserError();
+    case exports.PaymentErrorCode.MISSING_REGISTER_FIELDS:
+      return new MissingRegisterFieldsError();
+    case exports.PaymentErrorCode.FAILED_TO_REGISTER:
+      return new FailedToRegisterError();
   }
   switch (response.status) {
     case 400:
@@ -377,6 +405,7 @@ exports.BadRequestError = BadRequestError;
 exports.BaseError = BaseError;
 exports.ConflictError = ConflictError;
 exports.CreateListingError = CreateListingError;
+exports.FailedToRegisterError = FailedToRegisterError;
 exports.GameNotFoundError = GameNotFoundError;
 exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
@@ -384,6 +413,7 @@ exports.InvalidStatusError = InvalidStatusError;
 exports.InvalidTokenError = InvalidTokenError;
 exports.ListingNotFoundError = ListingNotFoundError;
 exports.ListingOwnedByUserError = ListingOwnedByUserError;
+exports.MissingRegisterFieldsError = MissingRegisterFieldsError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;

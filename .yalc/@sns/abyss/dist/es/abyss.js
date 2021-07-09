@@ -108,7 +108,7 @@ class ValidationError extends BadRequestError {
     };
   }
   toString() {
-    return "";
+    return "Some required fields are missing or incomplete...";
   }
 }
 
@@ -272,6 +272,30 @@ class ListingOwnedByUserError extends NotAuthorisedError {
   }
 }
 
+let PaymentErrorCode;
+(function (PaymentErrorCode) {
+  PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
+  PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
+})(PaymentErrorCode || (PaymentErrorCode = {}));
+class MissingRegisterFieldsError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.MISSING_REGISTER_FIELDS;
+  }
+  toString() {
+    return 'You are missing some required data from your account. Please check the "details" and "address" sections of your account are completed...';
+  }
+}
+class FailedToRegisterError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.FAILED_TO_REGISTER;
+  }
+  toString() {
+    return "Something went wrong trying to register your account as an active buyer/seller";
+  }
+}
+
 let PlatformErrorCode;
 (function (PlatformErrorCode) {
   PlatformErrorCode["PLATFORM_NOT_FOUND"] = "PLATFORM_NOT_FOUND";
@@ -353,6 +377,10 @@ const responseToError = response => {
       return new OrderNotOwnedByUserError("", "");
     case OrderErrorCode.LISTING_OWNED_BY_USER:
       return new ListingOwnedByUserError();
+    case PaymentErrorCode.MISSING_REGISTER_FIELDS:
+      return new MissingRegisterFieldsError();
+    case PaymentErrorCode.FAILED_TO_REGISTER:
+      return new FailedToRegisterError();
   }
   switch (response.status) {
     case 400:
@@ -369,4 +397,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

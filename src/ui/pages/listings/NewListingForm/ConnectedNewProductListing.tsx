@@ -12,7 +12,7 @@ import NewProductListing from './NewProductListing';
 import { useOnSubmit } from './utils';
 
 export default function ConnectedNewProductListing() {
-  useAuthGuard({ username: true, address: true });
+  useAuthGuard({ username: true, address: true, details: true });
   const { productId, platformId } =
     useParams<{
       productId: string;
@@ -31,7 +31,11 @@ export default function ConnectedNewProductListing() {
   const { action: create, error } = useCreateListing();
   const { push } = useHistory();
   const onSubmit = useOnSubmit({ create, productId, platformId, push });
-  const formProps = useForm<Values>();
+  const formProps = useForm<Values>({
+    defaultValues: {
+      postage: 0,
+    },
+  });
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
 
   return (

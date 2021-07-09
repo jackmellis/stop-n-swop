@@ -1,5 +1,5 @@
 import jpex from 'jpex';
-import { omitNullishProperties } from 'crosscutting/utils';
+import { omitNullProperties } from 'crosscutting/utils';
 import { Status } from '@sns/contracts/order';
 import type {
   SearchListingsRequest,
@@ -16,7 +16,7 @@ const searchListings =
     } = await driver<SearchListingsRequest, SearchListingsResponse>({
       url: '/listings',
       data: {
-        ...omitNullishProperties(data),
+        ...omitNullProperties(data),
         status: Status.OPEN,
       },
     });

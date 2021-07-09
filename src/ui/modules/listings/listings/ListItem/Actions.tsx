@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import Button from 'ui/elements/Button';
 import { makeGameListingPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
-import { useCurrency, useGetMessage } from 'ui/intl';
+import { useCurrency, useGetCurrency, useGetMessage } from 'ui/intl';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
 
@@ -26,6 +26,7 @@ export default function Actions({
   addToBasket,
 }: Props) {
   const getMessage = useGetMessage();
+  const getCurrency = useGetCurrency();
 
   return (
     <div
@@ -42,9 +43,14 @@ export default function Actions({
         {useCurrency(price, { currency })}
       </div>
       <div className="text-xs text-right text-gray-200 py-3">
-        {getMessage(ids.listings.listing.postage, {
-          postage: useCurrency(postage, { currency }),
-        })}
+        <Choose>
+          <When condition={Number(postage)}>
+            {getMessage(ids.listings.listing.postage, {
+              postage: getCurrency(postage, { currency }),
+            })}
+          </When>
+          <Otherwise>{getMessage(ids.listings.listing.noPostage)}</Otherwise>
+        </Choose>
       </div>
       <If condition={!readonly}>
         {addToBasket}

@@ -15,12 +15,21 @@ export const isEmpty = (obj: any) => {
   if (typeof obj === 'object') {
     return Object.keys(obj).length === 0;
   }
+  if (typeof obj === 'string') {
+    return obj === '';
+  }
   return false;
 };
 
-export const omitNullishProperties = <T>(obj: T): T => {
+export const omitNullProperties = <T>(obj: T): T => {
   return Object.fromEntries(
     Object.entries(obj).filter(([, value]) => value != null),
+  ) as T;
+};
+
+export const omitEmptyProperties = <T>(obj: T): T => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => !isEmpty(value)),
   ) as T;
 };
 

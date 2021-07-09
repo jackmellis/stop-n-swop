@@ -32,6 +32,9 @@ const enMessages = {
       remove: 'Remove',
       close: 'Close',
     },
+    select: {
+      defaultLabel: '-- Select --',
+    },
   },
   home: {
     title: 'Buy, sell, expand your retro collection',
@@ -244,8 +247,14 @@ const enMessages = {
       username: {
         description: "Before we continue, you'll need to set a username...",
       },
+      details: {
+        title: 'Your details',
+        description:
+          'we need to know a few basic details before you can begin trading on Stop N Swop...',
+      },
       address: {
-        description: 'Youll need to provide your address to continue...',
+        description:
+          'Please provide your current address details. This should be the same address that your bank account is registered at.',
       },
       reason: {
         [Reason.LOGIN_REQUIRED]: 'Please log in to continue...',
@@ -301,11 +310,9 @@ const enMessages = {
         aboutMe: {
           label: 'About me',
           username: 'Username',
-          email: 'Email',
+          details: 'Details',
           address: 'Address',
         },
-        orders: 'Orders',
-        listings: 'Listings',
       },
     },
     saveButton: 'Save',
@@ -322,9 +329,6 @@ const enMessages = {
         },
       },
       email: {
-        title: 'Email',
-        description:
-          "We'll use your email to send you notifications and receipts",
         email: {
           label: 'Your email address',
         },
@@ -348,6 +352,16 @@ const enMessages = {
         country: {
           label: 'Country',
         },
+      },
+      details: {
+        title: 'Details',
+        description: '',
+        firstName: {
+          label: 'First name',
+        },
+        lastName: { label: 'Last name' },
+        dateOfBirth: { label: 'Date of birth' },
+        nationality: { label: 'Nationality' },
       },
     },
   },

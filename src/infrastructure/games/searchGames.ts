@@ -1,5 +1,5 @@
 import jpex from 'jpex';
-import { omitNullishProperties } from 'crosscutting/utils';
+import { omitNullProperties } from 'crosscutting/utils';
 import type {
   SearchGamesRequest,
   SearchGamesResponse,
@@ -12,7 +12,7 @@ const searchGames =
   async ({ page, platforms, search, available }) => {
     const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
       url: '/games',
-      data: omitNullishProperties({
+      data: omitNullProperties({
         page,
         q: search,
         platformIds: platforms,
