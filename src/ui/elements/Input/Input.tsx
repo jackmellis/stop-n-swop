@@ -8,12 +8,14 @@ type State = 'success' | 'error' | 'disabled' | 'none';
 export interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   id: string;
-  label: ReactNode;
+  label?: ReactNode;
   prefix?: ReactNode;
   suffix?: ReactNode;
   containerStyles?: Record<string, boolean>;
+  containerClassName?: string;
   styles?: Record<string, boolean>;
   labelStyles?: Record<string, boolean>;
+  labelClassName?: string;
   state?: State;
   error?: any;
 }
@@ -22,9 +24,11 @@ export default function Input({
   prefix,
   suffix,
   containerStyles,
+  containerClassName,
   className,
   styles,
   labelStyles,
+  labelClassName,
   label,
   id,
   error,
@@ -45,6 +49,7 @@ export default function Input({
             'border-gray-400': state === 'disabled',
           },
           containerStyles,
+          containerClassName,
         )}
       >
         {prefix}
@@ -61,15 +66,18 @@ export default function Input({
             disabled={disabled}
             {...props}
           />
-          <label
-            htmlFor={id}
-            className={cx(
-              'absolute left-0 top-0 text-sm transition-all text-gray-200',
-              labelStyles,
-            )}
-          >
-            {label}
-          </label>
+          <If condition={label}>
+            <label
+              htmlFor={id}
+              className={cx(
+                'absolute left-0 top-0 text-sm transition-all text-gray-200',
+                labelStyles,
+                labelClassName,
+              )}
+            >
+              {label}
+            </label>
+          </If>
           {children}
         </div>
         {suffix}

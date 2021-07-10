@@ -280,6 +280,7 @@ exports.PaymentErrorCode = void 0;
 (function (PaymentErrorCode) {
   PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
   PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
+  PaymentErrorCode["BANK_ACCOUNT_FAIL"] = "BANK_ACCOUNT_FAIL";
 })(exports.PaymentErrorCode || (exports.PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -297,6 +298,12 @@ class FailedToRegisterError extends UnknownError {
   }
   toString() {
     return "Something went wrong trying to register your account as an active buyer/seller";
+  }
+}
+class BankAccountFailError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.BANK_ACCOUNT_FAIL;
   }
 }
 
@@ -385,6 +392,8 @@ const responseToError = response => {
       return new MissingRegisterFieldsError();
     case exports.PaymentErrorCode.FAILED_TO_REGISTER:
       return new FailedToRegisterError();
+    case exports.PaymentErrorCode.BANK_ACCOUNT_FAIL:
+      return new BankAccountFailError();
   }
   switch (response.status) {
     case 400:
@@ -402,6 +411,7 @@ const responseToError = response => {
 };
 
 exports.BadRequestError = BadRequestError;
+exports.BankAccountFailError = BankAccountFailError;
 exports.BaseError = BaseError;
 exports.ConflictError = ConflictError;
 exports.CreateListingError = CreateListingError;

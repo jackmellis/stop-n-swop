@@ -99,7 +99,7 @@ export default function BillingAddress() {
           </p>
           <FormError error={error} />
           <div className="space-y-8">
-            <AddressFields address={address} />
+            <AddressFields address={address} className="mt-8" />
             <div className="sm:w-1/2 sm:mx-auto">
               <Controller
                 name="useForDelivery"

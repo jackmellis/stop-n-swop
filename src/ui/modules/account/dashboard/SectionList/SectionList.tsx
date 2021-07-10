@@ -32,7 +32,7 @@ export default function SectionList({
         className={cx(
           'text-lg w-full border-primary-dark border-b-2 px-4 py-3 flex items-center justify-between',
           'lg:hidden',
-          { 'bg-primary-dark': expanded },
+          { 'lg:bg-primary-dark': expanded },
         )}
         onClick={() => setExpanded(!expanded)}
       >
@@ -62,7 +62,7 @@ export default function SectionList({
                   <div
                     className={cx(
                       'w-full px-4 py-3 text-left',
-                      'bg-primary-dark hover:bg-primary cursor-pointer hidden lg:block',
+                      'bg-primary-dark hover:bg-primary cursor-pointer jhidden lg:block',
                     )}
                     style={{ minWidth: '14rem' }}
                   >

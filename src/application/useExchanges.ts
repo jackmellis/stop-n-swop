@@ -20,6 +20,7 @@ import {
   AddressKey,
   CreateOrderKey,
   PatchOrderKey,
+  SaveBankKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -28,7 +29,7 @@ export default function useExchanges() {
       [TokensKey, UserKey],
       [LogInKey, AuthKey, LogOutKey],
     ],
-    [UserKey, UpdateUserKey],
+    [UserKey, [UpdateUserKey, SaveBankKey]],
     [
       [ListingsKey, ListingKey, MyListingsKey, ListingCountKey, HistoryKey],
       [CreateListingKey, UpdateListingKey],

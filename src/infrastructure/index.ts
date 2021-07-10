@@ -6,5 +6,6 @@ import './listings';
 import './navigation';
 import './notices';
 import './orders';
+import './payments';
 import './platforms';
 import './user';

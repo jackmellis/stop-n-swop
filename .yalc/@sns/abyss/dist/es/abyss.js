@@ -276,6 +276,7 @@ let PaymentErrorCode;
 (function (PaymentErrorCode) {
   PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
   PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
+  PaymentErrorCode["BANK_ACCOUNT_FAIL"] = "BANK_ACCOUNT_FAIL";
 })(PaymentErrorCode || (PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -293,6 +294,12 @@ class FailedToRegisterError extends UnknownError {
   }
   toString() {
     return "Something went wrong trying to register your account as an active buyer/seller";
+  }
+}
+class BankAccountFailError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.BANK_ACCOUNT_FAIL;
   }
 }
 
@@ -381,6 +388,8 @@ const responseToError = response => {
       return new MissingRegisterFieldsError();
     case PaymentErrorCode.FAILED_TO_REGISTER:
       return new FailedToRegisterError();
+    case PaymentErrorCode.BANK_ACCOUNT_FAIL:
+      return new BankAccountFailError();
   }
   switch (response.status) {
     case 400:
@@ -397,4 +406,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

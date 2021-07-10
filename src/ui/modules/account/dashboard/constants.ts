@@ -1,4 +1,4 @@
-import { makeDashboardPath, MY_LISTINGS, MY_ORDERS } from 'ui/constants/paths';
+import { makeDashboardPath } from 'ui/constants/paths';
 import { ids } from 'ui/messages';
 import type { Section } from './types';
 
@@ -25,6 +25,18 @@ export const sections: Section[] = [
         key: 'address',
         to: makeDashboardPath({ section: 'about-me', subSection: 'address' }),
         label: ids.account.dashboard.sections.aboutMe.address,
+      },
+    ],
+  },
+  {
+    key: 'billing',
+    label: 'Billing',
+    to: makeDashboardPath({ section: 'billing' }),
+    sections: [
+      {
+        key: 'account',
+        to: makeDashboardPath({ section: 'billing', subSection: 'account' }),
+        label: 'Bank Account',
       },
     ],
   },
