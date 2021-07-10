@@ -9,8 +9,12 @@ import type { Address } from '@sns/contracts/user';
 
 export default function AddressFields({
   address = {},
+  fullWidth = false,
+  className,
 }: {
   address?: Partial<Address>;
+  fullWidth?: boolean;
+  className?: string;
 }) {
   const getMessage = useGetMessage();
   const required = getMessage(ids.error.required);
@@ -18,9 +22,10 @@ export default function AddressFields({
   return (
     <div
       className={cx(
-        'space-y-4 flex-grow mt-8',
-        'sm:w-1/2 sm:mx-auto',
+        'space-y-4 flex-grow',
+        fullWidth || 'sm:w-1/2 sm:mx-auto',
         'lg:flex lg:flex-col lg:justify-center',
+        className,
       )}
     >
       <div>
@@ -68,7 +73,7 @@ export default function AddressFields({
           id="address.country"
           name="address.country"
           label={getMessage(ids.account.aboutMe.address.country.label)}
-          defaultValue={address.country ?? ''}
+          defaultValue={address.country ?? 'GB'}
           rules={{ required }}
           options={[]}
         />

@@ -12,7 +12,7 @@ export default function Address({
   submitText,
   onSubmit,
 }: {
-  title: ReactNode;
+  title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
   onSubmit?(): any;
@@ -28,11 +28,13 @@ export default function Address({
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
-      <h3 className="text-lg font-bold">{title}</h3>
+      <If condition={title}>
+        <h3 className="text-lg font-bold">{title}</h3>
+      </If>
       <p className="text-sm text-gray-100 italic">{description}</p>
       <FormError error={error} />
-      <AddressFields address={user.address} />
-      <div>
+      <AddressFields address={user.address} className="mt-8" />
+      <div className="flex justify-end">
         <Submit status={status} reset={reset}>
           {submitText}
         </Submit>

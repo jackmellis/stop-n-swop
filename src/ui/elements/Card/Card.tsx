@@ -4,12 +4,13 @@ import cx from 'classnames';
 interface Props {
   padding?: string | boolean;
   className?: string;
+  innerClassName?: string;
   title?: ReactNode;
   children: ReactNode;
 }
 
 export default forwardRef<HTMLDivElement, Props>(function Card(
-  { title, padding = 'p-3 md:p-10', className, children },
+  { title, padding = 'p-3 md:p-10', className, innerClassName, children },
   ref,
 ) {
   return (
@@ -33,7 +34,7 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
           {title}
         </div>
       </If>
-      <div className={cx(padding)}>{children}</div>
+      <div className={cx(padding, innerClassName)}>{children}</div>
     </div>
   );
 });

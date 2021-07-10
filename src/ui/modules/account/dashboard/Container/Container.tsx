@@ -14,6 +14,7 @@ export default function Container({
     <Card
       title={useMessage(ids.account.dashboard.welcome, { name })}
       className="w-full flex-grow lg:my-4 xl:w-4/5 mx-auto flex flex-col"
+      innerClassName="flex-grow flex flex-col"
     >
       {children}
     </Card>

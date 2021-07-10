@@ -22,7 +22,7 @@ export default function Details({
   mandatory = false,
   showEmail = true,
 }: {
-  title: ReactNode;
+  title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
   mandatory?: boolean;
@@ -53,7 +53,9 @@ export default function Details({
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
-      <h3 className="text-lg font-bold">{title}</h3>
+      <If condition={title}>
+        <h3 className="text-lg font-bold">{title}</h3>
+      </If>
       <p className="text-sm text-gray-100 italic">{description}</p>
       <FormError error={error} />
       <div className="flex flex-col flex-grow">
@@ -116,12 +118,13 @@ export default function Details({
           />
         </div>
         <div className="my-4 w-full md:w-1/2 mx-auto">
+          {/* TODO: wec could do with a specific nationality dropdown */}
           <SelectController
             Select={Country}
             name="nationality"
             id="nationality"
             label={getMessage(ids.account.aboutMe.details.nationality.label)}
-            defaultValue={user.nationality ?? ''}
+            defaultValue={user.nationality ?? 'GB'}
             options={[]}
             rules={{
               required: {
@@ -131,7 +134,7 @@ export default function Details({
             }}
           />
         </div>
-        <div>
+        <div className="flex justify-end">
           <Submit kind="primary" reset={reset} status={status}>
             {submitText}
           </Submit>

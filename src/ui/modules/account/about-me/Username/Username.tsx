@@ -14,7 +14,7 @@ export default function Username({
   description,
   submitText,
 }: {
-  title: ReactNode;
+  title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
   onSubmit?(): any;
@@ -32,7 +32,9 @@ export default function Username({
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
-      <h3 className="text-lg font-bold">{title}</h3>
+      <If condition={title}>
+        <h3 className="text-lg font-bold">{title}</h3>
+      </If>
       <p className="text-sm text-gray-100 italic">{description}</p>
       <FormError error={error} />
       <div className="flex flex-col flex-grow">
@@ -56,7 +58,7 @@ export default function Username({
             }}
           />
         </div>
-        <div>
+        <div className="flex justify-end">
           <Submit kind="primary" reset={reset} status={status}>
             {submitText}
           </Submit>

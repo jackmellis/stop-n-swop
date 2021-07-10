@@ -322,7 +322,7 @@ const enMessages = {
         description:
           'Pick a username! This will be your public display name shown to other users',
         username: {
-          label: 'Your username',
+          label: 'Pick a username',
           required: 'Please enter a username',
           maxLength:
             'Your username should be no longer than {maxLength} characters',
@@ -362,6 +362,31 @@ const enMessages = {
         lastName: { label: 'Last name' },
         dateOfBirth: { label: 'Date of birth' },
         nationality: { label: 'Nationality' },
+      },
+    },
+    billing: {
+      title: 'Bank account',
+      description:
+        "You'll need to provide your account number before you can receive any funds for your listings",
+      account: {
+        hasAccount: {
+          title: "You've already provided your bank account details",
+          description:
+            "We store your sensitive data securely, so you can't view your existing account number directly.",
+          suggestion:
+            'However, you can register a different account if you want:',
+          edit: 'Enter new account details',
+        },
+        sortCode: {
+          label: 'Sort code',
+        },
+        accountNumber: {
+          label: 'Account number',
+        },
+        name: {
+          label: 'Account holder name',
+        },
+        cancel: 'Cancel',
       },
     },
   },

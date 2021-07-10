@@ -12,6 +12,7 @@ import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
 import { useUser } from 'application/user';
+import Account from 'ui/modules/account/billing/Account';
 
 export default function Dashboard() {
   useAuthGuard();
@@ -26,7 +27,7 @@ export default function Dashboard() {
   return (
     <>
       <PageTitle>{getMessage(ids.account.dashboard.title)}</PageTitle>
-      <Container name={user.username}>
+      <Container name={user.username ?? user.email}>
         <Sections section={section} subSection={subSection} sections={sections}>
           <Route
             path={makeDashboardPath({
@@ -61,6 +62,18 @@ export default function Dashboard() {
             <Details
               title={getMessage(ids.account.aboutMe.details.title)}
               description={getMessage(ids.account.aboutMe.details.description)}
+              submitText={getMessage(ids.account.saveButton)}
+            />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'billing',
+              subSection: 'account',
+            })}
+          >
+            <Account
+              title={getMessage(ids.account.billing.title)}
+              description={getMessage(ids.account.billing.description)}
               submitText={getMessage(ids.account.saveButton)}
             />
           </Route>

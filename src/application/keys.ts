@@ -47,3 +47,7 @@ export const PatchOrderKey = Symbol('patch order');
 // Notices
 // Queries
 export const NoticesKey = Symbol('notices');
+
+// Payments
+// Actions
+export const SaveBankKey = Symbol('save bank account');
