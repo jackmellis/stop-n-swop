@@ -1,8 +1,9 @@
 import React, { ReactNode, Suspense } from 'react';
 import { ProductList } from 'ui/modules/product/products';
-import Filters from 'ui/modules/games/browse/Filters';
+import BrowseFilters from 'ui/modules/games/browse/Filters';
 import { Query, Status } from '@respite/core';
 import LoadingPage from 'ui/pages/Loading';
+import { Filters } from 'ui/modules/product/filters';
 import type { Platform } from '@sns/contracts/product';
 import type { useCounts, useGames } from 'application/games';
 import More from '../More';
@@ -35,9 +36,6 @@ export default function Results({
   setAvailable(value: boolean): void;
 }) {
   const { status } = gamesQuery;
-  const {
-    data: { platforms: platformCounts, available: availableCount },
-  } = gamesCountsQuery;
   const { data: platforms } = platformsQuery;
   const loading = (() => {
     if (status === Status.FETCHING || status === Status.LOADING) {
@@ -55,16 +53,19 @@ export default function Results({
 
   return (
     <div className="flex-grow flex flex-col lg:flex-row">
-      <Filters
-        platforms={platforms}
-        platformIds={platformIds}
-        setPlatformIds={setPlatformIds}
-        platformCounts={platformCounts}
-        availableCount={availableCount}
-        hasSearched={hasSearched}
-        available={available}
-        setAvailable={setAvailable}
-      />
+      <Filters>
+        <Suspense fallback={<LoadingPage />}>
+          <BrowseFilters
+            platforms={platforms}
+            platformIds={platformIds}
+            setPlatformIds={setPlatformIds}
+            hasSearched={hasSearched}
+            available={available}
+            setAvailable={setAvailable}
+            gamesCountsQuery={gamesCountsQuery}
+          />
+        </Suspense>
+      </Filters>
       <Choose>
         <When condition={!hasSearched}>
           <Empty />

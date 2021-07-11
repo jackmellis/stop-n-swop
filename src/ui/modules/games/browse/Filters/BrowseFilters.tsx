@@ -2,8 +2,9 @@ import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
-import { Filter, Filters } from 'ui/modules/product/filters';
+import { Filter } from 'ui/modules/product/filters';
 import type { Platform } from '@sns/contracts/product';
+import type { useCounts } from 'application/games';
 
 interface Props {
   available: boolean;
@@ -11,9 +12,8 @@ interface Props {
   platforms: Platform[];
   platformIds: string[];
   setPlatformIds(value: string[]): void;
-  platformCounts: Record<string, number>;
-  availableCount: number;
   hasSearched: boolean;
+  gamesCountsQuery: ReturnType<typeof useCounts>;
 }
 
 export default function BrowseFilters({
@@ -23,10 +23,12 @@ export default function BrowseFilters({
   platforms,
   platformIds,
   setPlatformIds,
-  platformCounts,
-  availableCount,
+  gamesCountsQuery,
 }: Props) {
   const getMessage = useGetMessage();
+  const {
+    data: { platforms: platformCounts, available: availableCount },
+  } = gamesCountsQuery;
 
   const availableLabel = hasSearched
     ? `${getMessage(
@@ -35,7 +37,7 @@ export default function BrowseFilters({
     : getMessage(ids.games.filters.preferences.available);
 
   return (
-    <Filters>
+    <>
       <Filter
         name="preferences"
         label={getMessage(ids.games.filters.preferences.label)}
@@ -66,6 +68,6 @@ export default function BrowseFilters({
             })}
         </CheckboxGroup>
       </Filter>
-    </Filters>
+    </>
   );
 }
