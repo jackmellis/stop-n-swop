@@ -47,7 +47,7 @@ export const useGetCurrency = () => {
   const getNumber = useGetNumber();
   return useCallback(
     (number: number, opts?: Intl.NumberFormatOptions) => {
-      return getNumber(number, {
+      return getNumber(number / 100, {
         style: 'currency',
         currency,
         ...opts,

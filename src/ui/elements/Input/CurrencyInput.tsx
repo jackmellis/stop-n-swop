@@ -15,13 +15,13 @@ export default function CurrencyInput({
   const getCurrency = useGetCurrency();
   const type = focused ? 'number' : 'text';
   const value = useMemo(() => {
-    if (focused) {
-      return actual;
-    }
     if (actual == null || actual === '') {
       return '';
     }
-    return getCurrency(Number(actual));
+    if (focused) {
+      return Number(actual) / 100;
+    }
+    return getCurrency(Number(actual), { currency: 'GBP' });
   }, [actual, focused, getCurrency]);
 
   return (
@@ -38,10 +38,15 @@ export default function CurrencyInput({
         onBlur?.(e);
       }}
       onChange={(e) => {
-        if (e.target.value?.match(/\.(\d){3}/)) {
-          e.target.value = e.target.value.replace(/\.(\d\d)\d+/, '.$1');
+        let value: string | number = e.target.value ?? '';
+        if (value.match(/\.(\d){3}/)) {
+          value = value.replace(/\.(\d\d)\d+/, '.$1');
+          e.target.value = value;
         }
-        onChange?.(e);
+        if (value) {
+          value = Number(value) * 100;
+        }
+        onChange?.(value as any);
       }}
       {...props}
     />
