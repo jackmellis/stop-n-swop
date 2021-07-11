@@ -5,9 +5,8 @@ import type { InternalQuery } from '@respite/core';
 import type { QueryOptions } from '@respite/query';
 import type { Game } from '@sns/contracts/product';
 import type { FetchProductsListingCount } from 'core/listings';
-import type { PromiseType } from 'crosscutting/utils';
 
-type Result = PromiseType<ReturnType<FetchProductsListingCount>>;
+type Result = Record<string, number>;
 
 const getProductIds = (games: Game[], page: number) => {
   const start = page * 20;
@@ -45,11 +44,17 @@ export const useListingsCounts = encase(
 
           const result = await fetch({ productIds });
 
-          return [...previous, ...result];
+          return result.reduce((acc, { count, productId }) => {
+            return {
+              ...acc,
+              [productId]: count,
+            };
+          }, previous);
         },
         deps,
         {
           ttl: 30000,
+          initialState: {},
           ...opts,
         },
       );

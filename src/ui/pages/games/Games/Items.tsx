@@ -36,8 +36,7 @@ export default function Items({
         const platform = platforms.find(
           (platform) => platform.id === game.platformId,
         );
-        const totalListings =
-          listingsCounts.find((row) => row.productId === game.id)?.count ?? 0;
+        const totalListings = listingsCounts[game.id] ?? 0;
 
         if (platform == null) {
           return null;

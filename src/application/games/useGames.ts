@@ -3,8 +3,9 @@ import { encase } from 'react-jpex';
 import { GameKey, GamesKey } from 'application/keys';
 import { useCache } from '@respite/core';
 import { useEffect, useRef } from 'react';
+import { useSelector } from '@respite/select';
 import type { SearchGames } from 'core/games';
-import type { PromiseType } from 'crosscutting/utils';
+import type { Game } from '@sns/contracts/product';
 
 // TODO: make an npm library for this
 export const useInfiniteQuery = <T>(
@@ -43,9 +44,12 @@ export const useInfiniteQuery = <T>(
 };
 
 type Args = Parameters<SearchGames>[0];
-type Result = PromiseType<ReturnType<SearchGames>>;
+type Result = {
+  nextPage: number;
+  games: Array<Array<Game>>;
+};
 
-export const useGames = encase(
+const usePagedGames = encase(
   (searchGames: SearchGames) =>
     ({ page, platforms, search, available }: Args, opts?: QueryOptions) => {
       const cache = useCache();
@@ -63,9 +67,11 @@ export const useGames = encase(
           result.games?.forEach((game) => {
             cache.success([GameKey, game.id], game);
           });
+          const games = [...previous.games];
+          games[page] = result.games;
           return {
             nextPage: result.nextPage,
-            games: [...previous.games, ...(result.games ?? [])],
+            games,
           };
         },
         [search, platforms.join(','), available],
@@ -80,3 +86,13 @@ export const useGames = encase(
       );
     },
 );
+
+export const useGames = (args: Args, opts?: QueryOptions) => {
+  const query = usePagedGames(args, opts);
+  return useSelector(query, (result) => {
+    return {
+      nextPage: result.nextPage,
+      games: result.games.flat(),
+    };
+  });
+};
