@@ -6,12 +6,14 @@ import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Address from 'ui/modules/account/about-me/Address';
 import { useAuthGuard } from 'application/auth';
+import { useUser } from 'application/user';
 
 export default function LevelUpAddress() {
   useAuthGuard();
   const redirect = useQueryParam('redirect');
   const { push } = useHistory();
   const getMessage = useGetMessage();
+  const { data: user } = useUser();
 
   return (
     <div className="flex-grow flex flex-col justify-center lg:items-center">
@@ -23,6 +25,7 @@ export default function LevelUpAddress() {
           description={getMessage(ids.auth.levelUp.address.description)}
           submitText={getMessage(ids.auth.levelUp.submitText)}
           onSubmit={() => push(redirect)}
+          user={user}
         />
       </Card>
     </div>

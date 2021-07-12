@@ -1,6 +1,6 @@
 {
   "name": "@sns/abyss",
-  "version": "0.0.0+3221d5f0",
+  "version": "0.0.0+1c65fa81",
   "repository": "git@github.com:stop-n-swop/stop-n-swop-abyss.git",
   "author": "Jack Ellis",
   "license": "MIT",
@@ -13,5 +13,5 @@
     "build": "yarn build:js && yarn build:ts",
     "prepublishOnly": "yarn build"
   },
-  "yalcSig": "3221d5f09f0f0a6571869282b14bb37b"
+  "yalcSig": "1c65fa81913014a04691dee6d8ee6308"
 }

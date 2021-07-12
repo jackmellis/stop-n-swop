@@ -8,14 +8,8 @@ import {
 import { Reason } from 'domain/constants/auth';
 import { useUser } from 'application/user';
 import { never } from 'crosscutting/utils';
+import { hasAddress, hasDetails, hasUsername } from 'domain/selectors/user';
 import { useIsLoggedIn } from './useIsLoggedIn';
-import type { User } from '@sns/contracts/user';
-
-const hasDetails = (user: User) => {
-  return Boolean(
-    user.firstName && user.lastName && user.dateOfBirth && user.nationality,
-  );
-};
 
 export const useAuthGuard = ({
   username,
@@ -32,7 +26,7 @@ export const useAuthGuard = ({
     throw never();
   }
 
-  if (username && !userQuery.data.username) {
+  if (username && !hasUsername(userQuery.data)) {
     replace(makeLevelUpUsernamePath({ pathname, search }));
     throw never();
   }
@@ -40,7 +34,7 @@ export const useAuthGuard = ({
     replace(makeLeveLUpDetailsPath({ pathname, search }));
     throw never();
   }
-  if (address && !userQuery.data.address.line1) {
+  if (address && !hasAddress(userQuery.data)) {
     replace(makeLevelUpAddressPath({ pathname, search }));
     throw never();
   }

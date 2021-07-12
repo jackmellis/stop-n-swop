@@ -1,9 +1,10 @@
 import React, { ReactNode, useState } from 'react';
-import { useUser } from 'application/user';
 import { useSaveBankAccount } from 'application/payments';
-import type { Address } from '@sns/contracts/user';
+import { hasAddress, hasDetails } from 'domain/selectors/user';
+import type { Address, User } from '@sns/contracts/user';
 import Submitted from './Submitted';
 import Edit from './Edit';
+import Incomplete from './Incomplete';
 
 interface Values {
   sortCode: string;
@@ -17,13 +18,14 @@ export default function Details({
   title,
   description,
   submitText,
+  user,
 }: {
   title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
+  user: User;
   onSubmit?(): any;
 }) {
-  const { data: user } = useUser();
   const [hasAccount, setHasAccount] = useState(() => !!user.hasAccount);
   const { action, error, status, reset } = useSaveBankAccount();
 
@@ -32,6 +34,10 @@ export default function Details({
     setHasAccount(true);
     onSubmit?.();
   };
+
+  if (!hasDetails(user) || !hasAddress(user)) {
+    return <Incomplete title={title} />;
+  }
 
   if (hasAccount) {
     return <Submitted setHasAccount={setHasAccount} />;

@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import Input, { DateInput, InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
-import { useUpdateUser, useUser } from 'application/user';
+import { useUpdateUser } from 'application/user';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
@@ -13,15 +13,18 @@ import addYears from 'date-fns/addYears';
 import format from 'date-fns/format';
 import Country from 'ui/elements/Country/Country';
 import Form from '../../dashboard/Form';
+import type { User } from '@sns/contracts/user';
 
 export default function Details({
   onSubmit,
   title,
   description,
   submitText,
+  user,
   mandatory = false,
   showEmail = true,
 }: {
+  user: User;
   title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
@@ -29,7 +32,6 @@ export default function Details({
   showEmail?: boolean;
   onSubmit?(): any;
 }) {
-  const { data: user } = useUser();
   const formProps = useForm();
   const { setError } = formProps;
   const intl = useIntl();

@@ -51,3 +51,4 @@ export const NoticesKey = Symbol('notices');
 // Payments
 // Actions
 export const SaveBankKey = Symbol('save bank account');
+export const UploadKycKey = Symbol('upload kyc');

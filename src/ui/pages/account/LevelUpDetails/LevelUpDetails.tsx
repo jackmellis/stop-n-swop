@@ -6,12 +6,14 @@ import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
 import Details from 'ui/modules/account/about-me/Details';
+import { useUser } from 'application/user';
 
 export default function LevelUpDetails() {
   useAuthGuard();
   const redirect = useQueryParam('redirect');
   const { push } = useHistory();
   const getMessage = useGetMessage();
+  const { data: user } = useUser();
 
   return (
     <div className="flex-grow flex flex-col justify-center lg:items-center">
@@ -25,6 +27,7 @@ export default function LevelUpDetails() {
           onSubmit={() => push(redirect)}
           mandatory
           showEmail={false}
+          user={user}
         />
       </Card>
     </div>

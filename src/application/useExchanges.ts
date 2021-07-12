@@ -21,6 +21,7 @@ import {
   CreateOrderKey,
   PatchOrderKey,
   SaveBankKey,
+  UploadKycKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -29,7 +30,7 @@ export default function useExchanges() {
       [TokensKey, UserKey],
       [LogInKey, AuthKey, LogOutKey],
     ],
-    [UserKey, [UpdateUserKey, SaveBankKey]],
+    [UserKey, [UpdateUserKey, SaveBankKey, UploadKycKey]],
     [
       [ListingsKey, ListingKey, MyListingsKey, ListingCountKey, HistoryKey],
       [CreateListingKey, UpdateListingKey],

@@ -277,6 +277,10 @@ let PaymentErrorCode;
   PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
   PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
   PaymentErrorCode["BANK_ACCOUNT_FAIL"] = "BANK_ACCOUNT_FAIL";
+  PaymentErrorCode["KYC_DOCUMENT_FAILED"] = "KYC_DOCUMENT_FAILED";
+  PaymentErrorCode["KYC_PAGE_TOO_SMALL"] = "KYC_PAGE_TOO_SMALL";
+  PaymentErrorCode["KYC_PAGE_FAILED"] = "KYC_PAGE_FAILED";
+  PaymentErrorCode["KYC_SUBMIT_FAILED"] = "KYC_SUBMIT_FAILED";
 })(PaymentErrorCode || (PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -300,6 +304,33 @@ class BankAccountFailError extends UnknownError {
   constructor(...args) {
     super(...args);
     this.code = PaymentErrorCode.BANK_ACCOUNT_FAIL;
+  }
+}
+class KycDocumentFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.KYC_DOCUMENT_FAILED;
+  }
+}
+class KycPageTooSmallError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.KYC_PAGE_TOO_SMALL;
+  }
+  toString() {
+    return "The uploaded file is too small";
+  }
+}
+class KycPageFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.KYC_PAGE_FAILED;
+  }
+}
+class KycSubmitFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.KYC_SUBMIT_FAILED;
   }
 }
 
@@ -390,6 +421,14 @@ const responseToError = response => {
       return new FailedToRegisterError();
     case PaymentErrorCode.BANK_ACCOUNT_FAIL:
       return new BankAccountFailError();
+    case PaymentErrorCode.KYC_DOCUMENT_FAILED:
+      return new KycDocumentFailedError();
+    case PaymentErrorCode.KYC_PAGE_TOO_SMALL:
+      return new KycPageTooSmallError();
+    case PaymentErrorCode.KYC_PAGE_FAILED:
+      return new KycPageFailedError();
+    case PaymentErrorCode.KYC_SUBMIT_FAILED:
+      return new KycSubmitFailedError();
   }
   switch (response.status) {
     case 400:
@@ -406,4 +445,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

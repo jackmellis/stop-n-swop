@@ -13,7 +13,7 @@ import AddressFields from '../../about-me/Address/AddressFields';
 import type { User } from '@sns/contracts/user';
 import type { Status } from '@respite/core';
 
-export default function Details({
+export default function Edit({
   onSubmit,
   title,
   description,

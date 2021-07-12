@@ -1,23 +1,25 @@
 import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
-import { useUpdateUser, useUser } from 'application/user';
+import { useUpdateUser } from 'application/user';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import Form from '../../dashboard/Form';
 import AddressFields from './AddressFields';
+import type { User } from '@sns/contracts/user';
 
 export default function Address({
   title,
   description,
   submitText,
   onSubmit,
+  user,
 }: {
+  user: User;
   title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
   onSubmit?(): any;
 }) {
-  const { data: user } = useUser();
   const { action, error, reset, status } = useUpdateUser();
   const handleSubmit = async (values: any) => {
     await action(values);
