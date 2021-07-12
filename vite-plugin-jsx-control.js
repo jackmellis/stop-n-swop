@@ -1,9 +1,9 @@
-import babel from '@babel/core';
+const babel = require('@babel/core');
 
-export default {
+module.exports = {
   name: 'babel',
   enforce: 'pre',
-  transform(code: string, id: string) {
+  transform(code, id) {
     if (!id.endsWith('.ts') && !id.endsWith('.tsx')) {
       return;
     }

@@ -3,6 +3,7 @@ export declare enum OauthProvider {
 }
 export declare enum KycStatus {
     NONE = "none",
+    CREATED = "created",
     VERIFYING = "verifying",
     VERIFIED = "verified",
     FAILED = "failed",

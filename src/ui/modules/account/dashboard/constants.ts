@@ -30,13 +30,18 @@ export const sections: Section[] = [
   },
   {
     key: 'billing',
-    label: 'Billing',
+    label: ids.account.dashboard.sections.billing.label,
     to: makeDashboardPath({ section: 'billing' }),
     sections: [
       {
         key: 'account',
         to: makeDashboardPath({ section: 'billing', subSection: 'account' }),
-        label: 'Bank Account',
+        label: ids.account.dashboard.sections.billing.account,
+      },
+      {
+        key: 'verify',
+        to: makeDashboardPath({ section: 'billing', subSection: 'verify' }),
+        label: ids.account.dashboard.sections.billing.verify,
       },
     ],
   },

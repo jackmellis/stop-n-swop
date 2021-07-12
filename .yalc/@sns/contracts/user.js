@@ -9,6 +9,7 @@ exports.OauthProvider = void 0;
 exports.KycStatus = void 0;
 (function (KycStatus) {
   KycStatus["NONE"] = "none";
+  KycStatus["CREATED"] = "created";
   KycStatus["VERIFYING"] = "verifying";
   KycStatus["VERIFIED"] = "verified";
   KycStatus["FAILED"] = "failed";

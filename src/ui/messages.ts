@@ -313,6 +313,11 @@ const enMessages = {
           details: 'Details',
           address: 'Address',
         },
+        billing: {
+          label: 'About me',
+          account: 'Bank Account',
+          verify: 'Verify',
+        },
       },
     },
     saveButton: 'Save',
@@ -369,6 +374,12 @@ const enMessages = {
       description:
         "You'll need to provide your account number before you can receive any funds for your listings",
       account: {
+        incomplete: {
+          description:
+            "Before you set up your account, you'll need to complete the Details and Address sections of your account",
+          details: 'Details',
+          address: 'Address',
+        },
         hasAccount: {
           title: "You've already provided your bank account details",
           description:
@@ -387,6 +398,42 @@ const enMessages = {
           label: 'Account holder name',
         },
         cancel: 'Cancel',
+      },
+      verify: {
+        title: 'Verify your identity',
+        incomplete: {
+          description:
+            "Before you begin identity verification, you'll need to complete the Details and Address sections of your account",
+          details: 'Details',
+          address: 'Address',
+        },
+        none: {
+          description:
+            'Before you can transfer your earnings into your account, we need to carry out a quick verification check...',
+          action: 'Please upload a photo of your drivers licence or passport.',
+          hint: 'Verifying your identity will also boost your seller rating!',
+        },
+        verifying: {
+          description: 'We are currently processing your identification',
+          hint: "This could take some time. We will let you know when you've been verified...",
+        },
+        failed: {
+          description:
+            'Unfortunately your identification could not be verified. Please try again.',
+          action: 'Please upload a photo of your drivers licence or passport.',
+        },
+        oudated: {
+          description:
+            "Your identification has expired. You'll need to upload another item before you can continue receiving funds",
+          action:
+            'Please upload a photo of either your drivers licence or passport.',
+        },
+        verified: {
+          description: 'Your identity has been verified',
+          complete: "You're all set to start receiving earnings!",
+          outstanding:
+            'Make sure to provide your bank details to start receiving your earnings...',
+        },
       },
     },
   },
@@ -466,6 +513,14 @@ const enMessages = {
       },
       orderReceived: {
         title: 'Your item has been received by the buyer',
+      },
+      kycVerified: {
+        title: 'Your identity verification has passed!',
+      },
+      kycFailed: {
+        title:
+          'Your identity verification has failed. Please check your account settings for more info.',
+        action: 'View',
       },
     },
   },

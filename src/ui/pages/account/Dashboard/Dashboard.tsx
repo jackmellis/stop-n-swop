@@ -13,10 +13,13 @@ import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
 import { useUser } from 'application/user';
 import Account from 'ui/modules/account/billing/Account';
+import Verify from 'ui/modules/account/billing/Verify';
+import { useUploadKyc } from 'application/payments';
 
 export default function Dashboard() {
   useAuthGuard();
   const { data: user } = useUser();
+  const uploadKyc = useUploadKyc();
   const { section, subSection } =
     useParams<{
       section: string;
@@ -39,6 +42,7 @@ export default function Dashboard() {
               title={getMessage(ids.account.aboutMe.username.title)}
               description={getMessage(ids.account.aboutMe.username.description)}
               submitText={getMessage(ids.account.saveButton)}
+              user={user}
             />
           </Route>
           <Route
@@ -51,6 +55,7 @@ export default function Dashboard() {
               title={getMessage(ids.account.aboutMe.address.title)}
               description={getMessage(ids.account.aboutMe.address.description)}
               submitText={getMessage(ids.account.saveButton)}
+              user={user}
             />
           </Route>
           <Route
@@ -63,6 +68,7 @@ export default function Dashboard() {
               title={getMessage(ids.account.aboutMe.details.title)}
               description={getMessage(ids.account.aboutMe.details.description)}
               submitText={getMessage(ids.account.saveButton)}
+              user={user}
             />
           </Route>
           <Route
@@ -75,6 +81,20 @@ export default function Dashboard() {
               title={getMessage(ids.account.billing.title)}
               description={getMessage(ids.account.billing.description)}
               submitText={getMessage(ids.account.saveButton)}
+              user={user}
+            />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'billing',
+              subSection: 'verify',
+            })}
+          >
+            <Verify
+              user={user}
+              error={uploadKyc.error}
+              status={uploadKyc.status}
+              onChange={(file) => uploadKyc.action([file])}
             />
           </Route>
         </Sections>

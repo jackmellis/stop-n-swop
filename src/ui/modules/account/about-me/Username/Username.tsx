@@ -1,25 +1,27 @@
 import React, { ReactNode } from 'react';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
-import { useUpdateUser, useUser } from 'application/user';
+import { useUpdateUser } from 'application/user';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import Form from '../../dashboard/Form';
+import type { User } from '@sns/contracts/user';
 
 export default function Username({
   onSubmit,
   title,
   description,
   submitText,
+  user,
 }: {
   title?: ReactNode;
   description: ReactNode;
   submitText: ReactNode;
+  user: User;
   onSubmit?(): any;
 }) {
-  const { data: user } = useUser();
   const formProps = useForm();
   const intl = useIntl();
   const getMessage = intl.message;

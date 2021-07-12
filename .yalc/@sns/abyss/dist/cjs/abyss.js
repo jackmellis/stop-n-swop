@@ -281,6 +281,10 @@ exports.PaymentErrorCode = void 0;
   PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
   PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
   PaymentErrorCode["BANK_ACCOUNT_FAIL"] = "BANK_ACCOUNT_FAIL";
+  PaymentErrorCode["KYC_DOCUMENT_FAILED"] = "KYC_DOCUMENT_FAILED";
+  PaymentErrorCode["KYC_PAGE_TOO_SMALL"] = "KYC_PAGE_TOO_SMALL";
+  PaymentErrorCode["KYC_PAGE_FAILED"] = "KYC_PAGE_FAILED";
+  PaymentErrorCode["KYC_SUBMIT_FAILED"] = "KYC_SUBMIT_FAILED";
 })(exports.PaymentErrorCode || (exports.PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -304,6 +308,33 @@ class BankAccountFailError extends UnknownError {
   constructor(...args) {
     super(...args);
     this.code = exports.PaymentErrorCode.BANK_ACCOUNT_FAIL;
+  }
+}
+class KycDocumentFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.KYC_DOCUMENT_FAILED;
+  }
+}
+class KycPageTooSmallError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.KYC_PAGE_TOO_SMALL;
+  }
+  toString() {
+    return "The uploaded file is too small";
+  }
+}
+class KycPageFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.KYC_PAGE_FAILED;
+  }
+}
+class KycSubmitFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.PaymentErrorCode.KYC_SUBMIT_FAILED;
   }
 }
 
@@ -394,6 +425,14 @@ const responseToError = response => {
       return new FailedToRegisterError();
     case exports.PaymentErrorCode.BANK_ACCOUNT_FAIL:
       return new BankAccountFailError();
+    case exports.PaymentErrorCode.KYC_DOCUMENT_FAILED:
+      return new KycDocumentFailedError();
+    case exports.PaymentErrorCode.KYC_PAGE_TOO_SMALL:
+      return new KycPageTooSmallError();
+    case exports.PaymentErrorCode.KYC_PAGE_FAILED:
+      return new KycPageFailedError();
+    case exports.PaymentErrorCode.KYC_SUBMIT_FAILED:
+      return new KycSubmitFailedError();
   }
   switch (response.status) {
     case 400:
@@ -421,6 +460,10 @@ exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
 exports.InvalidStatusError = InvalidStatusError;
 exports.InvalidTokenError = InvalidTokenError;
+exports.KycDocumentFailedError = KycDocumentFailedError;
+exports.KycPageFailedError = KycPageFailedError;
+exports.KycPageTooSmallError = KycPageTooSmallError;
+exports.KycSubmitFailedError = KycSubmitFailedError;
 exports.ListingNotFoundError = ListingNotFoundError;
 exports.ListingOwnedByUserError = ListingOwnedByUserError;
 exports.MissingRegisterFieldsError = MissingRegisterFieldsError;
