@@ -1,4 +1,4 @@
-import type { SaveBankDetailsRequest } from '@sns/contracts/payment';
+import type { Card, SaveBankDetailsRequest } from '@sns/contracts/payment';
 
 export type SaveBankDetails = (args: SaveBankDetailsRequest) => Promise<void>;
 
@@ -20,3 +20,5 @@ export type CompleteCard = (args: {
   expiry: string;
   cvc: string;
 }) => Promise<{ cardId: string }>;
+
+export type FetchCards = () => Promise<Card[]>;

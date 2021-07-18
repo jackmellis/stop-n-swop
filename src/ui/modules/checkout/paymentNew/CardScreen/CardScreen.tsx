@@ -38,7 +38,7 @@ export default function CardScreen({
       className="flex-grow flex justify-center items-center"
     >
       <Card
-        title={g(ids.checkout.payment.title)}
+        title={g(ids.checkout.paymentNew.title)}
         className="max-w-screen-sm mx-auto"
       >
         <div className="flex flex-col items-center">
@@ -52,7 +52,7 @@ export default function CardScreen({
               <Input
                 name="name"
                 id="name"
-                label={g(ids.checkout.payment.name.label)}
+                label={g(ids.checkout.paymentNew.name.label)}
                 value={defaultName}
                 onChange={() => null}
                 disabled
@@ -64,18 +64,18 @@ export default function CardScreen({
                 id="cardNumber"
                 defaultValue=""
                 Input={CardInput}
-                label={g(ids.checkout.payment.cardNumber.label)}
+                label={g(ids.checkout.paymentNew.cardNumber.label)}
                 rules={{
-                  required: g(ids.checkout.payment.cardNumber.required),
+                  required: g(ids.checkout.paymentNew.cardNumber.required),
                   maxLength: {
                     value: 16,
-                    message: g(ids.checkout.payment.cardNumber.length, {
+                    message: g(ids.checkout.paymentNew.cardNumber.length, {
                       length: 16,
                     }),
                   },
                   minLength: {
                     value: 16,
-                    message: g(ids.checkout.payment.cardNumber.length, {
+                    message: g(ids.checkout.paymentNew.cardNumber.length, {
                       length: 16,
                     }),
                   },
@@ -89,18 +89,18 @@ export default function CardScreen({
                   id="expiry"
                   defaultValue=""
                   Input={ExpiryInput}
-                  label={g(ids.checkout.payment.expiry.label)}
+                  label={g(ids.checkout.paymentNew.expiry.label)}
                   rules={{
-                    required: g(ids.checkout.payment.expiry.required),
+                    required: g(ids.checkout.paymentNew.expiry.required),
                     minLength: {
                       value: 4,
-                      message: g(ids.checkout.payment.expiry.length, {
+                      message: g(ids.checkout.paymentNew.expiry.length, {
                         length: 4,
                       }),
                     },
                     maxLength: {
                       value: 4,
-                      message: g(ids.checkout.payment.expiry.length, {
+                      message: g(ids.checkout.paymentNew.expiry.length, {
                         length: 4,
                       }),
                     },
@@ -111,21 +111,21 @@ export default function CardScreen({
                 <InputController
                   id="cvc"
                   defaultValue=""
-                  label={g(ids.checkout.payment.cvc.label)}
+                  label={g(ids.checkout.paymentNew.cvc.label)}
                   name="cvc"
                   rules={{
-                    required: g(ids.checkout.payment.cvc.required, {
+                    required: g(ids.checkout.paymentNew.cvc.required, {
                       length: 3,
                     }),
                     minLength: {
                       value: 3,
-                      message: g(ids.checkout.payment.cvc.required, {
+                      message: g(ids.checkout.paymentNew.cvc.required, {
                         length: 3,
                       }),
                     },
                     maxLength: {
                       value: 3,
-                      message: g(ids.checkout.payment.cvc.required, {
+                      message: g(ids.checkout.paymentNew.cvc.required, {
                         length: 3,
                       }),
                     },
@@ -138,14 +138,14 @@ export default function CardScreen({
               <CheckboxController
                 name="remember"
                 defaultValue
-                label={g(ids.checkout.payment.remember.label)}
+                label={g(ids.checkout.paymentNew.remember.label)}
               />
             </div>
             <div>
               <Submit className="w-full space-x-4" status={status}>
                 <FaLock />
                 <span>
-                  {g(ids.checkout.payment.submit, {
+                  {g(ids.checkout.paymentNew.submit, {
                     amount: getCurrency(getFinalPrice(listing), {
                       currency: listing.currency,
                     }),

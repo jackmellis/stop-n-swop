@@ -3,72 +3,73 @@ import { Status } from '@sns/contracts/order';
 import { useAuthGuard } from 'application/auth';
 import { useListing } from 'application/listings';
 import { useMyOrder, usePlaceOrder } from 'application/orders';
-import { useCreateCard } from 'application/payments';
-import { useUser } from 'application/user';
-import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useCards } from 'application/payments';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { makeCheckoutProcessingPath } from 'ui/constants/paths';
+import {
+  makeCheckoutPaymentNewPath,
+  makeCheckoutProcessingPath,
+} from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
-import CardScreen from 'ui/modules/checkout/payment/CardScreen/CardScreen';
+import PaymentScreen from 'ui/modules/checkout/payment/PaymentScreen';
+import Cards from 'ui/modules/checkout/payment/Cards';
+import NewCard from 'ui/modules/checkout/payment/NewCard';
+import SubmitCard from 'ui/modules/checkout/payment/SubmitCard/SubmitCard';
 import { combineActions } from '../BillingAddress/BillingAddress';
+import type { ActionQuery } from '@respite/action';
 
 export default function Payment() {
   useAuthGuard({
     username: true,
     details: true,
   });
-  const formProps = useForm({
-    defaultValues: {
-      remember: true,
-    },
-  });
-  const { data: user } = useUser();
-  const { orderId } = useParams<{ orderId: string }>();
   const retry = useQueryParam('retry') === 'true';
   const { push } = useHistory();
-
+  const { orderId } = useParams<{ orderId: string }>();
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
-
+  const { data: cards } = useCards();
   const placeAction = usePlaceOrder();
-  const createAction = useCreateCard();
-  const { error, status } = combineActions(placeAction, createAction);
-  const retryError = retry
-    ? 'Your payment was unsuccessful, please try again' // TODO: add to abyss
-    : undefined;
-  const orderError =
-    listing.status === Status.OPEN ? undefined : new OrderNotAvailableError();
-
-  const handleSubmit = formProps.handleSubmit(
-    async ({
-      cardNumber,
-      cvc,
-      expiry,
-    }: {
-      cardNumber: string;
-      expiry: string;
-      cvc: string;
-      remember: boolean;
-    }) => {
-      const { cardId } = await createAction.action({ cardNumber, cvc, expiry });
-      await placeAction.action({
-        cardId,
-        orderId,
-      });
-      push(makeCheckoutProcessingPath({ orderId }));
-    },
+  const { error, status } = combineActions(
+    placeAction,
+    {
+      error: retry
+        ? 'Your payment was unsuccessful, please try again' // TODO: add to abyss
+        : undefined,
+    } as ActionQuery<any>,
+    {
+      error:
+        listing.status === Status.OPEN
+          ? undefined
+          : new OrderNotAvailableError(),
+    } as ActionQuery<any>,
   );
+  const { action: placeOrder } = placeAction;
+
+  const [cardId, setCardId] = useState<string>(cards[0]?.id);
+
+  const handleSubmit = async () => {
+    await placeOrder({
+      cardId,
+      orderId,
+    });
+    push(makeCheckoutProcessingPath({ orderId }));
+  };
+
+  useEffect(() => {
+    if (!cards.length) {
+      push(makeCheckoutPaymentNewPath({ orderId }));
+    }
+  }, [cards.length, orderId, push]);
 
   return (
-    <FormProvider {...formProps}>
-      <CardScreen
-        error={error ?? orderError ?? retryError}
-        status={status}
-        user={user}
-        listing={listing}
-        onSubmit={handleSubmit}
-      />
-    </FormProvider>
+    <PaymentScreen
+      error={error}
+      cards={<Cards cardId={cardId} setCardId={setCardId} cards={cards} />}
+      newCard={<NewCard orderId={orderId} />}
+      submitCard={
+        <SubmitCard listing={listing} status={status} onSubmit={handleSubmit} />
+      }
+    />
   );
 }

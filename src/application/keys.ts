@@ -50,6 +50,9 @@ export const PlaceOrderKey = Symbol('place order');
 export const NoticesKey = Symbol('notices');
 
 // Payments
+// Queries
+export const CardsKey = Symbol('cards');
 // Actions
+export const CreateCardKey = Symbol('create card');
 export const SaveBankKey = Symbol('save bank account');
 export const UploadKycKey = Symbol('upload kyc');

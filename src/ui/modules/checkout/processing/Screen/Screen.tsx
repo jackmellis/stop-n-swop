@@ -10,7 +10,7 @@ export default function ProcessingScreen() {
   return (
     <div className="flex-grow flex justify-center items-center">
       <Card
-        title={g(ids.checkout.payment.title)}
+        title={g(ids.checkout.paymentNew.title)}
         className="max-w-screen-sm mx-auto"
       >
         <div className="flex flex-col items-center">

@@ -1,4 +1,5 @@
 import { Address } from "../user";
+import { Card } from "./entities";
 export interface SaveBankDetailsRequest {
     name: string;
     address: Address;
@@ -21,3 +22,6 @@ export interface PlaceOrderRequest {
     secureModeReturnUrl: string;
 }
 export declare type PlaceOrderResponse = {};
+export interface GetCardsResponse {
+    cards: Array<Card>;
+}

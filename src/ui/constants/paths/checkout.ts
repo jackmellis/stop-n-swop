@@ -24,6 +24,14 @@ export const makeCheckoutPaymentPath = ({
   }
   return str;
 };
+export const CHECKOUT_PAYMENT_NEW = '/checkout/:orderId/payment/new';
+export const makeCheckoutPaymentNewPath = ({
+  orderId,
+}: {
+  orderId: string;
+}) => {
+  return `/checkout/${orderId}/payment/new`;
+};
 export const CHECKOUT_PROCESSING = '/checkout/:orderId/process';
 export const makeCheckoutProcessingPath = ({ orderId }: { orderId: string }) =>
   `/checkout/${orderId}/process`;
