@@ -480,6 +480,13 @@ const enMessages = {
       next: 'Continue',
     },
     payment: {
+      description: 'Choose your payment method:',
+      newCard: 'Use a new card',
+      card: {
+        number: '****{alias}',
+      },
+    },
+    paymentNew: {
       title: 'Payment Details',
       name: {
         label: 'Name on card',

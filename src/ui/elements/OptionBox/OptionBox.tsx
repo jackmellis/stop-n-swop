@@ -19,7 +19,7 @@ export default function OptionBox({
 
   return (
     <div className={className}>
-      <div className="relative" style={{ '--aspect-ratio': 1 } as any}>
+      <div className="relative aspect aspect-1">
         <button
           type="button"
           className={cx(

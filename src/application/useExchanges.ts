@@ -1,9 +1,7 @@
 import { useExchange } from '@respite/exchange';
 import {
-  LogInKey,
   TokensKey,
   AuthKey,
-  LogOutKey,
   UserKey,
   UpdateUserKey,
   ListingsKey,
@@ -23,14 +21,13 @@ import {
   SaveBankKey,
   UploadKycKey,
   PlaceOrderKey,
+  CardsKey,
+  CreateCardKey,
 } from './keys';
 
 export default function useExchanges() {
   useExchange(
-    [
-      [TokensKey, UserKey],
-      [LogInKey, AuthKey, LogOutKey],
-    ],
+    [[TokensKey, UserKey], [AuthKey]],
     [UserKey, [UpdateUserKey, SaveBankKey, UploadKycKey]],
     [
       [ListingsKey, ListingKey, MyListingsKey, ListingCountKey, HistoryKey],
@@ -51,5 +48,6 @@ export default function useExchanges() {
     ],
     [[MyOrdersKey], [CreateOrderKey]],
     [[MyOrdersKey, ListingsKey, HistoryKey], [PlaceOrderKey]],
+    [CardsKey, CreateCardKey],
   );
 }

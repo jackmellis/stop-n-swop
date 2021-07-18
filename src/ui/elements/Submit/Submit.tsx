@@ -9,6 +9,9 @@ interface Props extends ButtonProps {
 
 export default function Submit({ status, reset, ...props }: Props) {
   const state = useMemo(() => {
+    if (props.disabled) {
+      return 'disabled';
+    }
     if (status === Status.LOADING) {
       return 'pending';
     }
@@ -16,7 +19,7 @@ export default function Submit({ status, reset, ...props }: Props) {
       return 'success';
     }
     return 'none';
-  }, [status]);
+  }, [props.disabled, status]);
 
   useEffect(() => {
     let handle: NodeJS.Timeout;

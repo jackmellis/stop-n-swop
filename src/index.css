@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 /* Aspect ratio magic */
+/* TODO: replace all instances of --aspect-ratio with the aspect classes */
 [style*='--aspect-ratio'] > :first-child {
   width: 100%;
 }
