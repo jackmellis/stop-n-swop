@@ -37,7 +37,6 @@ export default function View() {
           platform={platform.name}
         />
         <QuickActions
-          platformId={game.platformId}
           productId={productId}
           favourite={favourite}
           onFavouriteClick={() => setFavourite(!favourite)}

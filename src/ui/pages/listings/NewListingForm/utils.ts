@@ -5,11 +5,9 @@ import type { Values } from 'ui/modules/listings/new/types';
 export const useOnSubmit = ({
   create,
   productId,
-  platformId,
   push,
 }: {
   productId: string;
-  platformId: string;
   create: ReturnType<typeof useCreateListing>['action'];
   push(to: string): void;
 }) => {
@@ -42,7 +40,6 @@ export const useOnSubmit = ({
     push(
       makeNewListingCompletePath({
         listingId,
-        platformId,
         productId,
       }),
     );

@@ -4,7 +4,7 @@ import React from 'react';
 import PageTitle from 'ui/elements/PageTitle';
 import { Link, useParams } from 'react-router-dom';
 import { useGetMessage } from 'ui/intl';
-import { makeNewListingPlatformPath, NEW_LISTING } from 'ui/constants/paths';
+import { NEW_LISTING } from 'ui/constants/paths';
 import { ids } from 'ui/messages';
 import Card from 'ui/elements/Card';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
@@ -13,10 +13,9 @@ import { FaCheckCircle } from 'react-icons/fa';
 
 export default function NewListingCompete() {
   useAuthGuard();
-  const { productId, platformId, listingId } =
+  const { productId, listingId } =
     useParams<{
       productId: string;
-      platformId: string;
       listingId: string;
     }>();
   const {
@@ -28,9 +27,6 @@ export default function NewListingCompete() {
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
         <Link to={NEW_LISTING}>{getMessage(ids.listings.new.pageTitle)}</Link>
-        <Link to={makeNewListingPlatformPath({ platformId })}>
-          {platformId}
-        </Link>
         <span>{name}</span>
       </PageTitle>
       <Card

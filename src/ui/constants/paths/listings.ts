@@ -8,13 +8,6 @@ export const makeMyListingPath = ({ listingId }: { listingId: string }) =>
 
 export const NEW_LISTING = '/list';
 
-export const NEW_LISTING_PLATFORM = '/list/:platformId';
-export const makeNewListingPlatformPath = ({
-  platformId,
-}: {
-  platformId: string;
-}) => `${NEW_LISTING}/${platformId}`;
-
 export const GAME_LISTING = `${GAME}/listings/:listingId`;
 export const makeGameListingPath = ({
   productId,
@@ -28,23 +21,16 @@ export const EDIT_LISTING = `${MY_LISTING}/edit`;
 export const makeEditListingPath = ({ listingId }: { listingId: string }) =>
   `${makeMyListingPath({ listingId })}/edit`;
 
-export const GAME_NEW_LISTING = `${NEW_LISTING_PLATFORM}/:productId`;
-export const makeGameNewListingPath = ({
-  platformId,
-  productId,
-}: {
-  platformId: string;
-  productId: string;
-}) => `${makeNewListingPlatformPath({ platformId })}/${productId}`;
+export const GAME_NEW_LISTING = `${NEW_LISTING}/:productId`;
+export const makeGameNewListingPath = ({ productId }: { productId: string }) =>
+  `${NEW_LISTING}/${productId}`;
 export const NEW_LISTING_COMPLETE = `${GAME_NEW_LISTING}/:listingId`;
 export const makeNewListingCompletePath = ({
-  platformId,
   productId,
   listingId,
 }: {
-  platformId: string;
   productId: string;
   listingId: string;
 }) => {
-  return `${makeGameNewListingPath({ platformId, productId })}/${listingId}`;
+  return `${makeGameNewListingPath({ productId })}/${listingId}`;
 };

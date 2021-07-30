@@ -3,7 +3,7 @@ import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
-import { makeNewListingPlatformPath, NEW_LISTING } from 'ui/constants/paths';
+import { NEW_LISTING } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
 import type useMachine from 'ui/modules/listings/new/machine';
 import type { Query } from '@respite/core';
@@ -13,7 +13,6 @@ type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
-  platformId: string;
   name: string;
   step: Step;
   dispatch: Dispatch;
@@ -30,7 +29,6 @@ interface Props {
 
 export default function NewProductListing({
   productId,
-  platformId,
   name,
   step,
   dispatch,
@@ -43,9 +41,6 @@ export default function NewProductListing({
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
         <Link to={NEW_LISTING}>{useMessage(ids.listings.new.pageTitle)}</Link>
-        <Link to={makeNewListingPlatformPath({ platformId })}>
-          {platformId}
-        </Link>
         <span>{name}</span>
       </PageTitle>
       <Form

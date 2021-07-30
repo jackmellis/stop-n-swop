@@ -6,28 +6,39 @@ import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import type { Game } from '@sns/contracts/product';
+import type { Game, Platform } from '@sns/contracts/product';
 
 interface Props {
   onSearch(value: string): void;
   productId: string;
-  platformId: string;
   setProductId(value: string): void;
   results: Game[];
+  platforms: Platform[];
 }
 
 export default function GameFinder({
   onSearch,
-  platformId,
   productId,
   setProductId,
   results,
+  platforms,
 }: Props) {
-  const options = results.map((product) => ({
-    value: product.id,
-    label: product.name,
-  }));
   const getMessage = useGetMessage();
+  const options = results.map((product) => {
+    const platform = platforms.find(
+      (platform) => platform.id === product.platformId,
+    );
+    const value = product.id;
+    const label = getMessage(ids.listings.new.game.label, {
+      game: product.name,
+      platform: platform.name,
+    });
+
+    return {
+      value,
+      label,
+    };
+  });
 
   return (
     <div>
@@ -45,7 +56,7 @@ export default function GameFinder({
           <Button
             component={Link}
             kind="primary"
-            to={makeGameNewListingPath({ productId, platformId })}
+            to={makeGameNewListingPath({ productId })}
           >
             <span className="pr-3">
               {getMessage(ids.listings.new.game.button)}

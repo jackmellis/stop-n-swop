@@ -4,30 +4,27 @@ import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
 import GameFinder from 'ui/modules/listings/new/Game';
-import { Link } from 'react-router-dom';
-import { NEW_LISTING } from 'ui/constants/paths';
-import type { Game } from '@sns/contracts/product';
+import type { Game, Platform } from '@sns/contracts/product';
 
 interface Props {
   productId: string;
-  platformId: string;
   results: Game[];
+  platforms: Platform[];
   onSearch(value: string): void;
   setProductId(value: string): void;
 }
 
 export default function NewListing({
   productId,
-  platformId,
   results,
+  platforms,
   onSearch,
   setProductId,
 }: Props) {
   return (
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
-        <Link to={NEW_LISTING}>{useMessage(ids.listings.new.pageTitle)}</Link>
-        <span>{platformId}</span>
+        <span>{useMessage(ids.listings.new.pageTitle)}</span>
       </PageTitle>
       <Card
         title={useMessage(ids.listings.new.title)}
@@ -35,7 +32,7 @@ export default function NewListing({
       >
         <GameFinder
           productId={productId}
-          platformId={platformId}
+          platforms={platforms}
           results={results}
           onSearch={onSearch}
           setProductId={setProductId}

@@ -148,13 +148,10 @@ const enMessages = {
         boxed: 'Boxed',
         instructions: 'Instructions',
       },
-      platform: {
-        label: 'What platform are we talking?',
-        button: 'Next',
-      },
       game: {
         label: "Find the game you want to sell and let's get listing...",
         button: 'List!',
+        game: '{game} - {platform}',
       },
       photos: {
         required: 'This photo is required',

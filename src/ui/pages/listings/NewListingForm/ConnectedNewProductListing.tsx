@@ -14,13 +14,12 @@ import { useOnSubmit } from './utils';
 
 export default function ConnectedNewProductListing() {
   useAuthGuard({ username: true, address: true, details: true });
-  const { productId, platformId } =
+  const { productId } =
     useParams<{
       productId: string;
-      platformId: string;
     }>();
   const {
-    data: { name },
+    data: { name, platformId },
   } = useGame({ id: productId });
   const requirementsQuery = useRequirements({ productId, platformId });
   const {
@@ -31,7 +30,7 @@ export default function ConnectedNewProductListing() {
   } = useUser();
   const { action: create, error } = useCreateListing();
   const { push } = useHistory();
-  const onSubmit = useOnSubmit({ create, productId, platformId, push });
+  const onSubmit = useOnSubmit({ create, productId, push });
   const formProps = useForm<Values>({
     mode: 'onBlur',
     defaultValues: {
@@ -46,7 +45,6 @@ export default function ConnectedNewProductListing() {
     <FormProvider {...formProps}>
       <NewProductListing
         productId={productId}
-        platformId={platformId}
         dispatch={dispatch}
         step={step}
         name={name}
