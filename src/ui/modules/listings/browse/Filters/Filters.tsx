@@ -5,7 +5,7 @@ import { CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
 import { Filter, Filters } from 'ui/modules/product/filters';
 import { Controller } from 'react-hook-form';
-import StarFilter from './StarFilter';
+// import StarFilter from './StarFilter';
 
 const priceRanges = [[0, 1000000]];
 
@@ -114,7 +114,8 @@ export default function ListingsFilters() {
           )}
         />
       </Filter>
-      <Filter
+      {/* TODO: reimplement star rating */}
+      {/* <Filter
         name="rating"
         label={getMessage(ids.listings.filters.rating.label)}
       >
@@ -125,7 +126,7 @@ export default function ListingsFilters() {
             <StarFilter value={value} onChange={onChange} />
           )}
         />
-      </Filter>
+      </Filter> */}
     </Filters>
   );
 }

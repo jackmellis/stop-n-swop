@@ -1,6 +1,5 @@
 import React from 'react';
 import { LinkButton } from 'ui/elements/Button';
-import { FaEnvelope } from 'react-icons/fa';
 import { makeMyOrderPath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';

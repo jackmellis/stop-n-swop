@@ -30,9 +30,10 @@ export default function Filters({ children }: Props) {
         className={cx(
           'flex flex-shrink-0 z-10 justify-evenly px-0 py-0 flex-wrap',
           'md:mb-6',
-          'lg:space-y-6 lg:block lg:px-6 lg:w-1/4 lg:py-4',
+          'lg:block lg:px-6 lg:w-1/4 lg:py-4',
           'xl:w-1/6',
         )}
+        innerClassName={cx('lg:space-y-6')}
       >
         {children}
       </Card>
