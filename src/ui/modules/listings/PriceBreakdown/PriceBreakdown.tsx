@@ -1,0 +1,98 @@
+import React, { useState } from 'react';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
+import Button from 'ui/elements/Button';
+import { ids } from 'ui/messages';
+import {
+  getPlatformCharge,
+  getProtectionCharge,
+  getListingProfit,
+  getBasePrice,
+  getPostage,
+} from '@sns/contracts/listing';
+import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
+import type { Listing } from '@sns/contracts/listing';
+import PlatformFeeModal from './PlatformFeeModal';
+
+export default function PriceStep({
+  listing,
+  showListedPrice = true,
+  className,
+}: {
+  listing: Listing;
+  showListedPrice?: boolean;
+  className?: string;
+}) {
+  const [showProtectionModal, setShowProtectionModal] = useState(false);
+  const [showPlatformFeeModal, setShowPlatformFeeModal] = useState(false);
+  const getMessage = useGetMessage();
+  const getCurrency = useGetCurrency();
+  const { currency } = listing;
+
+  return (
+    <>
+      <div className={className}>
+        <h2 className="pb-4 font-semibold">
+          {getMessage(ids.listings.new.price.breakdown.title)}
+        </h2>
+        <div className="flex flex-wrap text-sm font-light">
+          <If condition={showListedPrice}>
+            <span className="w-1/2">
+              {getMessage(ids.listings.new.price.breakdown.price)}
+            </span>
+            <span className="w-1/2 text-right">
+              {getCurrency(getBasePrice(listing), { currency })}
+            </span>
+            <span className="w-1/2">
+              {getMessage(ids.listings.new.price.breakdown.postage)}
+            </span>
+            <span className="w-1/2 text-right">
+              {getCurrency(getPostage(listing), { currency })}
+            </span>
+          </If>
+          <span className="w-1/2">
+            <Button
+              className="font-light"
+              title={getMessage(ids.help.whatsThis)}
+              padding={false}
+              onClick={() => setShowPlatformFeeModal(true)}
+            >
+              {getMessage(ids.listings.new.price.breakdown.platform)}
+            </Button>
+          </span>
+          <span className="w-1/2 text-right">
+            {getCurrency(getPlatformCharge(listing), { currency })}
+          </span>
+          <span className="w-1/2">
+            <Button
+              className="font-light"
+              title={getMessage(ids.help.whatsThis)}
+              padding={false}
+              onClick={() => setShowProtectionModal(true)}
+            >
+              {getMessage(ids.listings.new.price.breakdown.protection)}
+            </Button>
+          </span>
+          <span className="w-1/2 text-right">
+            {getCurrency(getProtectionCharge(listing), { currency })}
+          </span>
+          <span className="w-1/2">
+            {getMessage(ids.listings.new.price.breakdown.earnings)}
+          </span>
+          <span className="w-1/2 text-right">
+            {getCurrency(Math.max(getListingProfit(listing), 0), {
+              currency,
+            })}
+          </span>
+        </div>
+      </div>
+      <ProtectionModal
+        isOpen={showProtectionModal}
+        onClose={() => setShowProtectionModal(false)}
+      />
+      <PlatformFeeModal
+        isOpen={showPlatformFeeModal}
+        onClose={() => setShowPlatformFeeModal(false)}
+      />
+    </>
+  );
+}

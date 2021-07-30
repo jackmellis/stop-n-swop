@@ -18,6 +18,9 @@ interface Props {
   onChangeStatus(args: { orderId: string; status: Status }): void;
 }
 
+const wrapperClass =
+  'space-y-2 sm:space-y-4 md:space-y-0 max-w-screen-xs mx-auto md:max-w-none md:flex md:space-x-4 lg:space-x-8';
+
 export default function Actions({
   listing,
   orders,
@@ -41,7 +44,7 @@ export default function Actions({
 
   if (listing.status === Status.OPEN) {
     return (
-      <div className="md:flex md:space-x-4 lg:space-x-8">
+      <div className={wrapperClass}>
         <ActionButton
           orderId=""
           action={Status.CLOSED}
@@ -54,7 +57,7 @@ export default function Actions({
   }
   if (listing.status === Status.CLOSED) {
     return (
-      <div className="md:flex md:space-x-4 lg:space-x-8">
+      <div className={wrapperClass}>
         <ActionButton
           orderId=""
           action={Status.OPEN}
@@ -94,7 +97,7 @@ export default function Actions({
 
   if (listing.status === Status.PLACED) {
     return (
-      <div className="block md:flex md:space-x-4 lg:space-x-8">
+      <div className={wrapperClass}>
         <ActionButton
           orderId={order.id}
           action={Status.APPROVED}
@@ -122,7 +125,7 @@ export default function Actions({
 
   if (listing.status === Status.APPROVED) {
     return (
-      <div className="md:flex md:space-x-4 lg:space-x-8">
+      <div className={wrapperClass}>
         <ActionButton
           orderId={order.id}
           action={Status.POSTED}

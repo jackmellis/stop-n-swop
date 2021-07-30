@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { makeGamePath } from 'ui/constants/paths';
@@ -6,19 +6,12 @@ import Button from 'ui/elements/Button';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
-import {
-  Condition,
-  getPlatformCharge,
-  getProtectionCharge,
-  getListingProfit,
-  Region,
-} from '@sns/contracts/listing';
+import { Condition, Region } from '@sns/contracts/listing';
 import { Status } from '@sns/contracts/order';
-import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
 import Buttons from '../Buttons';
 import type { Listing } from '@sns/contracts/listing';
 import type { Values } from '../types';
-import PlatformFeeModal from './PlatformFeeModal';
+import PriceBreakdown from '../../PriceBreakdown';
 
 export default function PriceStep({
   previous,
@@ -27,8 +20,6 @@ export default function PriceStep({
   productId: string;
   previous(): void;
 }) {
-  const [showProtectionModal, setShowProtectionModal] = useState(false);
-  const [showPlatformFeeModal, setShowPlatformFeeModal] = useState(false);
   const getMessage = useGetMessage();
   const isMounted = useIsMounted();
   const getCurrency = useGetCurrency();
@@ -154,55 +145,13 @@ export default function PriceStep({
             )}
           />
         </div>
-        <div className="lg:w-1/3 xl:w-1/4">
-          <h2 className="pt-8 pb-4 font-semibold">
-            {getMessage(ids.listings.new.price.breakdown.title)}
-          </h2>
-          <div className="flex flex-wrap text-sm">
-            <span className="w-1/2">
-              <Button
-                className="font-normal"
-                title={getMessage(ids.help.whatsThis)}
-                padding={false}
-                onClick={() => setShowPlatformFeeModal(true)}
-              >
-                {getMessage(ids.listings.new.price.breakdown.platform)}
-              </Button>
-            </span>
-            <span className="w-1/2 text-right">
-              {getCurrency(getPlatformCharge(listing), { currency })}
-            </span>
-            <span className="w-1/2">
-              <Button
-                className="font-normal"
-                title={getMessage(ids.help.whatsThis)}
-                padding={false}
-                onClick={() => setShowProtectionModal(true)}
-              >
-                {getMessage(ids.listings.new.price.breakdown.protection)}
-              </Button>
-            </span>
-            <span className="w-1/2 text-right">
-              {getCurrency(getProtectionCharge(listing), { currency })}
-            </span>
-            <span className="w-1/2">
-              {getMessage(ids.listings.new.price.breakdown.earnings)}
-            </span>
-            <span className="w-1/2 text-right">
-              {getCurrency(getListingProfit(listing), { currency })}
-            </span>
-          </div>
-        </div>
+        <PriceBreakdown
+          className="lg:w-1/3 xl:w-1/4 pt-8"
+          listing={listing}
+          showListedPrice={false}
+        />
       </div>
       <Buttons previous={previous} />
-      <ProtectionModal
-        isOpen={showProtectionModal}
-        onClose={() => setShowProtectionModal(false)}
-      />
-      <PlatformFeeModal
-        isOpen={showPlatformFeeModal}
-        onClose={() => setShowPlatformFeeModal(false)}
-      />
     </div>
   );
 }

@@ -80,7 +80,7 @@ export default function MyListing() {
       </PageTitle>
       <Card
         title={game.name}
-        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col space-y-8"
+        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 max-w-screen-lg mx-auto flex flex-col space-y-8"
       >
         <If condition={error}>
           <FormError error={error} />
@@ -91,6 +91,7 @@ export default function MyListing() {
           orderId={orderId}
           status={status}
           buyer={buyer}
+          listing={listing}
           actions={
             <Actions
               listing={listing}
