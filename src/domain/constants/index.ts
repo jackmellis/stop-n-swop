@@ -262,3 +262,6 @@ export const CountryOptions = sortBy(
   }),
   ({ label }) => label,
 );
+
+export const SHORT_TTL = 30000;
+export const STANDARD_TTL = 60000;

@@ -1,6 +1,7 @@
 import { encase } from 'react-jpex';
 import { QueryOptions, useQuery } from '@respite/query';
 import { ListingOrdersKey } from 'application/keys';
+import { SHORT_TTL } from 'domain/constants';
 import type { FetchListingOrders } from 'core/orders';
 
 export const useListingOrders = encase(
@@ -11,7 +12,7 @@ export const useListingOrders = encase(
         () => fetch({ listingId }),
         [listingId],
         {
-          ttl: 30000,
+          ttl: SHORT_TTL,
           ...opts,
         },
       );

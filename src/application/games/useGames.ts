@@ -4,6 +4,7 @@ import { GameKey, GamesKey } from 'application/keys';
 import { useCache } from '@respite/core';
 import { useEffect, useRef } from 'react';
 import { useSelector } from '@respite/select';
+import { SHORT_TTL } from 'domain/constants';
 import type { SearchGames } from 'core/games';
 import type { Game } from '@sns/contracts/product';
 
@@ -80,7 +81,7 @@ const usePagedGames = encase(
             nextPage: -1,
             games: [],
           },
-          ttl: available ? 30000 : undefined,
+          ttl: available ? SHORT_TTL : undefined,
           ...opts,
         },
       );

@@ -1,6 +1,7 @@
 import { QueryOptions, useQuery } from '@respite/query';
 import { encase } from 'react-jpex';
 import { GamesCountsKey } from 'application/keys';
+import { SHORT_TTL } from 'domain/constants';
 import type { FetchCounts } from 'core/games';
 import type { PromiseType } from 'crosscutting/utils';
 
@@ -23,7 +24,7 @@ export const useCounts = encase(
         [search, platforms.join(','), available],
         {
           ...opts,
-          ttl: 30000,
+          ttl: SHORT_TTL,
         },
       );
     },

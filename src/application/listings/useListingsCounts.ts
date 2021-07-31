@@ -1,6 +1,7 @@
 import { ListingCountKey } from 'application/keys';
 import { encase } from 'react-jpex';
 import { useGames, useInfiniteQuery } from 'application/games';
+import { SHORT_TTL } from 'domain/constants';
 import type { InternalQuery } from '@respite/core';
 import type { QueryOptions } from '@respite/query';
 import type { Game } from '@sns/contracts/product';
@@ -53,7 +54,7 @@ export const useListingsCounts = encase(
         },
         deps,
         {
-          ttl: 30000,
+          ttl: SHORT_TTL,
           initialState: {},
           ...opts,
         },
