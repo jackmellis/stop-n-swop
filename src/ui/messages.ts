@@ -214,6 +214,7 @@ const enMessages = {
       title: 'My listings',
       listButton: 'Create a new listing',
       hasActions: 'Action required!',
+      showAll: 'Show all',
     },
     myListing: {
       listing: 'Listing',
@@ -292,6 +293,7 @@ const enMessages = {
     myOrders: {
       title: 'My Orders',
       empty: "Looks like you haven't got any orders yet",
+      showAll: 'Show all',
     },
     myOrder: {
       order: 'order',
