@@ -51,7 +51,7 @@ export default function Payment() {
         </h1>
         <div className="p-10 space-y-12">
           <FormError error={error} />
-          <p>{g(ids.checkout.payment.description)}</p>
+          <p className="text-gray-900">{g(ids.checkout.payment.description)}</p>
           <PayPalButtons
             style={{
               color: 'gold',
