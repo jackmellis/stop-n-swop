@@ -78,6 +78,7 @@ export default function Typeahead({
         onInputChange={onSearch}
         inputId={id}
         isLoading={isLoading}
+        loadingMessage={() => 'Loading...'}
       />
       <If condition={Boolean(error)}>
         <FieldError error={error} />
