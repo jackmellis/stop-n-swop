@@ -61,10 +61,9 @@ const getClassNames = ({
   return cx(
     'flex items-center justify-center rounded font-medium md:transition-colors relative',
     padding && 'px-4 py-3',
-    {
-      'cursor-not-allowed':
-        state === 'disabled' || state === 'pending' || state === 'success',
-    },
+    state === 'disabled' || state === 'pending' || state === 'success'
+      ? 'cursor-not-allowed'
+      : 'cursor-pointer',
   );
 };
 

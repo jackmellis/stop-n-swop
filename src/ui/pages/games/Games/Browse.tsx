@@ -127,6 +127,7 @@ export default function Browse() {
     page,
     platforms: platformIds,
     available,
+    group: true,
   });
   const gamesCountsQuery = useCounts({
     available,

@@ -9,6 +9,7 @@ export interface Props {
   options: Array<{ label: ReactNode; value: any }>;
   id: string;
   error?: any;
+  disabled?: boolean;
   onChange?(value: any): void;
 }
 
@@ -19,6 +20,7 @@ export default function Select({
   options,
   id,
   error,
+  disabled,
 }: Props) {
   const g = useGetMessage();
 
@@ -32,6 +34,7 @@ export default function Select({
         value={value}
         onChange={onChange}
         className="w-full block bg-transparent border-b border-white focus:border-primary py-2"
+        disabled={disabled}
       >
         <option value="" className="bg-black text-white">
           {g(ids.elements.select.defaultLabel)}

@@ -1,65 +1,94 @@
-import React, { useState } from 'react';
-import { useMessage } from 'ui/intl';
-import Card from 'ui/elements/Card';
+import React, { useEffect, useState } from 'react';
+import { useGame, useGames } from 'application/games';
+import { useDebounce } from 'use-debounce';
+import { usePlatforms } from 'application/platforms';
+import { Status } from '@respite/core';
+import NewListingGameScreen from 'ui/modules/listings/new/game/Screen';
+import GameSearch from 'ui/modules/listings/new/game/GameSearch';
+import PlatformFinder from 'ui/modules/listings/new/game/PlatformFinder';
+import Actions from 'ui/modules/listings/new/game/Actions';
+import HelpButtons from 'ui/modules/listings/new/game/HelpButtons';
 import PageTitle from 'ui/elements/PageTitle';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import GameFinder from 'ui/modules/listings/new/Game';
 import Modal from 'ui/elements/Modal';
 import Help from 'ui/help/listings/newListing.mdx';
 import HavingTrouble from 'ui/help/listings/havingTrouble.mdx';
-import type { Game, Platform } from '@sns/contracts/product';
-import type { Query } from '@respite/core';
 
-interface Props {
-  productId: string;
-  results: Game[];
-  gameQuery: Query<Game>;
-  platforms: Platform[];
-  loading: boolean;
-  onSearch(value: string): void;
-  setProductId(value: string): void;
-}
-
-export default function NewListing({
-  productId,
-  results,
-  platforms,
-  onSearch,
-  setProductId,
-  gameQuery,
-  loading,
-}: Props) {
+export default function NewListingGame() {
+  const getMessage = useGetMessage();
   const [showHow, setShowHow] = useState(false);
   const [showTrouble, setShowTrouble] = useState(false);
+  const [search, setSearch] = useState('');
+  const [productId, setProductId] = useState('');
+  const [platformId, setPlatformId] = useState('');
+  const [debouncedSearch] = useDebounce(search, 500);
+
+  const gamesQuery = useGames({
+    search: debouncedSearch,
+    page: 0,
+    available: null,
+    platforms: [],
+    group: true,
+  });
+  const loaded = gamesQuery.status === Status.SUCCESS;
+  const loading = [Status.LOADING, Status.FETCHING].includes(gamesQuery.status);
+  // we only want to fetch the games when you've started searching
+  const games = loaded && debouncedSearch ? gamesQuery.data.games : [];
+  const { data: platforms } = usePlatforms();
+  const gameQuery = useGame({ id: productId });
+
+  useEffect(() => {
+    // TODO: add a task to allow @respite to not suspend
+    // rather than causing the app to suspend, we want to silently trigger the fetch once you've started searching
+    if (debouncedSearch && gamesQuery.status === Status.IDLE) {
+      gamesQuery.resolve();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
-        <span>{useMessage(ids.listings.new.pageTitle)}</span>
+        <span>{getMessage(ids.listings.new.pageTitle)}</span>
       </PageTitle>
-      <div className="flex-grow flex flex-col md:justify-center md:items-center">
-        <Card
-          title={useMessage(ids.listings.new.title)}
-          className="w-full max-w-screen-md flex-grow flex flex-col lg:flex-grow-0"
-          innerClassName="flex-grow flex flex-col md:flex-grow-0"
-        >
-          <GameFinder
+      <NewListingGameScreen
+        gameSearch={
+          <GameSearch
+            loading={loading}
+            onSearch={setSearch}
             productId={productId}
-            platforms={platforms}
-            results={results}
-            onSearch={onSearch}
             setProductId={setProductId}
+            setPlatformId={setPlatformId}
+            results={games}
+          />
+        }
+        platformSearch={
+          <PlatformFinder
+            gameQuery={gameQuery}
+            platformId={platformId}
+            platforms={platforms}
+            productId={productId}
+            setPlatformId={setPlatformId}
+            setProductId={setProductId}
+          />
+        }
+        actions={
+          <If condition={productId && platformId}>
+            <Actions gameQuery={gameQuery} productId={productId} />
+          </If>
+        }
+        helpButtons={
+          <HelpButtons
             openHowItWorks={() => setShowHow(true)}
             openTrouble={() => setShowTrouble(true)}
-            gameQuery={gameQuery}
-            loading={loading}
           />
-        </Card>
-      </div>
+        }
+      />
       <Modal
         isOpen={showHow}
         onClose={() => setShowHow(false)}
-        title={useMessage(ids.listings.new.helpTitle)}
+        title={getMessage(ids.listings.new.helpTitle)}
       >
         <div className="help">
           <Help />
@@ -67,7 +96,7 @@ export default function NewListing({
       </Modal>
       <Modal
         isOpen={showTrouble}
-        title={useMessage(ids.listings.new.troubleTitle)}
+        title={getMessage(ids.listings.new.troubleTitle)}
         onClose={() => setShowTrouble(false)}
       >
         <div className="help">

@@ -1,1 +1,1 @@
-export { default } from './ConnectedNewListingGame';
+export { default } from './NewListingGame';

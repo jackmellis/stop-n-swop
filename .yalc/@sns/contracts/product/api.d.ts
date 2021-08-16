@@ -4,6 +4,7 @@ export interface SearchGamesRequest {
     q?: string;
     platformIds?: string[];
     available?: boolean;
+    group?: boolean;
 }
 export interface SearchGamesResponse {
     nextPage: number;

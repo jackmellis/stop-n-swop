@@ -35,7 +35,7 @@ export type SearchListings = (
 export type FetchListing = (args: { id: string }) => Promise<Listing>;
 
 export type FetchProductsListingCount = (args: {
-  productIds: string[];
+  gameIds: string[];
 }) => Promise<
   Array<{
     productId: string;

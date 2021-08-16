@@ -59,7 +59,7 @@ export default function MyListingItem({
           <Photo
             alt="preview"
             src={Object.values(images)[0]}
-            className="object-contain"
+            className="object-cover"
           />
         </div>
         <div className="w-1/2 sm:w-1/3 md:w-1/2 lg:w-1/4 xl:w-1/5 pl-4 sm:pl-0">

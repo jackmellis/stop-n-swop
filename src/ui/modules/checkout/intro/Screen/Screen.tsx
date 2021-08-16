@@ -44,7 +44,7 @@ export default function Screen({
           <div className="aspect aspect-16-9 w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 mx-auto">
             <Photo
               src={Object.values(listing.images)[0]}
-              className="object-contain"
+              className="object-cover"
             />
           </div>
           <div className="flex-grow flex flex-col space-y-8">

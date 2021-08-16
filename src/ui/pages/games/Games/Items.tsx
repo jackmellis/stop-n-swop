@@ -29,27 +29,19 @@ export default function Items({
   return (
     <>
       {games.map((game) => {
-        if (platformIds.length && !platformIds.includes(game.platformId)) {
-          return null;
-        }
-
-        const platform = platforms.find(
-          (platform) => platform.id === game.platformId,
-        );
-        const totalListings = listingsCounts[game.id] ?? 0;
-
-        if (platform == null) {
-          return null;
-        }
-
         i += 1;
 
         return (
           <Item
             key={game.id}
             game={game}
-            platform={platform}
-            totalListings={totalListings}
+            platforms={platforms.filter((platform) => {
+              if (platformIds.length && !platformIds.includes(platform.id)) {
+                return false;
+              }
+              return game.platformIds.includes(platform.id);
+            })}
+            listingCounts={listingsCounts}
             style={cascade(i)}
           />
         );

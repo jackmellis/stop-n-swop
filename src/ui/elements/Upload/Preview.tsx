@@ -22,7 +22,7 @@ export default function Preview({
         onClick={() => setHovered(true)}
         className="w-full h-full"
       >
-        <Photo src={preview} className="object-contain w-full h-full" />
+        <Photo src={preview} className="object-cover w-full h-full" />
       </button>
       <If condition={hovered}>
         <PreviewOptions onClear={onClear} onClose={() => setHovered(false)} />

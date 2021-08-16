@@ -5,6 +5,7 @@ export type SearchGames = (args: {
   platforms: string[];
   available: boolean;
   page: number;
+  group: boolean;
 }) => Promise<{
   nextPage: number;
   games: Game[];

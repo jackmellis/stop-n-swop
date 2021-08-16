@@ -9,19 +9,18 @@ import type { FetchProductsListingCount } from 'core/listings';
 
 type Result = Record<string, number>;
 
-const getProductIds = (games: Game[], page: number) => {
+const getGameIds = (games: Game[], page: number) => {
   const start = page * 20;
   const end = page * 20 + 20;
 
-  return games.slice(start, end).map((game) => game.id);
+  return games.slice(start, end).map((game) => game.gameId);
 };
 
 const getPageAndDeps = (
   gamesQuery: ReturnType<typeof useGames>,
 ): [number, any[]] => {
   const queryDeps = (<InternalQuery<typeof gamesQuery['data']>>gamesQuery).deps;
-  const page = queryDeps[1];
-  const deps = queryDeps.slice(2);
+  const [, page, ...deps] = queryDeps;
 
   return [page, deps];
 };
@@ -37,13 +36,13 @@ export const useListingsCounts = encase(
         page,
         async (previous) => {
           const { games } = await gamesQuery.resolve();
-          const productIds = getProductIds(games, page);
+          const gameIds = getGameIds(games, page);
 
-          if (productIds.length === 0) {
+          if (gameIds.length === 0) {
             return previous;
           }
 
-          const result = await fetch({ productIds });
+          const result = await fetch({ gameIds });
 
           return result.reduce((acc, { count, productId }) => {
             return {

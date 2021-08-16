@@ -38,7 +38,8 @@ export interface GetListingParams {
 export declare type GetListingRequest = void;
 export declare type GetListingResponse = Listing;
 export interface GetProductsListingCountRequest {
-    productIds: string[];
+    productIds?: string[];
+    gameIds?: string[];
 }
 export interface GetProductsListingCountResponse {
     counts: Array<{

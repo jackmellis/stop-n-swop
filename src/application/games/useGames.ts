@@ -52,7 +52,10 @@ type Result = {
 
 const usePagedGames = encase(
   (searchGames: SearchGames) =>
-    ({ page, platforms, search, available }: Args, opts?: QueryOptions) => {
+    (
+      { page, platforms, search, available, group }: Args,
+      opts?: QueryOptions,
+    ) => {
       const cache = useCache();
 
       return useInfiniteQuery<Result>(
@@ -64,6 +67,7 @@ const usePagedGames = encase(
             platforms,
             search,
             available,
+            group,
           });
           result.games?.forEach((game) => {
             cache.success([GameKey, game.id], game);
@@ -75,7 +79,7 @@ const usePagedGames = encase(
             games,
           };
         },
-        [search, platforms.join(','), available],
+        [search, platforms.join(','), available, group],
         {
           initialState: {
             nextPage: -1,

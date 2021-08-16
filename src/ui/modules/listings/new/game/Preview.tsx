@@ -28,7 +28,7 @@ export default function Preview({ gameQuery: { data: game } }: Props) {
       <Photo
         src={game.cover}
         alt={game.name}
-        className={cx('object-contain w-full h-full', loading && 'invisible')}
+        className={cx('object-cover w-full h-full', loading && 'invisible')}
         onLoad={() => setLoading(false)}
       />
     </div>

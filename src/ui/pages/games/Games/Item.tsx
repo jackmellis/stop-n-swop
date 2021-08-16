@@ -5,12 +5,12 @@ import type { Platform, Game } from '@sns/contracts/product';
 export default function Item({
   style,
   game,
-  platform,
-  totalListings,
+  platforms,
+  listingCounts,
 }: {
   game: Game;
-  platform: Platform;
-  totalListings: number;
+  platforms: Platform[];
+  listingCounts: Record<string, number>;
   style?: CSSProperties;
 }) {
   const [favourite, setFavourite] = useState(false);
@@ -20,8 +20,8 @@ export default function Item({
       game={game}
       favourite={favourite}
       onFavouriteClick={() => setFavourite(!favourite)}
-      platform={platform}
-      totalListings={totalListings}
+      platforms={platforms}
+      listingCounts={listingCounts}
       style={style}
     />
   );

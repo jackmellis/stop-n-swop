@@ -57,6 +57,7 @@ const enMessages = {
       label: 'Search',
       results: {
         available: '{count} available',
+        platformAvailable: '{count} platforms',
         owner: '{developer} / {publisher}',
         empty: 'Find a game!',
         noResults: [
@@ -159,7 +160,6 @@ const enMessages = {
       game: {
         label: 'Find the game you want to sell to get started...',
         button: 'Get started',
-        game: '{game} - {platform}',
       },
       photos: {
         required: 'This photo is required',

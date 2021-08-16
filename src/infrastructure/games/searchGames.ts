@@ -9,7 +9,7 @@ import type { Driver } from 'core/io';
 
 const searchGames =
   (driver: Driver): SearchGames =>
-  async ({ page, platforms, search, available }) => {
+  async ({ page, platforms, search, available, group }) => {
     const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
       url: '/games',
       data: omitNullProperties({
@@ -17,6 +17,7 @@ const searchGames =
         q: search,
         platformIds: platforms,
         available,
+        group,
       }),
     });
 
