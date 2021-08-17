@@ -7,7 +7,7 @@ import {
   getProtectionCharge,
   getListingProfit,
   getBasePrice,
-  getPostage,
+  // getPostage,
 } from '@sns/contracts/listing';
 import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
 import type { Listing } from '@sns/contracts/listing';

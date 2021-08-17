@@ -25,6 +25,7 @@ import { Status } from '@respite/core';
 import { Status as OrderStatus } from '@sns/contracts/order';
 import Screen from 'ui/modules/listings/my/listing/Screen';
 import Help from 'ui/modules/listings/my/listing/Help';
+import { useUser } from 'application/user';
 
 export default function MyListing() {
   useAuthGuard();
@@ -51,6 +52,7 @@ export default function MyListing() {
     listingId,
   });
   const addressQuery = useAddress({ listingId });
+  const { data: user } = useUser();
   const {
     action: changeOrderStatus,
     status: actionStatus1,
@@ -62,7 +64,6 @@ export default function MyListing() {
     error: error2,
   } = useChangeListingStatus();
 
-  // TODO: use combineActions
   const actionStatus =
     actionStatus1 === Status.IDLE ? actionStatus2 : actionStatus1;
   const error = error1 ?? error2;
@@ -89,11 +90,17 @@ export default function MyListing() {
             status={status}
             buyer={buyer}
             listing={listing}
-            help={<Help status={status} />}
+            help={
+              <Help
+                status={status}
+                canApprove={user.preferences.manualApproval}
+              />
+            }
             actions={
               <Actions
                 listing={listing}
                 orders={orders}
+                user={user}
                 status={actionStatus}
                 onChangeStatus={({ orderId, status }) => {
                   if (

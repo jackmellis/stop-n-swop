@@ -7,12 +7,22 @@ import Disputed from 'ui/help/listings/status/disputed.mdx';
 import NotReceived from 'ui/help/listings/status/notReceived.mdx';
 import { Status } from '@sns/contracts/order';
 
-export default function Help({ status }: { status: Status }) {
+export default function Help({
+  status,
+  canApprove,
+}: {
+  status: Status;
+  canApprove: boolean;
+}) {
   switch (status) {
     case Status.CLOSED:
       return <Closed />;
     case Status.PLACED:
-      return <Placed />;
+      return (
+        <If condition={canApprove}>
+          <Placed />
+        </If>
+      );
     case Status.APPROVED:
       return <Approved />;
     case Status.POSTED:

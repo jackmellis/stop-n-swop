@@ -9,6 +9,7 @@ import type { Listing } from '@sns/contracts/listing';
 import Actions from '../Actions';
 import Overview from './Overview';
 import Help from '../Help';
+import type { User } from '@sns/contracts/user';
 
 export default {
   title: 'modules / listings / my / listing / Overview',
@@ -28,14 +29,21 @@ interface BasicProps {
   orderStatus: OrderStatus;
   actionStatus: ActionStatus;
   multiple: boolean;
+  manualApproval: boolean;
 }
 const basicProps: BasicProps = {
   orderStatus: OrderStatus.OPEN,
   actionStatus: ActionStatus.IDLE,
   multiple: false,
+  manualApproval: false,
 };
 
-export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
+export const Basic = ({
+  orderStatus,
+  actionStatus,
+  multiple,
+  manualApproval,
+}: BasicProps) => {
   const listing: Listing = {
     id: 'listing-id',
     status: orderStatus,
@@ -52,6 +60,16 @@ export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
   if (multiple) {
     orders.push(order);
   }
+  const user: User = {
+    username: 'stoppy',
+    address: null,
+    clientEmail: 'stop@swop.com',
+    email: 'stop@swop.com',
+    verified: true,
+    preferences: {
+      manualApproval,
+    },
+  };
 
   return (
     <Intl messages={en}>
@@ -62,10 +80,11 @@ export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
               onChangeStatus={alert}
               listing={listing}
               orders={orders}
+              user={user}
               status={actionStatus}
             />
           }
-          help={<Help status={orderStatus} />}
+          help={<Help status={orderStatus} canApprove={manualApproval} />}
           buyer="buyer_id"
           listing={listing}
           listingId={listing.id}

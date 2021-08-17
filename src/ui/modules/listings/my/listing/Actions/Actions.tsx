@@ -11,10 +11,12 @@ import type { Status as RStatus } from '@respite/core';
 import type { Listing } from '@sns/contracts/listing';
 import ActionButton from './ActionButton';
 import MultiOrders from './MultiOrders';
+import type { User } from '@sns/contracts/user';
 
 interface Props {
   listing: Listing;
   orders: Order[];
+  user: User;
   status: RStatus;
   onChangeStatus(args: { orderId: string; status: Status }): void;
 }
@@ -25,6 +27,7 @@ const wrapperClass =
 export default function Actions({
   listing,
   orders,
+  user,
   status,
   onChangeStatus,
 }: Props) {
@@ -40,6 +43,8 @@ export default function Actions({
     return orderId === active.orderId && status === active.status;
   };
   const getMessage = useGetMessage();
+  const canDecline = user.preferences.manualApproval;
+  const canApprove = canDecline;
 
   const { id: listingId } = listing;
 
@@ -99,27 +104,31 @@ export default function Actions({
   if (listing.status === Status.PLACED) {
     return (
       <div className={wrapperClass}>
-        <ActionButton
-          orderId={order.id}
-          action={Status.APPROVED}
-          active={isActive(order.id, Status.APPROVED)}
-          status={status}
-          onClick={handleClick}
-        />
-        <ActionButton
-          orderId={order.id}
-          action={Status.DECLINED}
-          active={isActive(order.id, Status.DECLINED)}
-          status={status}
-          onClick={handleClick}
-        />
-        <ActionButton
-          orderId={order.id}
-          action={Status.CLOSED}
-          active={isActive(order.id, Status.CLOSED)}
-          status={status}
-          onClick={handleClick}
-        />
+        <If condition={canApprove}>
+          <ActionButton
+            orderId={order.id}
+            action={Status.APPROVED}
+            active={isActive(order.id, Status.APPROVED)}
+            status={status}
+            onClick={handleClick}
+          />
+        </If>
+        <If condition={canDecline}>
+          <ActionButton
+            orderId={order.id}
+            action={Status.DECLINED}
+            active={isActive(order.id, Status.DECLINED)}
+            status={status}
+            onClick={handleClick}
+          />
+          <ActionButton
+            orderId={order.id}
+            action={Status.CLOSED}
+            active={isActive(order.id, Status.CLOSED)}
+            status={status}
+            onClick={handleClick}
+          />
+        </If>
       </div>
     );
   }

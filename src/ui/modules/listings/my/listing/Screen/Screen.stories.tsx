@@ -13,6 +13,7 @@ import type { Listing } from '@sns/contracts/listing';
 import BuyerAddress from '../BuyerAddress';
 import type { useAddress } from 'application/listings';
 import Help from '../Help';
+import type { User } from '@sns/contracts/user';
 
 export default {
   title: 'modules / listings / my / listing / Screen',
@@ -26,11 +27,13 @@ export default {
 
 interface BasicProps {
   orderStatus: Status;
+  manualApproval: boolean;
 }
 const basicProps: BasicProps = {
   orderStatus: Status.OPEN,
+  manualApproval: false,
 };
-export const Basic = ({ orderStatus }: BasicProps) => {
+export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
   const game: Game = {
     id: 'supermario64',
     name: 'Super Mario 64',
@@ -47,6 +50,16 @@ export const Basic = ({ orderStatus }: BasicProps) => {
     listingId: listing.id,
     status: orderStatus,
   } as Order;
+  const user: User = {
+    username: 'stoppy',
+    address: null,
+    clientEmail: 'stop@swop.com',
+    email: 'stop@swop.com',
+    verified: true,
+    preferences: {
+      manualApproval,
+    },
+  };
 
   return (
     <Respite>
@@ -63,7 +76,7 @@ export const Basic = ({ orderStatus }: BasicProps) => {
                 orderId={order.id}
                 productId={game.id}
                 status={orderStatus}
-                help={<Help status={orderStatus} />}
+                help={<Help status={orderStatus} canApprove={manualApproval} />}
                 buyerAddress={
                   <BuyerAddress
                     status={orderStatus}
@@ -89,6 +102,7 @@ export const Basic = ({ orderStatus }: BasicProps) => {
                     onChangeStatus={alert}
                     listing={listing}
                     orders={[order]}
+                    user={user}
                     status={ActionStatus.IDLE}
                   />
                 }

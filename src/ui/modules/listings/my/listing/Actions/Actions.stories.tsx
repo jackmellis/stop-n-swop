@@ -6,6 +6,7 @@ import { Status as ActionStatus } from '@respite/core';
 import { BrowserRouter } from 'react-router-dom';
 import type { Listing } from '@sns/contracts/listing';
 import Actions from './Actions';
+import type { User } from '@sns/contracts/user';
 
 export default {
   title: 'modules / listings / my / listing / Actions',
@@ -25,14 +26,21 @@ interface BasicProps {
   orderStatus: OrderStatus;
   actionStatus: ActionStatus;
   multiple: boolean;
+  manualApprove: boolean;
 }
 const basicProps: BasicProps = {
   orderStatus: OrderStatus.OPEN,
   actionStatus: ActionStatus.IDLE,
   multiple: false,
+  manualApprove: false,
 };
 
-export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
+export const Basic = ({
+  orderStatus,
+  actionStatus,
+  multiple,
+  manualApprove,
+}: BasicProps) => {
   const listing: Listing = {
     id: 'listing-id',
     status: orderStatus,
@@ -46,6 +54,16 @@ export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
   if (multiple) {
     orders.push(order);
   }
+  const user: User = {
+    username: 'stoppy',
+    address: null,
+    clientEmail: 'stop@swop.com',
+    email: 'stop@swop.com',
+    verified: true,
+    preferences: {
+      manualApproval: manualApprove,
+    },
+  };
 
   return (
     <Intl messages={en}>
@@ -55,6 +73,7 @@ export const Basic = ({ orderStatus, actionStatus, multiple }: BasicProps) => {
           listing={listing}
           orders={orders}
           status={actionStatus}
+          user={user}
         />
       </BrowserRouter>
     </Intl>
