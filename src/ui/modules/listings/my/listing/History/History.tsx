@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Loader from 'ui/modules/Loader';

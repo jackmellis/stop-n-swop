@@ -90,6 +90,7 @@ export default function MyListing() {
             status={status}
             buyer={buyer}
             listing={listing}
+            placedAt={orders[0]?.created}
             help={
               <Help
                 status={status}

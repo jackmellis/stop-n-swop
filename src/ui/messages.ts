@@ -200,6 +200,7 @@ const enMessages = {
       region: {
         title: 'What region code does your game have?',
         required: 'Please select a region',
+        unknown: "I'm not sure",
       },
       review: {
         title: "Nearly there! Let's just check everything's correct:",

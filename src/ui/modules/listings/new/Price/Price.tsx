@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { useGetCurrency, useGetMessage } from 'ui/intl';
-import { makeGamePath } from 'ui/constants/paths';
-import Button from 'ui/elements/Button';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
@@ -15,7 +13,7 @@ import PriceBreakdown from '../../PriceBreakdown';
 
 export default function PriceStep({
   previous,
-  productId,
+  productId: _productId,
 }: {
   productId: string;
   previous(): void;

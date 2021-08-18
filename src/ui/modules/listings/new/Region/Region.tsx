@@ -92,7 +92,7 @@ export default function RegionStep({
             next();
           }}
         >
-          I'm not sure
+          {getMessage(ids.listings.new.region.unknown)}
         </Button>
       </Buttons>
     </div>
