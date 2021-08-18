@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBoop } from 'ui/hooks';
 import { animated } from 'react-spring';
 import StaticStop from 'ui/assets/logo/Stop.svg';
@@ -15,9 +15,8 @@ const Swop = animated(StaticSwop as any);
 const A = animated(StaticA as any);
 const B = A;
 
-const palette = pickAPalette();
-
 export default function Logo() {
+  const [palette, setPalette] = useState(() => pickAPalette());
   const [plusStyle, plusBoop] = useBoop({ rotation: 45 });
   const [buttonStyle, buttonBoop] = useBoop({ y: 0.5, x: -0.5, scale: 0.95 });
   const [stopStyle, stopBoop] = useBoop({ x: -3 });
@@ -28,6 +27,14 @@ export default function Logo() {
     stopBoop();
     swopBoop();
   };
+
+  useEffect(() => {
+    const handle = setInterval(() => {
+      setPalette(pickAPalette());
+    }, 60000);
+
+    return () => clearInterval(handle);
+  }, []);
 
   const {
     a: { Component: ButtonA = A },
@@ -40,7 +47,12 @@ export default function Logo() {
 
   return (
     <div
-      style={{ position: 'relative', height: '2.7em', fill: text }}
+      style={{
+        position: 'relative',
+        height: '2.7em',
+        fill: text,
+        transition: 'fill 1s',
+      }}
       onMouseEnter={boop}
     >
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -56,9 +68,17 @@ export default function Logo() {
               left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 1,
+              transition: 'fill 1s',
             }}
           />
-          <Plus style={{ height: '2em', fill: pad.color, ...plusStyle }} />
+          <Plus
+            style={{
+              height: '2em',
+              fill: pad.color,
+              ...plusStyle,
+              transition: 'fill 1s',
+            }}
+          />
         </span>
         <Swop style={{ height: '1em', ...swopStyle }} />
         <span
@@ -77,6 +97,7 @@ export default function Logo() {
               fill: b.color,
               bottom: b.bottom ?? 0,
               marginRight: '0.1em',
+              transition: 'fill 1s',
               ...buttonStyle,
             }}
           />
@@ -87,6 +108,7 @@ export default function Logo() {
               height: '0.9em',
               fill: a.color,
               bottom: a.bottom ?? 0,
+              transition: 'fill 1s',
               ...buttonStyle,
             }}
           />
