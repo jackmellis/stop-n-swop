@@ -64,6 +64,7 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
     preferences: {
       manualApproval,
     },
+    created: new Date(),
   };
 
   return (

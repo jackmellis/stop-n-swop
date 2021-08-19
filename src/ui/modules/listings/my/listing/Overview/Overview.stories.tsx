@@ -69,6 +69,7 @@ export const Basic = ({
     preferences: {
       manualApproval,
     },
+    created: new Date(),
   };
 
   return (
