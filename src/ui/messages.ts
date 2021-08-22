@@ -504,8 +504,7 @@ const enMessages = {
     states: {
       orderPlaced: {
         title: 'An order has been placed for your listing 🎉',
-        subtitle:
-          'Approve the order and arrange for your item to be delivered!',
+        subtitle: 'Time to arrange for your item to be delivered!',
         action: 'View',
       },
       orderCancelled: {
