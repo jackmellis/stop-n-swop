@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ids, unflattenKeys } from 'ui/messages';
 import {
   NavLink,
@@ -10,6 +10,8 @@ import {
 import Card from 'ui/elements/Card';
 import Intro from 'ui/help/guide-intro.mdx';
 import { useMessage } from 'ui/intl';
+import cx from 'classnames';
+import { FaChevronDown } from 'react-icons/fa';
 
 const modules = Object.fromEntries(
   Object.entries(import.meta.globEager('../help/guide/**/*.mdx')).map(
@@ -30,20 +32,35 @@ const groupedModuleKeys: Record<string, Record<string, string>> =
 
 export default function Guide() {
   const location = useLocation();
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex-grow flex flex-col">
       <Card
         title={
-          <NavLink exact activeClassName="text-primary" to="/guide">
-            {useMessage(ids.guide.title)}
-          </NavLink>
+          <button
+            type="button"
+            className="w-full flex items-center justify-between"
+            onClick={() => setOpen(!open)}
+          >
+            <span>{useMessage(ids.guide.title)}</span>
+            <span className="block md:hidden">
+              <FaChevronDown className={cx(open && 'rotate-180 transform')} />
+            </span>
+          </button>
         }
         className="flex-grow flex flex-col"
         innerClassName="flex-grow flex flex-col"
+        padding={false}
       >
         <div className="flex flex-col space-y-8 md:flex-row md:space-y-0 flex-grow">
-          <ul className="px-8 space-y-4 flex-shrink-0 md:border-r md:mr-8">
+          <ul
+            className={cx(
+              'px-8 space-y-4 flex-shrink-0 border-b py-4 bg-gray-700 bg-opacity-40 -mt-2',
+              'md:border-b-0 md:pb-0 md:border-r md:mr-8 md:bg-transparent md:mt-0',
+              open || 'hidden md:block',
+            )}
+          >
             {Object.entries(groupedModuleKeys).map(([section, subSections]) => {
               const label = section.replace(/-/g, ' ');
               const path = `/guide/${subSections.index
@@ -93,7 +110,7 @@ export default function Guide() {
               );
             })}
           </ul>
-          <div className="flex-grow">
+          <div className="flex-grow p-3 md:p-10">
             <Switch>
               <Route path="/guide" exact>
                 <div className="help">

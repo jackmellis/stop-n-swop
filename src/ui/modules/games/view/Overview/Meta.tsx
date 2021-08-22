@@ -30,7 +30,10 @@ export default function Meta({
     >
       <h1
         className="text-lg font-logo sm:w-1/2"
-        style={{ textShadow: '3px 3px #000' }}
+        style={{
+          textShadow:
+            '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 3px 3px 0 #000',
+        }}
       >
         {name}
       </h1>

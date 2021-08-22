@@ -12,8 +12,8 @@ export default function Footer() {
   const g = useGetMessage();
 
   return (
-    <footer className="border-t-2 border-gray-700 bg-black text-sm">
-      <div className="p-4 md:px-12 lg:px-20 md:flex md:justify-between">
+    <footer className="border-t-2 border-gray-700 lg:bg-opacity-90 bg-black text-sm">
+      <div className="p-4 md:px-12 lg:px-20 md:flex md:justify-between space-y-4 md:space-y-0">
         <div className="md:flex md:flex-col md:space-y-6">
           <div className="font-logo">{g(ids.footer.title)}</div>
           <div className="flex space-x-4 md:space-x-8 md:text-lg">
@@ -37,7 +37,7 @@ export default function Footer() {
           <LinkButton to="/credits">{g(ids.footer.credits)}</LinkButton>
         </div>
       </div>
-      <div className="border-t border-gray-400 pt-2 text-sm">
+      <div className="border-t border-gray-400 px-4 py-2 text-sm">
         {g(ids.footer.legal, { year })}
       </div>
     </footer>

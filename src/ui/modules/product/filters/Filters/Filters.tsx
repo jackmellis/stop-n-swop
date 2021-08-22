@@ -28,6 +28,7 @@ export default function Filters({ children }: Props) {
         padding={false}
         ref={ref}
         className={cx('z-10', 'md:mb-6', 'lg:w-1/4 ', 'xl:w-auto')}
+        innerClassName="relative"
       >
         <div
           className={cx(
