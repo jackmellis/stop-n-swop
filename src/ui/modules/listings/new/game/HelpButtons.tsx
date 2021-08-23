@@ -1,26 +1,25 @@
 import React from 'react';
-import Button from 'ui/elements/Button';
+import Button, { AnchorButton } from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 interface Props {
-  openHowItWorks(): void;
   openTrouble(): void;
 }
 
-export default function HelpButtons({ openHowItWorks, openTrouble }: Props) {
+export default function HelpButtons({ openTrouble }: Props) {
   const getMessage = useGetMessage();
 
   return (
     <>
-      <Button
+      <AnchorButton
+        target="_blank"
+        href="/guide/selling/choose-your-game"
         className="text-sm"
-        padding={false}
         kind="tertiary"
-        onClick={openHowItWorks}
       >
         {getMessage(ids.listings.new.buttons.help)}
-      </Button>
+      </AnchorButton>
       <Button className="text-xs" padding={false} onClick={openTrouble}>
         {getMessage(ids.listings.new.buttons.trouble)}
       </Button>

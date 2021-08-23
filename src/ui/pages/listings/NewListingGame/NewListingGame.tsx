@@ -12,12 +12,10 @@ import PageTitle from 'ui/elements/PageTitle';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Modal from 'ui/elements/Modal';
-import Help from 'ui/help/listings/newListing.mdx';
 import HavingTrouble from 'ui/help/listings/havingTrouble.mdx';
 
 export default function NewListingGame() {
   const getMessage = useGetMessage();
-  const [showHow, setShowHow] = useState(false);
   const [showTrouble, setShowTrouble] = useState(false);
   const [search, setSearch] = useState('');
   const [productId, setProductId] = useState('');
@@ -78,22 +76,8 @@ export default function NewListingGame() {
             <Actions gameQuery={gameQuery} productId={productId} />
           </If>
         }
-        helpButtons={
-          <HelpButtons
-            openHowItWorks={() => setShowHow(true)}
-            openTrouble={() => setShowTrouble(true)}
-          />
-        }
+        helpButtons={<HelpButtons openTrouble={() => setShowTrouble(true)} />}
       />
-      <Modal
-        isOpen={showHow}
-        onClose={() => setShowHow(false)}
-        title={getMessage(ids.listings.new.helpTitle)}
-      >
-        <div className="help">
-          <Help />
-        </div>
-      </Modal>
       <Modal
         isOpen={showTrouble}
         title={getMessage(ids.listings.new.troubleTitle)}

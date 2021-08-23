@@ -55,7 +55,7 @@ export default function PriceStep({
             </span> */}
           <span className="w-1/2">
             <Button
-              className="font-light space-x-3"
+              className="font-light space-x-2"
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowPlatformFeeModal(true)}
@@ -71,7 +71,7 @@ export default function PriceStep({
           </span>
           <span className="w-1/2">
             <Button
-              className="font-light space-x-3"
+              className="font-light space-x-2 "
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowProtectionModal(true)}

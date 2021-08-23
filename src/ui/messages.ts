@@ -119,7 +119,6 @@ const enMessages = {
       pageTitle: 'New listing',
       productPageTitle: 'New listing for {name}',
       title: 'Create a listing',
-      helpTitle: 'Listing a game',
       troubleTitle: 'Having trouble?',
       buttons: {
         help: 'How does it work?',

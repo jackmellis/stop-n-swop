@@ -15,6 +15,8 @@ import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
 import { useHistory } from 'react-router-dom';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { FaQuestionCircle } from 'react-icons/fa';
+import { AnchorButton } from 'ui/elements/Button';
 import type { Values } from 'ui/modules/listings/new/types';
 import type { Query } from '@respite/core';
 
@@ -36,6 +38,14 @@ interface Props {
   }>;
   error: any;
 }
+
+const helpLinks: Record<Step, string> = {
+  region: '/guide/selling/create-your-listing#region',
+  condition: '/guide/selling/create-your-listing#condition',
+  photos: '/guide/selling/create-your-listing#photos',
+  price: '/guide/selling/create-your-listing#price',
+  description: '/guide/selling/create-your-listing#extras',
+} as Record<Step, string>;
 
 export default function Form({
   productId,
@@ -60,9 +70,23 @@ export default function Form({
     dispatch('next', values);
   };
 
+  const titleId = ids.listings.new[step]?.title;
+  const helpLink = helpLinks[step];
+
   return (
     <Card
-      title={useMessage(ids.listings.new[step]?.title)}
+      title={
+        <div className="flex items-start space-x-2">
+          <span>{useMessage(titleId)}</span>
+          <If condition={helpLink}>
+            <span className="text-sm">
+              <AnchorButton target="_blank" href={helpLink} className="text-xs">
+                <FaQuestionCircle />
+              </AnchorButton>
+            </span>
+          </If>
+        </div>
+      }
       padding={false}
       className="w-full max-w-screen-xl xl:mx-auto lg:my-8 xl:my-12"
     >

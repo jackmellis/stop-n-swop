@@ -1,4 +1,4 @@
-import { AnchorButton } from '../../../elements/Button';
+import { AnchorButton, LinkButton } from '../../../elements/Button';
 
 import guide01 from '../../../assets/guide/guide01.png';
 import guide02 from '../../../assets/guide/guide02.png';
@@ -24,3 +24,10 @@ When viewing a game, just click the _list this game_ button...
   alt="list via the game view page"
   className="xs:max-w-screen-xs border-2"
 />
+
+<div className="flex justify-start space-x-4 pt-8">
+  <span>Next:</span>
+  <LinkButton to="/guide/selling/create-your-listing" className="inline-flex">
+    Create your listing
+  </LinkButton>
+</div>
