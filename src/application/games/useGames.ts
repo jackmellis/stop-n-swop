@@ -53,7 +53,7 @@ type Result = {
 const usePagedGames = encase(
   (searchGames: SearchGames) =>
     (
-      { page, platforms, search, available, group }: Args,
+      { page, platforms, search, available, group, favourites }: Args,
       opts?: QueryOptions,
     ) => {
       const cache = useCache();
@@ -68,6 +68,7 @@ const usePagedGames = encase(
             search,
             available,
             group,
+            favourites,
           });
           result.games?.forEach((game) => {
             cache.success([GameKey, game.id], game);
@@ -79,13 +80,13 @@ const usePagedGames = encase(
             games,
           };
         },
-        [search, platforms.join(','), available, group],
+        [search, platforms.join(','), available, group, favourites],
         {
           initialState: {
             nextPage: -1,
             games: [],
           },
-          ttl: available ? SHORT_TTL : undefined,
+          ttl: available || favourites ? SHORT_TTL : undefined,
           ...opts,
         },
       );

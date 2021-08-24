@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { FaMoneyBillWave, FaPlus } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
@@ -7,22 +7,19 @@ import { makeGameNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { useBoop } from 'ui/hooks';
 import { ids } from 'ui/messages';
-import Favourite from 'ui/modules/product/Favourite';
 
 const ListIcon = animated(FaMoneyBillWave);
 const CollectionIcon = animated(FaPlus);
 
 interface Props {
   productId: string;
-  favourite: boolean;
-  onFavouriteClick(): void;
   onCollectClick(): void;
+  favourite: ReactNode;
 }
 
 export default function QuickActions({
   favourite,
   productId,
-  onFavouriteClick,
   onCollectClick,
 }: Props) {
   const [listStyle, listBoop] = useBoop({ rotation: 20, x: 4 });
@@ -31,15 +28,7 @@ export default function QuickActions({
 
   return (
     <div className="flex justify-around backdrop-filter backdrop-brightness-50 space-x-12">
-      <Favourite
-        value={favourite}
-        onClick={onFavouriteClick}
-        className="w-full justify-center"
-      >
-        <span className="hidden md:block text-xs ml-3">
-          {getMessage(ids.games.actions.favourite)}
-        </span>
-      </Favourite>
+      {favourite}
       <Button
         className="w-full justify-center"
         component={Link}

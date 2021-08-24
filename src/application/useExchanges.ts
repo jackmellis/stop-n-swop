@@ -28,7 +28,7 @@ import {
 export default function useExchanges() {
   useExchange(
     [[TokensKey, UserKey], [AuthKey]],
-    [UserKey, [UpdateUserKey]],
+    [UserKey, UpdateUserKey],
     [
       [ListingsKey, ListingKey, MyListingsKey, ListingCountKey, HistoryKey],
       [CreateListingKey, UpdateListingKey],
@@ -45,7 +45,7 @@ export default function useExchanges() {
       ],
       [ChangeStatusKey, ChangeListingStatusKey, PatchOrderKey],
     ],
-    [[MyOrdersKey], [CreateOrderKey]],
+    [MyOrdersKey, CreateOrderKey],
     [[MyOrdersKey, ListingsKey, HistoryKey], [CompletePaymentKey]],
     [[BalanceKey, TransactionsKey], [WithdrawBalanceKey]],
     [NoticesKey, ClearNoticesKey],

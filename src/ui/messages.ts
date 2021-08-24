@@ -70,6 +70,7 @@ const enMessages = {
       preferences: {
         label: 'Preferences',
         available: 'Available',
+        favourites: 'Favourites',
       },
       manufacturer: {
         label: 'Manufacturer',

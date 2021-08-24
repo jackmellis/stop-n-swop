@@ -6,6 +6,7 @@ export type SearchGames = (args: {
   available: boolean;
   page: number;
   group: boolean;
+  favourites: boolean;
 }) => Promise<{
   nextPage: number;
   games: Game[];
@@ -15,10 +16,10 @@ export type FetchCounts = (args: {
   search: string;
   platforms: string[];
   available: boolean;
+  favourites: boolean;
 }) => Promise<{
   total: number;
   platforms: Record<string, number>;
-  available: number;
 }>;
 
 export type FetchGame = (args: { id: string }) => Promise<Game>;

@@ -5,11 +5,11 @@ import type {
   SearchGamesResponse,
 } from '@sns/contracts/product';
 import type { SearchGames } from 'core/games';
-import type { Driver } from 'core/io';
+import type { AuthDriver } from 'core/io';
 
 const searchGames =
-  (driver: Driver): SearchGames =>
-  async ({ page, platforms, search, available, group }) => {
+  (driver: AuthDriver): SearchGames =>
+  async ({ page, platforms, search, available, group, favourites }) => {
     const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
       url: '/games',
       data: omitNullProperties({
@@ -18,6 +18,7 @@ const searchGames =
         platformIds: platforms,
         available,
         group,
+        favourites: favourites || null,
       }),
     });
 

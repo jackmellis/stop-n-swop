@@ -14,6 +14,9 @@ interface Props {
   setPlatformIds(value: string[]): void;
   hasSearched: boolean;
   gamesCountsQuery: ReturnType<typeof useCounts>;
+  favourites: boolean;
+  setFavourites(value: boolean): void;
+  isLoggedIn: boolean;
 }
 
 export default function BrowseFilters({
@@ -24,17 +27,14 @@ export default function BrowseFilters({
   platformIds,
   setPlatformIds,
   gamesCountsQuery,
+  favourites,
+  isLoggedIn,
+  setFavourites,
 }: Props) {
   const getMessage = useGetMessage();
   const {
-    data: { platforms: platformCounts, available: availableCount },
+    data: { platforms: platformCounts },
   } = gamesCountsQuery;
-
-  const availableLabel = hasSearched
-    ? `${getMessage(
-        ids.games.filters.preferences.available,
-      )} (${availableCount})`
-    : getMessage(ids.games.filters.preferences.available);
 
   return (
     <>
@@ -42,22 +42,31 @@ export default function BrowseFilters({
         name="preferences"
         label={getMessage(ids.games.filters.preferences.label)}
       >
-        <Checkbox
-          label={availableLabel}
-          value={available}
-          onChange={setAvailable}
-        />
+        <div className="space-y-3">
+          <Checkbox
+            label={getMessage(ids.games.filters.preferences.available)}
+            value={available}
+            onChange={setAvailable}
+          />
+          <If condition={isLoggedIn}>
+            <Checkbox
+              label={getMessage(ids.games.filters.preferences.favourites)}
+              value={favourites}
+              onChange={setFavourites}
+            />
+          </If>
+        </div>
       </Filter>
       <Filter
         name="platform"
         label={getMessage(ids.games.filters.platform.label)}
       >
-        <CheckboxGroup value={platformIds} onChange={setPlatformIds} limit={10}>
+        <CheckboxGroup value={platformIds} onChange={setPlatformIds} limit={7}>
           {platforms
             .filter(({ id }) => {
               const count = platformCounts[id] ?? 0;
 
-              return !hasSearched || count > 0;
+              return !hasSearched || platformIds.includes(id) || count > 0;
             })
             .map(({ name, id }) => {
               const count = platformCounts[id] ?? 0;

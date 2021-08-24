@@ -1,6 +1,5 @@
-import React, { CSSProperties, useCallback, useState } from 'react';
+import React, { CSSProperties, ReactNode, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Favourite from 'ui/modules/product/Favourite';
 import cx from 'classnames';
 import { makeGamePath } from 'ui/constants/paths';
 import { GridItem } from 'ui/elements/grid';
@@ -14,8 +13,7 @@ interface Props {
   game: Game;
   platforms: Platform[];
   listingCounts: Record<string, number>;
-  favourite: boolean;
-  onFavouriteClick(): void;
+  favourite: ReactNode;
   style?: CSSProperties;
 }
 
@@ -25,7 +23,6 @@ export default function ProductItem({
   style,
   listingCounts,
   favourite,
-  onFavouriteClick,
 }: Props) {
   const g = useGetMessage();
   const hasManyPlatforms = platforms.length > 1;
@@ -144,13 +141,7 @@ export default function ProductItem({
           </If>
         </div>
         <div className="flex flex-col justify-center">
-          <span style={{ fontSize: '2rem' }}>
-            <Favourite
-              key="favourite"
-              value={favourite}
-              onClick={onFavouriteClick}
-            />
-          </span>
+          <span style={{ fontSize: '2rem' }}>{favourite}</span>
         </div>
       </div>
     </GridItem>

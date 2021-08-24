@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Overview from 'ui/modules/games/view/Overview';
 import QuickActions from 'ui/modules/games/view/QuickActions';
 import { Link, useParams } from 'react-router-dom';
@@ -9,12 +9,12 @@ import { GAMES } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useResolve } from 'react-jpex';
+import Favourite from 'ui/modules/product/Favourite';
 import type { Emit } from 'core/events';
 import ListingsArea from './ListingsArea';
 
 export default function View() {
   const emit = useResolve<Emit>();
-  const [favourite, setFavourite] = useState(false);
   const { productId } =
     useParams<{
       productId: string;
@@ -49,8 +49,13 @@ export default function View() {
         />
         <QuickActions
           productId={productId}
-          favourite={favourite}
-          onFavouriteClick={() => setFavourite(!favourite)}
+          favourite={
+            <Favourite productId={productId} className="w-full justify-center">
+              <span className="hidden md:block text-xs ml-3">
+                {getMessage(ids.games.actions.favourite)}
+              </span>
+            </Favourite>
+          }
           onCollectClick={() => null}
         />
         <ListingsArea productId={productId} />

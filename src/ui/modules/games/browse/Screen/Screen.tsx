@@ -24,6 +24,9 @@ export default function BrowseScreen({
   setPage,
   available,
   setAvailable,
+  favourites,
+  isLoggedIn,
+  setFavourites,
 }: {
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
@@ -38,6 +41,9 @@ export default function BrowseScreen({
   children: ReactNode;
   available: boolean;
   setAvailable(value: boolean): void;
+  favourites: boolean;
+  setFavourites(value: boolean): void;
+  isLoggedIn: boolean;
 }) {
   return (
     <div className="flex-grow flex flex-col">
@@ -55,6 +61,9 @@ export default function BrowseScreen({
           setPlatformIds={setPlatformIds}
           available={available}
           setAvailable={setAvailable}
+          favourites={favourites}
+          isLoggedIn={isLoggedIn}
+          setFavourites={setFavourites}
         >
           {children}
         </Results>

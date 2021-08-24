@@ -57,3 +57,9 @@ export const BalanceKey = Symbol('balance');
 export const WithdrawBalanceKey = Symbol('withdraw balance');
 export const StartPaymentKey = Symbol('start payment');
 export const CompletePaymentKey = Symbol('complete payment');
+
+// Favourites
+// Queries
+export const FavouritesKey = Symbol('favourites');
+// Actions
+export const ToggleFavouriteKey = Symbol('toggle favourite');

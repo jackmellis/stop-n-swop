@@ -10,17 +10,28 @@ export default function Items({
   gamesQuery,
   listingsCountsQuery,
   platformIds,
+  favouriteIds,
 }: {
   platformsQuery: Query<Platform[]>;
   gamesQuery: Query<{ games: Game[]; nextPage: number }>;
   listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
+  favouriteIds: string[] | null;
 }) {
-  const {
+  let {
     data: { games },
   } = gamesQuery;
   const { data: platforms } = platformsQuery;
   const { data: listingsCounts } = listingsCountsQuery;
+
+  // If we're filtering by favourites, rather than constantly re-fetching and polling
+  // and so that you don't have unfavourited items show for 2 minutes or whatever
+  // we'll just manually remove them from the list at render time
+  // the counts may be out until the next refetch but I think that's okay...
+  if (favouriteIds && games.length) {
+    games = games.filter((game) => favouriteIds.includes(game.id));
+  }
+
   const totalResults = games.length;
   const cascade = useCascade(totalResults);
 

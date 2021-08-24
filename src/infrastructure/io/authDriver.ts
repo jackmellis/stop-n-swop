@@ -30,7 +30,7 @@ const authDriver = (
         ...rest,
         headers: {
           ...headers,
-          authorization: `Bearer ${authToken}`,
+          authorization: authToken ? `Bearer ${authToken}` : null,
         },
       });
     } catch (e) {

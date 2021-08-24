@@ -32,7 +32,7 @@ const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
 const Balance = lazy(() => import('ui/pages/account/Balance'));
 const LevelUpUsername = lazy(() => import('ui/pages/account/LevelUpUsername'));
 const LevelUpAddress = lazy(() => import('ui/pages/account/LevelUpAddress'));
-const User = lazy(() => import('ui/pages/account/User'));
+const User = lazy(() => import('ui/pages/users/User'));
 // Auth
 const Login = lazy(() => import('ui/pages/auth/Login'));
 const Logout = lazy(() => import('ui/pages/auth/Logout'));

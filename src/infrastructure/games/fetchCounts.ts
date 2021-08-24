@@ -4,12 +4,12 @@ import type {
   GetSearchCountsResponse,
 } from '@sns/contracts/product';
 import type { FetchCounts } from 'core/games';
-import type { Driver } from 'core/io';
+import type { AuthDriver } from 'core/io';
 
 const fetchCounts =
-  (driver: Driver): FetchCounts =>
-  async ({ platforms, search, available }) => {
-    if (!platforms.length && !search && !available) {
+  (driver: AuthDriver): FetchCounts =>
+  async ({ platforms, search, available, favourites }) => {
+    if (!platforms.length && !search && !available && !favourites) {
       return {
         available: 0,
         platforms: {},
@@ -26,6 +26,7 @@ const fetchCounts =
         q: search,
         platformIds: platforms,
         available,
+        favourites,
       },
     });
 

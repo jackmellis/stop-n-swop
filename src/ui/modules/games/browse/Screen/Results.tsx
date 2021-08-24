@@ -23,6 +23,9 @@ export default function Results({
   setPage,
   available,
   setAvailable,
+  favourites,
+  isLoggedIn,
+  setFavourites,
 }: {
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
@@ -35,6 +38,9 @@ export default function Results({
   children: ReactNode;
   available: boolean;
   setAvailable(value: boolean): void;
+  favourites: boolean;
+  setFavourites(value: boolean): void;
+  isLoggedIn: boolean;
 }) {
   const { status } = gamesQuery;
   const { data: platforms } = platformsQuery;
@@ -64,6 +70,9 @@ export default function Results({
             available={available}
             setAvailable={setAvailable}
             gamesCountsQuery={gamesCountsQuery}
+            favourites={favourites}
+            isLoggedIn={isLoggedIn}
+            setFavourites={setFavourites}
           />
         </Suspense>
       </Filters>

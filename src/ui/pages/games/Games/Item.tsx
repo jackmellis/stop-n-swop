@@ -1,5 +1,6 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import ProductItem from 'ui/modules/games/browse/ProductItem';
+import Favourte from 'ui/modules/product/Favourite';
 import type { Platform, Game } from '@sns/contracts/product';
 
 export default function Item({
@@ -13,13 +14,10 @@ export default function Item({
   listingCounts: Record<string, number>;
   style?: CSSProperties;
 }) {
-  const [favourite, setFavourite] = useState(false);
-
   return (
     <ProductItem
       game={game}
-      favourite={favourite}
-      onFavouriteClick={() => setFavourite(!favourite)}
+      favourite={<Favourte productId={game.id} />}
       platforms={platforms}
       listingCounts={listingCounts}
       style={style}

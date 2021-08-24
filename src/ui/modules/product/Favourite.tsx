@@ -4,6 +4,7 @@ import cx from 'classnames';
 import Button from 'ui/elements/Button';
 import { useBoop } from 'ui/hooks';
 import { animated } from 'react-spring';
+import { useFavourite, useToggleFavourite } from 'application/user';
 
 const useBoops = (
   states: Record<string, Parameters<typeof useBoop>[0]>,
@@ -15,16 +16,16 @@ const useBoops = (
 };
 
 export default function Favourte({
+  productId,
   className,
   children,
-  value,
-  onClick,
 }: {
-  value: boolean;
-  onClick(): void;
+  productId: string;
   className?: string;
   children?: ReactNode;
 }) {
+  const { data: value } = useFavourite(productId);
+  const { action: toggle } = useToggleFavourite();
   const [style, boop, setState] = useBoops({
     click: {
       scale: value ? 1.25 : 0.75,
@@ -54,7 +55,7 @@ export default function Favourte({
         e.stopPropagation();
         e.preventDefault();
         handleClick();
-        onClick();
+        toggle({ productId });
       }}
     >
       <Heart size="1em" className={cx(value && 'text-red-400')} style={style} />

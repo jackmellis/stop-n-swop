@@ -10,7 +10,10 @@ type Result = PromiseType<ReturnType<FetchCounts>>;
 
 export const useCounts = encase(
   (fetchCounts: FetchCounts) =>
-    ({ platforms, search, available }: Args, opts?: QueryOptions) => {
+    (
+      { platforms, search, available, favourites }: Args,
+      opts?: QueryOptions,
+    ) => {
       return useQuery<Result>(
         GamesCountsKey,
         async () => {
@@ -18,10 +21,11 @@ export const useCounts = encase(
             platforms,
             search,
             available,
+            favourites,
           });
           return result;
         },
-        [search, platforms.join(','), available],
+        [search, platforms.join(','), available, favourites],
         {
           ...opts,
           ttl: SHORT_TTL,
