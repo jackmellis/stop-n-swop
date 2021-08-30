@@ -27,7 +27,7 @@ const getListedPrice = listing => {
   return getBasePrice(listing) + getPostage(listing);
 };
 const getProtectionCharge = listing => {
-  return Math.ceil(getListedPrice(listing) * 0.05);
+  return Math.ceil(getListedPrice(listing) * 0.04);
 };
 const getPlatformCharge = listing => {
   return Math.ceil(getListedPrice(listing) * 0.04) + 30;
