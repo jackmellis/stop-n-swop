@@ -157,6 +157,12 @@ const enMessages = {
       platform: {
         label: 'Platform',
       },
+      developer: {
+        label: 'Developer',
+      },
+      publisher: {
+        label: 'Publisher',
+      },
     },
   },
   listings: {

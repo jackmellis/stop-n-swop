@@ -53,7 +53,16 @@ type Result = {
 const usePagedGames = encase(
   (searchGames: SearchGames) =>
     (
-      { page, platforms, search, available, group, favourites }: Args,
+      {
+        page,
+        platforms,
+        search,
+        available,
+        group,
+        favourites,
+        developers,
+        publishers,
+      }: Args,
       opts?: QueryOptions,
     ) => {
       const cache = useCache();
@@ -69,6 +78,8 @@ const usePagedGames = encase(
             available,
             group,
             favourites,
+            developers,
+            publishers,
           });
           result.games?.forEach((game) => {
             cache.success([GameKey, game.id], game);
@@ -80,7 +91,15 @@ const usePagedGames = encase(
             games,
           };
         },
-        [search, platforms.join(','), available, group, favourites],
+        [
+          search,
+          platforms.join(','),
+          available,
+          group,
+          favourites,
+          developers.join(','),
+          publishers.join(','),
+        ],
         {
           initialState: {
             nextPage: -1,

@@ -29,6 +29,8 @@ export default function NewListingGame() {
     platforms: [],
     group: true,
     favourites: false,
+    developers: [],
+    publishers: [],
   });
   const loaded = gamesQuery.status === Status.SUCCESS;
   const loading = [Status.LOADING, Status.FETCHING].includes(gamesQuery.status);

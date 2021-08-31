@@ -9,7 +9,16 @@ import type { AuthDriver } from 'core/io';
 
 const searchGames =
   (driver: AuthDriver): SearchGames =>
-  async ({ page, platforms, search, available, group, favourites }) => {
+  async ({
+    page,
+    platforms,
+    search,
+    available,
+    group,
+    favourites,
+    developers,
+    publishers,
+  }) => {
     const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
       url: '/games',
       data: omitNullProperties({
@@ -19,6 +28,8 @@ const searchGames =
         available,
         group,
         favourites: favourites || null,
+        developerIds: developers,
+        publisherIds: publishers,
       }),
     });
 

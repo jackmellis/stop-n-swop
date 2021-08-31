@@ -16,12 +16,16 @@ export const useInitialValues = () => {
     default: false,
     bool: true,
   });
+  const initialDevs = useQueryParam<string[]>('devs', { array: true });
+  const initialPubs = useQueryParam<string[]>('pubs', { array: true });
 
   return {
     initialSearch,
     initialPlatforms,
     initialAvailable,
     initialFavourites,
+    initialDevs,
+    initialPubs,
   };
 };
 
@@ -31,31 +35,43 @@ export const useResetParams = ({
   initialPlatforms,
   initialAvailable,
   initialFavourites,
+  initialDevs,
+  initialPubs,
   search,
   platformIds,
   available,
   latentSearch,
   favourites,
+  devs,
+  pubs,
   flush,
   setPage,
   setSearch,
   setPlatformIds,
   setAvailable,
   setFavourites,
+  setDevs,
+  setPubs,
 }: {
   initialSearch: string;
   initialPlatforms: string[];
   initialAvailable: boolean;
   initialFavourites: boolean;
+  initialDevs: string[];
+  initialPubs: string[];
   search: string;
   platformIds: string[];
   available: boolean;
   latentSearch: string;
   favourites: boolean;
+  devs: string[];
+  pubs: string[];
   flush(): void;
   setPage(p: number): void;
   setSearch(s: string): void;
   setPlatformIds(p: string[]): void;
+  setDevs(p: string[]): void;
+  setPubs(p: string[]): void;
   setAvailable(b: boolean): void;
   setFavourites(b: boolean): void;
 }) => {
@@ -71,13 +87,17 @@ export const useResetParams = ({
       initialSearch !== search ||
       initialPlatforms !== platformIds ||
       initialAvailable !== available ||
-      initialFavourites !== favourites
+      initialFavourites !== favourites ||
+      initialDevs !== devs ||
+      initialPubs !== pubs
     ) {
       setPage(0);
       setSearch(initialSearch);
       setPlatformIds(initialPlatforms);
       setAvailable(initialAvailable);
       setFavourites(initialFavourites);
+      setDevs(initialDevs);
+      setPubs(initialPubs);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPlatforms, initialSearch, initialAvailable, initialFavourites]);
@@ -98,12 +118,16 @@ export const useSyncUrl = ({
   platformIds,
   available,
   favourites,
+  devs,
+  pubs,
 }: {
   latentSearch: string;
   search: string;
   platformIds: string[];
   available: boolean;
   favourites: boolean;
+  devs: string[];
+  pubs: string[];
 }) => {
   const history = useHistory();
 
@@ -123,8 +147,18 @@ export const useSyncUrl = ({
     if (favourites) {
       params.append('favourites', 'true');
     }
+    if (devs.length) {
+      devs.forEach((id) => {
+        params.append('devs', id);
+      });
+    }
+    if (pubs.length) {
+      pubs.forEach((id) => {
+        params.append('pubs', id);
+      });
+    }
 
     history.replace({ search: params.toString() });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [history, platformIds, latentSearch, available, favourites]);
+  }, [history, platformIds, latentSearch, available, favourites, devs, pubs]);
 };

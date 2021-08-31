@@ -46,6 +46,7 @@ export default function Filter({ name, label, children }: Props) {
             'text-sm bg-gray-800 px-4 py-6 whitespace-nowrap',
             'md:text-base',
             'lg:text-sm lg:px-0 lg:py-3 lg:bg-transparent',
+            'xl:text-xs',
           )}
           style={{ minWidth: 'fit-content' }}
         >

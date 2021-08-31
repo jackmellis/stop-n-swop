@@ -11,7 +11,14 @@ type Result = PromiseType<ReturnType<FetchCounts>>;
 export const useCounts = encase(
   (fetchCounts: FetchCounts) =>
     (
-      { platforms, search, available, favourites }: Args,
+      {
+        platforms,
+        search,
+        available,
+        favourites,
+        developers,
+        publishers,
+      }: Args,
       opts?: QueryOptions,
     ) => {
       return useQuery<Result>(
@@ -22,13 +29,22 @@ export const useCounts = encase(
             search,
             available,
             favourites,
+            developers,
+            publishers,
           });
           return result;
         },
-        [search, platforms.join(','), available, favourites],
+        [
+          search,
+          platforms.join(','),
+          available,
+          favourites,
+          developers.join(','),
+          publishers.join(','),
+        ],
         {
           ...opts,
-          ttl: SHORT_TTL,
+          ttl: available || favourites ? SHORT_TTL : undefined,
         },
       );
     },

@@ -41,8 +41,8 @@ export default function View() {
         <Overview
           banner={game.banner}
           cover={game.cover}
-          developer={game.developers[0]}
-          publisher={game.publishers[0]}
+          developer={game.developer?.name}
+          publisher={game.publisher?.name}
           name={game.name}
           releaseDate={game.releaseDate}
           platform={platform.name}

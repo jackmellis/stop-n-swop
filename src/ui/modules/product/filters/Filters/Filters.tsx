@@ -27,7 +27,11 @@ export default function Filters({ children }: Props) {
       <Card
         padding={false}
         ref={ref}
-        className={cx('z-10', 'md:mb-6', 'lg:w-80 lg:flex-shrink-0')}
+        className={cx(
+          'z-10',
+          'md:mb-6',
+          'lg:w-80 lg:flex-shrink-0 lg:min-w-max',
+        )}
         innerClassName="relative"
       >
         <div

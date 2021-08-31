@@ -22,6 +22,9 @@ export const GamesCountsKey = Symbol('games counts');
 // Platforms
 export const PlatformsKey = Symbol('platforms');
 
+// Companies
+export const CompaniesKey = Symbol('companies');
+
 // Listings
 // Queries
 export const ListingRequirementsKey = Symbol('requirements');

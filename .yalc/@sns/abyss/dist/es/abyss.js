@@ -101,9 +101,11 @@ let CommonErrorCode;
 class BaseError extends Error {
   constructor(message) {
     super(message);
+    this.code = void 0;
+    this.status = void 0;
+    this.id = void 0;
     this.code = CommonErrorCode.UNKNOWN;
     this.status = 500;
-    this.id = void 0;
     this.id = ulid();
   }
   toHttpResponse() {

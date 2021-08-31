@@ -17,6 +17,10 @@ interface Props {
   favourites: boolean;
   setFavourites(value: boolean): void;
   isLoggedIn: boolean;
+  developerIds: string[];
+  setDeveloperIds(value: string[]): void;
+  publisherIds: string[];
+  setPublisherIds(value: string[]): void;
 }
 
 export default function BrowseFilters({
@@ -26,6 +30,10 @@ export default function BrowseFilters({
   platforms,
   platformIds,
   setPlatformIds,
+  developerIds,
+  setDeveloperIds,
+  publisherIds,
+  setPublisherIds,
   gamesCountsQuery,
   favourites,
   isLoggedIn,
@@ -33,7 +41,7 @@ export default function BrowseFilters({
 }: Props) {
   const getMessage = useGetMessage();
   const {
-    data: { platforms: platformCounts },
+    data: { platforms: platformCounts, developers, publishers },
   } = gamesCountsQuery;
 
   return (
@@ -61,7 +69,7 @@ export default function BrowseFilters({
         name="platform"
         label={getMessage(ids.games.filters.platform.label)}
       >
-        <CheckboxGroup value={platformIds} onChange={setPlatformIds} limit={7}>
+        <CheckboxGroup value={platformIds} onChange={setPlatformIds} limit={5}>
           {platforms
             .filter(({ id }) => {
               const count = platformCounts[id] ?? 0;
@@ -77,6 +85,42 @@ export default function BrowseFilters({
             })}
         </CheckboxGroup>
       </Filter>
+      <If condition={developers && Object.keys(developers).length}>
+        <Filter
+          name="developers"
+          label={getMessage(ids.games.filters.developer.label)}
+        >
+          <CheckboxGroup
+            value={developerIds}
+            onChange={setDeveloperIds}
+            limit={4}
+          >
+            {Object.values(developers).map(({ id, count, name }) => {
+              const label = `${name} (${count})`;
+
+              return <CheckboxGroupItem key={id} label={label} value={id} />;
+            })}
+          </CheckboxGroup>
+        </Filter>
+      </If>
+      <If condition={publishers && Object.keys(publishers).length}>
+        <Filter
+          name="publishers"
+          label={getMessage(ids.games.filters.publisher.label)}
+        >
+          <CheckboxGroup
+            value={publisherIds}
+            onChange={setPublisherIds}
+            limit={4}
+          >
+            {Object.values(publishers).map(({ id, count, name }) => {
+              const label = `${name} (${count})`;
+
+              return <CheckboxGroupItem key={id} label={label} value={id} />;
+            })}
+          </CheckboxGroup>
+        </Filter>
+      </If>
     </>
   );
 }

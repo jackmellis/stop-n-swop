@@ -105,9 +105,11 @@ exports.CommonErrorCode = void 0;
 class BaseError extends Error {
   constructor(message) {
     super(message);
+    this.code = void 0;
+    this.status = void 0;
+    this.id = void 0;
     this.code = exports.CommonErrorCode.UNKNOWN;
     this.status = 500;
-    this.id = void 0;
     this.id = ulid();
   }
   toHttpResponse() {

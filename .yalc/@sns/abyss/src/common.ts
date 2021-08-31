@@ -26,12 +26,14 @@ export interface IError {
 }
 
 export abstract class BaseError extends Error implements IError {
-  code: string = CommonErrorCode.UNKNOWN;
-  status = 500;
+  code: string;
+  status: number;
   id: string;
 
   constructor(message?: string) {
     super(message);
+    this.code = CommonErrorCode.UNKNOWN;
+    this.status = 500;
     this.id = ulid();
   }
 

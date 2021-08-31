@@ -8,12 +8,28 @@ import type { AuthDriver } from 'core/io';
 
 const fetchCounts =
   (driver: AuthDriver): FetchCounts =>
-  async ({ platforms, search, available, favourites }) => {
-    if (!platforms.length && !search && !available && !favourites) {
+  async ({
+    platforms,
+    search,
+    available,
+    favourites,
+    developers,
+    publishers,
+  }) => {
+    if (
+      !platforms.length &&
+      !search &&
+      !available &&
+      !favourites &&
+      !developers.length &&
+      !publishers.length
+    ) {
       return {
         available: 0,
         platforms: {},
         total: 0,
+        developers: {},
+        publishers: {},
       };
     }
 
@@ -27,6 +43,8 @@ const fetchCounts =
         platformIds: platforms,
         available,
         favourites,
+        developerIds: developers,
+        publisherIds: publishers,
       },
     });
 

@@ -16,10 +16,14 @@ export default function Browse() {
     initialPlatforms,
     initialSearch,
     initialFavourites,
+    initialDevs,
+    initialPubs,
   } = useInitialValues();
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState(initialSearch);
   const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
+  const [devs, setDevs] = useState<string[]>(initialDevs);
+  const [pubs, setPubs] = useState<string[]>(initialPubs);
   const [favourites, setFavourites] = useState(initialFavourites);
   const [available, setAvailable] = useState(initialAvailable);
   const [latentSearch, { flush }] = useDebounce(search, 500);
@@ -32,18 +36,27 @@ export default function Browse() {
     available,
     group: true,
     favourites,
+    developers: devs,
+    publishers: pubs,
   });
   const gamesCountsQuery = useCounts({
     available,
     platforms: platformIds,
     search: latentSearch,
     favourites,
+    developers: devs,
+    publishers: pubs,
   });
   const listingsCountsQuery = useListingsCounts(gamesQuery);
   const { data: favouriteIds } = useFavourites();
   const isLoggedIn = useIsLoggedIn();
   const hasSearched =
-    Boolean(latentSearch) || platformIds.length > 0 || available || favourites;
+    Boolean(latentSearch) ||
+    platformIds.length > 0 ||
+    available ||
+    favourites ||
+    devs.length > 0 ||
+    pubs.length > 0;
 
   useResetParams({
     available,
@@ -61,9 +74,23 @@ export default function Browse() {
     setSearch,
     flush,
     setPage,
+    devs,
+    initialDevs,
+    initialPubs,
+    pubs,
+    setDevs,
+    setPubs,
   });
 
-  useSyncUrl({ available, latentSearch, platformIds, search, favourites });
+  useSyncUrl({
+    available,
+    latentSearch,
+    platformIds,
+    search,
+    favourites,
+    devs,
+    pubs,
+  });
 
   // Reset the pagination when a search criteria changes
   useEffect(() => {
@@ -87,6 +114,10 @@ export default function Browse() {
       favourites={favourites}
       isLoggedIn={isLoggedIn}
       setFavourites={setFavourites}
+      developerIds={devs}
+      setDeveloperIds={setDevs}
+      publisherIds={pubs}
+      setPublisherIds={setPubs}
     >
       <Suspense fallback={<LoadingPage />}>
         <Items

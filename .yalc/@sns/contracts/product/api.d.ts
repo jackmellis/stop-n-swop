@@ -6,6 +6,8 @@ export interface SearchGamesRequest {
     available?: boolean;
     group?: boolean;
     favourites?: boolean;
+    developerIds?: string[];
+    publisherIds?: string[];
 }
 export interface SearchGamesResponse {
     nextPage: number;
@@ -20,15 +22,20 @@ export declare type GetGameParams = {
 };
 export declare type GetGameRequest = void;
 export declare type GetGameResponse = Game;
-export interface GetSearchCountsRequest {
-    q?: string;
-    platformIds?: string[];
-    available?: boolean;
-    favourites?: boolean;
-}
+export declare type GetSearchCountsRequest = Omit<SearchGamesRequest, "page" | "group">;
 export interface GetSearchCountsResponse {
     total: number;
     platforms: Record<string, number>;
+    developers: Record<string, {
+        id: string;
+        name: string;
+        count: number;
+    }>;
+    publishers: Record<string, {
+        id: string;
+        name: string;
+        count: number;
+    }>;
 }
 export declare type GameViwedParams = {
     productId: string;

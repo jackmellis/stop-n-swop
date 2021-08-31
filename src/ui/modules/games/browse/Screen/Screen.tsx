@@ -10,6 +10,29 @@ import type { useCounts, useGames } from 'application/games';
 import Results from './Results';
 import type { useListingsCounts } from 'application/listings';
 
+interface Props {
+  hasSearched: boolean;
+  platformsQuery: Query<Platform[]>;
+  gamesQuery: ReturnType<typeof useGames>;
+  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
+  gamesCountsQuery: ReturnType<typeof useCounts>;
+  search: string;
+  platformIds: string[];
+  onSearch(value: string): void;
+  setPlatformIds(value: string[]): void;
+  setPage(page: number): void;
+  children: ReactNode;
+  available: boolean;
+  setAvailable(value: boolean): void;
+  favourites: boolean;
+  setFavourites(value: boolean): void;
+  isLoggedIn: boolean;
+  developerIds: string[];
+  setDeveloperIds(value: string[]): void;
+  publisherIds: string[];
+  setPublisherIds(value: string[]): void;
+}
+
 export default function BrowseScreen({
   platformsQuery,
   gamesQuery,
@@ -27,24 +50,11 @@ export default function BrowseScreen({
   favourites,
   isLoggedIn,
   setFavourites,
-}: {
-  hasSearched: boolean;
-  platformsQuery: Query<Platform[]>;
-  gamesQuery: ReturnType<typeof useGames>;
-  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
-  gamesCountsQuery: ReturnType<typeof useCounts>;
-  search: string;
-  platformIds: string[];
-  onSearch(value: string): void;
-  setPlatformIds(value: string[]): void;
-  setPage(page: number): void;
-  children: ReactNode;
-  available: boolean;
-  setAvailable(value: boolean): void;
-  favourites: boolean;
-  setFavourites(value: boolean): void;
-  isLoggedIn: boolean;
-}) {
+  developerIds,
+  setDeveloperIds,
+  publisherIds,
+  setPublisherIds,
+}: Props) {
   return (
     <div className="flex-grow flex flex-col">
       <PageTitle>{useMessage(ids.games.title)}</PageTitle>
@@ -65,6 +75,10 @@ export default function BrowseScreen({
             favourites={favourites}
             isLoggedIn={isLoggedIn}
             setFavourites={setFavourites}
+            developerIds={developerIds}
+            setDeveloperIds={setDeveloperIds}
+            publisherIds={publisherIds}
+            setPublisherIds={setPublisherIds}
           >
             {children}
           </Results>

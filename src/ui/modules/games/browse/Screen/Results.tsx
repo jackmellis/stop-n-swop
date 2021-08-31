@@ -11,6 +11,27 @@ import Empty from '../Empty';
 import type { useListingsCounts } from 'application/listings';
 import NoResults from '../NoResults';
 
+interface Props {
+  hasSearched: boolean;
+  platformsQuery: Query<Platform[]>;
+  gamesQuery: ReturnType<typeof useGames>;
+  gamesCountsQuery: ReturnType<typeof useCounts>;
+  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
+  platformIds: string[];
+  setPlatformIds(value: string[]): void;
+  setPage(page: number): void;
+  children: ReactNode;
+  available: boolean;
+  setAvailable(value: boolean): void;
+  favourites: boolean;
+  setFavourites(value: boolean): void;
+  isLoggedIn: boolean;
+  developerIds: string[];
+  setDeveloperIds(value: string[]): void;
+  publisherIds: string[];
+  setPublisherIds(value: string[]): void;
+}
+
 export default function Results({
   platformsQuery,
   gamesQuery,
@@ -26,22 +47,11 @@ export default function Results({
   favourites,
   isLoggedIn,
   setFavourites,
-}: {
-  hasSearched: boolean;
-  platformsQuery: Query<Platform[]>;
-  gamesQuery: ReturnType<typeof useGames>;
-  gamesCountsQuery: ReturnType<typeof useCounts>;
-  listingsCountsQuery: ReturnType<typeof useListingsCounts>;
-  platformIds: string[];
-  setPlatformIds(value: string[]): void;
-  setPage(page: number): void;
-  children: ReactNode;
-  available: boolean;
-  setAvailable(value: boolean): void;
-  favourites: boolean;
-  setFavourites(value: boolean): void;
-  isLoggedIn: boolean;
-}) {
+  developerIds,
+  setDeveloperIds,
+  publisherIds,
+  setPublisherIds,
+}: Props) {
   const { status } = gamesQuery;
   const { data: platforms } = platformsQuery;
   const loading = (() => {
@@ -73,6 +83,10 @@ export default function Results({
             favourites={favourites}
             isLoggedIn={isLoggedIn}
             setFavourites={setFavourites}
+            developerIds={developerIds}
+            setDeveloperIds={setDeveloperIds}
+            publisherIds={publisherIds}
+            setPublisherIds={setPublisherIds}
           />
         </Suspense>
       </Filters>
