@@ -1,31 +1,92 @@
-import crypto from 'crypto';
-
-let urlAlphabet =
-  'ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW';
-
-const POOL_SIZE_MULTIPLIER = 32;
-let pool, poolOffset;
-let random = bytes => {
-  if (!pool || pool.length < bytes) {
-    pool = Buffer.allocUnsafe(bytes * POOL_SIZE_MULTIPLIER);
-    crypto.randomFillSync(pool);
-    poolOffset = 0;
-  } else if (poolOffset + bytes > pool.length) {
-    crypto.randomFillSync(pool);
-    poolOffset = 0;
-  }
-  let res = pool.subarray(poolOffset, poolOffset + bytes);
-  poolOffset += bytes;
-  return res
-};
-let nanoid = (size = 21) => {
-  let bytes = random(size);
-  let id = '';
-  while (size--) {
-    id += urlAlphabet[bytes[size] & 63];
-  }
-  return id
-};
+function createError(message) {
+    var err = new Error(message);
+    err.source = "ulid";
+    return err;
+}
+var ENCODING = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+var ENCODING_LEN = ENCODING.length;
+var TIME_MAX = Math.pow(2, 48) - 1;
+var TIME_LEN = 10;
+var RANDOM_LEN = 16;
+function randomChar(prng) {
+    var rand = Math.floor(prng() * ENCODING_LEN);
+    if (rand === ENCODING_LEN) {
+        rand = ENCODING_LEN - 1;
+    }
+    return ENCODING.charAt(rand);
+}
+function encodeTime(now, len) {
+    if (isNaN(now)) {
+        throw new Error(now + " must be a number");
+    }
+    if (now > TIME_MAX) {
+        throw createError("cannot encode time greater than " + TIME_MAX);
+    }
+    if (now < 0) {
+        throw createError("time must be positive");
+    }
+    if (Number.isInteger(now) === false) {
+        throw createError("time must be an integer");
+    }
+    var mod = void 0;
+    var str = "";
+    for (; len > 0; len--) {
+        mod = now % ENCODING_LEN;
+        str = ENCODING.charAt(mod) + str;
+        now = (now - mod) / ENCODING_LEN;
+    }
+    return str;
+}
+function encodeRandom(len, prng) {
+    var str = "";
+    for (; len > 0; len--) {
+        str = randomChar(prng) + str;
+    }
+    return str;
+}
+function detectPrng() {
+    var allowInsecure = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var root = arguments[1];
+    if (!root) {
+        root = typeof window !== "undefined" ? window : null;
+    }
+    var browserCrypto = root && (root.crypto || root.msCrypto);
+    if (browserCrypto) {
+        return function () {
+            var buffer = new Uint8Array(1);
+            browserCrypto.getRandomValues(buffer);
+            return buffer[0] / 0xff;
+        };
+    } else {
+        try {
+            var nodeCrypto = require("crypto");
+            return function () {
+                return nodeCrypto.randomBytes(1).readUInt8() / 0xff;
+            };
+        } catch (e) {}
+    }
+    if (allowInsecure) {
+        try {
+            console.error("secure crypto unusable, falling back to insecure Math.random()!");
+        } catch (e) {}
+        return function () {
+            return Math.random();
+        };
+    }
+    throw createError("secure crypto unusable, insecure Math.random not allowed");
+}
+function factory(currPrng) {
+    if (!currPrng) {
+        currPrng = detectPrng();
+    }
+    return function ulid(seedTime) {
+        if (isNaN(seedTime)) {
+            seedTime = Date.now();
+        }
+        return encodeTime(seedTime, TIME_LEN) + encodeRandom(RANDOM_LEN, currPrng);
+    };
+}
+var ulid = factory();
 
 let CommonErrorCode;
 (function (CommonErrorCode) {
@@ -43,7 +104,7 @@ class BaseError extends Error {
     this.code = CommonErrorCode.UNKNOWN;
     this.status = 500;
     this.id = void 0;
-    this.id = nanoid();
+    this.id = ulid();
   }
   toHttpResponse() {
     return {

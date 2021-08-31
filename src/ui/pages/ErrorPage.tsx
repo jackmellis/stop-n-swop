@@ -1,5 +1,5 @@
 import { BaseError } from '@sns/abyss';
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'ui/elements/Card';
 import { FaFrownOpen } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
@@ -13,12 +13,29 @@ interface Props extends FallbackProps {
 
 export default function ErrorPage({ error, resetErrorBoundary }: Props) {
   const g = useGetMessage();
+  const [showMore, setShowMore] = useState(false);
+
   const message = (() => {
-    if (error instanceof BaseError) {
-      return error.toString();
-    }
     if (typeof error === 'string') {
       return error;
+    }
+    if (error instanceof BaseError) {
+      if (showMore) {
+        return (
+          <pre>
+            {' '}
+            {JSON.stringify(
+              {
+                message: error.toString(),
+                ...error.toHttpResponse(),
+              },
+              null,
+              2,
+            )}
+          </pre>
+        );
+      }
+      return error.toString();
     }
     return error?.message;
   })();
@@ -34,7 +51,7 @@ export default function ErrorPage({ error, resetErrorBoundary }: Props) {
         }
         className="max-w-screen-md w-full"
       >
-        <div className="space-y-8">
+        <div className="space-y-8" onDoubleClick={() => setShowMore(!showMore)}>
           <p>{message}</p>
           <Button kind="primary" onClick={() => resetErrorBoundary(error)}>
             {g(ids.error.retryButton)}

@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+import { ulid } from "ulid";
 
 export enum CommonErrorCode {
   UNKNOWN = "UNKNOWN",
@@ -32,7 +32,7 @@ export abstract class BaseError extends Error implements IError {
 
   constructor(message?: string) {
     super(message);
-    this.id = nanoid();
+    this.id = ulid();
   }
 
   toHttpResponse() {
