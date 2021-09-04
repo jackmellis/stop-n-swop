@@ -10,8 +10,11 @@ interface Props {
 
 export default function Thumb({ to, image, label }: Props) {
   return (
-    <Link to={to} className="w-full rounded space-y-2 flex flex-col">
-      <div className="aspect aspect-16-9 w-full">
+    <Link
+      to={to}
+      className="w-full rounded space-y-2 flex flex-col hover:text-primary"
+    >
+      <div className="aspect aspect-16-9 w-full hover:filter hover:brightness-125">
         <Photo src={image} className="object-cover" />
       </div>
       <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center w-full">

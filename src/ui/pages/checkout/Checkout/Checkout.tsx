@@ -17,7 +17,6 @@ export default function CheckoutPage() {
   const { listingId } = useParams<{ listingId: string }>();
   const { data: listing } = useListing({ id: listingId });
   const { data: game } = useGame({ id: listing.productIds[0] });
-  const { id: productId } = game;
   const { action: createOrder, submitting, error } = useCreateOrder();
   const { push } = useHistory();
   const [protectionModalOpen, setProtectionModalOpen] = useState(false);
@@ -39,14 +38,7 @@ export default function CheckoutPage() {
         />
       }
       howItWorks={<HowItWorks />}
-      controls={
-        <Controls
-          listingId={listingId}
-          productId={productId}
-          submitting={submitting}
-          onClick={handleClick}
-        />
-      }
+      controls={<Controls submitting={submitting} onClick={handleClick} />}
     >
       <ProtectionModal
         isOpen={protectionModalOpen}

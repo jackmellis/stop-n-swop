@@ -26,7 +26,7 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
       ref={ref}
       className={cx(
         className,
-        'bg-black rounded',
+        'bg-black sm:rounded',
         glass && 'sm:bg-opacity-90 backdrop-filter backdrop-blur',
       )}
     >

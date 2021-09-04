@@ -19,7 +19,7 @@ export default function History({
 
   return (
     <div>
-      <div className="w-full text-left mb-4 font-semibold border-secondary border-b">
+      <div className="w-full text-left mb-4 pb-4 font-semibold border-secondary border-b">
         {getMessage(ids.listings.myListing.history.label)}
       </div>
       <Suspense

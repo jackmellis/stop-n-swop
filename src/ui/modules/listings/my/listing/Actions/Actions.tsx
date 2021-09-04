@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Order, Status } from '@sns/contracts/order';
-import Button from 'ui/elements/Button';
+import Button, { LinkButton } from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
-import { makeEditListingPath } from 'ui/constants/paths';
+import { makeEditListingPath, NEW_LISTING } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { FaPen } from 'react-icons/fa';
@@ -159,6 +159,15 @@ export default function Actions({
         >
           {getMessage(ids.order.actions.unposted)}
         </ActionButton>
+      </div>
+    );
+  }
+  if (listing.status === Status.COMPLETE) {
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <LinkButton kind="secondary" padding to={NEW_LISTING}>
+          {getMessage(ids.order.actions.listingComplete)}
+        </LinkButton>
       </div>
     );
   }

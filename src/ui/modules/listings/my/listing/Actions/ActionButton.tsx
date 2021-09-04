@@ -71,6 +71,9 @@ const getButtonState = (
 ): State => {
   const defaultState = baseState ?? stateMatrix[action] ?? 'none';
   if (!active) {
+    if (status === Status.LOADING) {
+      return 'disabled';
+    }
     return defaultState;
   }
   if (status === Status.LOADING) {

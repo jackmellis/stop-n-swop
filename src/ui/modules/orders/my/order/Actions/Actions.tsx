@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Order, Status as OrderStatus } from '@sns/contracts/order';
-import Button from 'ui/elements/Button';
+import Button, { LinkButton } from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import ActionButton from 'ui/modules/listings/my/listing/Actions/ActionButton';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {
+  GAMES,
   makeCheckoutPaymentPath,
   makeContinueCheckoutPath,
 } from 'ui/constants/paths';
@@ -119,6 +120,15 @@ export default function Actions({ order, status, onClick }: Props) {
           order={order}
           status={status}
         />
+      </div>
+    );
+  }
+  if (order.status === OrderStatus.COMPLETE) {
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <LinkButton kind="secondary" padding to={GAMES}>
+          {getMessage(ids.order.actions.orderComplete)}
+        </LinkButton>
       </div>
     );
   }

@@ -28,8 +28,8 @@ export default function Nav() {
   }
 
   return (
-    <nav className="md:flex lg:px-4 border-b-2 border-primary bg-black">
-      <div className="flex items-center pl-3 md:flex-grow">
+    <nav className="md:flex pl-4 lg:px-4 border-b-2 border-primary bg-black">
+      <div className="flex items-center md:flex-grow">
         <Title />
         <div className="flex-grow" />
         <If condition={loggedIn}>

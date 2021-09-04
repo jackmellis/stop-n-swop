@@ -28,7 +28,7 @@ export default function Listings({
   return (
     <ListingsList>
       <If condition={!listings.length}>
-        <ListItem>
+        <ListItem className="lg:rounded">
           <div className="w-full py-12 px-8 space-y-4 md:space-y-0 md:flex justify-between items-center">
             <span>{getMessage(ids.listings.empty.title)}</span>
             <LinkButton

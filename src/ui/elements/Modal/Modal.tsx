@@ -19,7 +19,7 @@ export default function Modal({
     <ReactModal
       isOpen={isOpen}
       appElement={document.getElementById('modal-container')}
-      overlayClassName="fixed inset-0 bg-black bg-opacity-20"
+      overlayClassName="fixed inset-0 bg-black bg-opacity-60"
       className={cx(
         'absolute inset-0 outline-none max-h-full overflow-y-auto',
         'md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:transform',

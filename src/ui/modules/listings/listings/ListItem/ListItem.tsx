@@ -27,7 +27,7 @@ export default function ListingsListItem({
   children,
 }: Props) {
   return (
-    <ListItem style={style}>
+    <ListItem style={style} className="lg:rounded lg:overflow-hidden">
       <div className={cx('flex space-x-4 w-full h-full')}>
         <Image image={image} />
 

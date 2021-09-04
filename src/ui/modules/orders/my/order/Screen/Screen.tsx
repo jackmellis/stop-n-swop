@@ -15,7 +15,7 @@ export default function MyOrderScreen({
   return (
     <Card
       title={game.name}
-      className="md:mt-3 lg:mt-4 container mx-auto xl:max-w-screen-lg flex flex-col"
+      className="md:my-3 lg:my-4 container mx-auto xl:max-w-screen-lg flex flex-col"
     >
       <If condition={error}>
         <FormError error={error} />

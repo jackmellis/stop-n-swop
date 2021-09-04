@@ -16,7 +16,7 @@ export default function Selling() {
       className="flex flex-col bg-secondary-dark md:w-1/2 items-center"
       flush
     >
-      <div className="space-y-4 flex-grow flex flex-col">
+      <div className="space-y-8 lg:space-y-12 flex-grow flex flex-col">
         <BlockHeading>{g(ids.home.new.selling.title)}</BlockHeading>
         <Reasons>
           {ids.home.new.selling.reasons.map(([text, description]) => (

@@ -53,10 +53,10 @@ export default function LoginPage() {
           onFailure={console.error}
         >
           <div
-            className="flex items-center"
+            className="flex items-center rounded hover:filter hover:brightness-115"
             style={{ backgroundColor: '#4285F4' }}
           >
-            <span className="p-3 bg-white">
+            <span className="p-3 bg-white rounded-l">
               <img src={G} width={24} height={24} aria-label="Google" />
             </span>
             <Choose>

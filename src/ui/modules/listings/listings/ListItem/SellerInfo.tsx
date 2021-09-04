@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'ui/elements/Button';
 import { makeUserPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 import StarRating from '../StarRating';
 
 export default function SellerInfo({
@@ -18,8 +19,10 @@ export default function SellerInfo({
           padding={false}
           component={Link}
           to={makeUserPath({ username })}
+          className="space-x-2"
         >
-          {username}
+          <FaUser className="text-xs" />
+          <span>{username}</span>
         </Button>
       </div>
       <StarRating rating={rating} />

@@ -43,7 +43,7 @@ export default function QuickActions({
         </span>
       </Button>
       <Button
-        className="w-full justify-center"
+        className="w-full justify-center hidden"
         onMouseEnter={collectionBoop}
         onClick={onCollectClick}
       >

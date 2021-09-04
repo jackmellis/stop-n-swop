@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { makeUserPath } from 'ui/constants/paths';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { ids } from 'ui/messages';
+import { FaUser } from 'react-icons/fa';
 
 export default function Overview({
   className,
@@ -58,9 +59,10 @@ export default function Overview({
               padding={false}
               component={Link}
               to={makeUserPath({ username })}
-              className="text-gray-300 mr-4"
+              className="text-gray-300 mr-4 space-x-2"
             >
-              {username}
+              <FaUser className="text-xs" />
+              <span>{username}</span>
             </Button>
             <StarRating rating={rating} />
           </div>

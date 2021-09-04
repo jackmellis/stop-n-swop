@@ -6,6 +6,7 @@ import { useGetDate, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Loader from 'ui/modules/Loader';
 import PriceBreakdown from 'ui/modules/listings/PriceBreakdown';
+import Photo from 'ui/elements/Photo';
 import type { Status as IStatus } from '@sns/contracts/order';
 import Buyer from '../Buyer';
 import Status from '../Status';
@@ -40,6 +41,7 @@ export default function Overview({
 }: Props) {
   const getMessage = useGetMessage();
   const getDate = useGetDate();
+  const image = Object.values(listing.images)[0];
 
   return (
     <div className="space-y-8">
@@ -93,10 +95,12 @@ export default function Overview({
             </If>
           </div>
         </div>
-        <PriceBreakdown
-          className="w-1/2 lg:w-1/3 hidden md:block"
-          listing={listing}
-        />
+        <div className="w-1/2 lg:w-1/3 hidden md:block space-y-8">
+          <div className="aspect aspect-16-9">
+            <Photo src={image} className="object-cover" />
+          </div>
+          <PriceBreakdown listing={listing} />
+        </div>
       </div>
       <div className="help">{help}</div>
       <Suspense fallback={<Loader size="0.5rem" sensible />}>

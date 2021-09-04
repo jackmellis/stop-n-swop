@@ -54,7 +54,7 @@ export default function ListingsArea({ productId }: Props) {
   const user = loggedIn ? userQuery.data : null;
 
   return (
-    <div className="flex flex-col lg:flex-row flex-grow">
+    <div className="flex flex-col lg:flex-row flex-grow lg:py-4 lg:space-x-4">
       <FormProvider {...formProps}>
         <Filters />
       </FormProvider>

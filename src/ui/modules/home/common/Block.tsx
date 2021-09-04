@@ -12,7 +12,7 @@ export default function Block({ children, className, flush }: Props) {
     <div
       className={cx(
         flush || 'md:rounded-lg',
-        'bg-black py-8 space-y-4',
+        'bg-black py-8 space-y-8 lg:space-y-12',
         'px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12',
         className,
       )}

@@ -3,6 +3,7 @@ import BuyingOrSelling from './BuyingOrSelling';
 import Header from './Header';
 import Intro from './Intro';
 import OrderProtection from './OrderProtection/OrderProtection';
+import Search from './Search';
 import SearchGames from './SearchGames';
 
 export default function Screen({
@@ -18,9 +19,10 @@ export default function Screen({
         <div>
           <Header />
           <Intro />
-          <BuyingOrSelling />
+          <Search />
         </div>
         <div className="md:space-y-8 lg:space-y-12">
+          <BuyingOrSelling />
           <SearchGames />
           <OrderProtection />
         </div>

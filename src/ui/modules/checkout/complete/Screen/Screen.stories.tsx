@@ -12,7 +12,7 @@ export const Basic = () => {
   return (
     <Intl messages={en}>
       <BrowserRouter>
-        <CompleteScreen orderId="1234" />
+        <CompleteScreen orderId="1234" image="" />
       </BrowserRouter>
     </Intl>
   );

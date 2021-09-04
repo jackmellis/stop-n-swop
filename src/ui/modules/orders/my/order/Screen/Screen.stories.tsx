@@ -6,6 +6,8 @@ import { Provider as Intl } from 'ui/intl';
 import { en } from 'ui/messages';
 import { BrowserRouter } from 'react-router-dom';
 import History from 'ui/modules/listings/my/listing/History';
+import { Provider as Jpex } from 'react-jpex';
+import type { Config } from 'core/io';
 import type { Listing } from '@sns/contracts/listing';
 import Overview from '../Overview';
 import Actions from '../Actions';
@@ -33,7 +35,11 @@ export const Basic = ({ status }: BasicProps) => {
     id: 'listing-id',
     username: 'seller-id',
     productIds: ['product-id'],
-  } as Listing;
+    images: {
+      example:
+        'http://www.boxmygames.com/wp-content/uploads/2015/07/Mario-Kart-64-2.jpg',
+    },
+  } as unknown as Listing;
   const order = {
     id: 'order-id',
     listingId: listing.id,
@@ -45,35 +51,45 @@ export const Basic = ({ status }: BasicProps) => {
   } as Game;
 
   return (
-    <Intl messages={en}>
-      <BrowserRouter>
-        <Screen
-          error={null}
-          game={game}
-          overview={
-            <Overview
-              listing={listing}
-              order={order}
-              help={<Help status={status} />}
-              history={
-                <History
-                  createdDate={new Date()}
-                  username="test"
-                  historyQuery={{ data: [] } as any}
-                />
-              }
-              actions={
-                <Actions
-                  onClick={() => null}
-                  order={order}
-                  status={ActionStatus.IDLE}
-                />
-              }
-            />
-          }
-        />
-      </BrowserRouter>
-    </Intl>
+    <Jpex
+      onMount={(jpex) => {
+        jpex.constant<Config>({
+          images: {
+            url: '',
+          },
+        } as any);
+      }}
+    >
+      <Intl messages={en}>
+        <BrowserRouter>
+          <Screen
+            error={null}
+            game={game}
+            overview={
+              <Overview
+                listing={listing}
+                order={order}
+                help={<Help status={status} />}
+                history={
+                  <History
+                    createdDate={new Date()}
+                    username="test"
+                    historyQuery={{ data: [] } as any}
+                  />
+                }
+                actions={
+                  <Actions
+                    onClick={() => null}
+                    order={order}
+                    status={ActionStatus.IDLE}
+                  />
+                }
+              />
+            }
+          />
+        </BrowserRouter>
+      </Intl>
+    </Jpex>
   );
 };
 Basic.args = basicProps;

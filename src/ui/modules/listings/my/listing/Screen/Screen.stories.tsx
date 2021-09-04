@@ -5,6 +5,8 @@ import { en } from 'ui/messages';
 import { BrowserRouter } from 'react-router-dom';
 import { Order, Status } from '@sns/contracts/order';
 import { Status as ActionStatus, Provider as Respite } from '@respite/core';
+import { Provider as Jpex } from 'react-jpex';
+import type { Config } from 'core/io';
 import Screen from './Screen';
 import Overview from '../Overview';
 import Actions from '../Actions';
@@ -45,7 +47,11 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
     postage: 200,
     currency: 'GBP',
     status: orderStatus,
-  } as Listing;
+    images: {
+      example:
+        'http://www.boxmygames.com/wp-content/uploads/2015/07/Mario-Kart-64-2.jpg',
+    },
+  } as unknown as Listing;
   const order: Order = {
     id: 'order_id',
     listingId: listing.id,
@@ -68,75 +74,87 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
   };
 
   return (
-    <Respite>
-      <Intl messages={en}>
-        <BrowserRouter>
-          <Screen
-            error={null}
-            game={game}
-            overview={
-              <Overview
-                buyer="buyer_id"
-                listingId={listing.id}
-                listing={listing}
-                orderId={order.id}
-                productId={game.id}
-                status={orderStatus}
-                placedAt={order.created}
-                help={<Help status={orderStatus} canApprove={manualApproval} />}
-                buyerAddress={
-                  <BuyerAddress
-                    status={orderStatus}
-                    addressQuery={
-                      {
-                        data: {
-                          name: 'Mr Customer',
-                          address: {
-                            line1: 'line 1',
-                            line2: 'line 2',
-                            city: 'city',
-                            postcode: 'PS57 C0D3',
-                            country: 'GB',
+    <Jpex
+      onMount={(jpex) => {
+        jpex.constant<Config>({
+          images: {
+            url: '',
+          },
+        } as any);
+      }}
+    >
+      <Respite>
+        <Intl messages={en}>
+          <BrowserRouter>
+            <Screen
+              error={null}
+              game={game}
+              overview={
+                <Overview
+                  buyer="buyer_id"
+                  listingId={listing.id}
+                  listing={listing}
+                  orderId={order.id}
+                  productId={game.id}
+                  status={orderStatus}
+                  placedAt={order.created}
+                  help={
+                    <Help status={orderStatus} canApprove={manualApproval} />
+                  }
+                  buyerAddress={
+                    <BuyerAddress
+                      status={orderStatus}
+                      addressQuery={
+                        {
+                          data: {
+                            name: 'Mr Customer',
+                            address: {
+                              line1: 'line 1',
+                              line2: 'line 2',
+                              city: 'city',
+                              postcode: 'PS57 C0D3',
+                              country: 'GB',
+                            },
                           },
-                        },
-                      } as ReturnType<typeof useAddress>
-                    }
-                  />
-                }
-                history={
-                  <History
-                    createdDate={new Date()}
-                    username="test"
-                    historyQuery={
-                      {
-                        data: [
-                          {
-                            date: new Date(),
-                            listingId: '',
-                            orderId: '',
-                            username: 'test',
-                            status: Status.APPROVED,
-                          },
-                        ],
-                      } as any
-                    }
-                  />
-                }
-                actions={
-                  <Actions
-                    onChangeStatus={alert}
-                    listing={listing}
-                    orders={[order]}
-                    user={user}
-                    status={ActionStatus.IDLE}
-                  />
-                }
-              />
-            }
-          />
-        </BrowserRouter>
-      </Intl>
-    </Respite>
+                        } as ReturnType<typeof useAddress>
+                      }
+                    />
+                  }
+                  history={
+                    <History
+                      createdDate={new Date()}
+                      username="test"
+                      historyQuery={
+                        {
+                          data: [
+                            {
+                              date: new Date(),
+                              listingId: '',
+                              orderId: '',
+                              username: 'test',
+                              status: Status.APPROVED,
+                            },
+                          ],
+                        } as any
+                      }
+                    />
+                  }
+                  actions={
+                    <Actions
+                      onChangeStatus={alert}
+                      listing={listing}
+                      orders={[order]}
+                      user={user}
+                      status={ActionStatus.IDLE}
+                    />
+                  }
+                />
+              }
+            />
+          </BrowserRouter>
+        </Intl>
+      </Respite>
+    </Jpex>
   );
 };
 Basic.args = basicProps;

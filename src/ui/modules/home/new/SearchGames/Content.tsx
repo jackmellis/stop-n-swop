@@ -8,7 +8,7 @@ export default function Content() {
   const g = useGetMessage();
 
   return (
-    <div className="flex-grow space-y-8">
+    <div className="flex-grow space-y-8 lg:space-y-12">
       {ids.home.new.search.text.map((id) => (
         <p key={id}>{g(id)}</p>
       ))}

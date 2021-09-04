@@ -39,15 +39,15 @@ export default function ReceivedModal({
         <div className="flex flex-col md:flex-row justify-around">
           <ActionButton
             orderId={order.id}
-            action={OrderStatus.RECEIVED}
-            active={isActive(OrderStatus.RECEIVED)}
+            action={OrderStatus.DISPUTED}
+            active={isActive(OrderStatus.DISPUTED)}
             status={status}
             onClick={onClick}
           />
           <ActionButton
             orderId={order.id}
-            action={OrderStatus.DISPUTED}
-            active={isActive(OrderStatus.DISPUTED)}
+            action={OrderStatus.RECEIVED}
+            active={isActive(OrderStatus.RECEIVED)}
             status={status}
             onClick={onClick}
           />

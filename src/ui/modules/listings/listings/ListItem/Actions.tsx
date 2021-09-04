@@ -39,7 +39,7 @@ export default function Actions({
         'xl:w-auto',
       )}
     >
-      <div className="text-2xl text-right">
+      <div className="text-xl font-semibold text-right">
         {useCurrency(price, { currency })}
       </div>
       <div className="text-xs text-right text-gray-200 py-3">

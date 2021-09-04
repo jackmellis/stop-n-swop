@@ -4,9 +4,7 @@ import FormError from 'ui/elements/FormError';
 import Photo from 'ui/elements/Photo';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import Button from 'ui/elements/Button';
-import { Link } from 'react-router-dom';
-import { makeGameListingPath, makeUserPath } from 'ui/constants/paths';
+import { FaUser } from 'react-icons/fa';
 import type { Game } from '@sns/contracts/product';
 import type { Listing } from '@sns/contracts/listing';
 
@@ -27,10 +25,6 @@ export default function Screen({
   controls: ReactNode;
   children?: ReactNode;
 }) {
-  const {
-    id: listingId,
-    productIds: [productId],
-  } = listing;
   const getMessage = useGetMessage();
 
   return (
@@ -49,25 +43,12 @@ export default function Screen({
           </div>
           <div className="flex-grow flex flex-col space-y-8">
             <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-              <Button
-                padding={false}
-                component={Link}
-                to={makeGameListingPath({ listingId, productId })}
-                className="text-xl"
-              >
-                {game.name}
-              </Button>
-              <span className="w-full sm:w-auto text-sm text-gray-200 flex justify-between">
-                <span className="md:hidden">
-                  {getMessage(ids.checkout.intro.seller)}&nbsp;
+              <span className="text-xl">{game.name}</span>
+              <span className="w-full sm:w-auto text-sm text-gray-200 flex justify-end items-center space-x-2">
+                <span>
+                  <FaUser className="text-xs" />
                 </span>
-                <Button
-                  padding={false}
-                  component={Link}
-                  to={makeUserPath({ username: listing.username })}
-                >
-                  {listing.username}
-                </Button>
+                <span>{listing.username}</span>
               </span>
             </div>
             {price}

@@ -11,7 +11,7 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
         case 'error':
           return 'bg-danger hover:bg-danger-dark text-white';
         case 'disabled':
-          return 'bg-primary-lightest text-gray-200';
+          return 'bg-gray-500 text-gray-300';
         default:
           return 'bg-primary hover:bg-primary-darker text-white hover:text-gray-100';
       }
@@ -20,7 +20,7 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
         case 'error':
           return 'bg-danger hover:bg-danger-dark text-white';
         case 'disabled':
-          return 'bg-secondary-lightest text-gray-500';
+          return 'bg-gray-500 text-gray-300';
         default:
           return 'bg-secondary hover:bg-secondary-darker text-white hover:text-gray-100';
       }

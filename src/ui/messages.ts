@@ -14,7 +14,7 @@ const enMessages = {
     games: 'games',
     collections: 'my collections',
     listings: 'my listings',
-    list: 'list',
+    list: 'sell',
     orders: 'my orders',
     account: {
       login: 'log in',
@@ -93,7 +93,7 @@ const enMessages = {
           'No?',
           "Our listings are all neatly categorised and grouped by platform/game so you can make sure you're only searching for stuff you actually want!",
         ],
-        cta: 'Get started',
+        cta: 'Start searching',
       },
     },
     existing: {
@@ -130,7 +130,7 @@ const enMessages = {
     title: 'Games',
     actions: {
       favourite: 'Favourite',
-      list: 'List this game',
+      list: 'Sell this game',
       collect: 'Add to collection',
     },
     search: {
@@ -169,7 +169,7 @@ const enMessages = {
   listings: {
     empty: {
       title: 'Looks like there are no listings for this game yet',
-      button: 'Create a listing',
+      button: 'Sell this game',
     },
     listing: {
       title: 'view listing',
@@ -232,7 +232,7 @@ const enMessages = {
         },
       },
       done: {
-        title: "That's it, you're listed!",
+        title: 'Complete!',
         subtitle: 'What next?',
         description:
           "Your listing will soon appear on the game's page, we'll notify you if somebody places an order for it.",
@@ -275,7 +275,7 @@ const enMessages = {
         instructions: 'Instructions',
       },
       price: {
-        title: 'How much do you want to list this for?',
+        title: 'How much do you want to sell this for?',
         required: 'Please enter an amount',
         min: 'The minimum allowed price for a listing is {min}',
         label: 'Price',
@@ -385,7 +385,8 @@ const enMessages = {
           'Please provide your current address details.\nThis should be the same address that your bank account is registered at.',
       },
       reason: {
-        [Reason.LOGIN_REQUIRED]: 'Please log in to continue...',
+        [Reason.LOGIN_REQUIRED]:
+          'Please log in or create an account to continue...',
         [Reason.SESSION_EXPRED]:
           'Your session has expired, please log in again...',
       },
@@ -398,8 +399,8 @@ const enMessages = {
       showAll: 'Show all',
     },
     myOrder: {
-      order: 'order',
-      listing: 'listing',
+      order: 'Order',
+      listing: 'Listing',
       receivedModal: {
         trigger: 'Received',
         title: "You've received your order, that's great!",
@@ -409,7 +410,7 @@ const enMessages = {
     actions: {
       edit: 'Edit',
       [Status.OPEN]: 'Open',
-      [Status.CLOSED]: 'Close',
+      [Status.CLOSED]: 'Close my listing',
       [Status.PENDING]: 'Continue order',
       [Status.CANCELLED]: 'Cancel order',
       [Status.APPROVED]: 'Approve',
@@ -421,6 +422,8 @@ const enMessages = {
       [Status.NOT_RECEIVED]: "My order hasn't arrived yet",
       feedback: 'Leave feedback?',
       unposted: "Actually I haven't posted it yet...",
+      listingComplete: 'Sell something else!',
+      orderComplete: 'Find more games!',
     },
     status: {
       [Status.OPEN]: 'Listed',
@@ -567,7 +570,6 @@ const enMessages = {
       title: 'Checkout',
       next: 'Continue',
       back: 'Back',
-      seller: 'seller:',
       price: {
         price: 'Price:',
         postage: 'Postage:',
@@ -655,7 +657,7 @@ const enMessages = {
   footer: {
     title: 'Stop N Swop',
     games: 'Games',
-    list: 'Create a listing',
+    list: 'Sell',
     guide: 'Guide',
     terms: 'Terms & conditions',
     privacy: 'Privacy policy',
