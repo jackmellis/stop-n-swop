@@ -87,6 +87,17 @@ export default function PriceStep({
                   }
                   return true;
                 },
+                max: (value) => {
+                  if (!isMounted()) {
+                    return true;
+                  }
+                  if (value > 1000000) {
+                    return getMessage(ids.listings.new.price.max, {
+                      max: getCurrency(1000000, { currency }),
+                    });
+                  }
+                  return true;
+                },
               },
             }}
             defaultValue=""

@@ -2,6 +2,7 @@ import { useUser } from 'application/user';
 import React from 'react';
 import Dash from 'ui/modules/home/existing/Dash';
 import Screen from 'ui/modules/home/existing/Screen';
+import Search from 'ui/modules/home/new/Search';
 import BalancePanel from './panels/Balance';
 import ListingsPanel from './panels/Listings';
 import OrdersPanel from './panels/Orders';
@@ -23,6 +24,7 @@ export default function ExistingHome() {
           <BalancePanel />
         </Dash>
       }
+      search={<Search />}
       popular={<Popular />}
       recentlyAdded={<RecentlyAdded />}
       suggested={<Suggested />}

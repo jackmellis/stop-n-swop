@@ -26,11 +26,14 @@ jpex.factory<TrackEvents>(
       track('session_expired');
     });
     subscribe('listing_created', ({ currency, postage, price }) => {
-      track('listing_created', { value: price + postage, unit: currency });
+      track('listing_created', {
+        value: (price + postage) / 100,
+        unit: currency,
+      });
     });
     subscribe('listing_updated', ({ currency, postage, price }) => {
       track('listing_updated', {
-        value: price + postage,
+        value: (price + postage) / 100,
         unit: currency,
       });
     });
@@ -44,7 +47,7 @@ jpex.factory<TrackEvents>(
       track('payment_completed');
     });
     subscribe('manual_withdrawal', ({ amount, currency }) => {
-      track('manual_withdrawal', { value: amount, unit: currency });
+      track('manual_withdrawal', { value: amount / 100, unit: currency });
     });
     subscribe('game_viewed', ({ productId }) => {
       gameView({ id: productId });

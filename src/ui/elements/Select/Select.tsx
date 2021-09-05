@@ -11,6 +11,7 @@ export interface Props {
   error?: any;
   disabled?: boolean;
   onChange?(value: any): void;
+  placeholder?: string;
 }
 
 export default function Select({
@@ -21,6 +22,7 @@ export default function Select({
   id,
   error,
   disabled,
+  placeholder,
 }: Props) {
   const g = useGetMessage();
 
@@ -37,7 +39,7 @@ export default function Select({
         disabled={disabled}
       >
         <option value="" className="bg-black text-white">
-          {g(ids.elements.select.defaultLabel)}
+          {placeholder ?? g(ids.elements.select.defaultLabel)}
         </option>
         {options.map(({ label, value }, i) => (
           <option

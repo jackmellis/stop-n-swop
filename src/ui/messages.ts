@@ -258,6 +258,7 @@ const enMessages = {
       },
       game: {
         label: 'Find the game you want to sell to get started...',
+        platform: 'Select a platform',
         button: 'Get started',
       },
       photos: {
@@ -278,6 +279,7 @@ const enMessages = {
         title: 'How much do you want to sell this for?',
         required: 'Please enter an amount',
         min: 'The minimum allowed price for a listing is {min}',
+        max: 'The maximum listing price is {max}',
         label: 'Price',
         postage: 'Postage',
         platformFee: {
@@ -312,7 +314,7 @@ const enMessages = {
       title: 'My listings',
       listButton: 'Create a new listing',
       hasActions: 'Action required!',
-      showAll: 'Show all',
+      showAll: 'Show closed',
     },
     myListing: {
       listing: 'Listing',
@@ -341,6 +343,12 @@ const enMessages = {
           username: 'User',
           status: 'Status',
         },
+      },
+      postedModal: {
+        title: 'Confirm posted',
+        details:
+          "Please confirm that you've posted your game. Once you confirm, we allow 7 days for the item to arrive.",
+        close: 'Cancel',
       },
     },
   },
@@ -396,7 +404,7 @@ const enMessages = {
     myOrders: {
       title: 'My Orders',
       empty: "Looks like you haven't got any orders yet",
-      showAll: 'Show all',
+      showAll: 'Show closed',
     },
     myOrder: {
       order: 'Order',
@@ -420,8 +428,6 @@ const enMessages = {
       [Status.RECEIVED]: 'All good!',
       [Status.DISPUTED]: "Something's wrong",
       [Status.NOT_RECEIVED]: "My order hasn't arrived yet",
-      feedback: 'Leave feedback?',
-      unposted: "Actually I haven't posted it yet...",
       listingComplete: 'Sell something else!',
       orderComplete: 'Find more games!',
     },
@@ -489,7 +495,7 @@ const enMessages = {
           label: 'Line 1',
         },
         line2: {
-          label: 'Line 2',
+          label: 'Line 2 (optional)',
         },
         city: {
           label: 'Town/City',

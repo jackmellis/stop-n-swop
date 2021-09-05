@@ -27,7 +27,7 @@ export default function HistoryList({
           <th>{getMessage(ids.listings.myListing.history.headers.status)}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="divide-y divide-gray-600">
         {history
           .slice()
           .sort(

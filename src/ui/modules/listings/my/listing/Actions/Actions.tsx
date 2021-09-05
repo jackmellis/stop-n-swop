@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { makeEditListingPath, NEW_LISTING } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { FaPen } from 'react-icons/fa';
+import { FaEnvelope, FaPen, FaTimes } from 'react-icons/fa';
 import cx from 'classnames';
+import Modal from 'ui/elements/Modal';
 import type { Status as RStatus } from '@respite/core';
 import type { Listing } from '@sns/contracts/listing';
 import ActionButton from './ActionButton';
@@ -31,6 +32,7 @@ export default function Actions({
   status,
   onChangeStatus,
 }: Props) {
+  const [showPostedModal, setShowPostedModal] = useState(false);
   const [active, setActive] = useState<{ orderId: string; status: Status }>({
     orderId: '',
     status: Status.OPEN,
@@ -136,32 +138,46 @@ export default function Actions({
   if (listing.status === Status.APPROVED) {
     return (
       <div className={cx(wrapperClass, 'justify-center')}>
-        <ActionButton
-          orderId={order.id}
-          action={Status.POSTED}
-          active={isActive(order.id, Status.POSTED)}
-          status={status}
-          onClick={handleClick}
-        />
+        <Button
+          kind="primary"
+          className="w-full lg:w-auto space-x-4"
+          onClick={() => setShowPostedModal(true)}
+        >
+          <FaEnvelope />
+          <span>{getMessage(ids.order.actions.posted)}</span>
+        </Button>
+        <Modal
+          title={getMessage(ids.listings.myListing.postedModal.title)}
+          isOpen={showPostedModal}
+          onClose={() => setShowPostedModal(false)}
+        >
+          <div className="space-y-8">
+            <p>{getMessage(ids.listings.myListing.postedModal.details)}</p>
+            <div className="flex flex-col space-y-4 lg:flex-row lg:space-y-0 justify-around">
+              <ActionButton
+                orderId={order.id}
+                action={Status.POSTED}
+                active={isActive(order.id, Status.POSTED)}
+                status={status}
+                onClick={handleClick}
+              />
+              <Button
+                kind="secondary"
+                onClick={() => setShowPostedModal(false)}
+                className="space-x-4 lg:order-first"
+              >
+                <FaTimes />
+                <span>
+                  {getMessage(ids.listings.myListing.postedModal.close)}
+                </span>
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </div>
     );
   }
 
-  if (listing.status === Status.POSTED) {
-    return (
-      <div className={cx(wrapperClass, 'justify-center')}>
-        <ActionButton
-          orderId={order.id}
-          action={Status.APPROVED}
-          active={isActive(order.id, Status.APPROVED)}
-          status={status}
-          onClick={handleClick}
-        >
-          {getMessage(ids.order.actions.unposted)}
-        </ActionButton>
-      </div>
-    );
-  }
   if (listing.status === Status.COMPLETE) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">

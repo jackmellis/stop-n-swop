@@ -30,20 +30,22 @@ export default function MyListings() {
   return (
     <div>
       <PageTitle>{getMessage(ids.listings.myListings.title)}</PageTitle>
-      <div className="mx-auto container">
-        <div className="flex justify-end my-6 space-x-8">
+      <div className="mx-auto container space-y-4 sm:py-4 lg:pt-0">
+        <div className="flex justify-between md:justify-end p-4 md:space-x-8 bg-black md:bg-transparent">
           <If condition={hasInactive}>
-            <Toggle
-              label={getMessage(ids.listings.myListings.showAll)}
-              value={showAll}
-              onChange={setShowAll}
-            />
+            <div className="flex items-center bg-black p-4 rounded bg-opacity-50">
+              <Toggle
+                label={getMessage(ids.listings.myListings.showAll)}
+                value={showAll}
+                onChange={setShowAll}
+              />
+            </div>
           </If>
           <Button kind="primary" component={Link} to={NEW_LISTING}>
             {getMessage(ids.listings.myListings.listButton)}
           </Button>
         </div>
-        <List>
+        <List className="space-y-2 sm:space-y-4 lg:space-y-8">
           {sortBy(listings, (listing) => listing.createdDate, false).map(
             (listing) => (
               <Listing key={listing.id} listing={listing} />

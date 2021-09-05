@@ -7,7 +7,11 @@ import { ids } from 'ui/messages';
 
 export default function Empty() {
   return (
-    <div className={cx('flex-grow flex justify-center items-center w-full')}>
+    <div
+      className={cx(
+        'flex-grow flex justify-center items-center w-full bg-black md:bg-transparent',
+      )}
+    >
       <Card
         className={cx('w-full', 'md:w-auto', 'lg:w-1/2', 'xl:w-1/3')}
         innerClassName={cx(

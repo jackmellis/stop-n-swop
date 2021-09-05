@@ -19,7 +19,7 @@ export default function Actions({ productId, gameQuery }: Props) {
   const getMessage = useGetMessage();
 
   return (
-    <div className="flex flex-col justify-around sm:flex-row flex-grow w-full">
+    <div className="flex flex-col justify-around sm:flex-row flex-grow w-full space-y-8 sm:space-y-0">
       <div className="w-3/4 mx-auto sm:mx-0 sm:w-1/2">
         <Suspense
           fallback={

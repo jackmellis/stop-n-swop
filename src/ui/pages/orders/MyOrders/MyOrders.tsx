@@ -32,16 +32,18 @@ export default function MyOrders() {
   return (
     <div>
       <PageTitle>{getMessage(ids.order.myOrders.title)}</PageTitle>
-      <div className="mt-6 container mx-auto">
-        <If condition={hasInactive}>
-          <div className="flex justify-end my-6">
-            <Toggle
-              label={getMessage(ids.order.myOrders.showAll)}
-              value={showAll}
-              onChange={setShowAll}
-            />
-          </div>
-        </If>
+      <div className="container mx-auto space-y-4 sm:py-4 lg:pt-0">
+        <div className="flex justify-between md:justify-end p-4 md:space-x-8 bg-black md:bg-transparent">
+          <If condition={hasInactive}>
+            <div className="flex items-center bg-black p-4 rounded bg-opacity-50">
+              <Toggle
+                label={getMessage(ids.order.myOrders.showAll)}
+                value={showAll}
+                onChange={setShowAll}
+              />
+            </div>
+          </If>
+        </div>
         <Choose>
           <When condition={orders.length === 0}>
             <Card>
@@ -49,7 +51,7 @@ export default function MyOrders() {
             </Card>
           </When>
           <Otherwise>
-            <List>
+            <List className="space-y-2 sm:space-y-4 lg:space-y-8">
               {sortBy(orders, (order) => order.created, false).map((order) => (
                 <Order key={order.id} order={order} />
               ))}

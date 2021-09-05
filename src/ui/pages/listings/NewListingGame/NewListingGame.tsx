@@ -13,13 +13,17 @@ import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Modal from 'ui/elements/Modal';
 import HavingTrouble from 'ui/help/listings/havingTrouble.mdx';
+import { useHistory } from 'react-router-dom';
+import { useQueryParam } from 'ui/hooks';
 
 export default function NewListingGame() {
   const getMessage = useGetMessage();
+  const initialproductId = useQueryParam('product', { default: '' });
+  const initialPlatformId = useQueryParam('platform', { default: '' });
   const [showTrouble, setShowTrouble] = useState(false);
   const [search, setSearch] = useState('');
-  const [productId, setProductId] = useState('');
-  const [platformId, setPlatformId] = useState('');
+  const [productId, setProductId] = useState(initialproductId);
+  const [platformId, setPlatformId] = useState(initialPlatformId);
   const [debouncedSearch] = useDebounce(search, 500);
 
   const gamesQuery = useGames({
@@ -35,9 +39,18 @@ export default function NewListingGame() {
   const loaded = gamesQuery.status === Status.SUCCESS;
   const loading = [Status.LOADING, Status.FETCHING].includes(gamesQuery.status);
   // we only want to fetch the games when you've started searching
-  const games = loaded && debouncedSearch ? gamesQuery.data.games : [];
   const { data: platforms } = usePlatforms();
   const gameQuery = useGame({ id: productId });
+  const games = (() => {
+    if (loaded && debouncedSearch) {
+      return gamesQuery.data.games;
+    }
+    if (productId) {
+      return [gameQuery.data];
+    }
+    return [];
+  })();
+  const history = useHistory();
 
   useEffect(() => {
     // TODO: add a task to allow @respite to not suspend
@@ -48,8 +61,19 @@ export default function NewListingGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (productId) {
+      params.append('product', productId);
+    }
+    if (platformId) {
+      params.append('platform', platformId);
+    }
+    history.replace({ search: params.toString() });
+  }, [history, platformId, productId]);
+
   return (
-    <div className="flex-grow flex flex-col relative">
+    <div className="flex-grow flex flex-col relative mb-4">
       <PageTitle>
         <span>{getMessage(ids.listings.new.pageTitle)}</span>
       </PageTitle>

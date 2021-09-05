@@ -1,5 +1,7 @@
 import React from 'react';
 import Select from 'ui/elements/Select';
+import { ids } from 'ui/messages';
+import { useGetMessage } from 'ui/intl';
 import type { Query } from '@respite/core';
 import type { Game, Platform } from '@sns/contracts/product';
 
@@ -22,6 +24,8 @@ export default function PlatformFinder({
   gameQuery,
   platforms: allPlatforms,
 }: Props) {
+  const g = useGetMessage();
+
   if (!productId) {
     return null;
   }
@@ -43,6 +47,7 @@ export default function PlatformFinder({
   return (
     <div className="w-full">
       <Select
+        placeholder={g(ids.listings.new.game.platform)}
         id="platform_search"
         label=""
         value={platformId}

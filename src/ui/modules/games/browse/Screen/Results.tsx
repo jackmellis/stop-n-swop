@@ -104,7 +104,7 @@ export default function Results({
           <NoResults />
         </When>
         <Otherwise>
-          <div className="flex-grow">
+          <div className="flex-grow py-8">
             <Suspense fallback={<LoadingPage />}>
               <ProductList>{children}</ProductList>
               <If condition={nextPage != null && nextPage >= 0}>

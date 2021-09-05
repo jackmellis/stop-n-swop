@@ -15,6 +15,7 @@ export interface Props {
   autoFocus?: boolean;
   error?: any;
   isLoading?: boolean;
+  placeholder?: string;
 }
 
 export default function Typeahead({
@@ -27,6 +28,7 @@ export default function Typeahead({
   autoFocus,
   error,
   isLoading,
+  placeholder,
 }: Props) {
   return (
     <div>
@@ -79,6 +81,8 @@ export default function Typeahead({
         inputId={id}
         isLoading={isLoading}
         loadingMessage={() => 'Loading...'}
+        menuPortalTarget={document.getElementById('select-container')}
+        placeholder={placeholder}
       />
       <If condition={Boolean(error)}>
         <FieldError error={error} />

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Photo from 'ui/elements/Photo';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
+import { FaChevronRight } from 'react-icons/fa';
 import type { Product } from '@sns/contracts/product';
 import type { Listing } from '@sns/contracts/listing';
 
@@ -40,7 +41,8 @@ export default function MyListingItem({
       <Link
         to={to}
         className={cx(
-          'relative w-full flex items-center',
+          'px-4 py-3',
+          'relative w-full flex items-center justify-between space-x-4',
           hasActions &&
             'bg-secondary-darkest bg-opacity-40 hover:bg-opacity-70',
         )}
@@ -62,7 +64,7 @@ export default function MyListingItem({
             className="object-cover"
           />
         </div>
-        <div className="w-1/2 sm:w-1/3 md:w-1/2 lg:w-1/4 xl:w-1/5 pl-4">
+        <div className="w-1/2 sm:w-1/3 md:w-1/2 lg:w-1/4 xl:w-1/5">
           <span className="block">{name}</span>
         </div>
         <div className="hidden lg:block w-1/4">
@@ -71,8 +73,9 @@ export default function MyListingItem({
         <div className="hidden xl:block w-1/4 xl:w-1/4">
           <StarRating rating={rating} />
         </div>
-        <div className="flex flex-col lg:flex-row w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 items-center">
-          {orderStatus}
+        <div>{orderStatus}</div>
+        <div className="lg:hidden">
+          <FaChevronRight />
         </div>
       </Link>
     </ListItem>

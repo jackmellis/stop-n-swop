@@ -17,12 +17,9 @@ const useReadNotices = (open: boolean, notices: Notice[]) => {
   const hasUnread = notices.some((notice) => notice.viewed === false);
 
   useEffect(() => {
-    const handle = setTimeout(() => {
-      if (open && hasUnread) {
-        markAsRead();
-      }
-    }, 2000);
-    return () => clearTimeout(handle);
+    if (open && hasUnread) {
+      markAsRead();
+    }
   }, [markAsRead, open, hasUnread]);
 };
 

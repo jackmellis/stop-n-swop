@@ -3,6 +3,7 @@ import Button from 'ui/elements/Button';
 import { FaRegBell } from 'react-icons/fa';
 import { useBoop } from 'ui/hooks';
 import { animated } from 'react-spring';
+import cx from 'classnames';
 import type { Notice } from '@sns/contracts/notice';
 
 const getUnreadNotices = (notices: Notice[]) => {
@@ -18,6 +19,7 @@ export default function Bell({
   onOpen(): void;
   notices: Notice[];
 }) {
+  const [pulse, setPulse] = useState(false);
   const [style, boop] = useBoop({ rotation: -20, scale: 0.95 });
   const [unread, setUnread] = useState(() => getUnreadNotices(notices));
   const hasUnread = unread > 0;
@@ -31,9 +33,16 @@ export default function Bell({
       if (open && hasUnread) {
         setUnread(0);
       }
-    }, 2000);
+    }, 500);
     return () => clearTimeout(handle);
   }, [open, hasUnread]);
+
+  useEffect(() => {
+    const h = setInterval(() => {
+      setPulse((v) => !v);
+    }, 1000);
+    return () => clearInterval(h);
+  }, []);
 
   return (
     <Button
@@ -47,8 +56,15 @@ export default function Bell({
       </animated.span>
       <If condition={hasUnread}>
         <div
-          className="absolute bg-primary-light rounded-full w-5 h-5 top-0 right-0 flex justify-center items-center text-xs"
-          style={{ color: 'white' }}
+          className={cx(
+            'absolute bg-primary-light rounded-full w-5 h-5 top-0 right-0 flex justify-center items-center text-xs',
+            pulse ? 'bg-primary-lightest' : 'bg-primary-light',
+          )}
+          style={{
+            color: 'white',
+            boxShadow: `0px 0px 5px ${pulse ? '5px' : '0px'} #0b825a`,
+            transition: 'box-shadow 1000ms, background-color 1000ms',
+          }}
         >
           {unread}
         </div>

@@ -15,7 +15,7 @@ export default function Intro() {
       <div className="text-2xl text-center pb-4">
         {g(ids.home.new.intro.title)}
       </div>
-      <div className="space-x-4 text-xs absolute right-2 bottom-1 text-gray-300">
+      <div className="space-x-4 text-xs absolute right-2 bottom-1 text-gray-100">
         <span className="text-sm">{g(ids.home.new.intro.haveAnAccount)}</span>
         <LinkButton to="/login" className="inline-flex">
           {g(ids.home.new.intro.logIn)}

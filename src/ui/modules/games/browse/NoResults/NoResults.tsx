@@ -9,7 +9,12 @@ export default function NoResults() {
   const getMessage = useGetMessage();
 
   return (
-    <div className={cx('flex-grow flex justify-center items-center w-full')}>
+    <div
+      className={cx(
+        'flex-grow flex justify-center items-center w-full',
+        'bg-black md:bg-transparent',
+      )}
+    >
       <Card
         className={cx(
           'w-full flex justify-center items-center space-x-4',

@@ -25,7 +25,7 @@ export default function Buying() {
         </Reasons>
         <div>
           <LinkButton padding to={GAMES} kind="primary" className="inline-flex">
-            {g(ids.home.new.search.cta)}
+            {g(ids.home.new.buying.cta)}
           </LinkButton>
         </div>
       </div>

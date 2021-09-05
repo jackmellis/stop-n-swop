@@ -48,6 +48,7 @@ export default function GameSearch({
         autoFocus
         label=""
         isLoading={loading}
+        placeholder="Search"
       />
     </div>
   );

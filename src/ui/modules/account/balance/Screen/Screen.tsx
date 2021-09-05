@@ -16,7 +16,7 @@ export default function Screen({
   error: any;
 }) {
   return (
-    <div className="flex-grow bg-black">
+    <div className="flex-grow bg-black mb-4">
       <If condition={error}>
         <FormError error={error} />
       </If>

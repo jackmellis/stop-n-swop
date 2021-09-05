@@ -19,7 +19,7 @@ export default function GridItem({
   return (
     <li
       className={cx(
-        'mb-2 flex justify-center',
+        'mb-4 flex justify-center',
         'md:w-1/2 md:mb-12 md:items-start',
         'lg:w-1/3',
         'xl:w-1/4',

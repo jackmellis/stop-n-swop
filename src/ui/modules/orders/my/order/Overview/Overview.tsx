@@ -5,6 +5,7 @@ import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { colorMatrix, iconMatrix } from 'ui/modules/listings/utils';
 import Photo from 'ui/elements/Photo';
+import { FaUser } from 'react-icons/fa';
 import type { Order } from '@sns/contracts/order';
 import type { Listing } from '@sns/contracts/listing';
 
@@ -84,9 +85,10 @@ export default function Overview({
               </h3>
               <LinkButton
                 to={makeUserPath({ username: seller })}
-                className="text-sm inline-flex"
+                className="inline-flex space-x-2"
               >
-                {seller}
+                <FaUser className="text-xs" />
+                <span className="text-sm">{seller}</span>
               </LinkButton>
             </div>
           </div>

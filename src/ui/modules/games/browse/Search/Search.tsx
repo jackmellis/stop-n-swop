@@ -18,8 +18,8 @@ export default function Search({ onChange, value, children }: Props) {
   return (
     <div
       className={cx(
-        'w-full xl:w-1/2 lg:mx-auto mb-4 flex bg-black lg:bg-opacity-70 px-8 pb-4',
-        value || focused ? 'mt-0 pt-4' : 'mt-4 pt-0',
+        'w-full xl:w-1/2 lg:mx-auto lg:mb-4 flex bg-black lg:bg-opacity-70 px-8 pb-4',
+        value || focused ? 'lg:mt-0 lg:pt-4' : 'lg:mt-4 lg:pt-0',
       )}
       style={{
         transition: 'padding-top 150ms, margin-top 150ms',

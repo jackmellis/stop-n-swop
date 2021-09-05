@@ -23,8 +23,8 @@ export default function OrderProtection() {
   return (
     <Block className="bg-opacity-90 md:bg-opacity-100">
       <BlockHeading>{g(ids.home.new.protection.title)}</BlockHeading>
-      <div className="flex justify-around space-x-8">
-        <div className="hidden md:block w-1/3 aspect aspect-16-9">
+      <div className="flex flex-col md:flex-row justify-around md:space-x-8 sm:space-y-4 md:space-y-0">
+        <div className="hidden sm:block w-1/2 md:w-1/3 aspect aspect-16-9 mx-auto">
           <img
             src={trust}
             alt="Holding hands"

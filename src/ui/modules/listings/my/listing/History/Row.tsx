@@ -13,7 +13,7 @@ export default function HistoryRow({
   status: Status;
 }) {
   return (
-    <tr className="border-b border-gray-600">
+    <tr>
       <td className="py-3">{useDate(date)}</td>
       <td>{useMessage(ids.order.status[status] ?? ids.order.status.open)}</td>
       <td className="hidden sm:table-cell text-right">{username}</td>
