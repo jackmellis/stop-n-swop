@@ -119,6 +119,16 @@ const enMessages = {
         action:
           '{count} {count === 1 ? "order requires" : "orders require"} action',
       },
+      newUser: {
+        title: 'Welcome!',
+        buy: 'Buy',
+        sell: 'Sell',
+        settings: 'Settings',
+        description: `Get started with Stop N Swop!
+Search for games to add to your collection
+Sell your games with us
+Set up your account`,
+      },
     },
     listings: {
       popular: 'Popular',
