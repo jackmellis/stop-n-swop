@@ -4,6 +4,7 @@ import type {
   Listing,
   AuditItem,
   UpdateListingRequest,
+  Discount,
 } from '@sns/contracts/listing';
 import type { Status } from '@sns/contracts/order';
 import type { Address } from '@sns/contracts/user';
@@ -54,3 +55,5 @@ export type FetchAddress = (args: {
 }) => Promise<{ name: string; address: Address }>;
 
 export type FetchSuggestions = () => Promise<Listing[]>;
+
+export type FetchDiscount = (args: { productId: string }) => Promise<Discount>;

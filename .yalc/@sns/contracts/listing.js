@@ -23,14 +23,40 @@ const getBasePrice = listing => {
 const getPostage = listing => {
   return listing.postage;
 };
+const getDiscount = listing => {
+  let discount = 0;
+  if (!listing.discount) {
+    return discount;
+  }
+  const total = getListedPrice(listing);
+  if (listing.discount.percentage) {
+    discount += Math.floor(total * (listing.discount.percentage / 100));
+  }
+  if (listing.discount.fixed) {
+    discount += listing.discount.fixed;
+  }
+  return discount;
+};
 const getListedPrice = listing => {
   return getBasePrice(listing) + getPostage(listing);
 };
-const getProtectionCharge = listing => {
+const getRawProtectionCharge = listing => {
   return Math.ceil(getListedPrice(listing) * 0.04);
 };
-const getPlatformCharge = listing => {
+const getProtectionCharge = listing => {
+  const platformCharge = getRawPlatformCharge(listing);
+  const fullDiscount = getDiscount(listing);
+  const discount = Math.max(fullDiscount - platformCharge, 0);
+  const protection = getRawProtectionCharge(listing);
+  return Math.max(protection - discount, 0);
+};
+const getRawPlatformCharge = listing => {
   return Math.ceil(getListedPrice(listing) * 0.04) + 30;
+};
+const getPlatformCharge = listing => {
+  const charge = getRawPlatformCharge(listing);
+  const discount = getDiscount(listing);
+  return Math.max(charge - discount, 0);
 };
 const getFinalPrice = listing => {
   return getListedPrice(listing);
@@ -65,6 +91,7 @@ const getProfit = listing => {
 
 exports.calculateProviderPayOutCharge = calculateProviderPayOutCharge;
 exports.getBasePrice = getBasePrice;
+exports.getDiscount = getDiscount;
 exports.getDisplayPrice = getDisplayPrice;
 exports.getFinalPrice = getFinalPrice;
 exports.getListedPrice = getListedPrice;

@@ -3,7 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
 import { useAuthGuard } from 'application/auth';
-import { useRequirements } from 'application/listings';
+import { useDiscount, useRequirements } from 'application/listings';
 import { useGame } from 'application/games';
 import { useUser } from 'application/user';
 import { useCreateListing } from 'application/listings/useCreateListing';
@@ -22,6 +22,7 @@ export default function ConnectedNewProductListing() {
     data: { name, platformId },
   } = useGame({ id: productId });
   const requirementsQuery = useRequirements({ productId, platformId });
+  const discountQuery = useDiscount({ productId });
   const {
     data: {
       username,
@@ -52,6 +53,7 @@ export default function ConnectedNewProductListing() {
         location={location}
         username={username}
         requirementsQuery={requirementsQuery}
+        discountQuery={discountQuery}
         error={error}
       />
     </FormProvider>

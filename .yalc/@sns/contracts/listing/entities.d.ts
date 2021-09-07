@@ -12,6 +12,7 @@ export interface Listing {
     images: Record<string, string>;
     price: number;
     postage: number;
+    discount?: Discount;
     currency: string;
     stats: Stats;
     description: string;
@@ -27,4 +28,9 @@ export interface AuditItem {
     date: Date;
     username: string;
     status: Status;
+}
+export interface Discount {
+    name: string;
+    percentage: number;
+    fixed: number;
 }

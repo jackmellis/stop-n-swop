@@ -8,6 +8,7 @@ import {
   getListingProfit,
   getBasePrice,
   getListedPrice,
+  getDiscount,
   // getPostage,
 } from '@sns/contracts/listing';
 import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
@@ -28,6 +29,13 @@ export default function PriceStep({
   const getCurrency = useGetCurrency();
   const { currency } = listing;
 
+  const listed = getListedPrice(listing);
+  const profit = Math.max(getListingProfit(listing), 0);
+  const price = getBasePrice(listing);
+  const discount = getDiscount(listing);
+  const platform = listed ? getPlatformCharge(listing) : 0;
+  const protection = getProtectionCharge(listing);
+
   return (
     <>
       <div className={className}>
@@ -36,7 +44,7 @@ export default function PriceStep({
             {getMessage(ids.listings.new.price.breakdown.earnings)}
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(Math.max(getListingProfit(listing), 0), {
+            {getCurrency(profit, {
               currency,
             })}
           </span>
@@ -46,17 +54,17 @@ export default function PriceStep({
             {getMessage(ids.listings.new.price.breakdown.price)}
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(getBasePrice(listing), { currency })}
+            {getCurrency(price, { currency })}
           </span>
           {/* <span className="w-1/2">
               {getMessage(ids.listings.new.price.breakdown.postage)}
             </span>
             <span className="w-1/2 text-right">
-              {getCurrency(getPostage(listing), { currency })}
+              {getCurrency(getPostage(listing), { currency, signDisplay: 'exceptZero' })}
             </span> */}
           <span className="w-1/2">
             <Button
-              className="font-light space-x-2"
+              className="!font-light space-x-2"
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowPlatformFeeModal(true)}
@@ -68,14 +76,11 @@ export default function PriceStep({
             </Button>
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(
-              0 - (getListedPrice(listing) ? getPlatformCharge(listing) : 0),
-              { currency },
-            )}
+            {getCurrency(-platform, { currency, signDisplay: 'exceptZero' })}
           </span>
           <span className="w-1/2">
             <Button
-              className="font-light space-x-2 "
+              className="!font-light space-x-2 "
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowProtectionModal(true)}
@@ -87,8 +92,20 @@ export default function PriceStep({
             </Button>
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(0 - getProtectionCharge(listing), { currency })}
+            {getCurrency(-protection, {
+              currency,
+              signDisplay: 'exceptZero',
+            })}
           </span>
+          <If
+            condition={listing.discount?.fixed || listing.discount?.percentage}
+          >
+            <span className="w-full text-sm text-right mt-4">
+              {getMessage(ids.listings.new.price.breakdown.discount, {
+                discount: getCurrency(discount, { currency }),
+              })}
+            </span>
+          </If>
         </div>
       </div>
       <ProtectionModal

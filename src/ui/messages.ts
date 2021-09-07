@@ -284,6 +284,7 @@ const enMessages = {
           platform: 'Platform fee:',
           protection: 'Order protection:',
           earnings: 'You will make:',
+          discount: '(Includes a total fee discount of {discount})',
         },
       },
       region: {

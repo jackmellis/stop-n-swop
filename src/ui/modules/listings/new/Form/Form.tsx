@@ -19,6 +19,7 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import { AnchorButton } from 'ui/elements/Button';
 import type { Values } from 'ui/modules/listings/new/types';
 import type { Query } from '@respite/core';
+import type { Discount } from '@sns/contracts/listing';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];
@@ -36,6 +37,7 @@ interface Props {
       required: boolean;
     }>;
   }>;
+  discountQuery: Query<Discount>;
   error: any;
 }
 
@@ -56,6 +58,7 @@ export default function Form({
   previousUrl,
   requirementsQuery,
   error,
+  discountQuery,
 }: Props) {
   const { handleSubmit, getValues } = useFormContext<Values>();
   const { push } = useHistory();
@@ -103,7 +106,11 @@ export default function Form({
             <Region previous={onPrevious} next={onNext} />
           </When>
           <When condition={step === 'price'}>
-            <Price previous={onPrevious} productId={productId} />
+            <Price
+              previous={onPrevious}
+              productId={productId}
+              discount={discountQuery.data}
+            />
           </When>
           <When condition={step === 'description'}>
             <Description previous={onPrevious} />

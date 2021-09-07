@@ -1,6 +1,7 @@
 export * from './useAddress';
 export * from './useChangeStatus';
 export * from './useCreateListing';
+export * from './useDiscount';
 export * from './useHistory';
 export * from './useListing';
 export * from './useListings';

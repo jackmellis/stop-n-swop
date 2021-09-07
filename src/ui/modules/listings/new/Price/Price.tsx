@@ -4,7 +4,7 @@ import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { CurrencyInput } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
-import { Condition, Region } from '@sns/contracts/listing';
+import { Condition, Discount, Region } from '@sns/contracts/listing';
 import { Status } from '@sns/contracts/order';
 import { useDebounce } from 'use-debounce';
 import Buttons from '../Buttons';
@@ -15,8 +15,10 @@ import PriceBreakdown from '../../PriceBreakdown';
 export default function PriceStep({
   previous,
   productId: _productId,
+  discount,
 }: {
   productId: string;
+  discount: Discount;
   previous(): void;
 }) {
   const getMessage = useGetMessage();
@@ -53,6 +55,7 @@ export default function PriceStep({
       rating: 0,
       status: Status.OPEN,
       username: '',
+      discount,
       stats: {
         boxed: false,
         condition: Condition.MINT,
@@ -60,7 +63,7 @@ export default function PriceStep({
         region: Region.PAL,
       },
     };
-  }, [postage, price]);
+  }, [postage, price, discount]);
 
   return (
     <div>

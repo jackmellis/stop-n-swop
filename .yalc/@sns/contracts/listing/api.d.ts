@@ -1,5 +1,5 @@
 import { Status } from "../order";
-import { AuditItem, Listing } from "./entities";
+import { AuditItem, Listing, Discount } from "./entities";
 import { Condition, Region } from "./enums";
 import { Address } from "../user";
 export declare type GetListingRequirementsRequest = void;
@@ -16,7 +16,7 @@ export interface CreateListingResponse {
 export interface UpdateListingParams {
     listingId: string;
 }
-export declare type UpdateListingRequest = Omit<Listing, "createdDate" | "username" | "location" | "rating" | "status" | "id">;
+export declare type UpdateListingRequest = Omit<Listing, "createdDate" | "username" | "location" | "rating" | "status" | "id" | "discount">;
 export declare type UpdateListingResponse = Listing;
 export interface SearchListingsRequest {
     productId?: string;
@@ -78,3 +78,8 @@ export interface GetListingAddressResponse {
     name: string;
     address: Address;
 }
+export declare type GetDiscountParams = {
+    productId: string;
+};
+export declare type GetDiscountBody = void;
+export declare type GetDiscountResponse = Discount;

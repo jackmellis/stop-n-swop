@@ -3,6 +3,7 @@ bin/tunnelto
 coverage/
 .eslintcache
 /stats.html
+/credentials.txt
 
 # Logs
 logs
