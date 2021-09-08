@@ -10,6 +10,7 @@ interface NonButtonProps {
   to?: string;
   href?: string;
   target?: string;
+  rel?: string;
 }
 
 export type Props = Attributes &

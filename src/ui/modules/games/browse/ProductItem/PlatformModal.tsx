@@ -56,7 +56,7 @@ export default function PlatformModal({
                   'block hover:text-primary transition-colors',
                 )}
               >
-                <div className="space-x-4 justify-between flex">
+                <div className="space-x-4 justify-between flex items-center">
                   <span className="font-semibold text-lg">{platform.name}</span>
                   <span className="text-sm font-light">
                     {g(ids.games.search.results.available, {

@@ -19,10 +19,22 @@ export default function Footer() {
             {g(ids.footer.title)}
           </AnchorButton>
           <div className="flex space-x-4 sm:space-x-8 text-lg">
-            <AnchorButton target="_blank" href="https://twitter.com">
+            <AnchorButton
+              target="_blank"
+              href="https://twitter.com"
+              rel="noopener"
+            >
+              {/* eslint-disable-next-line react/jsx-no-literals */}
+              <span className="sr-only">Twitter</span>
               <FaTwitter />
             </AnchorButton>
-            <AnchorButton target="_blank" href="https://discord.com">
+            <AnchorButton
+              target="_blank"
+              href="https://discord.com"
+              rel="noopener"
+            >
+              {/* eslint-disable-next-line react/jsx-no-literals */}
+              <span className="sr-only">Discord</span>
               <FaDiscord />
             </AnchorButton>
             <FaCookieBite title="No cookies here!" />
@@ -30,14 +42,26 @@ export default function Footer() {
         </div>
         <div className="flex justify-between sm:justify-around flex-grow">
           <div className="flex flex-col items-start">
-            <LinkButton to={GAMES}>{g(ids.footer.games)}</LinkButton>
-            <LinkButton to={NEW_LISTING}>{g(ids.footer.list)}</LinkButton>
-            <LinkButton to="/guide">{g(ids.footer.guide)}</LinkButton>
+            <LinkButton className="p-2 lg:p-1" to={GAMES}>
+              {g(ids.footer.games)}
+            </LinkButton>
+            <LinkButton className="p-2 lg:p-1" to={NEW_LISTING}>
+              {g(ids.footer.list)}
+            </LinkButton>
+            <LinkButton className="p-2 lg:p-1" to="/guide">
+              {g(ids.footer.guide)}
+            </LinkButton>
           </div>
           <div className="flex flex-col items-start">
-            <LinkButton to="/terms">{g(ids.footer.terms)}</LinkButton>
-            <LinkButton to="/privacy">{g(ids.footer.privacy)}</LinkButton>
-            <LinkButton to="/credits">{g(ids.footer.credits)}</LinkButton>
+            <LinkButton className="p-2 lg:p-1" to="/terms">
+              {g(ids.footer.terms)}
+            </LinkButton>
+            <LinkButton className="p-2 lg:p-1" to="/privacy">
+              {g(ids.footer.privacy)}
+            </LinkButton>
+            <LinkButton className="p-2 lg:p-1" to="/credits">
+              {g(ids.footer.credits)}
+            </LinkButton>
           </div>
         </div>
       </div>

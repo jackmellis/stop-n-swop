@@ -8,7 +8,7 @@ export default function useCascade(total: number) {
       if (index < total) {
         setIndex(index + 1);
       }
-    }, 50);
+    }, 25);
     return () => clearTimeout(h);
   }, [index, total]);
 

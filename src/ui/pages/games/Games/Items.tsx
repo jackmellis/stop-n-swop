@@ -35,13 +35,9 @@ export default function Items({
   const totalResults = games.length;
   const cascade = useCascade(totalResults);
 
-  let i = -1;
-
   return (
     <>
-      {games.map((game) => {
-        i += 1;
-
+      {games.map((game, i) => {
         return (
           <Item
             key={game.id}

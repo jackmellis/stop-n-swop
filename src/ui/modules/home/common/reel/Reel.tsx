@@ -25,7 +25,7 @@ export default function Reel<T extends any>({ items, render, page }: Props<T>) {
   });
 
   return (
-    <div className="w-full relative overflow-x-hidden">
+    <div className="w-full relative overflow-hidden">
       {transition.map(({ key, props: style, item: { items } }) => (
         <animated.div
           key={key}

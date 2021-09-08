@@ -51,6 +51,7 @@
     url('./ui/assets/lithograph-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -59,6 +60,7 @@
     url('./ui/assets/lithograph_bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -67,6 +69,7 @@
     url('./ui/assets/zx-spectrum-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 .help {

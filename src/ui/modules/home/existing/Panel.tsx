@@ -19,7 +19,7 @@ export default function Panel({
         className,
       )}
     >
-      <h3 className="text-xs font-semibold text-primary">{title}</h3>
+      <h3 className="text-xs font-semibold text-primary-light">{title}</h3>
       <div className="space-y-4 flex-grow w-full flex flex-col items-start">
         {children}
       </div>
