@@ -30,7 +30,8 @@ const getDiscount = listing => {
   }
   const total = getListedPrice(listing);
   if (listing.discount.percentage) {
-    discount += Math.floor(total * (listing.discount.percentage / 100));
+    const percDiscount = Math.floor(total * (listing.discount.percentage / 100));
+    discount += percDiscount;
   }
   if (listing.discount.fixed) {
     discount += listing.discount.fixed;
@@ -43,15 +44,15 @@ const getListedPrice = listing => {
 const getRawProtectionCharge = listing => {
   return Math.ceil(getListedPrice(listing) * 0.04);
 };
+const getRawPlatformCharge = listing => {
+  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
+};
 const getProtectionCharge = listing => {
   const platformCharge = getRawPlatformCharge(listing);
   const fullDiscount = getDiscount(listing);
   const discount = Math.max(fullDiscount - platformCharge, 0);
   const protection = getRawProtectionCharge(listing);
   return Math.max(protection - discount, 0);
-};
-const getRawPlatformCharge = listing => {
-  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
 };
 const getPlatformCharge = listing => {
   const charge = getRawPlatformCharge(listing);

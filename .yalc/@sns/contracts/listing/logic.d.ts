@@ -15,7 +15,7 @@ export declare const getPlatformCharge: (listing: Listing) => number;
 export declare const getFinalPrice: (listing: Listing) => number;
 /** Returns the price that will show on the storefront. This is like getFinalPrice but without postage */
 export declare const getDisplayPrice: (listing: Listing) => number;
-/** Returns the amount sns will charge the seller (i.e. order protection + platform charge - discount) */
+/** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
 export declare const getListingCharges: (listing: Listing) => number;
 /** Returns the amount the seller will receive for a listing */
 export declare const getListingProfit: (listing: Listing) => number;

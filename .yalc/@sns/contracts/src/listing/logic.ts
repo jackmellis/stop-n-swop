@@ -18,7 +18,10 @@ export const getDiscount = (listing: Listing) => {
   }
   const total = getListedPrice(listing);
   if (listing.discount.percentage) {
-    discount += Math.floor(total * (listing.discount.percentage / 100));
+    const percDiscount = Math.floor(
+      total * (listing.discount.percentage / 100)
+    );
+    discount += percDiscount;
   }
   if (listing.discount.fixed) {
     discount += listing.discount.fixed;
@@ -35,18 +38,22 @@ const getRawProtectionCharge = (listing: Listing) => {
   return Math.ceil(getListedPrice(listing) * 0.04);
 };
 
+const getRawPlatformCharge = (listing: Listing) => {
+  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
+};
+
 /** Returns the amount of order protection that will be deducted from the listed price */
 export const getProtectionCharge = (listing: Listing) => {
+  // discounts are first deducted from the platform charge, any remaining is then deducted from the protection charge
+  // calculate the amount of discount remaining after the platform charge
+  // and then take that off the protection charge
   const platformCharge = getRawPlatformCharge(listing);
   const fullDiscount = getDiscount(listing);
+  // you can't discount more than 100% of the fees!
   const discount = Math.max(fullDiscount - platformCharge, 0);
   const protection = getRawProtectionCharge(listing);
 
   return Math.max(protection - discount, 0);
-};
-
-const getRawPlatformCharge = (listing: Listing) => {
-  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
 };
 
 /** Returns the total platform charge that will be deducted from the listed price */
@@ -66,7 +73,7 @@ export const getDisplayPrice = (listing: Listing) => {
   return getBasePrice(listing);
 };
 
-/** Returns the amount sns will charge the seller (i.e. order protection + platform charge - discount) */
+/** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
 export const getListingCharges = (listing: Listing) => {
   return getProtectionCharge(listing) + getPlatformCharge(listing);
 };
