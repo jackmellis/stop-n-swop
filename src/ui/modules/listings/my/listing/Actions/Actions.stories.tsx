@@ -4,9 +4,9 @@ import { en } from 'ui/messages';
 import { Order, Status as OrderStatus } from '@sns/contracts/order';
 import { Status as ActionStatus } from '@respite/core';
 import { BrowserRouter } from 'react-router-dom';
+import { User, UserLevel } from '@sns/contracts/user';
 import type { Listing } from '@sns/contracts/listing';
 import Actions from './Actions';
-import type { User } from '@sns/contracts/user';
 
 export default {
   title: 'modules / listings / my / listing / Actions',
@@ -60,6 +60,7 @@ export const Basic = ({
     clientEmail: 'stop@swop.com',
     email: 'stop@swop.com',
     verified: true,
+    level: UserLevel.USER,
     preferences: {
       manualApproval: manualApprove,
       noticeEmails: false,

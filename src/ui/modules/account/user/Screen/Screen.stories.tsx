@@ -9,6 +9,7 @@ import { Provider as Jpex } from 'react-jpex';
 import Purchase from 'ui/modules/listings/Purchase';
 import { en } from 'ui/messages';
 import { BrowserRouter } from 'react-router-dom';
+import { UserLevel } from '@sns/contracts/user';
 import type { Config } from 'core/io';
 import UserScreen from './Screen';
 import Overview from '../Overview';
@@ -42,6 +43,7 @@ export const Basic = () => {
                   } as any,
                   clientEmail: '',
                   email: '',
+                  level: UserLevel.USER,
                   preferences: { manualApproval: false, noticeEmails: false },
                   username: 'jb',
                   verified: true,

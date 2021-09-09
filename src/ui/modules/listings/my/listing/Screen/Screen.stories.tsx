@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Order, Status } from '@sns/contracts/order';
 import { Status as ActionStatus, Provider as Respite } from '@respite/core';
 import { Provider as Jpex } from 'react-jpex';
+import { User, UserLevel } from '@sns/contracts/user';
 import type { Config } from 'core/io';
 import Screen from './Screen';
 import Overview from '../Overview';
@@ -15,7 +16,6 @@ import type { Listing } from '@sns/contracts/listing';
 import BuyerAddress from '../BuyerAddress';
 import type { useAddress } from 'application/listings';
 import Help from '../Help';
-import type { User } from '@sns/contracts/user';
 import History from '../History';
 
 export default {
@@ -72,6 +72,7 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
       noticeEmails: false,
     },
     created: new Date(),
+    level: UserLevel.USER,
   };
 
   return (
