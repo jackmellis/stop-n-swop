@@ -58,7 +58,6 @@ export const ClearNoticesKey = Symbol('clear notices');
 // Payments
 // Queries
 export const TransactionsKey = Symbol('transactions');
-export const BalanceKey = Symbol('balance');
 // Actions
 export const WithdrawBalanceKey = Symbol('withdraw balance');
 export const StartPaymentKey = Symbol('start payment');

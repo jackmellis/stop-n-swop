@@ -73,6 +73,8 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
     },
     created: new Date(),
     level: UserLevel.USER,
+    balance: 0,
+    currency: 'GBP',
   };
 
   return (

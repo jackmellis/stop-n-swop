@@ -66,6 +66,8 @@ export const Basic = ({
       noticeEmails: false,
     },
     created: new Date(),
+    balance: 0,
+    currency: 'GBP',
   };
 
   return (

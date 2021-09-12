@@ -25,4 +25,6 @@ export interface User {
         noticeEmails: boolean;
     };
     verified: boolean;
+    balance: number;
+    currency: string;
 }

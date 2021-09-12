@@ -14,7 +14,7 @@ export interface LoginRequest {
     favouriteProductIds: string[];
 }
 export declare type LoginResponse = RefreshTokenResponse;
-export interface UpdateUserRequest extends Pick<Partial<User>, "username" | "level"> {
+export interface UpdateUserRequest extends Pick<Partial<User>, "username" | "level" | "balance"> {
     address?: Partial<User["address"]>;
     clientEmail?: string;
     preferences?: Pick<Partial<User["preferences"]>, "noticeEmails">;

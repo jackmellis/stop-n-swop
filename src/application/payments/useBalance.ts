@@ -1,9 +1,9 @@
-import { useQuery } from '@respite/query';
-import { BalanceKey } from 'application/keys';
-import { encase } from 'react-jpex';
-import { STANDARD_TTL } from 'domain/constants';
-import type { FetchBalance } from 'core/payments';
+import { useSelector } from '@respite/select';
+import { useUser } from 'application/user';
 
-export const useBalance = encase((fetch: FetchBalance) => () => {
-  return useQuery(BalanceKey, fetch, [], { ttl: STANDARD_TTL });
-});
+export const useBalance = () => {
+  return useSelector(useUser(), (user) => ({
+    balance: user.balance,
+    currency: user.currency,
+  }));
+};

@@ -48,6 +48,8 @@ export const Basic = () => {
                   username: 'jb',
                   verified: true,
                   created: new Date(),
+                  balance: 0,
+                  currency: 'GBP',
                 }}
               />
             }
