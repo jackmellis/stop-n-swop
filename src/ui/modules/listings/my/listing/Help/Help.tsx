@@ -5,6 +5,7 @@ import Approved from 'ui/help/listings/status/approved.mdx';
 import Posted from 'ui/help/listings/status/posted.mdx';
 import Disputed from 'ui/help/listings/status/disputed.mdx';
 import NotReceived from 'ui/help/listings/status/notReceived.mdx';
+import Verifying from 'ui/help/listings/status/verifying.mdx';
 import { Status } from '@sns/contracts/order';
 
 export default function Help({
@@ -15,6 +16,8 @@ export default function Help({
   canApprove: boolean;
 }) {
   switch (status) {
+    case Status.VERIFYING:
+      return <Verifying />;
     case Status.CLOSED:
       return <Closed />;
     case Status.PLACED:

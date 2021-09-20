@@ -2,7 +2,7 @@ import { Status } from '@sns/contracts/order';
 import type { Listing } from '@sns/contracts/listing';
 
 export const isListingOpen = (listing: Listing) => {
-  return listing.status === Status.OPEN;
+  return [Status.OPEN, Status.VERIFYING].includes(listing.status);
 };
 
 export const isListingClosed = (listing: Listing) => {

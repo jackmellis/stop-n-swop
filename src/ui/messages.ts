@@ -437,6 +437,7 @@ Set up your account`,
       orderComplete: 'Find more games!',
     },
     status: {
+      [Status.VERIFYING]: 'Verifying',
       [Status.OPEN]: 'Listed',
       [Status.CLOSED]: 'Closed',
       [Status.CREATED]: 'In progress',

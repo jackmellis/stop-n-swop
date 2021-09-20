@@ -10,9 +10,11 @@ import {
   FaThumbsUp,
   FaCommentDots,
   FaQuestion,
+  FaEllipsisH,
 } from 'react-icons/fa';
 
 export const iconMatrix = {
+  [Status.VERIFYING]: FaEllipsisH,
   [Status.OPEN]: FaStream,
   [Status.CLOSED]: FaLock,
   [Status.CREATED]: FaShoppingCart,
@@ -32,6 +34,7 @@ export const iconMatrix = {
 };
 
 export const colorMatrix = {
+  [Status.VERIFYING]: 'text-white',
   [Status.OPEN]: 'text-white',
   [Status.CLOSED]: 'text-gray-400',
   [Status.PLACED]: 'text-primary',

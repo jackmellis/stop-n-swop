@@ -87,6 +87,23 @@ export default function Actions({
       </div>
     );
   }
+  if (listing.status === Status.VERIFYING) {
+    return (
+      <div className={wrapperClass}>
+        <Button
+          className="w-full lg:w-auto space-x-4"
+          component={Link}
+          to={makeEditListingPath({ listingId })}
+          kind="secondary"
+        >
+          <span>
+            <FaPen />
+          </span>
+          <span>{getMessage(ids.order.actions.edit)}</span>
+        </Button>
+      </div>
+    );
+  }
   if (listing.status === Status.PLACED && orders.length > 1) {
     return (
       <MultiOrders

@@ -73,7 +73,7 @@ export default function MyListingItem({
         <div className="hidden xl:block w-1/4 xl:w-1/4">
           <StarRating rating={rating} />
         </div>
-        <div>{orderStatus}</div>
+        <div className="flex-shrink-0">{orderStatus}</div>
         <div className="lg:hidden">
           <FaChevronRight />
         </div>

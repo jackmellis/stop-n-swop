@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 exports.Status = void 0;
 (function (Status) {
+  Status["VERIFYING"] = "verifying";
   Status["OPEN"] = "open";
   Status["CLOSED"] = "closed";
   Status["CREATED"] = "created";

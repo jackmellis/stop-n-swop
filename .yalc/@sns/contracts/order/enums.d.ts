@@ -1,4 +1,5 @@
 export declare enum Status {
+    VERIFYING = "verifying",
     OPEN = "open",
     CLOSED = "closed",
     CREATED = "created",
