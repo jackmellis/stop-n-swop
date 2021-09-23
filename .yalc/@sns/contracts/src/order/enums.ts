@@ -15,7 +15,7 @@ export enum Status {
   NOT_RECEIVED = "notReceived", // the buyer has not received the item after a certain amount of time
   NO_RESPONSE = "noResponse", // the buyer never told us the order arrived so we just assumed it
   RESOLVED = "resolved", // a dispute has been resolved and we can close the order / transfer funds / etc.
-  REFUNDED = "refunded",
+  REFUNDED = "refunded", // the order has been refunded and closed
   COMPLETE = "complete", // the order is complete and the funds have been transferred into the seller's wallet
   CANCELLED = "cancelled", // the transaction has been cancelled by the buyer
 }

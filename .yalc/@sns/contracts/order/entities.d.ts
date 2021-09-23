@@ -8,4 +8,5 @@ export interface Order {
     created: Date;
     deliveryAddress: Address;
     errorCode: string;
+    postedDate: Date;
 }

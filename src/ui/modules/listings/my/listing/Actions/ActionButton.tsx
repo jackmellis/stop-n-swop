@@ -31,6 +31,7 @@ const kindMatrix = {
   [Action.APPROVED]: 'primary',
   [Action.DECLINED]: 'secondary',
   [Action.POSTED]: 'primary',
+  [Action.NOT_RECEIVED]: 'secondary',
   [Action.RECEIVED]: 'primary',
   [Action.DISPUTED]: 'secondary',
 };
@@ -45,6 +46,7 @@ const messageMatrix = {
   [Action.APPROVED]: ids.order.actions.approved,
   [Action.DECLINED]: ids.order.actions.declined,
   [Action.POSTED]: ids.order.actions.posted,
+  [Action.NOT_RECEIVED]: ids.order.actions.notReceived,
   [Action.RECEIVED]: ids.order.actions.received,
   [Action.DISPUTED]: ids.order.actions.disputed,
 };
@@ -59,6 +61,7 @@ interface Props {
   kind?: Kind;
   showIcon?: boolean;
   children?: ReactNode;
+  title?: string;
 }
 
 const Nothing = () => null;
@@ -95,6 +98,7 @@ export default function ActionButton({
   state: baseState,
   showIcon = true,
   children,
+  title,
 }: Props) {
   const g = useGetMessage();
   const Icon = (showIcon ? iconMatrix[action] : undefined) ?? Nothing;
@@ -107,6 +111,7 @@ export default function ActionButton({
       className="w-full lg:w-auto space-x-4"
       kind={kind}
       state={state}
+      title={title}
       onClick={() => onClick({ orderId, status: action })}
     >
       <Choose>

@@ -11,6 +11,8 @@ import {
   makeCheckoutPaymentPath,
   makeContinueCheckoutPath,
 } from 'ui/constants/paths';
+import isBefore from 'date-fns/isBefore';
+import addDays from 'date-fns/addDays';
 import type { Status } from '@respite/core';
 import ReceivedModal from './ReceivedModal';
 
@@ -83,18 +85,24 @@ export default function Actions({ order, status, onClick }: Props) {
   }
 
   if (order.status === OrderStatus.POSTED) {
+    // We only want to declare the item as "not received" after waiting for 7 days
+    const isOld = isBefore(new Date(order.postedDate), addDays(new Date(), -7));
+    const state = isOld ? undefined : 'disabled';
+
     return (
       <div className="md:flex justify-center md:space-x-4 lg:space-x-8">
         <Button kind="primary" onClick={() => setReceivedModal(true)}>
           {getMessage(ids.order.myOrder.receivedModal.trigger)}
         </Button>
-        <Button
-          kind="secondary"
-          state="disabled"
+        <ActionButton
+          orderId={order.id}
+          action={OrderStatus.NOT_RECEIVED}
+          active={isActive(OrderStatus.NOT_RECEIVED)}
+          status={status}
+          onClick={handleClick}
+          state={state}
           title="Please allow up to 7 days for your order to arrive"
-        >
-          {getMessage(ids.order.actions.notReceived)}
-        </Button>
+        />
         <ReceivedModal
           active={active}
           isOpen={receivedModal}

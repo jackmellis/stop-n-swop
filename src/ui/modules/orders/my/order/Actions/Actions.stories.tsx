@@ -4,6 +4,7 @@ import React from 'react';
 import { en } from 'ui/messages';
 import { Provider as Intl } from 'ui/intl';
 import { BrowserRouter } from 'react-router-dom';
+import addDays from 'date-fns/addDays';
 import Actions from './Actions';
 
 export default {
@@ -23,13 +24,15 @@ export default {
 interface BasicArgs {
   actionStatus: ActionStatus;
   orderStatus: OrderStatus;
+  old: boolean;
 }
 const args: BasicArgs = {
   actionStatus: ActionStatus.IDLE,
   orderStatus: OrderStatus.CREATED,
+  old: false,
 };
 
-export const Basic = ({ actionStatus, orderStatus }: BasicArgs) => {
+export const Basic = ({ actionStatus, orderStatus, old }: BasicArgs) => {
   return (
     <Intl messages={en}>
       <BrowserRouter>
@@ -39,6 +42,7 @@ export const Basic = ({ actionStatus, orderStatus }: BasicArgs) => {
             {
               id: 'order-id',
               status: orderStatus,
+              postedDate: addDays(new Date(), old ? -7 : -2),
             } as Order
           }
           onClick={alert}
